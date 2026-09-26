@@ -3,9 +3,14 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Foundation\Testing\Concerns\WithoutVite;
 
 abstract class TestCase extends BaseTestCase
 {
-    use WithoutVite;
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // تعطيل Vite في بيئة الاختبارات لتجنب خطأ manifest.json
+        $this->withoutVite();
+    }
 }
