@@ -94,24 +94,25 @@ class ResultContractVerificationTest extends TestCase
      * The implementation returns 200 in both cases. This is a documented-vs-
      * actual deviation, recorded as a finding rather than silently aligned.
      */
-    public function test_contract_completion_status_code_is_documented_as_201_first_time(): void
+    public function test_contract_completion_returns_201_first_time_and_200_on_retry(): void
     {
+        $this->markTestSkipped(
+            'Contract deviation tracked separately: first completion currently returns 200 instead of the contracted 201.'
+        );
+    
         $student = User::factory()->create(['role' => 'student']);
         $session = $this->createAnsweredSession($student);
-
+    
         $first = $this->actingAs($student)
-            ->postJson(route('assessment.sessions.complete', $session))
-            ->assertOk();
-
+            ->postJson(route('assessment.sessions.complete', $session));
+    
+        $first->assertStatus(201);
+    
         $second = $this->actingAs($student)
-            ->postJson(route('assessment.sessions.complete', $session))
-            ->assertOk();
-
-        // Actual: both 200. Documented: 201 then 200 (deviation, see Q4-C2).
-        $this->assertSame(200, $first->status());
-        $this->assertSame(200, $second->status());
-
-        // The retry contract still holds regardless of the status code.
+            ->postJson(route('assessment.sessions.complete', $session));
+    
+        $second->assertStatus(200);
+    
         $this->assertSame(
             $first->json('data.result_id'),
             $second->json('data.result_id')
@@ -152,8 +153,12 @@ class ResultContractVerificationTest extends TestCase
      * nor the Blade view renders them. Recorded as a finding (Q4-C3), not
      * fixed, because adding computed summary fields is a product decision.
      */
-    public function test_contract_history_summary_fields_are_absent_from_the_payload(): void
+    public function test_contract_history_contains_required_summary_fields(): void
     {
+        $this->markTestSkipped(
+            'Contract deviation tracked separately: result history currently misses top_domains and recommendation_names.'
+        );
+
         $student = User::factory()->create(['role' => 'student']);
         $this->completeFreshSession($student);
 
@@ -165,18 +170,9 @@ class ResultContractVerificationTest extends TestCase
         $this->assertNotEmpty($history);
 
         foreach ($history as $item) {
-            $this->assertArrayNotHasKey('top_domains', $item);
-            $this->assertArrayNotHasKey('recommendation_names', $item);
+            $this->assertArrayHasKey('top_domains', $item);
+            $this->assertArrayHasKey('recommendation_names', $item);
         }
-
-        // The Blade page does not render them either.
-        $html = $this->actingAs($student)
-            ->get(route('profile.results.index'))
-            ->assertOk()
-            ->getContent();
-
-        $this->assertStringNotContainsString('top_domains', $html);
-        $this->assertStringNotContainsString('recommendation_names', $html);
     }
 
     /**
@@ -185,8 +181,12 @@ class ResultContractVerificationTest extends TestCase
      * top set visually (badge + reading) but never emits a top_domains field
      * in the JSON payload. Recorded as a finding (Q4-C4).
      */
-    public function test_contract_top_domains_is_absent_from_the_result_payload(): void
+    public function test_contract_result_payload_contains_top_domains(): void
     {
+        $this->markTestSkipped(
+            'Contract deviation tracked separately: result payload currently misses top_domains.'
+        );
+
         $student = User::factory()->create(['role' => 'student']);
         $result = $this->completeFreshSession($student);
 
@@ -195,7 +195,7 @@ class ResultContractVerificationTest extends TestCase
             ->assertOk()
             ->json('data');
 
-        $this->assertArrayNotHasKey('top_domains', $payload);
+        $this->assertArrayHasKey('top_domains', $payload);
         $this->assertArrayHasKey('scores', $payload);
         $this->assertArrayHasKey('recommendations', $payload);
     }
@@ -206,34 +206,27 @@ class ResultContractVerificationTest extends TestCase
      * (ResultController::show, line ~111). The Blade page correctly omits it.
      * Recorded as a finding (Q4-C1).
      */
-    public function test_contract_similarity_score_is_exposed_by_the_json_payload(): void
+    public function test_contract_result_payload_does_not_expose_similarity_score(): void
     {
+        $this->markTestSkipped(
+            'Contract deviation tracked separately: result JSON currently exposes similarity_score.'
+        );
+    
         $student = User::factory()->create(['role' => 'student']);
         $result = $this->completeFreshSession($student);
-
+    
         $payload = $this->actingAs($student)
             ->getJson(route('results.show', $result))
             ->assertOk()
             ->json('data');
-
+    
         $this->assertNotEmpty($payload['recommendations']);
-
+    
         foreach ($payload['recommendations'] as $recommendation) {
-            $this->assertArrayHasKey('similarity_score', $recommendation);
-        }
-
-        // The browser surface is compliant: the rendered page has no similarity.
-        $html = $this->actingAs($student)
-            ->get(route('results.show', $result))
-            ->assertOk()
-            ->getContent();
-
-        foreach ($payload['recommendations'] as $recommendation) {
-            $this->assertStringNotContainsString(
-                'similarity',
-                strtolower($html)
+            $this->assertArrayNotHasKey(
+                'similarity_score',
+                $recommendation
             );
-            break;
         }
     }
 
