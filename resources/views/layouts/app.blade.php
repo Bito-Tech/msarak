@@ -40,7 +40,7 @@
 
             <nav aria-label="التنقل الرئيسي" class="relative">
                 {{-- المكتب (sm+): روابط مضمّنة كما هي --}}
-                <ul class="hidden items-center gap-x-4 sm:flex">
+                <ul class="hidden flex-wrap items-center gap-x-4 sm:flex">
                     @foreach ($navLinks as $link)
                         <li>
                             <a href="{{ $link['href'] }}"
@@ -48,6 +48,27 @@
                                @if ($link['current']) aria-current="page" @endif>{{ $link['label'] }}</a>
                         </li>
                     @endforeach
+                    @auth
+                        {{-- UX-02: تسجيل الخروج بحوار تأكيد CSS-only (checkbox مخفي + peer-checked)
+                             — بلا JS وبلا تعديل مسارات: التأكيد submit فعلي، والإلغاء label يفك التحبير --}}
+                        <li class="relative">
+                            <input type="checkbox" id="logout-pop-desktop" class="peer sr-only">
+                            <label for="logout-pop-desktop"
+                                   class="nav-link inline-flex min-h-11 cursor-pointer select-none items-center rounded-lg px-2.5 font-medium text-slate-700 transition-colors hover:bg-danger-50 hover:text-danger-700 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-600/15">تسجيل الخروج</label>
+                            <form method="POST" action="{{ route('logout') }}"
+                                  class="absolute end-0 top-full z-50 mt-1 hidden w-64 rounded-xl border border-slate-200 bg-white p-4 text-start shadow-pop peer-checked:block">
+                                @csrf
+                                <p class="text-sm font-bold text-slate-900">هل تريد تسجيل الخروج؟</p>
+                                <p class="mt-1 text-xs leading-relaxed text-slate-500">ستحتاج إلى تسجيل الدخول مجددًا للعودة إلى حسابك.</p>
+                                <div class="mt-4 flex items-center justify-end gap-2">
+                                    <label for="logout-pop-desktop"
+                                           class="btn btn-secondary btn-pill text-sm cursor-pointer select-none">إلغاء</label>
+                                    <button type="submit"
+                                            class="btn btn-pill text-sm bg-danger-600 text-white shadow-sm shadow-danger-600/25 hover:bg-danger-700">تسجيل الخروج</button>
+                                </div>
+                            </form>
+                        </li>
+                    @endauth
                     {{-- روابط الصفحات اللاحقة تضاف هنا --}}
                 </ul>
 
@@ -65,6 +86,25 @@
                                    @if ($link['current']) aria-current="page" @endif>{{ $link['label'] }}</a>
                             </li>
                         @endforeach
+                        @auth
+                            <li class="mt-1 border-t border-slate-100 pt-1">
+                                {{-- نفس حوار التأكيد CSS-only — منسدل مضمّن داخل قائمة الجوال --}}
+                                <input type="checkbox" id="logout-pop-mobile" class="peer sr-only">
+                                <label for="logout-pop-mobile"
+                                       class="nav-link flex min-h-11 cursor-pointer select-none items-center rounded-lg px-3 font-medium text-slate-700 transition-colors hover:bg-danger-50 hover:text-danger-700 peer-focus-visible:ring-4 peer-focus-visible:ring-brand-600/15">تسجيل الخروج</label>
+                                <form method="POST" action="{{ route('logout') }}"
+                                      class="mt-1 hidden rounded-xl border border-slate-200 bg-slate-50 p-3 text-start peer-checked:block">
+                                    @csrf
+                                    <p class="text-sm font-bold text-slate-900">هل تريد تسجيل الخروج؟</p>
+                                    <div class="mt-3 flex items-center justify-end gap-2">
+                                        <label for="logout-pop-mobile"
+                                               class="btn btn-secondary btn-pill text-sm cursor-pointer select-none">إلغاء</label>
+                                        <button type="submit"
+                                                class="btn btn-pill text-sm bg-danger-600 text-white shadow-sm shadow-danger-600/25 hover:bg-danger-700">تسجيل الخروج</button>
+                                    </div>
+                                </form>
+                            </li>
+                        @endauth
                     </ul>
                 </details>
             </nav>
