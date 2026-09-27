@@ -73,7 +73,9 @@
 | R-18 | اختلاف ملفات الاعتماديات أو البيئة بين أعضاء الفريق | منخفض | متوسط | حارث | اعتماد `composer.lock` و`package-lock.json` و`.env.example` وسكربتات التحقق وعدم استخدام تحديثات اعتماديات عشوائية | Monitoring |
 | R-19 | فشل المشروع من Clean Clone رغم نجاحه على أجهزة المطورين | منخفض | عالٍ | حارث / عبدالله | إعادة تنفيذ Clean Clone وFinal Verification قبل الإصدار النهائي | Open |
 | R-20 | إصدار نسخة نهائية بوثائق أو إعدادات لا تطابق الكود الفعلي | متوسط | عالٍ | حارث | Release Checklist، ومراجعة README والعقود وDecision Log وKnown Issues قبل إنشاء Tag النهائي | Open |
-
+| R-21 | توسع نطاق v1.0.0 أثناء مرحلة التحقق والإصدار | متوسط | عالٍ | حارث | تطبيق DEC-021؛ لا تدخل Feature جديدة بعد Scope Freeze إلا كـRelease-blocking defect أو Change Request معتمد | Monitoring |
+| R-22 | اعتماد Evidence قديمة بعد تغير `main` | متوسط | عالٍ | حارث / عبدالله | ربط الأدلة بـCommit SHA وإعادة Final Verification وClean Clone على Release Candidate النهائي فقط | Open |
+| R-23 | إنشاء Tag على Commit مختلف عن Commit الذي اجتاز Release Gate | منخفض | حرج | حارث | تثبيت RC SHA ثم منع تغييره؛ أي Merge بعد التحقق يلغي الاعتماد ويتطلب إعادة الفحوص المتأثرة | Open |
 ---
 
 ## 4. قواعد المراجعة
