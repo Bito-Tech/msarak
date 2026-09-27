@@ -7,7 +7,7 @@
         <section aria-labelledby="register-title" class="auth-card">
             {{-- علامة الهوية على الجوال (اللوحة الجانبية مخفية تحت lg) --}}
             <div class="mb-5 flex items-center gap-2 lg:hidden" aria-hidden="true">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30">م</span>
+                <img src="/logo.svg" alt="" width="32" height="32" class="h-8 w-8" aria-hidden="true">
                 <span class="text-lg font-bold text-brand-700">مسارك</span>
             </div>
 
