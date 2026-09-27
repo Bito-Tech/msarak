@@ -91,6 +91,55 @@
 **الحالة:** Active  
 ينشأ Tag `v1.0.0` فقط بعد نجاح CI والاختبارات والبناء وClean Clone وFinal Verification وUAT وRelease Checklist وعدم وجود عيب Critical مفتوح، مع تحديث README وRelease Notes.
 
+
+## DEC-021 — تجميد نطاق v1.0.0 قبل Release Gate
+**الحالة:** Active
+
+يُجمّد نطاق `v1.0.0` قبل التحقق النهائي لمنع توسع النطاق أثناء Q-05 وC-05 وH-05.
+
+### يدخل الإصدار
+
+- جميع الوظائف المعتمدة والمنجزة ضمن نطاق المشروع الحالي.
+- UX-02 — توفير تسجيل الخروج من الواجهة.
+- BRAND-01 — اعتماد ودمج أصول الهوية الرسمية.
+- الإصلاحات اللازمة للعيوب التي يثبت Q-05 أو C-05 أنها Release Blockers.
+
+### يؤجل لما بعد v1.0.0
+
+- تغيير كلمة المرور من داخل الحساب كميزة جديدة.
+- استبدال `window.confirm` وتحسين Escape كتحسين UX مستقل ما لم يتحول إلى Defect مثبت مانع.
+- التحسينات المسجلة في Post-v1 Technical Improvements.
+- أي Feature جديدة غير معتمدة في نطاق الإصدار الحالي.
+
+بعد هذا القرار لا تدخل Feature جديدة إلى `v1.0.0` إلا بقرار Change Management صريح أو إذا ثبت أنها إصلاح لعيب يمنع الإصدار.
+
+## DEC-022 — تنفيذ H-05 على مرحلتين
+**الحالة:** Active
+
+تنفذ H-05 على مرحلتين:
+
+1. `Stage A — Release Management Baseline`
+   - Release Scope
+   - Baseline
+   - Traceability
+   - Checklist
+   - Risk/Decision review
+   - Known Issues / Deferred Items
+   - Draft Release Notes
+
+   يجوز دمج هذه المرحلة قبل اكتمال Q-05 وC-05.
+
+2. `Finalization`
+   - Q-05 Technical Verification Evidence
+   - C-05 UAT Evidence
+   - Final defect disposition
+   - Final Release Candidate SHA
+   - Final Clean Clone
+   - Release Gate
+   - Tag `v1.0.0`
+
+أي Evidence سابقة على Final Release Candidate تعتبر Interim Evidence فقط إذا تغير `main` بعدها.
+
 ## قالب قرار جديد
 `DEC-XXX — العنوان | التاريخ | الحالة | المالك | السياق | القرار | السبب | الأثر | الملفات/Issues المتأثرة | القرار السابق إن وجد`
 

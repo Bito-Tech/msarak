@@ -55,6 +55,16 @@
 - أو Issue مستقلة حسب طبيعته.
 
 ---
+### الأعمال المتبقية المعتمدة قبل Freeze النهائي
+
+يدخل ضمن `v1.0.0` قبل تثبيت Release Candidate:
+
+- `UX-02` — توفير تسجيل الخروج من الواجهة بوصفه استكمالًا لوظيفة Logout المعتمدة أصلًا.
+- `BRAND-01` — اعتماد ودمج أصول الهوية الرسمية.
+
+بعد ذلك يطبق Scope Freeze وفق `DEC-021`، ولا تدخل Feature جديدة إلا من خلال Change Management أو بوصفها إصلاحًا لعيب Release Blocking مثبت.
+
+---
 
 ## 2. قاعدة الإصدار — Release Rule
 
@@ -452,12 +462,16 @@ H-05 مسؤولة عن:
 
 | Area | Owner | Status | Evidence Ready | Blocker |
 |---|---|---|---|---|
-| B-05 Backend/Admin | Malek711 | Completed | Pending final reuse | No |
-| F-05 Frontend/Admin/Profile | ayman-albaidahi | In Progress | No | TBD |
-| Q-05 Technical Verification | Abdullah-Al-basheri | In Progress | No | TBD |
-| C-05 UAT/Content | Mulatef-Aldahia | In Progress | No | TBD |
-| H-05 Release Integration | Alhareith | In Progress | Partial | TBD |
+| B-05 Backend/Admin | Malek711 | Completed / Merged | Yes — subject to final regression | No |
+| F-05 Frontend/Admin/Profile | ayman-albaidahi | Completed / Merged | Yes — subject to final regression | No |
+| Q-04 Verification | Abdullah-Al-basheri | Completed / Merged | Yes | Findings require disposition |
+| UX-02 Logout UI | ayman-albaidahi | Release-scoped / Pending merge | No | Prevents final RC freeze |
+| BRAND-01 Identity | Alhareith + Mulatef + ayman-albaidahi | Release-scoped / In Progress | No | Prevents final identity freeze |
+| Q-05 Technical Verification | Abdullah-Al-basheri | In Progress | Partial only | Final evidence pending |
+| C-05 UAT/Content | Mulatef-Aldahia | In Progress | Partial only | Final evidence pending |
+| H-05 Release Integration | Alhareith | Stage A In Progress | Partial | Final Gate not started |
 
+> أي Clean Clone أو Test Evidence منفذة قبل آخر تغيير Release-scoped تعتبر Interim Evidence فقط، ولا تستبدل Final Verification على Release Candidate النهائي.
 > هذا الجدول ليس بديلًا عن GitHub Issues، بل ملخص Release Readiness فقط.
 
 ---
