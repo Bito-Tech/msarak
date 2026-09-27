@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="#4f46e5">
+    {{-- BRAND-01: أصول الهوية المحلية — صفر طلبات خارجية --}}
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="مسارك — منصة للتوجيه الأكاديمي والمهني">
+    <meta property="og:description" content="استكشف ميولك، تعرّف إلى التخصصات، وقارن بينها — منصة للتوجيه الأكاديمي والمهني لطلاب الثانوية في اليمن.">
+    <meta property="og:image" content="{{ url('/og.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
     <title>@hasSection('title')@yield('title') | @endifمسارك</title>
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}
@@ -34,7 +43,7 @@
         @endphp
         <div class="container-page flex items-center justify-between gap-x-6 py-3">
             <a href="{{ url('/') }}" class="inline-flex min-h-11 items-center gap-2 text-xl font-bold text-brand-700 transition-colors hover:text-brand-800">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30" aria-hidden="true">م</span>
+                <img src="/logo.svg" alt="" width="32" height="32" class="h-8 w-8" aria-hidden="true">
                 مسارك
             </a>
 
@@ -125,7 +134,7 @@
             <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-10">
                 <div class="max-w-md">
                     <div class="flex items-center gap-2">
-                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-extrabold text-white ring-1 ring-inset ring-white/25" aria-hidden="true">م</span>
+                        <img src="/logo.svg" alt="" width="32" height="32" class="h-8 w-8" aria-hidden="true">
                         <span class="text-xl font-bold">مسارك</span>
                     </div>
                     <p class="mt-3 text-sm leading-relaxed text-brand-100/90">
