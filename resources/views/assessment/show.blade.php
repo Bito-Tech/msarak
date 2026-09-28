@@ -105,19 +105,15 @@
                         </div>
                     </div>
 
-                    <div class="mb-1.5 hidden items-end justify-between gap-3 sm:mb-2 sm:flex">
-                        <div>
-                            <p class="text-[11px] font-extrabold text-slate-900 sm:text-base">اختر تصرفًا واحدًا</p>
-                            <p class="mt-0.5 text-[8.5px] leading-3.5 text-slate-500 sm:text-xs sm:leading-relaxed">
-                                اختر التصرف الأساسي، وقيّم كل خيار مباشرة.
-                            </p>
-                        </div>
+                    <div class="sr-only">
+                        <p>اختر تصرفًا واحدًا</p>
+                        <p>اختر التصرف الأساسي، وقيّم كل خيار مباشرة.</p>
                     </div>
 
                     <fieldset id="options-fieldset" class="min-w-0">
                         <legend class="sr-only">اختر التصرف الأساسي ثم قيّم الخيارات اختياريًا</legend>
                         <p class="sr-only">مقياس التقييم من لا يشبهني إطلاقًا إلى يشبهني جدًا.</p>
-                        <div id="options-container" class="min-w-0 space-y-1.5 sm:space-y-3"></div>
+                        <div id="options-container" class="min-w-0 space-y-1.5 sm:space-y-2"></div>
                     </fieldset>
 
                     <div class="mt-2 border-t border-slate-200/70 pt-2 sm:mt-3 sm:pt-2.5">
@@ -136,7 +132,7 @@
                         </div>
                     </div>
 
-                    <div class="assessment-nav-dock sticky bottom-1 z-20 -mx-0.5 mt-2 flex min-w-0 items-center justify-between gap-1.5 rounded-xl border p-1.5 shadow-pop backdrop-blur sm:static sm:mx-0 sm:mt-2 sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pt-2 sm:shadow-none">
+                    <div class="assessment-nav-dock sticky bottom-2 z-20 -mx-0.5 mt-2 flex min-w-0 items-center justify-between gap-1.5 rounded-xl border p-1.5 shadow-pop backdrop-blur sm:mx-0 sm:mt-2 sm:p-1.5 sm:shadow-pop">
                         <button type="button" id="prev-btn" class="btn btn-secondary min-h-10 min-w-0 flex-1 px-2.5 py-1.5 text-xs disabled:pointer-events-none disabled:opacity-40 sm:min-h-10 sm:max-w-40 sm:px-3 sm:py-1.5 sm:text-sm">
                             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
