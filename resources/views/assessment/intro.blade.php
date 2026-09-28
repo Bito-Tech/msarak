@@ -45,7 +45,7 @@
                     @if ($activeSession)
                         <div class="mb-2 flex items-center gap-2 text-sm font-bold text-white/80">
                             <span class="assessment-action-status-dot inline-flex h-2.5 w-2.5 rounded-full" aria-hidden="true"></span>
-                            تم حفظ تقدمك ويمكنك المتابعة مباشرة
+                            لديك تقييم غير مكتمل — تم حفظ تقدمك ويمكنك المتابعة مباشرة
                         </div>
                         <form method="POST" action="{{ route('assessment.sessions.store') }}">
                             @csrf
@@ -141,7 +141,7 @@
                             <h3 class="text-base font-extrabold text-slate-900">استخدم البديل عند الحاجة</h3>
                             <div class="mt-1.5 space-y-1 text-sm leading-6 text-slate-600">
                                 <p><strong class="text-slate-900">لا يشبهني أي من هذه التصرفات:</strong> فهمت الموقف، لكن لا ينطبق عليك أي خيار.</p>
-                                <p><strong class="text-slate-900">لا أستطيع الحكم:</strong> لا تملك معلومات كافية لإجابة موثوقة.</p>
+                                <p><strong class="text-slate-900">لا أستطيع الحكم على هذا الموقف:</strong> لا تملك معلومات كافية لإجابة موثوقة.</p>
                             </div>
                         </div>
                     </div>
