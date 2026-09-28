@@ -10,19 +10,15 @@
             رجوع لدليل التخصصات
         </a>
 
-        <header class="group relative card-surface mt-4 overflow-hidden">
-            {{-- هالات زخرفية كما في البطاقات --}}
-            <div class="pointer-events-none absolute -end-12 -top-12 h-40 w-40 rounded-full bg-brand-400/10 blur-2xl" aria-hidden="true"></div>
-            <div class="pointer-events-none absolute -start-8 bottom-0 h-28 w-28 rounded-full bg-accent-500/10 blur-2xl" aria-hidden="true"></div>
-
-            <div class="relative z-10 flex items-start gap-4">
+        <header class="card-surface mt-4">
+            <div class="flex items-start gap-4">
                 {{-- الأيقونة الدلالية: نفس لغة بطاقات الدليل --}}
                 <x-ui.spec-icon :id="$specialization['id'] ?? null" :name="$specialization['name'] ?? ''" size="lg" />
                 <div>
-                    <h1 class="text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
+                    <h1 class="text-2xl font-bold leading-tight text-slate-900 sm:text-4xl">
                         {{ $specialization['name'] ?? 'بدون اسم' }}
                     </h1>
-                    <p class="mt-4 text-lg leading-relaxed text-slate-700">
+                    <p class="mt-3 text-base leading-relaxed text-slate-700 sm:text-lg">
                         {{ $specialization['description'] ?? '' }}
                     </p>
                 </div>

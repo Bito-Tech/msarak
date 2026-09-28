@@ -14,10 +14,8 @@
             مقارنة التخصصات
         </h1>
 
-        {{-- لغة المبارزة: شارة «مقابل» على كل العروض — فاصلة أفقية بين البطاقتين على الجوال، ومتمركزة على المكتب --}}
-        <div class="relative mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
-            <article class="card-surface group relative order-1 overflow-hidden pt-7">
-                <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-l from-brand-500 to-brand-700" aria-hidden="true"></div>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <article class="card-surface">
                 <div class="flex items-center gap-3.5">
                     <x-ui.spec-icon :id="$first['id'] ?? null" :name="$first['name'] ?? ''" />
                     <h2 class="text-xl leading-snug font-bold text-slate-900">{{ $first['name'] ?? 'بدون اسم' }}</h2>
@@ -25,15 +23,7 @@
                 <p class="mt-3 leading-relaxed text-slate-600">{{ $first['description'] ?? '' }}</p>
             </article>
 
-            {{-- الشارة: في تدفق الشبكة على الجوال (بين البطاقتين)، ومطلقة متوسطة على المكتب --}}
-            <div class="relative z-10 order-2 flex items-center gap-3 sm:absolute sm:inset-x-0 sm:top-1/2 sm:flex-none sm:-translate-y-1/2 sm:justify-center sm:pointer-events-none" aria-hidden="true">
-                <span class="h-px flex-1 bg-slate-200 sm:hidden" aria-hidden="true"></span>
-                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-brand-800 text-xs font-extrabold text-white shadow-pop ring-4 ring-slate-50">مقابل</span>
-                <span class="h-px flex-1 bg-slate-200 sm:hidden" aria-hidden="true"></span>
-            </div>
-
-            <article class="card-surface group relative order-3 overflow-hidden pt-7">
-                <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-l from-accent-500 to-accent-600" aria-hidden="true"></div>
+            <article class="card-surface">
                 <div class="flex items-center gap-3.5">
                     <x-ui.spec-icon :id="$second['id'] ?? null" :name="$second['name'] ?? ''" tone="accent" />
                     <h2 class="text-xl leading-snug font-bold text-slate-900">{{ $second['name'] ?? 'بدون اسم' }}</h2>
@@ -51,7 +41,8 @@
             ];
         @endphp
 
-        {{-- جدول المبارزة: تلوين عمودي خفيف يعكس هوية كل جهة + دلالات صف/عمود --}}
+        <p class="mt-5 text-sm text-slate-600 sm:hidden">مرّر الجدول أفقيًا لمقارنة المحور نفسه بين التخصصين.</p>
+        {{-- The row heading remains visible while the two columns scroll together. --}}
         <div class="card-surface mt-8 overflow-hidden p-0">
             <div class="table-scroll-fade overflow-x-auto">
                 <table class="w-full min-w-160 border-separate border-spacing-0 text-start">
