@@ -996,3 +996,154 @@
         margin-top: 0.8rem;
     }
 }
+
+
+/* Intro readability pass — larger type, clearer hierarchy, same one-screen layout. */
+.assessment-intro-kicker {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01em;
+}
+
+.assessment-intro-title {
+    font-size: clamp(2.55rem, 3.4vw, 3.2rem);
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+}
+
+.assessment-intro-lead {
+    font-size: 1.08rem;
+    line-height: 2rem;
+    max-width: 44rem;
+}
+
+.assessment-intro-note-text {
+    font-size: 0.95rem;
+    line-height: 1.75rem;
+}
+
+.assessment-intro-resume-text {
+    font-size: 0.9rem;
+    line-height: 1.45rem;
+}
+
+.assessment-intro-photo-label {
+    font-size: 0.82rem;
+    line-height: 1.2rem;
+}
+
+.assessment-intro-photo-text {
+    font-size: 1rem;
+    line-height: 1.7rem;
+}
+
+.assessment-guide-kicker {
+    font-size: 0.82rem;
+    line-height: 1.2rem;
+}
+
+.assessment-guide-title {
+    font-size: 1.7rem;
+    line-height: 2.15rem;
+}
+
+.assessment-step-title {
+    font-size: 1rem;
+    line-height: 1.55rem;
+}
+
+.assessment-step-text {
+    font-size: 0.88rem;
+    line-height: 1.55rem;
+}
+
+.assessment-intro-emoji-label {
+    font-size: 0.58rem;
+    line-height: 0.82rem;
+}
+
+.assessment-intro-footer-text {
+    font-size: 0.72rem;
+    line-height: 1.15rem;
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+    .assessment-intro-hero-panel {
+        padding-block: 1.45rem;
+    }
+
+    .assessment-intro-guide-panel {
+        padding-block: 1.2rem;
+    }
+
+    .assessment-intro-guide-panel .assessment-intro-step {
+        padding: 0.78rem 0.9rem;
+    }
+
+    .assessment-step-title {
+        font-size: 0.96rem;
+        line-height: 1.4rem;
+    }
+
+    .assessment-step-text {
+        font-size: 0.82rem;
+        line-height: 1.4rem;
+    }
+
+    .assessment-intro-footer {
+        margin-top: 0.65rem;
+        padding: 0.65rem 0.8rem;
+    }
+}
+
+@media (max-width: 639px) {
+    .assessment-intro-kicker {
+        font-size: 0.74rem;
+        line-height: 1.05rem;
+    }
+
+    .assessment-intro-title {
+        font-size: 1.65rem;
+        line-height: 1.2;
+    }
+
+    .assessment-intro-lead {
+        font-size: 0.75rem;
+        line-height: 1.2rem;
+    }
+
+    .assessment-intro-resume-text {
+        font-size: 0.7rem;
+        line-height: 1rem;
+    }
+
+    .assessment-guide-kicker {
+        font-size: 0.62rem;
+        line-height: 0.9rem;
+    }
+
+    .assessment-guide-title {
+        font-size: 1.08rem;
+        line-height: 1.4rem;
+    }
+
+    .assessment-step-title {
+        font-size: 0.78rem;
+        line-height: 1.12rem;
+    }
+
+    .assessment-step-text {
+        font-size: 0.68rem;
+        line-height: 1.05rem;
+    }
+
+    .assessment-intro-emoji-label {
+        font-size: 0.45rem;
+        line-height: 0.62rem;
+    }
+
+    .assessment-intro-footer-text {
+        font-size: 0.54rem;
+        line-height: 0.75rem;
+    }
+}
