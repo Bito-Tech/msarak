@@ -3,10 +3,11 @@
 @section('title', 'سجل نتائجي')
 
 @section('content')
-<div class="mx-auto max-w-2xl">
+<div class="mx-auto max-w-3xl">
 
     <header class="mb-6">
-        <h1 class="text-3xl font-extrabold leading-tight text-slate-900">سجل نتائجي</h1>
+        <p class="text-sm font-bold text-brand-700">حسابي / النتائج</p>
+        <h1 class="mt-2 text-3xl font-extrabold leading-tight text-slate-900">سجل نتائجي</h1>
         <p class="mt-2 text-base leading-relaxed text-slate-700">
             نتائج استكشاف الميول التي أتممتها، الأحدث أولًا. كل نتيجة محفوظة كما صدرت وقتها.
         </p>
@@ -20,12 +21,12 @@
             <a href="{{ route('assessment.intro') }}" class="btn btn-primary mt-2">ابدأ استكشاف ميولك</a>
         </x-ui.empty-state>
     @else
-        <ul class="space-y-4">
+        <ul class="space-y-3">
             @foreach ($results as $item)
                 <li>
                     <a href="{{ route('results.show', $item) }}"
-                       class="card-surface card-lift group flex items-center gap-4 p-5">
-                        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm shadow-brand-600/30"
+                       class="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-brand-200 hover:bg-brand-50/30 sm:p-5">
+                        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700"
                               aria-hidden="true">
                             <x-ui.icon name="check" class="h-5 w-5" />
                         </span>
@@ -33,7 +34,7 @@
                             <span class="block text-base font-bold text-slate-900 group-hover:text-brand-700">
                                 نتيجة التقييم — {{ $item->created_at?->format('Y-m-d') }}
                             </span>
-                            <span class="mt-1 block text-sm text-slate-500">
+                            <span class="mt-1 block break-words text-xs leading-relaxed text-slate-600 sm:text-sm">
                                 إصدار الأداة {{ $item->scoring_version }} · إصدار الدليل {{ $item->catalog_version }}
                             </span>
                         </span>
@@ -44,8 +45,8 @@
         </ul>
     @endif
 
-    <div class="mt-8">
-        <a href="{{ route('assessment.intro') }}" class="btn btn-secondary">تقييم جديد</a>
+    <div class="mt-7">
+        <a href="{{ route('assessment.intro') }}" class="btn btn-secondary w-full sm:w-auto">الذهاب إلى التقييم</a>
     </div>
 </div>
 @endsection
