@@ -31,6 +31,7 @@ class AssessmentJourney {
         this.saveStatus = 'idle'; // idle | saving | saved | error
         this.debounceSaveTimer = null;
         this.pendingConflict = null;
+        this.lastRatingInteraction = null;
         this.abortController = null;
 
         this.cacheElements();
@@ -262,13 +263,13 @@ class AssessmentJourney {
             const currentRating = currentAnswer.ratings[opt.option_id];
 
             const card = document.createElement('div');
-            card.className = `option-card grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 rounded-xl border px-3 py-3.5 transition sm:px-4 lg:grid-cols-[auto_minmax(0,1fr)_minmax(330px,430px)] lg:gap-x-5 ${
+            card.dir = 'rtl';
+            card.className = `option-card grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2.5 gap-y-2.5 rounded-xl border px-3 py-3 transition sm:gap-x-3 sm:px-4 sm:py-3.5 lg:grid-cols-[auto_minmax(0,1fr)_minmax(285px,390px)] lg:gap-x-4 ${
                 isPrimary
                     ? 'border-brand-400 bg-brand-50/35 ring-1 ring-brand-500/60 shadow-xs'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/45'
             }`;
             card.dataset.optionId = String(opt.option_id);
-            card.style.direction = 'ltr';
 
             const radio = document.createElement('input');
             radio.type = 'radio';
@@ -281,8 +282,7 @@ class AssessmentJourney {
 
             const label = document.createElement('label');
             label.htmlFor = radio.id;
-            label.dir = 'rtl';
-            label.className = 'cursor-pointer text-end text-sm font-semibold leading-7 text-slate-800 sm:text-base';
+            label.className = 'min-w-0 cursor-pointer text-right text-sm font-semibold leading-6 text-slate-800 sm:text-[0.95rem] sm:leading-7';
             label.textContent = opt.option_text;
 
             card.append(radio, label);
@@ -294,23 +294,28 @@ class AssessmentJourney {
             });
 
             const ratingArea = document.createElement('div');
-            ratingArea.dir = 'rtl';
-            ratingArea.className = `col-span-2 border-t border-slate-100 pt-2.5 lg:col-span-1 lg:border-0 lg:pt-0 ${hasPrimary ? '' : 'opacity-55'}`;
+            ratingArea.className = `col-span-2 min-w-0 border-t border-slate-100 pt-2 lg:col-span-1 lg:border-0 lg:pt-0 ${
+                hasPrimary ? '' : 'opacity-55'
+            }`;
 
             if (hasPrimary) {
                 const scale = document.createElement('div');
                 scale.dir = 'ltr';
-                scale.className = 'grid grid-cols-5 items-center gap-1 sm:gap-2';
+                scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-0.5 min-[360px]:gap-1 sm:gap-1.5';
 
                 RATING_LEVELS.forEach((level) => {
                     const isSelectedRating = currentRating === level.value;
+                    const wasJustPressed = this.lastRatingInteraction
+                        && this.lastRatingInteraction.optionId === opt.option_id
+                        && this.lastRatingInteraction.ratingValue === level.value;
+
                     const ratingBtn = document.createElement('button');
                     ratingBtn.type = 'button';
-                    ratingBtn.className = `rating-btn mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-transparent transition sm:h-11 sm:w-11 ${
+                    ratingBtn.className = `rating-btn mx-auto inline-flex h-8 w-8 min-w-0 items-center justify-center rounded-full bg-transparent transition sm:h-10 sm:w-10 ${
                         isSelectedRating
-                            ? 'ring-2 ring-brand-600 ring-offset-2 ring-offset-white'
-                            : 'hover:bg-slate-100 focus-visible:bg-slate-100'
-                    }`;
+                            ? 'scale-110 bg-brand-50/80 ring-2 ring-brand-600 ring-offset-1 ring-offset-white'
+                            : 'hover:bg-slate-100'
+                    } ${wasJustPressed ? 'rating-pop' : ''}`;
                     ratingBtn.dataset.rating = String(level.value);
                     ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
                     ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
@@ -319,9 +324,9 @@ class AssessmentJourney {
                     const icon = document.createElement('img');
                     icon.src = `/assets/assessment/emoji/${level.icon}`;
                     icon.alt = '';
-                    icon.width = 40;
-                    icon.height = 40;
-                    icon.className = 'h-8 w-8 select-none object-contain sm:h-9 sm:w-9';
+                    icon.width = 36;
+                    icon.height = 36;
+                    icon.className = 'h-7 w-7 select-none object-contain min-[360px]:h-8 min-[360px]:w-8 sm:h-9 sm:w-9';
                     icon.draggable = false;
                     ratingBtn.appendChild(icon);
 
@@ -333,17 +338,20 @@ class AssessmentJourney {
                 });
 
                 const endLabels = document.createElement('div');
-                endLabels.className = 'mt-1 flex items-center justify-between px-0.5 text-[11px] font-medium text-slate-400 sm:text-xs';
+                endLabels.dir = 'rtl';
+                endLabels.className = 'mt-1 flex min-w-0 items-center justify-between gap-2 text-[10px] font-medium leading-4 text-slate-400 min-[360px]:text-[11px] sm:text-xs';
                 const positiveLabel = document.createElement('span');
+                positiveLabel.className = 'truncate';
                 positiveLabel.textContent = 'يشبهني جدًا';
                 const negativeLabel = document.createElement('span');
+                negativeLabel.className = 'truncate text-left';
                 negativeLabel.textContent = 'لا يشبهني إطلاقًا';
                 endLabels.append(positiveLabel, negativeLabel);
 
                 ratingArea.append(scale, endLabels);
             } else {
                 const helper = document.createElement('p');
-                helper.className = 'text-center text-xs font-medium text-slate-400 lg:text-end';
+                helper.className = 'text-right text-[11px] font-medium leading-5 text-slate-400 sm:text-xs';
                 helper.textContent = 'اختر التصرف الأقرب لك لإظهار التقييم الاختياري.';
                 ratingArea.appendChild(helper);
             }
@@ -360,6 +368,7 @@ class AssessmentJourney {
             target?.focus({ preventScroll: true });
         }
 
+        this.lastRatingInteraction = null;
         this.updateNavButtons();
         this.renderNavGrid();
     }
@@ -406,21 +415,23 @@ class AssessmentJourney {
     handleRatingClick(optionId, ratingValue, isAlreadySelected) {
         const answer = this.getCurrentAnswer();
 
-        // Clicking the active rating again unrates (clears rating)
+        // Clicking the active rating again unrates (clears rating).
         if (isAlreadySelected) {
+            this.lastRatingInteraction = { optionId, ratingValue };
             delete answer.ratings[optionId];
             this.renderCurrentQuestion();
             this.scheduleSave();
             return;
         }
 
-        // Conflict check: if student chose this option as Primary AND gives strong negative rating (-1 or -2)
+        // Conflict check: if student chose this option as Primary AND gives strong negative rating (-1 or -2).
         if (answer.primary_option_id === optionId && (ratingValue === -1 || ratingValue === -2)) {
             this.pendingConflict = { optionId, ratingValue };
             this.openConflictModal();
             return;
         }
 
+        this.lastRatingInteraction = { optionId, ratingValue };
         answer.ratings[optionId] = ratingValue;
         this.renderCurrentQuestion();
         this.scheduleSave();
@@ -438,9 +449,15 @@ class AssessmentJourney {
     resolveConflict(keepRating) {
         if (keepRating && this.pendingConflict) {
             const answer = this.getCurrentAnswer();
+            this.lastRatingInteraction = {
+                optionId: this.pendingConflict.optionId,
+                ratingValue: this.pendingConflict.ratingValue,
+            };
             answer.ratings[this.pendingConflict.optionId] = this.pendingConflict.ratingValue;
             this.renderCurrentQuestion();
             this.scheduleSave();
+        } else {
+            this.lastRatingInteraction = null;
         }
         this.closeConflictModal();
     }
