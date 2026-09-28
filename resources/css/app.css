@@ -415,22 +415,29 @@
     box-shadow: 0 3px 0 var(--assessment-gold);
 }
 
-.assessment-rating-btn.is-selected {
-    z-index: 3;
-    background: transparent;
-    transform: translateY(-2px) scale(1.34);
-    filter: saturate(1.08) drop-shadow(0 7px 9px rgb(15 118 110 / 0.26));
+.assessment-rating-item {
+    min-width: 0;
 }
 
-.assessment-rating-btn.is-selected::after {
-    content: '';
-    position: absolute;
-    inset-inline: 20%;
-    bottom: -0.32rem;
-    height: 0.16rem;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--assessment-gold), var(--assessment-accent));
-    box-shadow: 0 2px 5px rgb(15 118 110 / 0.18);
+.assessment-rating-label {
+    min-height: 1.35rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: #667a77;
+}
+
+.assessment-rating-btn.is-selected {
+    z-index: 3;
+    background: linear-gradient(145deg, #eef8f5, #dceee9);
+    transform: translateY(-1px) scale(1.18);
+    box-shadow: 0 5px 13px rgb(15 118 110 / 0.18);
+    filter: saturate(1.08);
+}
+
+.assessment-rating-btn.is-selected + .assessment-rating-label {
+    color: var(--assessment-accent-strong);
+    font-weight: 700;
 }
 
 .assessment-special-card {
@@ -553,12 +560,13 @@
         box-shadow: 0 10px 28px rgb(22 63 58 / 0.13);
     }
 
-    .assessment-rating-btn.is-selected {
-        transform: translateY(-1px) scale(1.3);
+    .assessment-rating-label {
+        min-height: 1.25rem;
+        color: #6f817e;
     }
 
-    .assessment-rating-btn.is-selected::after {
-        bottom: -0.2rem;
-        height: 0.12rem;
+    .assessment-rating-btn.is-selected {
+        transform: translateY(-1px) scale(1.16);
+        box-shadow: 0 4px 10px rgb(15 118 110 / 0.16);
     }
 }

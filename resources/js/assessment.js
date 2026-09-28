@@ -6,11 +6,11 @@
  */
 
 const RATING_LEVELS = [
-    { value: -2, label: 'لا يشبهني إطلاقًا', icon: 'emoji-strongly-dislike.png' },
-    { value: -1, label: 'لا يشبهني', icon: 'emoji-dislike.png' },
-    { value: 0, label: 'محايد / غير متأكد', icon: 'emoji-neutral.png' },
-    { value: 1, label: 'يشبهني', icon: 'emoji-like.png' },
-    { value: 2, label: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
+    { value: -2, label: 'لا يشبهني إطلاقًا', displayLabel: 'لا يشبهني إطلاقًا', icon: 'emoji-strongly-dislike.png' },
+    { value: -1, label: 'لا يشبهني', displayLabel: 'لا يشبهني', icon: 'emoji-dislike.png' },
+    { value: 0, label: 'محايد / غير متأكد', displayLabel: 'محايد', icon: 'emoji-neutral.png' },
+    { value: 1, label: 'يشبهني', displayLabel: 'يشبهني', icon: 'emoji-like.png' },
+    { value: 2, label: 'يشبهني جدًا', displayLabel: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
 ];
 
 class AssessmentJourney {
@@ -305,9 +305,12 @@ class AssessmentJourney {
                     && this.lastRatingInteraction.optionId === opt.option_id
                     && this.lastRatingInteraction.ratingValue === level.value;
 
+                const ratingItem = document.createElement('div');
+                ratingItem.className = 'assessment-rating-item flex min-w-0 flex-col items-center gap-0.5';
+
                 const ratingBtn = document.createElement('button');
                 ratingBtn.type = 'button';
-                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-full bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-10 sm:w-10 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
+                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-10 sm:w-10 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
                 ratingBtn.dataset.rating = String(level.value);
                 ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
                 ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
@@ -322,26 +325,20 @@ class AssessmentJourney {
                 icon.draggable = false;
                 ratingBtn.appendChild(icon);
 
+                const ratingLabel = document.createElement('span');
+                ratingLabel.className = 'assessment-rating-label w-full whitespace-normal text-center text-[7px] font-medium leading-[0.68rem] text-slate-500 sm:text-[9px] sm:leading-3';
+                ratingLabel.textContent = level.displayLabel;
+
                 ratingBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     this.handleRatingClick(opt.option_id, level.value, isSelectedRating);
                 });
 
-                scale.appendChild(ratingBtn);
+                ratingItem.append(ratingBtn, ratingLabel);
+                scale.appendChild(ratingItem);
             });
 
-            const endLabels = document.createElement('div');
-            endLabels.dir = 'ltr';
-            endLabels.className = 'mt-1 hidden min-w-0 items-center justify-between gap-2 px-1 text-[11px] font-medium leading-4 text-slate-400 sm:flex';
-            const negativeLabel = document.createElement('span');
-            negativeLabel.className = 'truncate';
-            negativeLabel.textContent = 'لا يشبهني إطلاقًا';
-            const positiveLabel = document.createElement('span');
-            positiveLabel.className = 'truncate text-right';
-            positiveLabel.textContent = 'يشبهني جدًا';
-            endLabels.append(negativeLabel, positiveLabel);
-
-            ratingArea.append(scale, endLabels);
+            ratingArea.append(scale);
             card.appendChild(ratingArea);
             this.optionsContainer.appendChild(card);
         });

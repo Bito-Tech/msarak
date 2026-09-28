@@ -117,10 +117,6 @@
                     <fieldset id="options-fieldset" class="min-w-0">
                         <legend class="sr-only">اختر التصرف الأساسي ثم قيّم الخيارات اختياريًا</legend>
                         <p class="sr-only">مقياس التقييم من لا يشبهني إطلاقًا إلى يشبهني جدًا.</p>
-                        <div class="mb-1 flex items-center justify-between px-1 text-[7.5px] font-medium text-slate-400 sm:hidden" dir="ltr">
-                            <span>لا يشبهني إطلاقًا</span>
-                            <span>يشبهني جدًا</span>
-                        </div>
                         <div id="options-container" class="min-w-0 space-y-1.5 sm:space-y-3"></div>
                     </fieldset>
 
