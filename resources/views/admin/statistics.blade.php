@@ -17,10 +17,8 @@
 <div class="mx-auto max-w-3xl">
 
     {{-- ترويسة اللوحة --}}
-    <header class="card-surface relative overflow-hidden">
-        <div class="pointer-events-none absolute -end-12 -top-12 h-40 w-40 rounded-full bg-brand-400/10 blur-2xl" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute -start-8 bottom-0 h-28 w-28 rounded-full bg-accent-500/10 blur-2xl" aria-hidden="true"></div>
-        <div class="auth-head relative z-10">
+    <header class="card-surface">
+        <div class="auth-head">
             <span class="auth-head-icon">
                 <x-ui.icon name="activity" class="h-5 w-5" />
             </span>
@@ -79,7 +77,7 @@
     @else
         {{-- بطاقات المؤشرات --}}
         <dl class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div class="card-surface card-lift p-5">
+            <div class="card-surface p-5">
                 <dt class="flex items-center gap-2 text-sm font-semibold text-slate-600">
                     <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700" aria-hidden="true">
                         <x-ui.icon name="activity" class="h-4 w-4" />
@@ -88,7 +86,7 @@
                 </dt>
                 <dd class="mt-3 text-3xl font-extrabold text-slate-900 tabular-nums">{{ number_format($stats['started_assessments']) }}</dd>
             </div>
-            <div class="card-surface card-lift p-5">
+            <div class="card-surface p-5">
                 <dt class="flex items-center gap-2 text-sm font-semibold text-slate-600">
                     <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-success-50 text-success-700" aria-hidden="true">
                         <x-ui.icon name="check" class="h-4 w-4" />
@@ -97,7 +95,7 @@
                 </dt>
                 <dd class="mt-3 text-3xl font-extrabold text-slate-900 tabular-nums">{{ number_format($stats['completed_assessments']) }}</dd>
             </div>
-            <div class="card-surface card-lift p-5">
+            <div class="card-surface p-5">
                 <dt class="flex items-center gap-2 text-sm font-semibold text-slate-600">
                     <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-100 text-accent-600" aria-hidden="true">
                         <x-ui.icon name="target" class="h-4 w-4" />
@@ -124,8 +122,8 @@
                             <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full {{ $i === 0 ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600' }} text-xs font-extrabold"
                                   aria-hidden="true">{{ $i + 1 }}</span>
                             <span class="min-w-0 flex-1">
-                                <span class="flex items-baseline justify-between gap-3">
-                                    <span class="truncate text-sm font-bold text-slate-900">{{ $row['name'] }}</span>
+                                <span class="flex flex-wrap items-baseline justify-between gap-2">
+                                    <span class="min-w-0 break-words text-sm font-bold text-slate-900">{{ $row['name'] }}</span>
                                     <span class="shrink-0 text-sm font-bold text-slate-600 tabular-nums">{{ number_format($row['count']) }}</span>
                                 </span>
                                 <span class="mt-1.5 block h-2 w-full overflow-hidden rounded-full bg-slate-100"

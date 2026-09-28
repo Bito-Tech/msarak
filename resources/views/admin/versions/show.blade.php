@@ -8,7 +8,7 @@
     // الأزرار المتاحة تُقفل على المسودة؛ التفويض الفعلي في role:admin وB-05.
     $isDraft = $version->status === 'draft';
     $badges = [
-        'draft' => ['neutral', 'مسودة'],
+        'draft' => ['brand', 'مسودة'],
         'active' => ['success', 'نشط'],
         'retired' => ['warning', 'مؤرشف'],
     ];
@@ -24,10 +24,10 @@
         كل الإصدارات
     </a>
 
-    <header class="card-surface mt-4">
+    <header class="card-surface mt-4 p-5 sm:p-7">
         <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-base font-extrabold text-white shadow-sm shadow-brand-600/30"
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-base font-extrabold text-brand-800"
                       aria-hidden="true">v{{ $version->version_number }}</span>
                 <div>
                     <h1 class="text-2xl font-bold text-slate-900">الإصدار {{ $version->version_number }}</h1>
@@ -42,19 +42,20 @@
             </div>
 
             @if ($isDraft)
-                <div class="flex flex-wrap items-center gap-3">
-                    <a href="{{ route('admin.assessment-versions.questions.create', $version) }}" class="btn btn-primary btn-pill text-sm">إضافة سؤال</a>
+                <div class="flex w-full flex-col gap-3 sm:w-auto sm:items-end">
+                    <a href="{{ route('admin.assessment-versions.questions.create', $version) }}" class="btn btn-primary text-sm">إضافة سؤال</a>
 
                     {{-- Publish — التأكيد بموافقة صريحة (checkbox إلزامي) بلا JS --}}
                     <form method="POST" action="{{ route('admin.assessment-versions.publish', $version) }}"
-                         class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50/60 px-3 py-2">
+                         class="w-full rounded-xl border border-warning-300 bg-warning-50 p-4 sm:max-w-sm">
                         @csrf
-                        <label class="flex items-center gap-2 text-xs font-semibold text-slate-700" for="publish-confirm">
+                        <p class="text-sm font-semibold leading-relaxed text-slate-900">سيصبح هذا الإصدار نشطًا، وتُؤرشف النسخة النشطة السابقة إن وُجدت.</p>
+                        <label class="mt-3 flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-800" for="publish-confirm">
                             <input id="publish-confirm" type="checkbox" required
-                                   class="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-600/40">
-                            أوافق على النشر
+                                   class="h-5 w-5 rounded border-slate-300 text-brand-600 focus:ring-brand-600/40">
+                            أؤكد نشر هذا الإصدار
                         </label>
-                        <button type="submit" class="btn btn-success btn-pill text-sm">نشر الإصدار</button>
+                        <button type="submit" class="btn btn-success mt-2 w-full text-sm">نشر الإصدار</button>
                     </form>
                 </div>
             @endif
@@ -96,17 +97,16 @@
                                 <div class="flex shrink-0 flex-wrap items-center justify-end gap-x-2.5 gap-y-1.5">
                                     <a href="{{ route('admin.assessment-versions.questions.edit', [$version, $question]) }}"
                                        class="btn btn-soft btn-pill text-sm">تعديل<span class="sr-only"> السؤال {{ $question->position }}</span></a>
-                                    {{-- حذف بحاجز تأكيد: checkbox إلزامي يمنع الإرسال بـHTML أصلي،
-                                         والزرق خامل بصريًا حتى التأكيد عبر peer (بلا JS) — نمط «أوافق على النشر» --}}
+                                    {{-- تأكيد الحذف يبقى مطلوبًا من HTML قبل إرسال الطلب. --}}
                                     <form method="POST" action="{{ route('admin.assessment-versions.questions.destroy', [$version, $question]) }}"
-                                          class="flex items-center gap-2">
+                                          class="flex flex-wrap items-center gap-2">
                                         @csrf @method('DELETE')
                                         <input type="checkbox" id="confirm-delete-{{ $question->id }}" required
-                                               class="peer h-4 w-4 shrink-0 cursor-pointer rounded border-slate-300 accent-danger-600 focus:ring-danger-600/40">
+                                               class="peer h-5 w-5 shrink-0 cursor-pointer rounded border-slate-300 accent-danger-600 focus:ring-danger-600/40">
                                         <label for="confirm-delete-{{ $question->id }}"
-                                               class="cursor-pointer select-none text-xs font-semibold text-slate-500 transition-colors peer-checked:text-danger-700">تأكيد</label>
+                                               class="inline-flex min-h-11 cursor-pointer select-none items-center text-xs font-semibold text-slate-700 transition-colors peer-checked:text-danger-700">تأكيد الحذف</label>
                                         <button type="submit"
-                                                class="btn btn-pill text-sm font-semibold text-danger-700 hover:bg-danger-50 peer-not-checked:pointer-events-none peer-not-checked:opacity-50">حذف<span class="sr-only"> السؤال {{ $question->position }}</span></button>
+                                                class="btn border border-danger-300 text-sm font-semibold text-danger-700 hover:bg-danger-50 peer-not-checked:pointer-events-none peer-not-checked:opacity-50">حذف<span class="sr-only"> السؤال {{ $question->position }}</span></button>
                                     </form>
                                 </div>
                             @endif
