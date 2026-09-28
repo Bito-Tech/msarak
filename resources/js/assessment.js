@@ -7,39 +7,39 @@
 
 const RATING_LEVELS = [
     {
-        value: 2,
-        label: 'يشبهني جدًا',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 9.5c.5-.8 1.5-.8 2 0"/><path d="M14 9.5c.5-.8 1.5-.8 2 0"/><path d="M8 14c1 2.5 7 2.5 8 0"/></svg>`,
-        activeClass: 'bg-emerald-600 text-white border-emerald-600 shadow-xs',
-        idleClass: 'bg-emerald-50/60 text-emerald-800 border-emerald-200 hover:bg-emerald-100',
-    },
-    {
-        value: 1,
-        label: 'يشبهني',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 13.5c1 1.8 6 1.8 7 0"/></svg>`,
-        activeClass: 'bg-teal-600 text-white border-teal-600 shadow-xs',
-        idleClass: 'bg-teal-50/60 text-teal-800 border-teal-200 hover:bg-teal-100',
-    },
-    {
-        value: 0,
-        label: 'محايد / غير متأكد',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><line x1="8.5" y1="14" x2="15.5" y2="14" stroke-width="2"/></svg>`,
-        activeClass: 'bg-slate-700 text-white border-slate-700 shadow-xs',
-        idleClass: 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200',
+        value: -2,
+        label: 'لا يشبهني إطلاقًا',
+        icon: 'emoji-strongly-dislike.svg',
+        activeClass: 'bg-rose-600 text-white border-rose-600 shadow-xs',
+        idleClass: 'bg-rose-50/60 text-rose-800 border-rose-200 hover:bg-rose-100',
     },
     {
         value: -1,
         label: 'لا يشبهني',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 15.5c1-1.5 6-1.5 7 0"/></svg>`,
+        icon: 'emoji-dislike.svg',
         activeClass: 'bg-amber-600 text-white border-amber-600 shadow-xs',
         idleClass: 'bg-amber-50/60 text-amber-800 border-amber-200 hover:bg-amber-100',
     },
     {
-        value: -2,
-        label: 'لا يشبهني إطلاقًا',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M13.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M8 16c1.2-2.5 6.8-2.5 8 0"/></svg>`,
-        activeClass: 'bg-rose-600 text-white border-rose-600 shadow-xs',
-        idleClass: 'bg-rose-50/60 text-rose-800 border-rose-200 hover:bg-rose-100',
+        value: 0,
+        label: 'محايد / غير متأكد',
+        icon: 'emoji-neutral.svg',
+        activeClass: 'bg-slate-700 text-white border-slate-700 shadow-xs',
+        idleClass: 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200',
+    },
+    {
+        value: 1,
+        label: 'يشبهني',
+        icon: 'emoji-like.svg',
+        activeClass: 'bg-teal-600 text-white border-teal-600 shadow-xs',
+        idleClass: 'bg-teal-50/60 text-teal-800 border-teal-200 hover:bg-teal-100',
+    },
+    {
+        value: 2,
+        label: 'يشبهني جدًا',
+        icon: 'emoji-strongly-like.svg',
+        activeClass: 'bg-emerald-600 text-white border-emerald-600 shadow-xs',
+        idleClass: 'bg-emerald-50/60 text-emerald-800 border-emerald-200 hover:bg-emerald-100',
     },
 ];
 
@@ -252,6 +252,10 @@ class AssessmentJourney {
         const question = this.getCurrentQuestion();
         if (!question) return;
 
+        const focused = document.activeElement;
+        const focusedOption = focused?.closest?.('.option-card')?.dataset.optionId;
+        const focusedRating = focused?.dataset.rating;
+        const focusedRadio = focused?.name === 'primary_option';
         const currentAnswer = this.getCurrentAnswer();
         this.hideError();
 
@@ -276,7 +280,7 @@ class AssessmentJourney {
             const letter = ARABIC_OPTION_LETTERS[idx] || (idx + 1);
 
             const card = document.createElement('div');
-            card.className = `option-card group relative rounded-2xl border p-4 sm:p-5 transition-all cursor-pointer ${
+            card.className = `option-card group relative rounded-xl border px-3 py-2.5 sm:px-4 sm:py-3 transition-all ${
                 isPrimary
                     ? 'border-brand-600 bg-brand-50/40 ring-1 ring-brand-600 shadow-xs'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60'
@@ -285,7 +289,7 @@ class AssessmentJourney {
 
             // Option selection row
             const topRow = document.createElement('div');
-            topRow.className = 'flex items-start gap-3.5';
+            topRow.className = 'flex items-center gap-2.5 cursor-pointer';
 
             // Letter Avatar Pill
             const letterBadge = document.createElement('span');
@@ -307,7 +311,7 @@ class AssessmentJourney {
 
             const label = document.createElement('label');
             label.htmlFor = radio.id;
-            label.className = 'flex-1 text-sm sm:text-base font-semibold text-slate-900 cursor-pointer leading-relaxed';
+            label.className = 'flex-1 text-sm font-semibold text-slate-900 cursor-pointer leading-snug sm:text-base';
             label.textContent = opt.option_text;
 
             topRow.appendChild(letterBadge);
@@ -319,36 +323,44 @@ class AssessmentJourney {
                 e.preventDefault();
                 this.selectPrimaryOption(opt.option_id);
             });
+            radio.addEventListener('change', () => this.selectPrimaryOption(opt.option_id));
 
             // Optional 5-point rating scale drawer
             // Appears when a primary option has been selected
             if (hasPrimary) {
                 const ratingDrawer = document.createElement('div');
-                ratingDrawer.className = 'mt-3.5 border-t border-slate-100 pt-3 ps-10 animate-in fade-in duration-200';
+                ratingDrawer.className = 'mt-2 border-t border-slate-100 pt-2';
 
                 const ratingTitle = document.createElement('div');
-                ratingTitle.className = 'mb-2 flex items-center justify-between text-xs text-slate-500';
+                ratingTitle.className = 'mb-1 text-xs text-slate-600';
                 ratingTitle.innerHTML = `
-                    <span class="font-medium text-slate-700">إلى أي مدى يشبهك هذا التصرف؟</span>
-                    <span class="text-[11px] text-slate-400">تقييم إضافي اختياري</span>
+                    <span class="font-medium">إلى أي مدى يشبهك؟ (اختياري)</span>
                 `;
                 ratingDrawer.appendChild(ratingTitle);
 
                 const scaleGrid = document.createElement('div');
-                scaleGrid.className = 'flex flex-wrap gap-1.5 sm:gap-2';
+                scaleGrid.className = 'grid grid-cols-2 gap-1.5 min-[390px]:grid-cols-3 md:grid-cols-5';
 
                 RATING_LEVELS.forEach((level) => {
                     const isSelectedRating = currentRating === level.value;
                     const ratingBtn = document.createElement('button');
                     ratingBtn.type = 'button';
-                    ratingBtn.className = `rating-btn inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold transition-all shadow-2xs hover:shadow-xs active:scale-95 ${
+                    ratingBtn.className = `rating-btn flex min-h-11 min-w-0 items-center justify-center gap-1 rounded-lg border px-1.5 py-1 text-xs font-bold leading-tight transition-colors ${
                         isSelectedRating ? level.activeClass : level.idleClass
                     }`;
-
-                    ratingBtn.innerHTML = `
-                        ${level.iconSvg}
-                        <span>${level.label}</span>
-                    `;
+                    ratingBtn.dataset.rating = String(level.value);
+                    ratingBtn.setAttribute('aria-label', `تقييم ${letter}: ${level.label}`);
+                    ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
+                    const icon = document.createElement('img');
+                    icon.src = `/assets/assessment/emoji/${level.icon}`;
+                    icon.alt = '';
+                    icon.width = 20;
+                    icon.height = 20;
+                    icon.className = 'h-5 w-5 shrink-0';
+                    const text = document.createElement('span');
+                    text.className = 'text-center';
+                    text.textContent = level.label;
+                    ratingBtn.append(icon, text);
 
                     ratingBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -364,6 +376,14 @@ class AssessmentJourney {
             this.optionsContainer.appendChild(card);
         });
 
+        if (focusedOption) {
+            const card = [...this.optionsContainer.children].find((element) => element.dataset.optionId === focusedOption);
+            const target = focusedRadio
+                ? card?.querySelector('input[name="primary_option"]')
+                : [...(card?.querySelectorAll('.rating-btn') || [])].find((button) => button.dataset.rating === focusedRating);
+            target?.focus({ preventScroll: true });
+        }
+
         this.updateNavButtons();
         this.renderNavGrid();
     }
@@ -371,13 +391,13 @@ class AssessmentJourney {
     updateSpecialCardStyles() {
         const currentAnswer = this.getCurrentAnswer();
 
-        this.noneFitCard.className = `relative flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
+        this.noneFitCard.className = `relative flex cursor-pointer items-start gap-2 rounded-xl border p-3 transition-colors focus-within:ring-2 focus-within:ring-brand-600 ${
             currentAnswer.none_selected
                 ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
                 : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
         }`;
 
-        this.cannotJudgeCard.className = `relative flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
+        this.cannotJudgeCard.className = `relative flex cursor-pointer items-start gap-2 rounded-xl border p-3 transition-colors focus-within:ring-2 focus-within:ring-brand-600 ${
             currentAnswer.unable_to_judge
                 ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
                 : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'

@@ -15,32 +15,9 @@
         {!! json_encode($initialData, JSON_UNESCAPED_UNICODE) !!}
     </script>
 
-    {{-- نصوص السلم الخماسي للتقييم الإضافي وفق نصوص C-03 المعتمدة للوصولية والفحص --}}
-    <template id="rating-scale-legend">
-        <div data-rating="2">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 9.5c.5-.8 1.5-.8 2 0"/><path d="M14 9.5c.5-.8 1.5-.8 2 0"/><path d="M8 14c1 2.5 7 2.5 8 0"/></svg>
-            <span>يشبهني جدًا</span>
-        </div>
-        <div data-rating="1">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 13.5c1 1.8 6 1.8 7 0"/></svg>
-            <span>يشبهني</span>
-        </div>
-        <div data-rating="0">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><line x1="8.5" y1="14" x2="15.5" y2="14" stroke-width="2"/></svg>
-            <span>محايد / غير متأكد</span>
-        </div>
-        <div data-rating="-1">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 15.5c1-1.5 6-1.5 7 0"/></svg>
-            <span>لا يشبهني</span>
-        </div>
-        <div data-rating="-2">
-            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M13.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M8 16c1.2-2.5 6.8-2.5 8 0"/></svg>
-            <span>لا يشبهني إطلاقًا</span>
-        </div>
-    </template>
 
     {{-- رأس التقييم ومؤشر التقدم --}}
-    <div class="card-surface mb-6 sm:p-6 transition-all">
+    <div class="card-surface mb-3 p-4 sm:p-5">
         <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
                 <span class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500">
@@ -61,16 +38,16 @@
         </div>
 
         {{-- شريط التقدم المرئي --}}
-        <div class="mt-4 h-2.5 w-full overflow-hidden rounded-full bg-slate-100" role="progressbar" id="progress-bar-container" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100" role="progressbar" id="progress-bar-container" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
             <div id="progress-bar-fill" class="h-full rounded-full bg-gradient-to-l from-brand-500 to-brand-700 shadow-xs shadow-brand-600/40 transition-all duration-300 ease-out" style="width: 0%;"></div>
         </div>
     </div>
 
     {{-- بطاقة الموقف الحالية --}}
-    <div class="card-surface sm:p-8">
+    <div class="card-surface p-4 sm:p-6">
         {{-- سيناريو الموقف --}}
-        <div class="mb-6 border-b border-slate-100 pb-5">
-            <div class="mb-3 flex items-center justify-between">
+        <div class="mb-3 border-b border-slate-100 pb-3">
+            <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
                 <span id="scenario-badge" class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">
                     <span class="h-1.5 w-1.5 rounded-full bg-brand-600 animate-pulse"></span>
                     الموقف رقم <span id="badge-num" class="ms-0.5">1</span>
@@ -109,27 +86,27 @@
         </div>
 
         {{-- خيارات التصرف الأربعة --}}
-        <fieldset class="space-y-4" id="options-fieldset">
-            <legend class="mb-3 block text-base font-bold text-slate-900">
+        <fieldset class="space-y-2" id="options-fieldset">
+            <legend class="mb-2 block text-base font-bold text-slate-900">
                 أي تصرف يشبهك أكثر؟
                 <span class="block text-xs font-normal text-slate-500 mt-0.5">
                     اختر تصرفًا واحدًا فقط يمثل طريقة تعاملك مع هذا الموقف.
                 </span>
             </legend>
 
-            <div id="options-container" class="space-y-3">
+            <div id="options-container" class="space-y-2">
                 {{-- تُحقن الخيارات عبر JavaScript ديناميكياً --}}
             </div>
         </fieldset>
 
         {{-- خيارات الاستبعاد الخاصة (حصرية مع الخيار الأساسي) --}}
-        <div class="mt-8 border-t border-slate-100 pt-6">
+        <div class="mt-4 border-t border-slate-100 pt-3">
             <span class="mb-3 block text-xs font-bold uppercase tracking-wider text-slate-400">
                 خيارات بديلة عند تعذر مطابقة التصرفات
             </span>
-            <div class="grid gap-3 sm:grid-cols-2">
+            <div class="grid gap-2 sm:grid-cols-2">
                 {{-- لا يشبهني أي من هذه التصرفات --}}
-                <label id="none-fit-card" class="relative flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-4 transition-all hover:bg-slate-50 hover:border-slate-300">
+                <label id="none-fit-card" class="relative flex cursor-pointer items-start gap-2 rounded-xl border border-slate-200 p-3 transition-all hover:bg-slate-50 hover:border-slate-300">
                     <input type="radio" name="response_state" value="none_selected" id="none-fit-radio" class="mt-1 h-4 w-4 border-slate-300 text-brand-600 focus:ring-brand-600 cursor-pointer">
                     <div>
                         <span class="flex items-center gap-1.5 font-bold text-slate-900 text-sm">
@@ -145,7 +122,7 @@
                 </label>
 
                 {{-- لا أستطيع الحكم على هذا الموقف --}}
-                <label id="cannot-judge-card" class="relative flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-4 transition-all hover:bg-slate-50 hover:border-slate-300">
+                <label id="cannot-judge-card" class="relative flex cursor-pointer items-start gap-2 rounded-xl border border-slate-200 p-3 transition-all hover:bg-slate-50 hover:border-slate-300">
                     <input type="radio" name="response_state" value="unable_to_judge" id="cannot-judge-radio" class="mt-1 h-4 w-4 border-slate-300 text-brand-600 focus:ring-brand-600 cursor-pointer">
                     <div>
                         <span class="flex items-center gap-1.5 font-bold text-slate-900 text-sm">
@@ -163,7 +140,7 @@
         </div>
 
         {{-- شريط التحكم والتنقل السفلي --}}
-        <div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-6">
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
             <button type="button" id="prev-btn" class="btn btn-secondary text-sm gap-2 disabled:opacity-40 disabled:pointer-events-none">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

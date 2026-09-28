@@ -201,6 +201,11 @@
         transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
+    .option-card:focus-within {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
+    }
+
     .rating-btn {
         transition: all 0.15s ease-in-out;
     }
