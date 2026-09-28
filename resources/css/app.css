@@ -753,3 +753,204 @@
         padding: 0.9rem;
     }
 }
+
+
+/* Full-viewport assessment introduction. */
+.assessment-intro-screen {
+    width: 100%;
+    max-width: none;
+    height: calc(100dvh - 5.75rem);
+    min-height: 620px;
+}
+
+.assessment-intro-shell {
+    height: 100%;
+    border-color: #d3dfdb;
+    background: #f8fbfa;
+}
+
+.assessment-intro-hero-panel {
+    background: #0b4e4b;
+}
+
+.assessment-intro-hero-overlay {
+    background:
+        radial-gradient(circle at 18% 18%, rgb(197 154 88 / 0.22), transparent 28%),
+        linear-gradient(135deg, rgb(6 41 40 / 0.94) 5%, rgb(9 74 70 / 0.84) 54%, rgb(15 118 110 / 0.6) 100%),
+        linear-gradient(180deg, transparent 56%, rgb(3 30 29 / 0.34));
+}
+
+.assessment-intro-guide-panel {
+    background: #f5f9f7;
+    overflow: hidden;
+}
+
+.assessment-resume-chip {
+    color: #0b5e59;
+    background: #dceee8;
+    border: 1px solid #c5ded6;
+}
+
+@media (min-width: 1024px) {
+    .assessment-intro-screen {
+        height: calc(100dvh - 5.55rem);
+        min-height: 610px;
+    }
+
+    .assessment-intro-shell {
+        min-height: 0;
+    }
+
+    .assessment-intro-guide-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1023px) {
+    .assessment-intro-screen {
+        height: auto;
+        min-height: calc(100dvh - 5.5rem);
+    }
+}
+
+@media (max-width: 639px) {
+    .assessment-intro-screen {
+        height: calc(100dvh - 4.7rem);
+        min-height: 650px;
+    }
+
+    .assessment-intro-shell {
+        display: grid;
+        grid-template-rows: minmax(0, 0.82fr) minmax(0, 1.18fr);
+        height: 100%;
+        border-radius: 1rem;
+    }
+
+    .assessment-intro-hero-panel {
+        min-height: 0;
+        padding: 0.8rem;
+    }
+
+    .assessment-intro-hero-panel .assessment-intro-pill {
+        padding: 0.25rem 0.55rem;
+        font-size: 0.62rem;
+    }
+
+    .assessment-intro-hero-panel .assessment-intro-eyebrow {
+        margin-top: 0.65rem;
+        font-size: 0.68rem;
+    }
+
+    .assessment-intro-hero-panel h1 {
+        margin-top: 0.2rem;
+        font-size: 1.55rem;
+        line-height: 1.25;
+    }
+
+    .assessment-intro-hero-panel h1 + p {
+        margin-top: 0.45rem;
+        font-size: 0.7rem;
+        line-height: 1.25rem;
+    }
+
+    .assessment-intro-note {
+        display: none;
+    }
+
+    .assessment-intro-photo-card {
+        display: none;
+    }
+
+    .assessment-intro-hero-panel > .mt-5 {
+        margin-top: 0.6rem;
+    }
+
+    .assessment-intro-cta {
+        min-height: 2.4rem;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.75rem;
+    }
+
+    .assessment-intro-guide-panel {
+        min-height: 0;
+        overflow: hidden;
+        padding: 0.7rem;
+    }
+
+    .assessment-intro-guide-panel h2 {
+        font-size: 1rem;
+    }
+
+    .assessment-intro-guide-panel > .mt-4 {
+        margin-top: 0.55rem;
+    }
+
+    .assessment-intro-guide-panel .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+        margin-top: 0.45rem;
+    }
+
+    .assessment-intro-step {
+        padding: 0.6rem;
+        border-radius: 0.8rem;
+    }
+
+    .assessment-intro-step .assessment-step-number {
+        width: 1.65rem;
+        height: 1.65rem;
+        border-radius: 0.55rem;
+        font-size: 0.65rem;
+    }
+
+    .assessment-intro-step h3 {
+        font-size: 0.72rem;
+    }
+
+    .assessment-intro-step p,
+    .assessment-intro-step .space-y-1 {
+        font-size: 0.62rem;
+        line-height: 1rem;
+    }
+
+    .assessment-intro-step .mt-3 {
+        margin-top: 0.4rem;
+    }
+
+    .assessment-intro-emoji {
+        padding-block: 0.25rem;
+        border-radius: 0.55rem;
+    }
+
+    .assessment-intro-emoji img {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .assessment-intro-emoji span {
+        font-size: 0.42rem;
+        line-height: 0.55rem;
+    }
+
+    .assessment-intro-footer {
+        margin-top: 0.5rem;
+        padding: 0.55rem;
+    }
+
+    .assessment-intro-footer .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.35rem;
+    }
+
+    .assessment-intro-footer .assessment-mini-icon {
+        width: 1.35rem;
+        height: 1.35rem;
+        border-radius: 0.45rem;
+        font-size: 0.62rem;
+    }
+
+    .assessment-intro-footer p {
+        font-size: 0.52rem;
+        line-height: 0.72rem;
+    }
+}
