@@ -116,7 +116,7 @@
 
     <main id="main" tabindex="-1"
           class="{{ request()->routeIs('assessment.show')
-              ? 'w-full flex-1 break-words px-2 py-3 sm:px-5 sm:py-6 lg:px-8 lg:py-8'
+              ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
               : (request()->routeIs('assessment.intro')
                   ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
                   : 'container-page flex-1 break-words py-8 lg:py-12') }}">
@@ -124,7 +124,7 @@
         @yield('content')
     </main>
 
-    <footer class="mt-auto {{ request()->routeIs('assessment.intro') ? 'hidden' : '' }}">
+    <footer class="mt-auto {{ request()->routeIs('assessment.*') ? 'hidden' : '' }}">
         <div class="bg-brand-900 text-white">
             <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-8">
                 <div class="max-w-md">

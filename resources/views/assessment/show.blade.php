@@ -5,7 +5,7 @@
 @section('content')
 <div id="assessment-app"
      dir="rtl"
-     class="assessment-stage mx-auto w-full max-w-[1440px]"
+     class="assessment-stage mx-auto w-full max-w-none"
      data-session-id="{{ $session->id }}"
      data-complete-url="{{ route('assessment.sessions.complete', $session->id) }}"
      data-save-base-url="/assessment/sessions/{{ $session->id }}/answers"
@@ -15,7 +15,7 @@
         {!! json_encode($initialData, JSON_UNESCAPED_UNICODE) !!}
     </script>
 
-    <section class="assessment-panel overflow-hidden rounded-2xl border shadow-card" aria-labelledby="assessment-question-title">
+    <section class="assessment-panel assessment-panel-screen overflow-hidden rounded-2xl border shadow-card" aria-labelledby="assessment-question-title">
         {{-- شريط علوي خفيف فقط للتقدم والحفظ والتنقل السريع. --}}
         <div class="assessment-toolbar border-b px-2.5 py-1.5 sm:px-5 sm:py-2 lg:px-6">
             <div class="flex min-w-0 items-center gap-2.5 sm:gap-4">
@@ -27,7 +27,7 @@
                     </svg>
                 </button>
 
-                <div class="min-w-0 flex-1">
+                <div class="assessment-answer-column min-w-0 flex-1">
                     <div class="mb-1 flex min-w-0 items-center justify-between gap-2 sm:mb-1.5 sm:gap-3">
                         <span id="progress-position-text" class="shrink-0 text-[10px] font-bold text-slate-700 sm:text-sm">
                             الموقف <span id="current-position-num">1</span> من <span id="total-questions-num">18</span>
@@ -56,10 +56,10 @@
             </div>
         </div>
 
-        <div class="p-2 sm:p-4 lg:p-4">
-            <div class="flex min-w-0 flex-col gap-2.5 sm:gap-3 lg:flex-row lg:items-start lg:gap-5">
+        <div class="assessment-content p-2 sm:p-4 lg:p-4">
+            <div class="assessment-workspace flex min-w-0 flex-col gap-2.5 sm:gap-3 lg:flex-row lg:items-stretch lg:gap-5">
                 {{-- اليمين: السؤال + خريطة المواقف. --}}
-                <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[430px] lg:shrink-0 xl:w-[480px]">
+                <aside class="assessment-question-column min-w-0 lg:w-[470px] lg:shrink-0 xl:w-[520px]">
                     <div class="assessment-question-card rounded-xl border p-2.5 shadow-sm sm:rounded-2xl sm:p-4">
                         <div class="mb-1.5 flex items-center justify-between gap-2 sm:mb-3 sm:gap-3">
                             <span id="scenario-badge" class="assessment-question-badge hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold sm:inline-flex sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs">
