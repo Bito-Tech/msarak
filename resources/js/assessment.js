@@ -256,7 +256,6 @@ class AssessmentJourney {
         this.updateSpecialCardStyles();
 
         this.optionsContainer.innerHTML = '';
-        const hasPrimary = currentAnswer.primary_option_id !== null;
 
         question.options.forEach((opt, idx) => {
             const isPrimary = currentAnswer.primary_option_id === opt.option_id;
@@ -264,7 +263,7 @@ class AssessmentJourney {
 
             const card = document.createElement('div');
             card.dir = 'rtl';
-            card.className = `option-card flex min-w-0 flex-col gap-3 rounded-xl border px-3 py-3 transition sm:px-4 lg:flex-row lg:items-center lg:gap-5 lg:px-5 lg:py-3.5 ${
+            card.className = `option-card flex min-w-0 flex-col gap-2 rounded-xl border px-2.5 py-2.5 transition sm:gap-3 sm:px-4 sm:py-3 lg:flex-row lg:items-center lg:gap-5 lg:px-5 lg:py-3.5 ${
                 isPrimary
                     ? 'border-brand-500 bg-brand-50/35 ring-1 ring-brand-500/60 shadow-sm'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/45'
@@ -272,7 +271,7 @@ class AssessmentJourney {
             card.dataset.optionId = String(opt.option_id);
 
             const choiceWrap = document.createElement('div');
-            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-3 lg:basis-[54%]';
+            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2.5 sm:gap-3 lg:basis-[54%]';
 
             const radio = document.createElement('input');
             radio.type = 'radio';
@@ -280,12 +279,12 @@ class AssessmentJourney {
             radio.value = opt.option_id;
             radio.id = `opt-radio-${opt.option_id}`;
             radio.checked = isPrimary;
-            radio.className = 'mt-1 h-5 w-5 shrink-0 cursor-pointer border-slate-300 text-brand-600 focus:ring-brand-600';
+            radio.className = 'mt-0.5 h-4.5 w-4.5 shrink-0 cursor-pointer border-slate-300 text-brand-600 focus:ring-brand-600 sm:mt-1 sm:h-5 sm:w-5';
             radio.setAttribute('aria-label', `اختيار التصرف ${idx + 1} بوصفه الأقرب لك`);
 
             const label = document.createElement('label');
             label.htmlFor = radio.id;
-            label.className = 'min-w-0 flex-1 cursor-pointer text-right text-sm font-semibold leading-7 text-slate-800 sm:text-[0.95rem]';
+            label.className = 'min-w-0 flex-1 cursor-pointer text-right text-[11.5px] font-semibold leading-5 text-slate-800 min-[380px]:text-xs sm:text-[0.95rem] sm:leading-7';
             label.textContent = opt.option_text;
 
             choiceWrap.append(radio, label);
@@ -298,69 +297,59 @@ class AssessmentJourney {
             });
 
             const ratingArea = document.createElement('div');
-            ratingArea.className = `min-w-0 border-t border-slate-100 pt-2.5 lg:w-[330px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[370px] ${
-                hasPrimary ? '' : 'opacity-45'
-            }`;
+            ratingArea.className = 'min-w-0 border-t border-slate-100 pt-1.5 sm:pt-2.5 lg:w-[330px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[370px]';
 
-            if (hasPrimary) {
-                const scale = document.createElement('div');
-                scale.dir = 'ltr';
-                scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-1 sm:gap-2';
+            const scale = document.createElement('div');
+            scale.dir = 'ltr';
+            scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-0.5 min-[380px]:gap-1 sm:gap-2';
 
-                RATING_LEVELS.forEach((level) => {
-                    const isSelectedRating = currentRating === level.value;
-                    const wasJustPressed = this.lastRatingInteraction
-                        && this.lastRatingInteraction.optionId === opt.option_id
-                        && this.lastRatingInteraction.ratingValue === level.value;
+            RATING_LEVELS.forEach((level) => {
+                const isSelectedRating = currentRating === level.value;
+                const wasJustPressed = this.lastRatingInteraction
+                    && this.lastRatingInteraction.optionId === opt.option_id
+                    && this.lastRatingInteraction.ratingValue === level.value;
 
-                    const ratingBtn = document.createElement('button');
-                    ratingBtn.type = 'button';
-                    ratingBtn.className = `rating-btn mx-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-transparent sm:h-10 sm:w-10 ${
-                        isSelectedRating
-                            ? 'bg-brand-50 ring-2 ring-brand-600 ring-offset-1 ring-offset-white'
-                            : 'hover:bg-slate-100'
-                    } ${wasJustPressed ? 'rating-pop' : ''}`;
-                    ratingBtn.dataset.rating = String(level.value);
-                    ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
-                    ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
-                    ratingBtn.title = level.label;
+                const ratingBtn = document.createElement('button');
+                ratingBtn.type = 'button';
+                ratingBtn.className = `rating-btn mx-auto inline-flex h-7.5 w-7.5 items-center justify-center rounded-full bg-transparent min-[380px]:h-8 min-[380px]:w-8 sm:h-10 sm:w-10 ${
+                    isSelectedRating
+                        ? 'bg-brand-50 ring-2 ring-brand-600 ring-offset-1 ring-offset-white'
+                        : 'hover:bg-slate-100'
+                } ${wasJustPressed ? 'rating-pop' : ''}`;
+                ratingBtn.dataset.rating = String(level.value);
+                ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
+                ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
+                ratingBtn.title = level.label;
 
-                    const icon = document.createElement('img');
-                    icon.src = `/assets/assessment/emoji/${level.icon}`;
-                    icon.alt = '';
-                    icon.width = 36;
-                    icon.height = 36;
-                    icon.className = 'h-8 w-8 select-none object-contain sm:h-9 sm:w-9';
-                    icon.draggable = false;
-                    ratingBtn.appendChild(icon);
+                const icon = document.createElement('img');
+                icon.src = `/assets/assessment/emoji/${level.icon}`;
+                icon.alt = '';
+                icon.width = 34;
+                icon.height = 34;
+                icon.className = 'h-6.5 w-6.5 select-none object-contain min-[380px]:h-7 min-[380px]:w-7 sm:h-9 sm:w-9';
+                icon.draggable = false;
+                ratingBtn.appendChild(icon);
 
-                    ratingBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.handleRatingClick(opt.option_id, level.value, isSelectedRating);
-                    });
-
-                    scale.appendChild(ratingBtn);
+                ratingBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.handleRatingClick(opt.option_id, level.value, isSelectedRating);
                 });
 
-                const endLabels = document.createElement('div');
-                endLabels.dir = 'ltr';
-                endLabels.className = 'mt-1 flex min-w-0 items-center justify-between gap-2 px-1 text-[10px] font-medium leading-4 text-slate-400 sm:text-[11px]';
-                const negativeLabel = document.createElement('span');
-                negativeLabel.className = 'truncate';
-                negativeLabel.textContent = 'لا يشبهني إطلاقًا';
-                const positiveLabel = document.createElement('span');
-                positiveLabel.className = 'truncate text-right';
-                positiveLabel.textContent = 'يشبهني جدًا';
-                endLabels.append(negativeLabel, positiveLabel);
+                scale.appendChild(ratingBtn);
+            });
 
-                ratingArea.append(scale, endLabels);
-            } else {
-                const helper = document.createElement('p');
-                helper.className = 'text-center text-[11px] font-medium leading-5 text-slate-400';
-                helper.textContent = 'اختر التصرف أولًا لإظهار التقييم الاختياري.';
-                ratingArea.appendChild(helper);
-            }
+            const endLabels = document.createElement('div');
+            endLabels.dir = 'ltr';
+            endLabels.className = 'mt-0.5 flex min-w-0 items-center justify-between gap-2 px-0.5 text-[8px] font-medium leading-3.5 text-slate-400 min-[380px]:text-[9px] sm:mt-1 sm:px-1 sm:text-[11px] sm:leading-4';
+            const negativeLabel = document.createElement('span');
+            negativeLabel.className = 'truncate';
+            negativeLabel.textContent = 'لا يشبهني إطلاقًا';
+            const positiveLabel = document.createElement('span');
+            positiveLabel.className = 'truncate text-right';
+            positiveLabel.textContent = 'يشبهني جدًا';
+            endLabels.append(negativeLabel, positiveLabel);
 
+            ratingArea.append(scale, endLabels);
             card.appendChild(ratingArea);
             this.optionsContainer.appendChild(card);
         });
@@ -420,12 +409,26 @@ class AssessmentJourney {
     handleRatingClick(optionId, ratingValue, isAlreadySelected) {
         const answer = this.getCurrentAnswer();
 
+        // A rating belongs to the normal option-answer mode. If a special response
+        // was active, return to the normal mode without inventing a primary choice.
+        if (answer.none_selected || answer.unable_to_judge) {
+            answer.none_selected = false;
+            answer.unable_to_judge = false;
+            this.noneFitRadio.checked = false;
+            this.cannotJudgeRadio.checked = false;
+        }
+
         // Clicking the active rating again unrates (clears rating).
         if (isAlreadySelected) {
             this.lastRatingInteraction = { optionId, ratingValue };
             delete answer.ratings[optionId];
             this.renderCurrentQuestion();
-            this.scheduleSave();
+
+            if (answer.primary_option_id !== null) {
+                this.scheduleSave();
+            } else {
+                this.setSaveStatus('idle', 'اختر التصرف الأساسي للحفظ.');
+            }
             return;
         }
 
@@ -439,7 +442,12 @@ class AssessmentJourney {
         this.lastRatingInteraction = { optionId, ratingValue };
         answer.ratings[optionId] = ratingValue;
         this.renderCurrentQuestion();
-        this.scheduleSave();
+
+        if (answer.primary_option_id !== null) {
+            this.scheduleSave();
+        } else {
+            this.setSaveStatus('idle', 'اختر التصرف الأساسي للحفظ.');
+        }
     }
 
     openConflictModal() {

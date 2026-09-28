@@ -60,26 +60,26 @@
             <div class="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-start lg:gap-6">
                 {{-- اليمين: السؤال + خريطة المواقف. --}}
                 <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[360px] lg:shrink-0 xl:w-[390px]">
-                    <div class="rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/80 p-4 shadow-sm sm:p-5">
-                        <div class="mb-4 flex items-center justify-between gap-3">
+                    <div class="rounded-xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/80 p-3 shadow-sm sm:rounded-2xl sm:p-5">
+                        <div class="mb-2.5 flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
                             <span id="scenario-badge" class="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700 ring-1 ring-inset ring-brand-100">
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h7.5M8.25 12h7.5m-7.5 5.25h4.5M6.75 3.75h10.5A2.25 2.25 0 0 1 19.5 6v12a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 18V6a2.25 2.25 0 0 1 2.25-2.25Z" />
                                 </svg>
                                 الموقف <span id="badge-num" class="ms-0.5">1</span>
                             </span>
-                            <span class="text-xs font-medium text-slate-400">استكشاف ميولك</span>
+                            <span class="hidden text-xs font-medium text-slate-400 sm:inline">استكشاف ميولك</span>
                         </div>
 
                         <h1 id="assessment-question-title" class="sr-only">استكشاف ميولك</h1>
-                        <h2 id="scenario-text" class="text-lg font-extrabold leading-[1.9] text-slate-900 sm:text-xl">
+                        <h2 id="scenario-text" class="text-[0.95rem] font-extrabold leading-7 text-slate-900 sm:text-xl sm:leading-[1.9]">
                             جارٍ تحميل الموقف…
                         </h2>
-                        <p class="mt-2 text-sm leading-7 text-slate-500">
+                        <p class="mt-1 text-[11px] leading-5 text-slate-500 sm:mt-2 sm:text-sm sm:leading-7">
                             اختر التصرف الأقرب لك، ثم قيّم الخيارات اختياريًا.
                         </p>
 
-                        <div class="mt-5 rounded-xl border border-slate-200 bg-white p-3.5">
+                        <div class="mt-5 hidden rounded-xl border border-slate-200 bg-white p-3.5 lg:block">
                             <div class="mb-2 flex items-center justify-between gap-2 text-xs">
                                 <span class="font-bold text-slate-700">خريطة المواقف</span>
                                 <span id="processed-summary-text" class="text-slate-400">
@@ -105,11 +105,11 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 flex items-end justify-between gap-3">
+                    <div class="mb-2 flex items-end justify-between gap-3 sm:mb-3">
                         <div>
-                            <p class="text-base font-extrabold text-slate-900 sm:text-lg">اختر تصرفًا واحدًا</p>
-                            <p class="mt-0.5 text-xs leading-relaxed text-slate-500 sm:text-sm">
-                                النص في اليمين، والتقييم المستقل في اليسار.
+                            <p class="text-sm font-extrabold text-slate-900 sm:text-lg">اختر تصرفًا واحدًا</p>
+                            <p class="mt-0.5 text-[10px] leading-4 text-slate-500 sm:text-sm sm:leading-relaxed">
+                                اختر التصرف الأساسي، وقيّم كل خيار مباشرة.
                             </p>
                         </div>
                     </div>
@@ -117,41 +117,41 @@
                     <fieldset id="options-fieldset" class="min-w-0">
                         <legend class="sr-only">اختر التصرف الأساسي ثم قيّم الخيارات اختياريًا</legend>
                         <p class="sr-only">مقياس التقييم من لا يشبهني إطلاقًا إلى يشبهني جدًا.</p>
-                        <div id="options-container" class="min-w-0 space-y-3"></div>
+                        <div id="options-container" class="min-w-0 space-y-2 sm:space-y-3"></div>
                     </fieldset>
 
-                    <div class="mt-4 border-t border-slate-100 pt-3.5">
-                        <p class="mb-2.5 text-xs font-bold text-brand-700 sm:text-sm">إذا لم يناسبك أي تصرف أو لم تستطع الحكم:</p>
+                    <div class="mt-3 border-t border-slate-100 pt-2.5 sm:mt-4 sm:pt-3.5">
+                        <p class="mb-2 text-[10px] font-bold text-brand-700 sm:mb-2.5 sm:text-sm">إذا لم يناسبك أي تصرف أو لم تستطع الحكم:</p>
                         <div class="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
-                            <label id="none-fit-card" class="relative flex min-h-11 min-w-0 cursor-pointer items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 transition hover:border-brand-200 hover:bg-brand-50/40">
+                            <label id="none-fit-card" class="relative flex min-h-10 min-w-0 cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-2.5 py-2 transition hover:border-brand-200 hover:bg-brand-50/40 sm:min-h-11 sm:gap-2.5 sm:px-3 sm:py-2.5">
                                 <input type="radio" name="response_state" value="none_selected" id="none-fit-radio"
                                        class="h-5 w-5 shrink-0 border-slate-300 text-brand-600 focus:ring-brand-600">
-                                <span class="min-w-0 text-sm font-semibold leading-6 text-slate-800">لا يشبهني أي من هذه التصرفات</span>
+                                <span class="min-w-0 text-[11px] font-semibold leading-5 text-slate-800 sm:text-sm sm:leading-6">لا يشبهني أي من هذه التصرفات</span>
                             </label>
-                            <label id="cannot-judge-card" class="relative flex min-h-11 min-w-0 cursor-pointer items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 transition hover:border-brand-200 hover:bg-brand-50/40">
+                            <label id="cannot-judge-card" class="relative flex min-h-10 min-w-0 cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-2.5 py-2 transition hover:border-brand-200 hover:bg-brand-50/40 sm:min-h-11 sm:gap-2.5 sm:px-3 sm:py-2.5">
                                 <input type="radio" name="response_state" value="unable_to_judge" id="cannot-judge-radio"
                                        class="h-5 w-5 shrink-0 border-slate-300 text-brand-600 focus:ring-brand-600">
-                                <span class="min-w-0 text-sm font-semibold leading-6 text-slate-800">لا أستطيع الحكم على هذا الموقف</span>
+                                <span class="min-w-0 text-[11px] font-semibold leading-5 text-slate-800 sm:text-sm sm:leading-6">لا أستطيع الحكم على هذا الموقف</span>
                             </label>
                         </div>
                     </div>
 
-                    <div class="mt-4 flex min-w-0 items-center justify-between gap-2 border-t border-slate-100 pt-3.5">
-                        <button type="button" id="prev-btn" class="btn btn-secondary min-w-0 flex-1 px-3 text-sm disabled:pointer-events-none disabled:opacity-40 sm:max-w-40">
+                    <div class="sticky bottom-2 z-20 -mx-1 mt-3 flex min-w-0 items-center justify-between gap-2 rounded-xl border border-slate-200/80 bg-white/95 p-2 shadow-pop backdrop-blur sm:static sm:mx-0 sm:mt-4 sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pt-3.5 sm:shadow-none">
+                        <button type="button" id="prev-btn" class="btn btn-secondary min-h-10 min-w-0 flex-1 px-2.5 py-1.5 text-xs disabled:pointer-events-none disabled:opacity-40 sm:min-h-11 sm:max-w-40 sm:px-3 sm:py-2 sm:text-sm">
                             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                             </svg>
                             <span>السابق</span>
                         </button>
 
-                        <button type="button" id="next-btn" class="btn btn-primary min-w-0 flex-1 px-3 text-sm sm:max-w-40">
+                        <button type="button" id="next-btn" class="btn btn-primary min-h-10 min-w-0 flex-1 px-2.5 py-1.5 text-xs sm:min-h-11 sm:max-w-40 sm:px-3 sm:py-2 sm:text-sm">
                             <span>التالي</span>
                             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
                             </svg>
                         </button>
 
-                        <button type="button" id="complete-btn" class="btn btn-success hidden min-w-0 flex-1 px-3 text-sm sm:max-w-44">
+                        <button type="button" id="complete-btn" class="btn btn-success hidden min-h-10 min-w-0 flex-1 px-2.5 py-1.5 text-xs sm:min-h-11 sm:max-w-44 sm:px-3 sm:py-2 sm:text-sm">
                             <span>إكمال التقييم</span>
                         </button>
                     </div>
