@@ -1905,3 +1905,438 @@
         width: 23rem;
     }
 }
+
+
+/* Home — full-width teal/gold system aligned with assessment pages. */
+.home-page {
+    background: #eaf1ef;
+}
+
+.home-page header {
+    background: rgb(253 254 254 / 0.94);
+}
+
+.home-page header .nav-link[aria-current='page'] {
+    background: #e7f3ef;
+    color: #0f6d68;
+}
+
+.home-page header .container-page > a {
+    color: #0f6d68;
+}
+
+.home-page header .container-page > a > span {
+    background-image: linear-gradient(135deg, #c59a58, #0f766e);
+    box-shadow: 0 5px 16px rgb(15 118 110 / 0.2);
+}
+
+.home-page footer > div {
+    background: #123f3c;
+}
+
+.home-page footer .container-page {
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+}
+
+.home-page footer p,
+.home-page footer a {
+    color: rgb(236 249 245 / 0.86);
+}
+
+.home-screen {
+    --home-teal: #0f766e;
+    --home-teal-strong: #0a514d;
+    --home-gold: #c59a58;
+    width: 100%;
+    max-width: none;
+}
+
+.home-grid {
+    min-height: 0;
+}
+
+.home-hero,
+.home-actions-card {
+    min-height: 0;
+    border-color: #d3dfdb;
+    box-shadow: 0 18px 50px rgb(28 62 58 / 0.08), 0 2px 8px rgb(28 62 58 / 0.04);
+}
+
+.home-hero {
+    color: #173b38;
+    background: #edf5f1;
+}
+
+.home-hero-image {
+    opacity: 0.42;
+    filter: saturate(0.55) contrast(0.82) brightness(1.08);
+    transform: scale(1.015);
+}
+
+.home-hero-wash {
+    background:
+        radial-gradient(circle at 18% 18%, rgb(197 154 88 / 0.13), transparent 31%),
+        linear-gradient(135deg, rgb(248 251 249 / 0.95) 0%, rgb(239 247 243 / 0.91) 53%, rgb(230 242 237 / 0.8) 100%);
+}
+
+.home-pill {
+    color: #0b5e59;
+    background: rgb(255 255 255 / 0.72);
+    border: 1px solid rgb(133 169 160 / 0.36);
+    box-shadow: 0 4px 12px rgb(37 83 76 / 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.home-kicker {
+    color: #a9782f;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.home-title {
+    color: #0a4642;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+}
+
+.home-lead {
+    color: #315c58;
+    font-size: 1.15rem;
+    line-height: 2rem;
+}
+
+.home-insight {
+    color: #315652;
+    background: rgb(255 255 255 / 0.72);
+    border-color: rgb(134 168 160 / 0.3);
+    box-shadow: 0 8px 22px rgb(33 74 69 / 0.05);
+    backdrop-filter: blur(10px);
+    font-size: 0.95rem;
+    line-height: 1.75rem;
+}
+
+.home-mini-stat {
+    color: #234f4b;
+    background: rgb(255 255 255 / 0.7);
+    border: 1px solid rgb(127 165 156 / 0.3);
+}
+
+.home-actions-card {
+    background: #f7faf9;
+}
+
+.home-actions-title {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.home-actions-copy {
+    font-size: 1rem;
+    line-height: 1.7rem;
+}
+
+.home-action-list {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.home-action-block {
+    border-color: #d6e3df;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgb(28 72 66 / 0.045);
+}
+
+.home-action-icon {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0f766e, #0a514d);
+    box-shadow: 0 7px 16px rgb(15 118 110 / 0.2);
+}
+
+.home-action-eyebrow {
+    color: #a9782f;
+}
+
+.home-action-title {
+    font-size: 1.4rem;
+    line-height: 1.9rem;
+}
+
+.home-action-copy {
+    font-size: 0.98rem;
+    line-height: 1.65rem;
+}
+
+.home-emoji {
+    min-height: 2.8rem;
+    border: 1px solid #dce7e3;
+    background: #f7faf9;
+}
+
+.home-big-btn {
+    min-height: 4.5rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.5rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.home-big-btn-primary {
+    color: #062f2d;
+    background: linear-gradient(135deg, #ffe2a6 0%, #e9b85e 58%, #d5a14b 100%);
+    border: 1px solid rgb(197 154 88 / 0.45);
+    box-shadow: 0 10px 24px rgb(99 72 26 / 0.16);
+}
+
+.home-big-btn-secondary {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0f766e, #0a514d);
+    box-shadow: 0 10px 24px rgb(15 118 110 / 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .home-big-btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.035);
+    }
+
+    .home-big-btn-primary:hover {
+        box-shadow: 0 15px 30px rgb(99 72 26 / 0.21);
+    }
+
+    .home-big-btn-secondary:hover {
+        box-shadow: 0 15px 30px rgb(15 118 110 / 0.26);
+    }
+}
+
+.home-disclaimer {
+    font-size: 0.76rem;
+    line-height: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+    .home-screen {
+        height: calc(100dvh - 10.6rem);
+        min-height: 520px;
+    }
+
+    .home-grid,
+    .home-hero,
+    .home-actions-card {
+        height: 100%;
+    }
+
+    .home-actions-card {
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+    .home-screen {
+        height: calc(100dvh - 10.15rem);
+        min-height: 500px;
+    }
+
+    .home-hero {
+        padding: 1.45rem 1.8rem;
+    }
+
+    .home-title {
+        font-size: clamp(2.55rem, 3.4vw, 3.35rem);
+    }
+
+    .home-lead {
+        margin-top: 0.75rem;
+        font-size: 1.02rem;
+        line-height: 1.75rem;
+    }
+
+    .home-insight {
+        margin-top: 0.8rem;
+        padding: 0.8rem 0.95rem;
+        font-size: 0.86rem;
+        line-height: 1.5rem;
+    }
+
+    .home-hero-footer {
+        margin-top: 0.75rem;
+    }
+
+    .home-actions-card {
+        padding: 1.25rem 1.4rem;
+    }
+
+    .home-actions-title {
+        font-size: 1.75rem;
+        line-height: 2.15rem;
+    }
+
+    .home-actions-card > header > .home-actions-copy {
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+    }
+
+    .home-action-list {
+        margin-top: 0.8rem;
+        gap: 0.7rem;
+    }
+
+    .home-action-block {
+        padding: 0.85rem 1rem;
+    }
+
+    .home-action-icon {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+
+    .home-action-title {
+        font-size: 1.18rem;
+        line-height: 1.55rem;
+    }
+
+    .home-action-copy {
+        margin-top: 0.45rem;
+        font-size: 0.86rem;
+        line-height: 1.4rem;
+    }
+
+    .home-action-block .mt-3.grid {
+        margin-top: 0.5rem;
+    }
+
+    .home-emoji {
+        min-height: 2.25rem;
+    }
+
+    .home-emoji img {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    .home-big-btn {
+        min-height: 3.7rem;
+        margin-top: 0.65rem;
+        padding: 0.7rem 1rem;
+        font-size: 1rem;
+    }
+
+    .home-disclaimer {
+        margin-top: 0.6rem;
+        font-size: 0.68rem;
+        line-height: 1rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .home-screen {
+        height: auto;
+        min-height: 0;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-hero,
+    .home-actions-card {
+        height: auto;
+    }
+}
+
+@media (max-width: 639px) {
+    .home-grid {
+        gap: 0.75rem;
+    }
+
+    .home-hero,
+    .home-actions-card {
+        border-radius: 1rem;
+    }
+
+    .home-hero {
+        padding: 1rem;
+    }
+
+    .home-kicker {
+        font-size: 0.78rem;
+        line-height: 1.1rem;
+    }
+
+    .home-title {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .home-lead {
+        font-size: 0.9rem;
+        line-height: 1.55rem;
+    }
+
+    .home-insight {
+        font-size: 0.78rem;
+        line-height: 1.35rem;
+        padding: 0.8rem;
+    }
+
+    .home-hero-footer {
+        gap: 0.4rem;
+    }
+
+    .home-mini-stat {
+        font-size: 0.7rem;
+        padding: 0.45rem 0.65rem;
+    }
+
+    .home-actions-card {
+        padding: 1rem;
+    }
+
+    .home-actions-title {
+        font-size: 1.45rem;
+        line-height: 1.85rem;
+    }
+
+    .home-actions-copy {
+        font-size: 0.85rem;
+        line-height: 1.45rem;
+    }
+
+    .home-action-list {
+        grid-template-rows: auto;
+        gap: 0.75rem;
+        margin-top: 0.9rem;
+    }
+
+    .home-action-block {
+        padding: 0.9rem;
+    }
+
+    .home-action-title {
+        font-size: 1.1rem;
+        line-height: 1.45rem;
+    }
+
+    .home-action-copy {
+        font-size: 0.82rem;
+        line-height: 1.35rem;
+    }
+
+    .home-big-btn {
+        min-height: 3.8rem;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border-radius: 0.9rem;
+    }
+
+    .home-disclaimer {
+        font-size: 0.67rem;
+        line-height: 1rem;
+    }
+
+    .home-page footer .container-page {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
