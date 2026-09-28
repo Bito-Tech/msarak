@@ -59,7 +59,7 @@
         <div class="p-2 sm:p-5 lg:p-6">
             <div class="flex min-w-0 flex-col gap-2.5 sm:gap-4 lg:flex-row lg:items-start lg:gap-6">
                 {{-- اليمين: السؤال + خريطة المواقف. --}}
-                <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[360px] lg:shrink-0 xl:w-[390px]">
+                <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[430px] lg:shrink-0 xl:w-[480px]">
                     <div class="assessment-question-card rounded-xl border p-2.5 shadow-sm sm:rounded-2xl sm:p-5">
                         <div class="mb-1.5 flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
                             <span id="scenario-badge" class="assessment-question-badge hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold sm:inline-flex sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs">

@@ -10,7 +10,7 @@ const RATING_LEVELS = [
     { value: -1, label: 'لا يشبهني', icon: 'emoji-dislike.png' },
     { value: 0, label: 'محايد / غير متأكد', icon: 'emoji-neutral.png' },
     { value: 1, label: 'يشبهني', icon: 'emoji-like.png' },
-    { value: 2, label: 'يشبهني جدًا', emoji: '😁' },
+    { value: 2, label: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
 ];
 
 class AssessmentJourney {
@@ -313,22 +313,14 @@ class AssessmentJourney {
                 ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
                 ratingBtn.title = level.label;
 
-                if (level.emoji) {
-                    const glyph = document.createElement('span');
-                    glyph.className = 'assessment-emoji-glyph select-none text-[1.35rem] leading-none min-[380px]:text-[1.45rem] sm:text-[2rem]';
-                    glyph.textContent = level.emoji;
-                    glyph.setAttribute('aria-hidden', 'true');
-                    ratingBtn.appendChild(glyph);
-                } else {
-                    const icon = document.createElement('img');
-                    icon.src = `/assets/assessment/emoji/${level.icon}`;
-                    icon.alt = '';
-                    icon.width = 34;
-                    icon.height = 34;
-                    icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-9 sm:w-9';
-                    icon.draggable = false;
-                    ratingBtn.appendChild(icon);
-                }
+                const icon = document.createElement('img');
+                icon.src = `/assets/assessment/emoji/${level.icon}`;
+                icon.alt = '';
+                icon.width = 34;
+                icon.height = 34;
+                icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-9 sm:w-9';
+                icon.draggable = false;
+                ratingBtn.appendChild(icon);
 
                 ratingBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
