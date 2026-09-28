@@ -655,17 +655,33 @@
 }
 
 .assessment-intro-cta {
-    color: #123b38;
-    background: linear-gradient(135deg, #f4d69e, #cfa85f);
-    box-shadow: 0 10px 25px rgb(3 45 43 / 0.24);
+    color: #062f2d;
+    background: linear-gradient(135deg, #ffe2a6 0%, #e9b85e 58%, #d5a14b 100%);
+    border: 1px solid rgb(255 255 255 / 0.4);
+    box-shadow:
+        0 0 0 4px rgb(255 255 255 / 0.08),
+        0 14px 34px rgb(3 45 43 / 0.3);
     transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.assessment-intro-cta-primary {
+    min-height: 4.5rem;
+    min-width: 21rem;
+    letter-spacing: 0.01em;
+}
+
+.assessment-action-status-dot {
+    background: #9ee8cf;
+    box-shadow: 0 0 0 4px rgb(158 232 207 / 0.12);
 }
 
 @media (hover: hover) and (pointer: fine) {
     .assessment-intro-cta:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.035);
-        box-shadow: 0 14px 30px rgb(3 45 43 / 0.28);
+        transform: translateY(-2px) scale(1.015);
+        filter: brightness(1.04) saturate(1.02);
+        box-shadow:
+            0 0 0 5px rgb(255 255 255 / 0.1),
+            0 18px 38px rgb(3 45 43 / 0.34);
     }
 }
 
@@ -868,9 +884,12 @@
     }
 
     .assessment-intro-cta {
-        min-height: 2.4rem;
-        padding: 0.45rem 0.9rem;
-        font-size: 0.75rem;
+        min-height: 3.4rem;
+        min-width: 0;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        font-size: 0.98rem;
+        border-radius: 0.9rem;
     }
 
     .assessment-intro-guide-panel {
@@ -880,7 +899,7 @@
     }
 
     .assessment-intro-guide-panel h2 {
-        font-size: 1rem;
+        font-size: 1.08rem;
     }
 
     .assessment-intro-guide-panel > .mt-4 {
@@ -904,13 +923,14 @@
     }
 
     .assessment-intro-step h3 {
-        font-size: 0.72rem;
+        font-size: 0.78rem;
+        line-height: 1.15rem;
     }
 
     .assessment-intro-step p,
     .assessment-intro-step .space-y-1 {
-        font-size: 0.62rem;
-        line-height: 1rem;
+        font-size: 0.68rem;
+        line-height: 1.05rem;
     }
 
     .assessment-intro-step .mt-3 {
@@ -952,5 +972,27 @@
     .assessment-intro-footer p {
         font-size: 0.52rem;
         line-height: 0.72rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .assessment-intro-hero-panel {
+        padding-inline: clamp(2rem, 3vw, 3.5rem);
+    }
+
+    .assessment-intro-guide-panel .assessment-intro-step {
+        padding: 0.9rem 1rem;
+    }
+
+    .assessment-intro-guide-panel > .mt-4 {
+        margin-top: 0.8rem;
+    }
+
+    .assessment-intro-guide-panel .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+        margin-top: 0.65rem;
+    }
+
+    .assessment-intro-footer {
+        margin-top: 0.8rem;
     }
 }

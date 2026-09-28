@@ -27,50 +27,56 @@
                     </span>
                 </div>
 
-                <p class="assessment-intro-eyebrow mt-5 text-sm font-bold">ابدأ من نفسك، لا من توقعات الآخرين</p>
-                <h1 id="intro-title" class="mt-2 max-w-2xl text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-[2.65rem]">
+                <p class="assessment-intro-eyebrow mt-5 text-base font-bold">ابدأ من نفسك، لا من توقعات الآخرين</p>
+                <h1 id="intro-title" class="mt-2 max-w-2xl text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-[3rem]">
                     استكشاف ميولك
                 </h1>
-                <p class="mt-4 max-w-2xl text-sm leading-7 text-white/88 sm:text-base">
+                <p class="mt-4 max-w-2xl text-base leading-8 text-white/90 sm:text-lg">
                     مواقف قصيرة تساعدك على ملاحظة الأنشطة والتصرفات التي تميل إليها، لتكوّن صورة أوضح عن المجالات التي تستحق منك الاستكشاف.
                 </p>
 
                 <div class="assessment-intro-note mt-5 max-w-2xl rounded-2xl border p-4">
-                    <p class="text-xs leading-6 text-white/82 sm:text-sm">
+                    <p class="text-sm leading-7 text-white/84 sm:text-[0.95rem]">
                         هذا التقييم <strong class="text-white">استكشافي وإرشادي</strong>، وليس اختبار قدرات أو تشخيص شخصية، ولا يحدد تخصصًا أو مهنة واحدة مناسبة لك بشكل نهائي.
                     </p>
                 </div>
+
+                <div class="assessment-intro-action mt-6">
+                    @if ($activeSession)
+                        <div class="mb-2 flex items-center gap-2 text-sm font-bold text-white/80">
+                            <span class="assessment-action-status-dot inline-flex h-2.5 w-2.5 rounded-full" aria-hidden="true"></span>
+                            تم حفظ تقدمك ويمكنك المتابعة مباشرة
+                        </div>
+                        <form method="POST" action="{{ route('assessment.sessions.store') }}">
+                            @csrf
+                            <button type="submit" class="assessment-intro-cta assessment-intro-cta-primary inline-flex min-h-16 w-full max-w-md items-center justify-center gap-3 rounded-2xl px-10 py-4 text-xl font-extrabold sm:w-auto sm:min-w-[320px]">
+                                متابعة التقييم
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
+                                </svg>
+                            </button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ route('assessment.sessions.store') }}">
+                            @csrf
+                            <button type="submit" class="assessment-intro-cta assessment-intro-cta-primary inline-flex min-h-16 w-full max-w-md items-center justify-center gap-3 rounded-2xl px-10 py-4 text-xl font-extrabold sm:w-auto sm:min-w-[320px]">
+                                بدء التقييم
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
+                                </svg>
+                            </button>
+                        </form>
+                    @endif
+                </div>
             </div>
 
-            <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                <div class="assessment-intro-photo-card max-w-xl rounded-2xl border p-3.5 backdrop-blur-md">
-                    <p class="text-xs font-bold text-white/65">أثناء الإجابة</p>
-                    <p class="mt-1 text-sm font-extrabold leading-6 text-white sm:text-base">
+            <div class="mt-5">
+                <div class="assessment-intro-photo-card max-w-2xl rounded-2xl border p-3.5 backdrop-blur-md">
+                    <p class="text-sm font-bold text-white/70">أثناء الإجابة</p>
+                    <p class="mt-1 text-base font-extrabold leading-7 text-white sm:text-lg">
                         اختر ما يشبهك فعلًا، ثم استخدم التقييم لتوضيح درجة انطباق بقية التصرفات عليك.
                     </p>
                 </div>
-
-                @if ($activeSession)
-                    <form method="POST" action="{{ route('assessment.sessions.store') }}" class="shrink-0">
-                        @csrf
-                        <button type="submit" class="assessment-intro-cta inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-extrabold sm:w-auto">
-                            متابعة التقييم
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
-                            </svg>
-                        </button>
-                    </form>
-                @else
-                    <form method="POST" action="{{ route('assessment.sessions.store') }}" class="shrink-0">
-                        @csrf
-                        <button type="submit" class="assessment-intro-cta inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-sm font-extrabold sm:w-auto">
-                            بدء التقييم
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
-                            </svg>
-                        </button>
-                    </form>
-                @endif
             </div>
         </div>
 
@@ -78,7 +84,7 @@
             <div class="flex items-end justify-between gap-3">
                 <div>
                     <p class="assessment-intro-eyebrow text-xs font-bold">ثلاث خطوات فقط</p>
-                    <h2 class="mt-1 text-xl font-extrabold text-slate-900">طريقة الإجابة</h2>
+                    <h2 class="mt-1 text-2xl font-extrabold text-slate-900">طريقة الإجابة</h2>
                 </div>
                 @if ($activeSession)
                     <span class="assessment-resume-chip rounded-full px-3 py-1.5 text-[11px] font-bold">تم حفظ تقدمك</span>
@@ -90,8 +96,8 @@
                     <div class="flex items-start gap-3">
                         <span class="assessment-step-number inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-extrabold">1</span>
                         <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">اختر التصرف الأقرب لك</h3>
-                            <p class="mt-1 text-xs leading-5 text-slate-600">
+                            <h3 class="text-base font-extrabold text-slate-900">اختر التصرف الأقرب لك</h3>
+                            <p class="mt-1 text-sm leading-6 text-slate-600">
                                 اختر تصرفًا واحدًا يمثل طريقتك المعتادة، لا التصرف الذي يبدو أفضل أو أكثر قبولًا.
                             </p>
                         </div>
@@ -102,7 +108,7 @@
                     <div class="flex items-start gap-3">
                         <span class="assessment-step-number inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-extrabold">2</span>
                         <div class="min-w-0 flex-1">
-                            <h3 class="text-sm font-extrabold text-slate-900">قيّم الخيارات إن رغبت</h3>
+                            <h3 class="text-base font-extrabold text-slate-900">قيّم الخيارات إن رغبت</h3>
                             <p class="mt-1 text-xs leading-5 text-slate-600">
                                 التقييمات مستقلة واختيارية، ويمكنك ترك أي خيار دون تقييم.
                             </p>
@@ -132,8 +138,8 @@
                     <div class="flex items-start gap-3">
                         <span class="assessment-step-number inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-extrabold">3</span>
                         <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">استخدم البديل عند الحاجة</h3>
-                            <div class="mt-1.5 space-y-1 text-xs leading-5 text-slate-600">
+                            <h3 class="text-base font-extrabold text-slate-900">استخدم البديل عند الحاجة</h3>
+                            <div class="mt-1.5 space-y-1 text-sm leading-6 text-slate-600">
                                 <p><strong class="text-slate-900">لا يشبهني أي من هذه التصرفات:</strong> فهمت الموقف، لكن لا ينطبق عليك أي خيار.</p>
                                 <p><strong class="text-slate-900">لا أستطيع الحكم:</strong> لا تملك معلومات كافية لإجابة موثوقة.</p>
                             </div>
