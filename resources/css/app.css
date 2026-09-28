@@ -46,6 +46,26 @@
 }
 
 @layer base {
+    :root {
+        /* Shared roles for the existing Blade components and page layouts. */
+        --surface-page: #f8fafc;
+        --surface-card: #ffffff;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --border-subtle: #e2e8f0;
+        --action-primary: var(--color-brand-600);
+        --action-primary-hover: var(--color-brand-700);
+        --focus-color: var(--color-brand-700);
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-12: 3rem;
+        --radius-control: 0.5rem;
+    }
+
     html {
         -webkit-text-size-adjust: 100%;
         scroll-padding-top: 5rem;
@@ -56,7 +76,8 @@
     }
 
     :focus-visible {
-        @apply outline-2 outline-offset-2 outline-brand-600;
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -71,19 +92,28 @@
 
 @layer components {
     .container-page { @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8; }
+    .container-reading { @apply mx-auto w-full max-w-3xl; }
+    .container-form { @apply mx-auto w-full max-w-md; }
+    .page-heading { @apply text-3xl font-bold leading-tight text-slate-900 sm:text-4xl; }
+    .section-heading { @apply text-xl font-bold leading-snug text-slate-900 sm:text-2xl; }
+    .body-copy { @apply text-base leading-relaxed text-slate-700; }
 
-    .btn { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2 text-base font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0; }
+    .btn { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-2 text-base font-semibold transition-colors duration-150; }
     .btn-primary { @apply bg-brand-600 text-white shadow-sm shadow-brand-600/25 hover:bg-brand-700 hover:shadow-md hover:shadow-brand-600/30; }
     .btn-secondary { @apply border border-slate-300 bg-white text-slate-900 hover:border-slate-400 hover:bg-slate-100 hover:shadow-sm; }
     .btn-success { @apply bg-success-700 text-white shadow-sm shadow-success-700/25 hover:bg-success-800 hover:shadow-md hover:shadow-success-700/30; }
     .btn-soft { @apply bg-brand-50 text-brand-700 hover:bg-brand-100; }
+    .btn-danger { @apply bg-danger-700 text-white hover:bg-danger-600; }
     .btn-pill { @apply rounded-full px-5 py-2; }
+    .btn:disabled, .btn[aria-disabled='true'] { @apply cursor-not-allowed opacity-50; }
 
     .field-label { @apply mb-1 block text-sm font-semibold text-slate-800; }
     .field-input { @apply block min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 transition-colors focus:border-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-600/15; }
     .field-input:focus-visible { outline: none; }
     .field-input[aria-invalid='true'] { @apply border-danger-600 bg-danger-50/50; }
     .field-input[aria-invalid='true']:focus { @apply border-danger-600 ring-danger-600/15; }
+    .field-hint { @apply mt-1 text-sm leading-relaxed text-slate-600; }
+    .field-error { @apply mt-1 text-sm leading-relaxed text-danger-700; }
 
     .card-surface { @apply rounded-card border border-slate-200/80 bg-white p-6 shadow-card; }
     .card-lift { @apply transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-pop; }
@@ -91,6 +121,8 @@
     .alert { @apply rounded-lg border-s-4 p-4 text-base; }
     .alert-success { @apply border-success-300 bg-success-50 text-success-700; }
     .alert-error { @apply border-danger-300 bg-danger-50 text-danger-700; }
+    .alert-info { @apply border-brand-200 bg-brand-50 text-brand-800; }
+    .alert-warning { @apply border-warning-300 bg-warning-50 text-warning-700; }
 
     .ltr-text { direction: ltr; unicode-bidi: isolate; text-align: start; }
 
