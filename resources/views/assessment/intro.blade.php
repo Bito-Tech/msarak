@@ -27,7 +27,7 @@
     @endif
 
     <section aria-labelledby="guide-heading" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-        <h2 id="guide-heading" class="text-2xl font-bold text-slate-900">كيف تجيب؟</h2>
+        <h2 id="guide-heading" class="text-2xl font-bold text-slate-900">طريقة الإجابة</h2>
         <ol class="mt-6 space-y-7">
             <li class="flex gap-4">
                 <span aria-hidden="true" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-100 font-bold text-brand-800">1</span>
