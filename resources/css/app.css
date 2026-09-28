@@ -2340,3 +2340,23 @@
         padding-bottom: 1rem;
     }
 }
+
+
+/* Home balance refinement: smaller hero, wider action card, full primary CTA. */
+@media (min-width: 1024px) {
+    .home-action-list {
+        grid-template-rows: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+    .home-action-list {
+        grid-template-rows: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .home-action-block:first-child .home-big-btn {
+        flex: 0 0 auto;
+        min-height: 3.55rem;
+        margin-top: 0.5rem;
+    }
+}

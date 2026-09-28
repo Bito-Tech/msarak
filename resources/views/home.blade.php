@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="home-screen mx-auto w-full" dir="rtl">
-    <section class="home-grid grid gap-4 lg:grid-cols-[1.08fr_0.92fr]" aria-labelledby="home-title">
+    <section class="home-grid grid gap-4 lg:grid-cols-[0.9fr_1.1fr]" aria-labelledby="home-title">
         {{-- البطاقة اليمنى: الهوية والرسالة الرئيسية --}}
         <article class="home-hero relative isolate flex min-h-0 flex-col justify-between overflow-hidden rounded-3xl border p-5 shadow-card sm:p-7 lg:p-9">
             <img
