@@ -263,11 +263,11 @@ class AssessmentJourney {
 
             const card = document.createElement('div');
             card.dir = 'rtl';
-            card.className = `option-card assessment-option-card flex min-w-0 flex-col gap-1.5 rounded-lg border px-2 py-2 transition sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3 lg:flex-row lg:items-center lg:justify-center lg:gap-2.5 lg:px-5 lg:py-3.5 ${isPrimary ? 'is-primary shadow-sm' : ''}`;
+            card.className = `option-card assessment-option-card flex min-w-0 flex-col gap-1.5 rounded-lg border px-2 py-2 transition sm:gap-2 sm:rounded-xl sm:px-4 sm:py-2 lg:flex-row lg:items-center lg:justify-center lg:gap-2.5 lg:px-5 lg:py-2 ${isPrimary ? 'is-primary shadow-sm' : ''}`;
             card.dataset.optionId = String(opt.option_id);
 
             const choiceWrap = document.createElement('div');
-            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2 sm:gap-3 lg:flex-none lg:w-[44%] xl:w-[46%]';
+            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2 sm:gap-2.5 lg:flex-none lg:w-[44%] xl:w-[46%]';
 
             const radio = document.createElement('input');
             radio.type = 'radio';
@@ -280,7 +280,7 @@ class AssessmentJourney {
 
             const label = document.createElement('label');
             label.htmlFor = radio.id;
-            label.className = 'min-w-0 flex-1 cursor-pointer text-right text-[10px] font-semibold leading-[1.15rem] text-slate-800 min-[380px]:text-[10.5px] sm:text-[0.95rem] sm:leading-7';
+            label.className = 'min-w-0 flex-1 cursor-pointer text-right text-[10px] font-semibold leading-[1.15rem] text-slate-800 min-[380px]:text-[10.5px] sm:text-[0.9rem] sm:leading-6';
             label.textContent = opt.option_text;
 
             choiceWrap.append(radio, label);
@@ -293,11 +293,11 @@ class AssessmentJourney {
             });
 
             const ratingArea = document.createElement('div');
-            ratingArea.className = 'min-w-0 border-t border-slate-200/70 pt-1 sm:pt-2.5 lg:w-[315px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[335px]';
+            ratingArea.className = 'min-w-0 border-t border-slate-200/70 pt-1 sm:pt-1.5 lg:w-[315px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[335px]';
 
             const scale = document.createElement('div');
             scale.dir = 'ltr';
-            scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-0 sm:gap-2';
+            scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-0 sm:gap-1.5';
 
             RATING_LEVELS.forEach((level) => {
                 const isSelectedRating = currentRating === level.value;
@@ -310,7 +310,7 @@ class AssessmentJourney {
 
                 const ratingBtn = document.createElement('button');
                 ratingBtn.type = 'button';
-                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-10 sm:w-10 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
+                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-9 sm:w-9 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
                 ratingBtn.dataset.rating = String(level.value);
                 ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
                 ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
@@ -321,12 +321,12 @@ class AssessmentJourney {
                 icon.alt = '';
                 icon.width = 34;
                 icon.height = 34;
-                icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-9 sm:w-9';
+                icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-8 sm:w-8';
                 icon.draggable = false;
                 ratingBtn.appendChild(icon);
 
                 const ratingLabel = document.createElement('span');
-                ratingLabel.className = 'assessment-rating-label w-full whitespace-normal text-center text-[7px] font-medium leading-[0.68rem] text-slate-500 sm:text-[9px] sm:leading-3';
+                ratingLabel.className = 'assessment-rating-label w-full whitespace-nowrap text-center text-[6.5px] font-medium leading-[0.62rem] text-slate-500 sm:text-[8px] sm:leading-[0.7rem]';
                 ratingLabel.textContent = level.displayLabel;
 
                 ratingBtn.addEventListener('click', (e) => {
@@ -358,7 +358,7 @@ class AssessmentJourney {
 
     updateSpecialCardStyles() {
         const currentAnswer = this.getCurrentAnswer();
-        const base = 'assessment-special-card relative flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:min-h-12 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3';
+        const base = 'assessment-special-card relative flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:min-h-10 sm:gap-2 sm:rounded-xl sm:px-3 sm:py-2';
         this.noneFitCard.className = `${base} ${currentAnswer.none_selected ? 'is-selected' : ''}`;
         this.cannotJudgeCard.className = `${base} ${currentAnswer.unable_to_judge ? 'is-selected' : ''}`;
     }

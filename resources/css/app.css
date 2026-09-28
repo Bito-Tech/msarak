@@ -420,24 +420,23 @@
 }
 
 .assessment-rating-label {
-    min-height: 1.35rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     color: #667a77;
 }
 
 .assessment-rating-btn.is-selected {
     z-index: 3;
-    background: linear-gradient(145deg, #eef8f5, #dceee9);
-    transform: translateY(-1px) scale(1.18);
-    box-shadow: 0 5px 13px rgb(15 118 110 / 0.18);
+    background: linear-gradient(145deg, #0d625d, #0a4f4b);
+    transform: translateY(-1px) scale(1.17);
+    box-shadow: 0 6px 15px rgb(7 67 64 / 0.28);
     filter: saturate(1.08);
 }
 
 .assessment-rating-btn.is-selected + .assessment-rating-label {
-    color: var(--assessment-accent-strong);
-    font-weight: 700;
+    color: #084c48;
+    font-weight: 800;
 }
 
 .assessment-special-card {
@@ -561,12 +560,39 @@
     }
 
     .assessment-rating-label {
-        min-height: 1.25rem;
         color: #6f817e;
     }
 
     .assessment-rating-btn.is-selected {
-        transform: translateY(-1px) scale(1.16);
-        box-shadow: 0 4px 10px rgb(15 118 110 / 0.16);
+        transform: translateY(-1px) scale(1.15);
+        box-shadow: 0 4px 10px rgb(7 67 64 / 0.24);
+    }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+    .assessment-page #main {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .assessment-toolbar {
+        padding-block: 0.4rem;
+    }
+
+    .assessment-question-card {
+        padding: 0.85rem;
+    }
+
+    .assessment-map {
+        margin-top: 0.7rem;
+        padding: 0.65rem;
+    }
+
+    .assessment-option-card {
+        min-height: 3.75rem;
+    }
+
+    .assessment-options-pane + * {
+        min-height: 0;
     }
 }
