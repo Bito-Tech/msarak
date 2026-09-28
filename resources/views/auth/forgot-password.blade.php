@@ -5,19 +5,13 @@
 @section('content')
     <div class="auth-shell">
         <section aria-labelledby="forgot-title" class="auth-card">
-            {{-- علامة الهوية على الجوال (اللوحة الجانبية مخفية تحت lg) --}}
-            <div class="mb-5 flex items-center gap-2 lg:hidden" aria-hidden="true">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30">م</span>
-                <span class="text-lg font-bold text-brand-700">مسارك</span>
-            </div>
-
             <div class="auth-head">
                 <span class="auth-head-icon">
                     <x-ui.icon name="envelope" class="h-5 w-5" />
                 </span>
-                <h1 id="forgot-title" class="text-2xl font-bold">استعادة كلمة المرور</h1>
+                <h1 id="forgot-title" class="text-2xl font-bold text-slate-900 sm:text-3xl">استعادة كلمة المرور</h1>
             </div>
-            <p class="mt-2 text-sm text-slate-600">أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.</p>
+            <p class="mt-2 text-sm text-slate-600">إذا كان بريدك مسجلًا لدينا، ستصلك رسالة فيها رابط استعادة كلمة المرور.</p>
 
             <form method="POST" action="{{ route('password.email') }}" class="auth-form mt-6 space-y-4">
                 @csrf
@@ -51,7 +45,7 @@
         </svg>
     </span>
     <h2 class="text-3xl font-bold">لا تقلق، الأمر شائع</h2>
-    <p class="mt-4 text-lg text-brand-50">أدخل بريدك وسنرسل لك رابطًا آمنًا لاستعادة الوصول إلى حسابك.</p>
+    <p class="mt-4 text-lg text-brand-50">ستظهر لك رسالة تأكيد بعد إرسال الطلب، سواء كان البريد مسجلًا أم لا.</p>
 </aside>
     </div>
 @endsection

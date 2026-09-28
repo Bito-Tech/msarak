@@ -143,11 +143,11 @@
 
 
     .auth-shell {
-        @apply grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12;
+        @apply grid items-start gap-6 lg:grid-cols-2 lg:items-center lg:gap-10;
     }
 
     .auth-card {
-        @apply w-full max-w-md justify-self-center rounded-card border border-slate-200/80 bg-white p-6 shadow-card sm:p-8;
+        @apply w-full max-w-md justify-self-center rounded-card border border-slate-200 bg-white p-5 shadow-card sm:p-8;
     }
 
     .auth-head {
@@ -155,12 +155,11 @@
     }
 
     .auth-head-icon {
-        @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm shadow-brand-600/30;
+        @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700;
     }
 
     .auth-panel {
-        @apply relative hidden overflow-hidden rounded-card bg-gradient-to-br from-brand-700 via-brand-600 to-brand-800 p-10 text-white lg:flex lg:flex-col lg:justify-center;
-        background-image: radial-gradient(circle at 18% 22%, rgb(255 255 255 / 0.10) 0 2px, transparent 3px), radial-gradient(circle at 42% 68%, rgb(255 255 255 / 0.08) 0 2px, transparent 3px), radial-gradient(circle at 76% 34%, rgb(255 255 255 / 0.08) 0 2px, transparent 3px), linear-gradient(to bottom left, var(--color-brand-700), var(--color-brand-600), var(--color-brand-800));
+        @apply hidden rounded-card bg-brand-700 p-10 text-white lg:flex lg:flex-col lg:justify-center;
     }
 
     .field-wrap { @apply relative; }
@@ -172,18 +171,8 @@
     .field-input-with-toggle { @apply ps-12; }
 
 
-    .auth-panel::before {
-        content: '';
-        @apply absolute -end-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl;
-    }
-
-    .auth-panel::after {
-        content: '';
-        @apply absolute -start-10 bottom-0 h-40 w-40 rounded-full bg-accent-500/20 blur-2xl;
-    }
-
     .auth-panel-icon {
-        @apply mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur-xs;
+        @apply mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25;
     }
 }
 

@@ -5,17 +5,11 @@
 @section('content')
     <div class="auth-shell">
         <section aria-labelledby="register-title" class="auth-card">
-            {{-- علامة الهوية على الجوال (اللوحة الجانبية مخفية تحت lg) --}}
-            <div class="mb-5 flex items-center gap-2 lg:hidden" aria-hidden="true">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30">م</span>
-                <span class="text-lg font-bold text-brand-700">مسارك</span>
-            </div>
-
             <div class="auth-head">
                 <span class="auth-head-icon">
                     <x-ui.icon name="user-plus" class="h-5 w-5" />
                 </span>
-                <h1 id="register-title" class="text-2xl font-bold">إنشاء حساب</h1>
+                <h1 id="register-title" class="text-2xl font-bold text-slate-900 sm:text-3xl">إنشاء حساب</h1>
             </div>
 
             <form method="POST" action="{{ route('register') }}" class="auth-form mt-6 space-y-4">
@@ -111,7 +105,7 @@
         </svg>
     </span>
     <h2 class="text-3xl font-bold">مساحتك الخاصة تبدأ هنا</h2>
-    <p class="mt-4 text-lg text-brand-50">أنشئ حسابك لتستكشف دليل التخصصات وتحفظ نتائج تقييمك في مكان واحد.</p>
+    <p class="mt-4 text-lg text-brand-50">أنشئ حسابك لاستكشاف ميولك وحفظ نتائجك للعودة إليها لاحقًا.</p>
 </aside>
     </div>
 @endsection
