@@ -114,7 +114,10 @@
         <div class="border-b border-slate-200" aria-hidden="true"></div>
     </header>
 
-    <main id="main" tabindex="-1" class="container-page flex-1 break-words py-8 lg:py-12">
+    <main id="main" tabindex="-1"
+          class="{{ request()->routeIs('assessment.show')
+              ? 'w-full flex-1 break-words px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8'
+              : 'container-page flex-1 break-words py-8 lg:py-12' }}">
         <x-ui.flash class="mb-6" />
         @yield('content')
     </main>
