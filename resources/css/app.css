@@ -211,6 +211,7 @@
 
     .rating-btn[aria-pressed='true'] {
         transform: scale(1.12);
+        filter: drop-shadow(0 5px 8px rgb(79 70 229 / 0.18));
     }
 
     .rating-btn.rating-pop img {
@@ -234,5 +235,20 @@
     @keyframes spec-draw {
         from { stroke-dashoffset: 100; }
         to   { stroke-dashoffset: 0; }
+    }
+}
+
+@media (max-width: 639px) {
+    .assessment-stage {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
+    }
+
+    .assessment-stage .option-card,
+    .assessment-stage fieldset,
+    .assessment-stage nav,
+    .assessment-stage section {
+        max-width: 100%;
     }
 }

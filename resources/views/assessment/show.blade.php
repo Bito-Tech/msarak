@@ -5,7 +5,7 @@
 @section('content')
 <div id="assessment-app"
      dir="rtl"
-     class="mx-auto w-full max-w-7xl overflow-x-hidden"
+     class="assessment-stage mx-auto w-full max-w-full overflow-x-hidden lg:relative lg:left-1/2 lg:w-[min(1180px,calc(100vw-2rem))] lg:max-w-none lg:-translate-x-1/2"
      data-session-id="{{ $session->id }}"
      data-complete-url="{{ route('assessment.sessions.complete', $session->id) }}"
      data-save-base-url="/assessment/sessions/{{ $session->id }}/answers"
@@ -27,7 +27,7 @@
                     </svg>
                 </button>
 
-                <div class="min-w-0 flex-1">
+                <div class="min-w-0 lg:col-start-1 lg:row-start-1">
                     <div class="mb-1.5 flex min-w-0 items-center justify-between gap-2">
                         <span id="progress-position-text" class="shrink-0 text-xs font-bold text-slate-700 sm:text-sm">
                             الموقف <span id="current-position-num">1</span> من <span id="total-questions-num">18</span>
@@ -56,11 +56,11 @@
             </div>
         </div>
 
-        <div class="px-3 py-4 sm:px-5 sm:py-5 lg:px-7 lg:py-7">
-            {{-- على سطح المكتب: السؤال يمينًا والخيارات يسارًا. على الهاتف: تكديس عمودي كامل بلا تمرير أفقي. --}}
-            <div class="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-start lg:gap-7">
-                <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[34%] lg:shrink-0">
-                    <div class="rounded-2xl bg-slate-50/80 p-4 ring-1 ring-inset ring-slate-100 sm:p-5 lg:p-6">
+        <div class="px-2.5 py-3.5 sm:px-5 sm:py-5 lg:px-7 lg:py-6">
+            {{-- سطح المكتب: سؤال واضح يمينًا، والخيارات كاملة يسارًا. الهاتف: عمود واحد بعرض كامل. --}}
+            <div class="grid min-w-0 grid-cols-1 gap-3.5 lg:grid-cols-[minmax(0,1.75fr)_minmax(300px,0.85fr)] lg:items-start lg:gap-6">
+                <aside class="min-w-0 lg:col-start-2 lg:row-start-1 lg:sticky lg:top-24">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-3.5 shadow-sm sm:p-5 lg:p-5">
                         <div class="mb-3 flex items-center justify-between gap-3 lg:mb-5">
                             <span id="scenario-badge" class="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700 ring-1 ring-inset ring-brand-100">
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
@@ -72,11 +72,11 @@
                         </div>
 
                         <h1 id="assessment-question-title" class="sr-only">استكشاف ميولك</h1>
-                        <h2 id="scenario-text" class="text-lg font-extrabold leading-[1.75] text-slate-900 sm:text-xl lg:text-[1.55rem] lg:leading-[1.8]">
+                        <h2 id="scenario-text" class="text-base font-extrabold leading-[1.8] text-slate-900 sm:text-xl lg:text-[1.28rem] lg:leading-[1.95]">
                             جارٍ تحميل الموقف…
                         </h2>
-                        <p class="mt-2 text-sm leading-7 text-slate-500">
-                            اختر التصرف الأقرب لك، ثم قيّم مدى انطباق كل خيار عليك. التقييمات الإضافية اختيارية.
+                        <p class="mt-1.5 text-xs leading-6 text-slate-500 sm:text-sm">
+                            اختر التصرف الأقرب لك، ثم قيّم الخيارات اختياريًا.
                         </p>
                     </div>
                 </aside>
@@ -94,10 +94,10 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 flex items-end justify-between gap-3">
+                    <div class="mb-2.5 flex items-center justify-between gap-3">
                         <div>
                             <p class="text-sm font-extrabold text-slate-900 sm:text-base">اختر تصرفًا واحدًا</p>
-                            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">التقييم أسفل كل خيار مستقل واختياري.</p>
+                            <p class="mt-0.5 text-[11px] leading-relaxed text-slate-500 sm:text-xs">لكل خيار تقييم مستقل من خمس درجات.</p>
                         </div>
                     </div>
 
@@ -107,7 +107,7 @@
                         <div id="options-container" class="min-w-0 space-y-2.5 sm:space-y-3"></div>
                     </fieldset>
 
-                    <div class="mt-4 border-t border-slate-100 pt-3.5">
+                    <div class="mt-3 border-t border-slate-100 pt-3">
                         <p class="mb-2.5 text-xs font-bold text-brand-700 sm:text-sm">إذا لم يناسبك أي تصرف أو لم تستطع الحكم:</p>
                         <div class="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
                             <label id="none-fit-card" class="relative flex min-h-11 min-w-0 cursor-pointer items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 transition hover:border-brand-200 hover:bg-brand-50/40">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-4 flex min-w-0 items-center justify-between gap-2 border-t border-slate-100 pt-3.5">
+                    <div class="mt-3 flex min-w-0 items-center justify-between gap-2 border-t border-slate-100 pt-3">
                         <button type="button" id="prev-btn" class="btn btn-secondary min-w-0 flex-1 px-3 text-sm disabled:pointer-events-none disabled:opacity-40 sm:max-w-36">
                             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <nav aria-label="التنقل بين مواقف التقييم" class="mt-4 border-t border-slate-100 pt-3.5">
+                    <nav aria-label="التنقل بين مواقف التقييم" class="mt-3 hidden border-t border-slate-100 pt-3 sm:block">
                         <div class="mb-2 flex min-w-0 items-center justify-between gap-2 text-[11px] text-slate-500 sm:text-xs">
                             <span class="shrink-0 font-semibold">الانتقال إلى موقف</span>
                             <span id="processed-summary-text" class="min-w-0 truncate">تمت معالجة <span id="processed-count-num">0</span> من 18 موقفًا</span>
