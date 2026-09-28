@@ -10,7 +10,7 @@ const RATING_LEVELS = [
     { value: -1, label: 'لا يشبهني', icon: 'emoji-dislike.png' },
     { value: 0, label: 'محايد / غير متأكد', icon: 'emoji-neutral.png' },
     { value: 1, label: 'يشبهني', icon: 'emoji-like.png' },
-    { value: 2, label: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
+    { value: 2, label: 'يشبهني جدًا', emoji: '😁' },
 ];
 
 class AssessmentJourney {
@@ -263,15 +263,11 @@ class AssessmentJourney {
 
             const card = document.createElement('div');
             card.dir = 'rtl';
-            card.className = `option-card flex min-w-0 flex-col gap-1.5 rounded-lg border px-2 py-2 transition sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3 lg:flex-row lg:items-center lg:gap-5 lg:px-5 lg:py-3.5 ${
-                isPrimary
-                    ? 'border-brand-500 bg-brand-50/35 ring-1 ring-brand-500/60 shadow-sm'
-                    : 'border-slate-200 bg-white lg:hover:border-slate-300 lg:hover:bg-slate-50/45'
-            }`;
+            card.className = `option-card assessment-option-card flex min-w-0 flex-col gap-1.5 rounded-lg border px-2 py-2 transition sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3 lg:flex-row lg:items-center lg:justify-center lg:gap-2.5 lg:px-5 lg:py-3.5 ${isPrimary ? 'is-primary shadow-sm' : ''}`;
             card.dataset.optionId = String(opt.option_id);
 
             const choiceWrap = document.createElement('div');
-            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2 sm:gap-3 lg:basis-[54%]';
+            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2 sm:gap-3 lg:flex-none lg:w-[44%] xl:w-[46%]';
 
             const radio = document.createElement('input');
             radio.type = 'radio';
@@ -297,7 +293,7 @@ class AssessmentJourney {
             });
 
             const ratingArea = document.createElement('div');
-            ratingArea.className = 'min-w-0 border-t border-slate-100 pt-1 sm:pt-2.5 lg:w-[330px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[370px]';
+            ratingArea.className = 'min-w-0 border-t border-slate-200/70 pt-1 sm:pt-2.5 lg:w-[315px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[335px]';
 
             const scale = document.createElement('div');
             scale.dir = 'ltr';
@@ -311,24 +307,28 @@ class AssessmentJourney {
 
                 const ratingBtn = document.createElement('button');
                 ratingBtn.type = 'button';
-                ratingBtn.className = `rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-full bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-10 sm:w-10 ${
-                    isSelectedRating
-                        ? 'bg-brand-50 ring-2 ring-brand-600 ring-offset-1 ring-offset-white'
-                        : 'hover:bg-slate-100'
-                } ${wasJustPressed ? 'rating-pop' : ''}`;
+                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-full bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-10 sm:w-10 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
                 ratingBtn.dataset.rating = String(level.value);
                 ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
                 ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
                 ratingBtn.title = level.label;
 
-                const icon = document.createElement('img');
-                icon.src = `/assets/assessment/emoji/${level.icon}`;
-                icon.alt = '';
-                icon.width = 34;
-                icon.height = 34;
-                icon.className = 'h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-9 sm:w-9';
-                icon.draggable = false;
-                ratingBtn.appendChild(icon);
+                if (level.emoji) {
+                    const glyph = document.createElement('span');
+                    glyph.className = 'assessment-emoji-glyph select-none text-[1.35rem] leading-none min-[380px]:text-[1.45rem] sm:text-[2rem]';
+                    glyph.textContent = level.emoji;
+                    glyph.setAttribute('aria-hidden', 'true');
+                    ratingBtn.appendChild(glyph);
+                } else {
+                    const icon = document.createElement('img');
+                    icon.src = `/assets/assessment/emoji/${level.icon}`;
+                    icon.alt = '';
+                    icon.width = 34;
+                    icon.height = 34;
+                    icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-9 sm:w-9';
+                    icon.draggable = false;
+                    ratingBtn.appendChild(icon);
+                }
 
                 ratingBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -369,9 +369,9 @@ class AssessmentJourney {
 
     updateSpecialCardStyles() {
         const currentAnswer = this.getCurrentAnswer();
-        const base = 'relative flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:min-h-12 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3';
-        this.noneFitCard.className = `${base} ${currentAnswer.none_selected ? 'border-brand-500 bg-brand-50/50 ring-1 ring-brand-500/60' : 'border-slate-200 bg-white hover:border-brand-200 hover:bg-brand-50/40'}`;
-        this.cannotJudgeCard.className = `${base} ${currentAnswer.unable_to_judge ? 'border-brand-500 bg-brand-50/50 ring-1 ring-brand-500/60' : 'border-slate-200 bg-white hover:border-brand-200 hover:bg-brand-50/40'}`;
+        const base = 'assessment-special-card relative flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:min-h-12 sm:gap-3 sm:rounded-xl sm:px-4 sm:py-3';
+        this.noneFitCard.className = `${base} ${currentAnswer.none_selected ? 'is-selected' : ''}`;
+        this.cannotJudgeCard.className = `${base} ${currentAnswer.unable_to_judge ? 'is-selected' : ''}`;
     }
 
     selectPrimaryOption(optionId) {
@@ -556,9 +556,9 @@ class AssessmentJourney {
         this.saveStatusText.textContent = message;
 
         if (status === 'saving') {
-            this.saveStatusText.className = 'text-brand-600 font-semibold';
+            this.saveStatusText.className = 'assessment-status-saving font-semibold';
             this.saveStatusIcon.innerHTML = `
-                <svg class="h-3.5 w-3.5 animate-spin text-brand-600" fill="none" viewBox="0 0 24 24">
+                <svg class="assessment-status-saving h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -620,12 +620,8 @@ class AssessmentJourney {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.setAttribute('aria-label', `الموقف رقم ${q.position}`);
-            btn.className = `flex h-9 w-full items-center justify-center rounded-xl text-xs font-bold transition-all ${
-                isCurrent
-                    ? 'bg-brand-600 text-white ring-2 ring-brand-600 ring-offset-2 shadow-xs'
-                    : isAnswered
-                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            btn.className = `assessment-question-dot flex h-9 w-full items-center justify-center rounded-xl text-xs font-bold transition-all ${
+                isCurrent ? 'is-current' : isAnswered ? 'is-answered' : 'is-idle'
             }`;
 
             btn.textContent = q.position;

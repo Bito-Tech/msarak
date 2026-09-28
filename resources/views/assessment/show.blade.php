@@ -15,19 +15,19 @@
         {!! json_encode($initialData, JSON_UNESCAPED_UNICODE) !!}
     </script>
 
-    <section class="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-card" aria-labelledby="assessment-question-title">
+    <section class="assessment-panel overflow-hidden rounded-2xl border shadow-card" aria-labelledby="assessment-question-title">
         {{-- شريط علوي خفيف فقط للتقدم والحفظ والتنقل السريع. --}}
-        <div class="border-b border-slate-100 bg-white px-2.5 py-2 sm:px-5 sm:py-3 lg:px-6">
+        <div class="assessment-toolbar border-b px-2.5 py-2 sm:px-5 sm:py-3 lg:px-6">
             <div class="flex min-w-0 items-center gap-2.5 sm:gap-4">
                 <button type="button" id="top-prev-btn"
-                        class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9 border border-slate-200 bg-white text-slate-600 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 disabled:pointer-events-none disabled:opacity-35"
+                        class="assessment-top-button hidden h-8 w-8 shrink-0 items-center justify-center rounded-full border transition disabled:pointer-events-none disabled:opacity-35 sm:inline-flex sm:h-9 sm:w-9"
                         aria-label="الموقف السابق">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.1" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
                 </button>
 
-                <div class="min-w-0 flex-1">
+                <div class="assessment-options-pane min-w-0 flex-1 rounded-xl border p-2.5 sm:rounded-2xl sm:p-4 lg:p-5">
                     <div class="mb-1 flex min-w-0 items-center justify-between gap-2 sm:mb-1.5 sm:gap-3">
                         <span id="progress-position-text" class="shrink-0 text-[10px] font-bold text-slate-700 sm:text-sm">
                             الموقف <span id="current-position-num">1</span> من <span id="total-questions-num">18</span>
@@ -41,13 +41,13 @@
                          role="progressbar" id="progress-bar-container"
                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                         <div id="progress-bar-fill"
-                             class="h-full rounded-full bg-gradient-to-l from-brand-500 to-brand-700 transition-[width] duration-300 ease-out"
+                             class="assessment-progress-fill h-full rounded-full transition-[width] duration-300 ease-out"
                              style="width:0%"></div>
                     </div>
                 </div>
 
                 <button type="button" id="top-next-btn"
-                        class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 disabled:pointer-events-none disabled:opacity-35 sm:h-9 sm:w-9"
+                        class="assessment-top-button hidden h-8 w-8 shrink-0 items-center justify-center rounded-full border transition disabled:pointer-events-none disabled:opacity-35 sm:inline-flex sm:h-9 sm:w-9"
                         aria-label="الموقف التالي">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.1" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
@@ -60,29 +60,29 @@
             <div class="flex min-w-0 flex-col gap-2.5 sm:gap-4 lg:flex-row lg:items-start lg:gap-6">
                 {{-- اليمين: السؤال + خريطة المواقف. --}}
                 <aside class="min-w-0 lg:sticky lg:top-24 lg:w-[360px] lg:shrink-0 xl:w-[390px]">
-                    <div class="rounded-xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/80 p-2.5 shadow-sm sm:rounded-2xl sm:p-5">
+                    <div class="assessment-question-card rounded-xl border p-2.5 shadow-sm sm:rounded-2xl sm:p-5">
                         <div class="mb-1.5 flex items-center justify-between gap-2 sm:mb-4 sm:gap-3">
-                            <span id="scenario-badge" class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-bold sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs text-brand-700 ring-1 ring-inset ring-brand-100">
+                            <span id="scenario-badge" class="assessment-question-badge hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold sm:inline-flex sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs">
                                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h7.5M8.25 12h7.5m-7.5 5.25h4.5M6.75 3.75h10.5A2.25 2.25 0 0 1 19.5 6v12a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 18V6a2.25 2.25 0 0 1 2.25-2.25Z" />
                                 </svg>
                                 الموقف <span id="badge-num" class="ms-0.5">1</span>
                             </span>
-                            <span class="hidden text-xs font-medium text-slate-400 sm:inline">استكشاف ميولك</span>
+                            <span class="assessment-question-kicker hidden text-xs font-medium sm:inline">استكشاف ميولك</span>
                         </div>
 
                         <h1 id="assessment-question-title" class="sr-only">استكشاف ميولك</h1>
-                        <h2 id="scenario-text" class="text-[0.82rem] font-extrabold leading-6 text-slate-900 sm:text-xl sm:leading-[1.9]">
+                        <h2 id="scenario-text" class="assessment-question-text text-[0.8rem] font-extrabold leading-[1.45rem] sm:text-xl sm:leading-[1.9]">
                             جارٍ تحميل الموقف…
                         </h2>
-                        <p class="mt-0.5 text-[9px] leading-4 text-slate-500 sm:mt-2 sm:text-sm sm:leading-7">
+                        <p class="assessment-question-hint mt-0.5 hidden text-[9px] leading-4 sm:mt-2 sm:block sm:text-sm sm:leading-7">
                             اختر التصرف الأقرب لك، ثم قيّم الخيارات اختياريًا.
                         </p>
 
-                        <div class="mt-5 hidden rounded-xl border border-slate-200 bg-white p-3.5 lg:block">
+                        <div class="assessment-map mt-5 hidden rounded-xl border p-3.5 lg:block">
                             <div class="mb-2 flex items-center justify-between gap-2 text-xs">
-                                <span class="font-bold text-slate-700">خريطة المواقف</span>
-                                <span id="processed-summary-text" class="text-slate-400">
+                                <span class="font-bold">خريطة المواقف</span>
+                                <span id="processed-summary-text" class="assessment-map-muted">
                                     تمت معالجة <span id="processed-count-num">0</span> من 18
                                 </span>
                             </div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-1.5 flex items-end justify-between gap-3 sm:mb-3">
+                    <div class="mb-1.5 hidden items-end justify-between gap-3 sm:mb-3 sm:flex">
                         <div>
                             <p class="text-[11px] font-extrabold text-slate-900 sm:text-lg">اختر تصرفًا واحدًا</p>
                             <p class="mt-0.5 text-[8.5px] leading-3.5 text-slate-500 sm:text-sm sm:leading-relaxed">
@@ -124,8 +124,8 @@
                         <div id="options-container" class="min-w-0 space-y-1.5 sm:space-y-3"></div>
                     </fieldset>
 
-                    <div class="mt-2 border-t border-slate-100 pt-2 sm:mt-4 sm:pt-3.5">
-                        <p class="mb-1.5 text-[8.5px] font-bold text-brand-700 sm:mb-2.5 sm:text-sm">إذا لم يناسبك أي تصرف أو لم تستطع الحكم:</p>
+                    <div class="mt-2 border-t border-slate-200/70 pt-2 sm:mt-4 sm:pt-3.5">
+                        <p class="assessment-special-label mb-1.5 hidden text-[8.5px] font-bold sm:mb-2.5 sm:block sm:text-sm">إذا لم يناسبك أي تصرف أو لم تستطع الحكم:</p>
                         <div class="grid min-w-0 grid-cols-2 gap-1.5 sm:gap-2">
                             <label id="none-fit-card" class="relative flex min-h-9 min-w-0 cursor-pointer items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2 py-1.5 transition hover:border-brand-200 hover:bg-brand-50/40 sm:min-h-11 sm:gap-2.5 sm:rounded-xl sm:px-3 sm:py-2.5">
                                 <input type="radio" name="response_state" value="none_selected" id="none-fit-radio"
@@ -140,7 +140,7 @@
                         </div>
                     </div>
 
-                    <div class="sticky bottom-1 z-20 -mx-0.5 mt-2 flex min-w-0 items-center justify-between gap-1.5 rounded-xl border border-slate-200/80 bg-white/95 p-1.5 shadow-pop backdrop-blur sm:static sm:mx-0 sm:mt-4 sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pt-3.5 sm:shadow-none">
+                    <div class="assessment-nav-dock sticky bottom-1 z-20 -mx-0.5 mt-2 flex min-w-0 items-center justify-between gap-1.5 rounded-xl border p-1.5 shadow-pop backdrop-blur sm:static sm:mx-0 sm:mt-4 sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pt-3.5 sm:shadow-none">
                         <button type="button" id="prev-btn" class="btn btn-secondary min-h-10 min-w-0 flex-1 px-2.5 py-1.5 text-xs disabled:pointer-events-none disabled:opacity-40 sm:min-h-11 sm:max-w-40 sm:px-3 sm:py-2 sm:text-sm">
                             <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

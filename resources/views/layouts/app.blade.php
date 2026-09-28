@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="{{ request()->routeIs('assessment.show') ? '#0f766e' : '#4f46e5' }}">
     <title>@hasSection('title')@yield('title') | @endifمسارك</title>
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}
@@ -12,7 +12,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans">
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans {{ request()->routeIs('assessment.show') ? 'assessment-page' : '' }}">
     <a href="#main" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
 
     <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md">
@@ -116,7 +116,7 @@
 
     <main id="main" tabindex="-1"
           class="{{ request()->routeIs('assessment.show')
-              ? 'w-full flex-1 break-words px-3 py-4 sm:px-5 sm:py-6 lg:px-8 lg:py-8'
+              ? 'w-full flex-1 break-words px-2 py-3 sm:px-5 sm:py-6 lg:px-8 lg:py-8'
               : 'container-page flex-1 break-words py-8 lg:py-12' }}">
         <x-ui.flash class="mb-6" />
         @yield('content')
