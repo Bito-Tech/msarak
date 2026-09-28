@@ -124,7 +124,7 @@
         @yield('content')
     </main>
 
-    <footer class="mt-auto {{ request()->routeIs('assessment.*') ? 'hidden' : '' }}">
+    <footer class="mt-auto">
         <div class="bg-brand-900 text-white">
             <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-8">
                 <div class="max-w-md">
