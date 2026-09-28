@@ -30,17 +30,19 @@
             } elseif (auth()->check() && auth()->user()->role === 'admin') {
                 $navLinks[] = ['href' => route('admin.assessment-versions.index'), 'label' => 'إدارة التقييم', 'current' => request()->routeIs('admin.assessment-versions.*')];
                 $navLinks[] = ['href' => route('admin.statistics.index'), 'label' => 'الإحصائيات', 'current' => request()->routeIs('admin.statistics.*')];
+            } elseif (! auth()->check()) {
+                $navLinks[] = ['href' => route('login'), 'label' => 'تسجيل الدخول', 'current' => request()->routeIs('login')];
             }
         @endphp
-        <div class="container-page flex items-center justify-between gap-x-6 py-3">
+        <div class="container-page flex items-center justify-between gap-x-4 py-2.5 lg:gap-x-6">
             <a href="{{ url('/') }}" class="inline-flex min-h-11 items-center gap-2 text-xl font-bold text-brand-700 transition-colors hover:text-brand-800">
                 <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30" aria-hidden="true">م</span>
                 مسارك
             </a>
 
-            <nav aria-label="التنقل الرئيسي" class="relative">
-                {{-- المكتب (sm+): روابط مضمّنة كما هي --}}
-                <ul class="hidden flex-wrap items-center gap-x-4 sm:flex">
+            <nav aria-label="التنقل الرئيسي" class="relative shrink-0">
+                {{-- The full navigation fits reliably at desktop widths. --}}
+                <ul class="hidden items-center gap-x-2 lg:flex xl:gap-x-4">
                     @foreach ($navLinks as $link)
                         <li>
                             <a href="{{ $link['href'] }}"
@@ -72,13 +74,13 @@
                     {{-- روابط الصفحات اللاحقة تضاف هنا --}}
                 </ul>
 
-                {{-- الجوال (<sm): قائمة منسدلة أصلية details/summary — بلا JS، تعمل باللمس والكيبورد --}}
-                <details class="sm:hidden">
+                {{-- Compact navigation for phones and tablets. --}}
+                <details class="lg:hidden">
                     <summary class="nav-link flex min-h-11 cursor-pointer list-none select-none items-center gap-1.5 rounded-lg px-3 font-medium text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700 [&::-webkit-details-marker]:hidden">
                         <x-ui.icon name="menu" class="h-5 w-5" />
                         القائمة
                     </summary>
-                    <ul class="absolute end-0 top-full z-50 mt-1 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-pop">
+                    <ul class="absolute end-0 top-full z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-slate-200 bg-white p-2 shadow-pop">
                         @foreach ($navLinks as $link)
                             <li>
                                 <a href="{{ $link['href'] }}"
@@ -109,20 +111,17 @@
                 </details>
             </nav>
         </div>
-        {{-- خط الهوية السفلي — نفس شريط البطاقات (brand→accent) بدل الحد المسطح --}}
-        <div class="h-0.5 bg-gradient-to-l from-brand-500 via-brand-600 to-accent-500/70 opacity-70" aria-hidden="true"></div>
+        <div class="border-b border-slate-200" aria-hidden="true"></div>
     </header>
 
-    <main id="main" tabindex="-1" class="container-page flex-1 break-words py-12 lg:py-16">
+    <main id="main" tabindex="-1" class="container-page flex-1 break-words py-8 lg:py-12">
         <x-ui.flash class="mb-6" />
         @yield('content')
     </main>
 
     <footer class="mt-auto">
-        {{-- شريط الهوية العلوي — مرآة شريط الترويسة السفلي --}}
-        <div class="h-1 bg-gradient-to-l from-brand-500 via-brand-600 to-accent-500" aria-hidden="true"></div>
-        <div class="bg-gradient-to-br from-brand-800 to-brand-900 text-white">
-            <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-10">
+        <div class="bg-brand-900 text-white">
+            <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-8">
                 <div class="max-w-md">
                     <div class="flex items-center gap-2">
                         <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-extrabold text-white ring-1 ring-inset ring-white/25" aria-hidden="true">م</span>
