@@ -76,7 +76,7 @@
                         <p id="error-alert-message" class="text-sm font-medium">تعذر حفظ الإجابة. حاول مرة أخرى.</p>
                     </div>
                 </div>
-                <button type="button" id="retry-save-btn" class="inline-flex items-center gap-1 rounded-lg bg-danger-600 px-3 py-1 text-xs font-bold text-white shadow-xs hover:bg-danger-700 transition-colors">
+                <button type="button" id="retry-save-btn" class="inline-flex min-h-11 items-center gap-1 rounded-lg bg-danger-600 px-3 py-2 text-sm font-bold text-white shadow-xs hover:bg-danger-700 transition-colors">
                     <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
                     </svg>

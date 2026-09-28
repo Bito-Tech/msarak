@@ -119,7 +119,13 @@ class AssessmentJourney {
         this.noneFitRadio.addEventListener('change', () => this.handleSpecialChoice('none_selected'));
         this.cannotJudgeRadio.addEventListener('change', () => this.handleSpecialChoice('unable_to_judge'));
 
-        this.retrySaveBtn.addEventListener('click', () => this.flushSave());
+        this.retrySaveBtn.addEventListener('click', () => {
+            if (this.questions.length === 0) {
+                this.fetchSessionData();
+            } else {
+                this.flushSave();
+            }
+        });
 
         // Conflict modal handlers
         this.conflictKeepBtn.addEventListener('click', () => this.resolveConflict(true));
@@ -157,8 +163,10 @@ class AssessmentJourney {
         if (initialScript && initialScript.textContent.trim()) {
             try {
                 const initialData = JSON.parse(initialScript.textContent);
-                this.loadPayload(initialData);
-                return;
+                if (Array.isArray(initialData?.questions)) {
+                    this.loadPayload(initialData);
+                    return;
+                }
             } catch (err) {
                 console.error('Failed to parse embedded initial assessment data', err);
             }
@@ -169,6 +177,7 @@ class AssessmentJourney {
 
     async fetchSessionData() {
         this.setSaveStatus('loading', 'جارٍ تحميل جلسة التقييم…');
+        this.hideError();
         try {
             const response = await fetch(this.app.dataset.sessionUrl, {
                 headers: {
@@ -182,9 +191,14 @@ class AssessmentJourney {
             }
 
             const json = await response.json();
+            if (!Array.isArray(json.data?.questions)) {
+                throw new Error('Invalid session payload');
+            }
             this.loadPayload(json.data);
+            this.setSaveStatus('idle', 'جاهز');
         } catch (err) {
-            this.showError('تعذر الاتصال. تأكد من اتصالك بالإنترنت ثم حاول مرة أخرى.');
+            this.setSaveStatus('error', 'تعذر تحميل التقييم.');
+            this.showError('تعذر تحميل التقييم. تحقق من اتصالك ثم حاول مرة أخرى.');
         }
     }
 
