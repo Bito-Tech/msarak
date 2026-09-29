@@ -36,7 +36,14 @@ class SpecializationController extends Controller
 
         abort_if($first === null || $second === null, 404);
 
-        return view('specializations.compare', compact('first', 'second'));
+        $visuals = $this->visualsById();
+
+        return view('specializations.compare', [
+            'first' => $first,
+            'second' => $second,
+            'firstVisual' => $visuals[$firstId] ?? null,
+            'secondVisual' => $visuals[$secondId] ?? null,
+        ]);
     }
 
     public function show(string $specialization): View

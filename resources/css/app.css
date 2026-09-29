@@ -4685,3 +4685,601 @@
         border-radius: 0.75rem;
     }
 }
+
+
+/* Specialization comparison — visual, side-by-side and mobile-first without horizontal tables. */
+.specialization-compare-page {
+    background:
+        radial-gradient(circle at 90% 8%, rgb(213 235 228 / 0.42), transparent 28rem),
+        #eaf1ef;
+}
+
+.specialization-compare-page header {
+    background: rgb(253 254 254 / 0.94);
+}
+
+.specialization-compare {
+    max-width: 1500px;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.specialization-compare-back {
+    color: #315a55;
+    background: rgb(255 255 255 / 0.74);
+    border: 1px solid #d3e0dc;
+    transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.specialization-compare-note {
+    color: #50706b;
+    background: rgb(255 255 255 / 0.58);
+    border: 1px solid #d5e3df;
+}
+
+.specialization-compare-heading {
+    border-color: #d3e2dd;
+    background:
+        radial-gradient(circle at 88% 10%, rgb(207 235 225 / 0.7), transparent 34%),
+        linear-gradient(135deg, #fbfdfc 0%, #f0f8f5 100%);
+    box-shadow: 0 10px 28px rgb(29 66 60 / 0.055);
+}
+
+.specialization-compare-kicker {
+    color: #a7772d;
+}
+
+.specialization-compare-title {
+    color: #164e49;
+    font-size: clamp(2.25rem, 4vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.specialization-compare-lead {
+    color: #55726d;
+    font-size: 1.02rem;
+    line-height: 1.85rem;
+}
+
+.specialization-compare-axis-count {
+    min-width: 8rem;
+    color: #35635d;
+    background: rgb(255 255 255 / 0.72);
+    border: 1px solid #d0e2dc;
+}
+
+.specialization-compare-axis-count strong {
+    color: #0f766e;
+    font-size: 1.65rem;
+    line-height: 1.65rem;
+}
+
+.compare-major-card,
+.compare-axis-column {
+    --compare-color: #0f766e;
+    --compare-accent: #c59a58;
+    --compare-soft: #e9f4f0;
+    --compare-soft-2: #d7e9e3;
+}
+
+.compare-major-card[data-specialization='computer_science'],
+.compare-axis-column[data-specialization='computer_science'] {
+    --compare-color: #355f78;
+    --compare-accent: #7ba3b4;
+    --compare-soft: #edf4f7;
+    --compare-soft-2: #dce9ef;
+}
+
+.compare-major-card[data-specialization='human_medicine'],
+.compare-axis-column[data-specialization='human_medicine'] {
+    --compare-color: #287b77;
+    --compare-accent: #7fb9b3;
+    --compare-soft: #e9f5f3;
+    --compare-soft-2: #d5ebe7;
+}
+
+.compare-major-card[data-specialization='nursing'],
+.compare-axis-column[data-specialization='nursing'] {
+    --compare-color: #4f7888;
+    --compare-accent: #91b8c0;
+    --compare-soft: #edf4f6;
+    --compare-soft-2: #dce9ed;
+}
+
+.compare-major-card[data-specialization='civil_engineering'],
+.compare-axis-column[data-specialization='civil_engineering'] {
+    --compare-color: #647f8d;
+    --compare-accent: #ad875e;
+    --compare-soft: #f0f4f5;
+    --compare-soft-2: #e2e9ec;
+}
+
+.compare-major-card[data-specialization='architecture'],
+.compare-axis-column[data-specialization='architecture'] {
+    --compare-color: #667a8c;
+    --compare-accent: #aebbc6;
+    --compare-soft: #f1f4f6;
+    --compare-soft-2: #e1e7ec;
+}
+
+.compare-major-card[data-specialization='business_administration'],
+.compare-axis-column[data-specialization='business_administration'] {
+    --compare-color: #75634e;
+    --compare-accent: #bf9a63;
+    --compare-soft: #f5f1ea;
+    --compare-soft-2: #e9e0d2;
+}
+
+.compare-major-card[data-specialization='accounting'],
+.compare-axis-column[data-specialization='accounting'] {
+    --compare-color: #486b5b;
+    --compare-accent: #b29a62;
+    --compare-soft: #eef4f0;
+    --compare-soft-2: #dce8e1;
+}
+
+.compare-major-card[data-specialization='law'],
+.compare-axis-column[data-specialization='law'] {
+    --compare-color: #704c40;
+    --compare-accent: #b28d61;
+    --compare-soft: #f5efec;
+    --compare-soft-2: #eaded8;
+}
+
+.compare-major-card[data-specialization='graphic_design_multimedia'],
+.compare-axis-column[data-specialization='graphic_design_multimedia'] {
+    --compare-color: #9a5e63;
+    --compare-accent: #d09a70;
+    --compare-soft: #f8efef;
+    --compare-soft-2: #efdddd;
+}
+
+.compare-major-card[data-specialization='english_language_translation'],
+.compare-axis-column[data-specialization='english_language_translation'] {
+    --compare-color: #596c8a;
+    --compare-accent: #9583ad;
+    --compare-soft: #f0f1f6;
+    --compare-soft-2: #e0e2ec;
+}
+
+.compare-major-card {
+    border-color: #d4e1dd;
+    background: #ffffff;
+    box-shadow: 0 14px 34px rgb(27 61 56 / 0.065);
+}
+
+.compare-major-accent {
+    background: linear-gradient(90deg, var(--compare-accent), var(--compare-color));
+}
+
+.compare-major-media {
+    background: var(--compare-soft);
+}
+
+.compare-major-image {
+    object-position: center;
+    filter: saturate(0.88) contrast(0.96) brightness(0.99);
+    transform: scale(1.01);
+    transition: transform 0.32s ease;
+}
+
+.compare-major-wash {
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, transparent 48%, rgb(10 43 40 / 0.34) 100%),
+        linear-gradient(90deg, color-mix(in srgb, var(--compare-color) 8%, transparent), transparent 52%);
+}
+
+.compare-major-position {
+    color: #ffffff;
+    background: color-mix(in srgb, var(--compare-color) 82%, transparent);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    backdrop-filter: blur(8px);
+}
+
+.compare-major-icon {
+    background: var(--compare-soft);
+    border: 1px solid var(--compare-soft-2);
+}
+
+.compare-major-icon > span {
+    background-image: linear-gradient(135deg, var(--compare-soft), var(--compare-soft-2));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--compare-color) 14%, transparent);
+}
+
+.compare-major-icon > span > span.absolute {
+    background-image: linear-gradient(135deg, var(--compare-accent), var(--compare-color));
+}
+
+.compare-major-icon .spec-draw {
+    color: var(--compare-color);
+}
+
+.compare-major-title {
+    color: #193f3a;
+    font-size: clamp(1.35rem, 2vw, 1.8rem);
+    line-height: 1.45;
+}
+
+.compare-major-description {
+    color: #526f6a;
+    font-size: 1rem;
+    line-height: 1.8rem;
+}
+
+.compare-major-details {
+    color: var(--compare-color);
+    background: var(--compare-soft);
+    border: 1px solid var(--compare-soft-2);
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.specialization-compare-vs {
+    align-self: center;
+    position: relative;
+    z-index: 3;
+}
+
+.specialization-compare-vs span {
+    color: #ffffff;
+    background: linear-gradient(135deg, #c59a58 0%, #9b7235 100%);
+    border: 4px solid #eaf1ef;
+    box-shadow: 0 10px 24px rgb(105 76 32 / 0.2);
+    letter-spacing: 0.04em;
+}
+
+.compare-axis-card {
+    border-color: #d4e1dd;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgb(28 62 58 / 0.05);
+}
+
+.compare-axis-head {
+    background:
+        linear-gradient(135deg, #fbfdfc 0%, #f4f9f7 100%);
+    border-bottom: 1px solid #e0e9e6;
+}
+
+.compare-axis-icon {
+    color: #0f766e;
+    background: #e7f4ef;
+    border: 1px solid #d2e8e0;
+}
+
+.compare-axis-eyebrow {
+    color: #9b7235;
+}
+
+.compare-axis-title {
+    color: #173f3a;
+    font-size: 1.45rem;
+    line-height: 1.85rem;
+}
+
+.compare-axis-hint {
+    color: #6b827e;
+    line-height: 1.55rem;
+}
+
+.compare-axis-column {
+    min-width: 0;
+    padding: 1.35rem;
+    background:
+        radial-gradient(circle at 90% 5%, color-mix(in srgb, var(--compare-soft) 82%, transparent), transparent 32%),
+        #ffffff;
+}
+
+.compare-axis-column + .compare-axis-column {
+    border-inline-start: 1px solid #e0e9e6;
+}
+
+.compare-axis-column-label {
+    color: var(--compare-color);
+    font-size: 0.98rem;
+    line-height: 1.4rem;
+}
+
+.compare-axis-copy {
+    color: #3f5f5a;
+    font-size: 1.02rem;
+    line-height: 1.9rem;
+    font-weight: 500;
+}
+
+.compare-axis-items {
+    align-content: start;
+}
+
+.compare-axis-item {
+    min-height: 3.6rem;
+    color: #405e59;
+    background: rgb(248 251 250 / 0.9);
+    border: 1px solid color-mix(in srgb, var(--compare-color) 10%, #e0e9e6);
+    font-size: 0.96rem;
+    line-height: 1.68rem;
+    font-weight: 500;
+}
+
+.compare-axis-bullet {
+    color: #ffffff;
+    background: var(--compare-color);
+    box-shadow: 0 5px 12px color-mix(in srgb, var(--compare-color) 16%, transparent);
+}
+
+.compare-axis-empty {
+    color: #91a19e;
+    font-size: 0.94rem;
+}
+
+.specialization-compare-footer {
+    border-color: #d2e2dc;
+    background:
+        radial-gradient(circle at 8% 50%, rgb(197 154 88 / 0.11), transparent 24%),
+        linear-gradient(135deg, #f9fcfb 0%, #e9f5f0 100%);
+    box-shadow: 0 10px 28px rgb(28 62 58 / 0.05);
+}
+
+.specialization-compare-footer-title {
+    color: #173f3a;
+    font-size: 1.45rem;
+    line-height: 1.85rem;
+}
+
+.specialization-compare-footer-copy {
+    color: #5d7772;
+    font-size: 0.95rem;
+    line-height: 1.55rem;
+}
+
+.specialization-compare-footer-cta {
+    color: #ffffff;
+    background: linear-gradient(135deg, #118278, #0b615b);
+    border: 1px solid #0b665f;
+    box-shadow: 0 10px 24px rgb(15 118 110 / 0.18);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .specialization-compare-back:hover {
+        color: #0f766e;
+        background: #eaf6f2;
+        border-color: #b9d9d0;
+    }
+
+    .compare-major-card:hover .compare-major-image {
+        transform: scale(1.035);
+    }
+
+    .compare-major-details:hover {
+        transform: translateY(-1px);
+        background: color-mix(in srgb, var(--compare-soft) 72%, white);
+        border-color: color-mix(in srgb, var(--compare-color) 28%, white);
+    }
+
+    .specialization-compare-footer-cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgb(15 118 110 / 0.24);
+    }
+}
+
+@media (min-width: 1024px) {
+    .specialization-compare-pair {
+        position: relative;
+    }
+
+    .compare-major-card {
+        min-height: 100%;
+    }
+
+    .compare-major-body {
+        min-height: 16rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .compare-major-details {
+        margin-top: auto;
+        width: fit-content;
+    }
+
+    .compare-axis-column {
+        padding: 1.6rem 1.75rem 1.75rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .specialization-compare-vs {
+        height: 2.2rem;
+        margin-block: -0.1rem;
+    }
+
+    .specialization-compare-vs span {
+        width: 3rem;
+        height: 3rem;
+        font-size: 0.72rem;
+        border-width: 3px;
+    }
+
+    .compare-axis-column + .compare-axis-column {
+        border-inline-start: 0;
+        border-top: 1px solid #e0e9e6;
+    }
+}
+
+@media (max-width: 639px) {
+    .specialization-compare-toolbar {
+        margin-bottom: 0.6rem;
+    }
+
+    .specialization-compare-back {
+        min-height: 2.7rem;
+        padding-inline: 0.75rem;
+        font-size: 0.78rem;
+    }
+
+    .specialization-compare-note {
+        display: none;
+    }
+
+    .specialization-compare-heading {
+        border-radius: 1rem;
+        padding: 0.95rem;
+    }
+
+    .specialization-compare-kicker {
+        font-size: 0.68rem;
+    }
+
+    .specialization-compare-title {
+        font-size: 1.85rem;
+        line-height: 1.25;
+    }
+
+    .specialization-compare-lead {
+        margin-top: 0.45rem;
+        font-size: 0.82rem;
+        line-height: 1.42rem;
+    }
+
+    .specialization-compare-axis-count {
+        display: none;
+    }
+
+    .specialization-compare-pair {
+        margin-top: 0.65rem;
+        gap: 0.45rem;
+    }
+
+    .compare-major-card {
+        border-radius: 1rem;
+    }
+
+    .compare-major-media {
+        min-height: 10.5rem;
+    }
+
+    .compare-major-position {
+        top: 0.65rem;
+        inset-inline-start: 0.65rem;
+        padding: 0.28rem 0.55rem;
+        font-size: 0.58rem;
+    }
+
+    .compare-major-body {
+        padding: 0.9rem;
+    }
+
+    .compare-major-icon {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 0.75rem;
+    }
+
+    .compare-major-title {
+        font-size: 1.05rem;
+        line-height: 1.38rem;
+    }
+
+    .compare-major-description {
+        margin-top: 0.55rem;
+        font-size: 0.82rem;
+        line-height: 1.42rem;
+    }
+
+    .compare-major-details {
+        margin-top: 0.7rem;
+        min-height: 2.7rem;
+        padding-inline: 0.75rem;
+        font-size: 0.72rem;
+    }
+
+    .specialization-compare-sections {
+        margin-top: 0.65rem;
+        gap: 0.65rem;
+    }
+
+    .compare-axis-card {
+        border-radius: 1rem;
+    }
+
+    .compare-axis-head {
+        padding: 0.9rem;
+    }
+
+    .compare-axis-icon {
+        width: 2.35rem;
+        height: 2.35rem;
+        border-radius: 0.7rem;
+    }
+
+    .compare-axis-eyebrow {
+        font-size: 0.62rem;
+    }
+
+    .compare-axis-title {
+        font-size: 1.08rem;
+        line-height: 1.4rem;
+    }
+
+    .compare-axis-hint {
+        font-size: 0.72rem;
+        line-height: 1.15rem;
+    }
+
+    .compare-axis-column {
+        padding: 0.9rem;
+    }
+
+    .compare-axis-column-label {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+    }
+
+    .compare-axis-copy {
+        margin-top: 0.55rem;
+        font-size: 0.86rem;
+        line-height: 1.52rem;
+    }
+
+    .compare-axis-items {
+        margin-top: 0.6rem;
+        gap: 0.42rem;
+    }
+
+    .compare-axis-item {
+        min-height: 0;
+        padding: 0.65rem 0.7rem;
+        border-radius: 0.8rem;
+        font-size: 0.82rem;
+        line-height: 1.42rem;
+    }
+
+    .compare-axis-bullet {
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 0.42rem;
+        font-size: 0.6rem;
+    }
+
+    .specialization-compare-footer {
+        margin-top: 0.65rem;
+        border-radius: 1rem;
+        padding: 0.95rem;
+    }
+
+    .specialization-compare-footer-title {
+        font-size: 1.08rem;
+        line-height: 1.45rem;
+    }
+
+    .specialization-compare-footer-copy {
+        font-size: 0.78rem;
+        line-height: 1.25rem;
+    }
+
+    .specialization-compare-footer-cta {
+        width: 100%;
+        min-height: 3.4rem;
+        font-size: 0.84rem;
+    }
+}
