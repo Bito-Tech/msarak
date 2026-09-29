@@ -7198,3 +7198,381 @@
         padding-top: 0.55rem;
     }
 }
+
+
+/* Global header brand + compact account/history refinement. */
+.site-header {
+    width: 100%;
+    border-bottom: 1px solid rgb(210 224 219 / 0.9);
+    box-shadow: 0 4px 18px rgb(28 62 58 / 0.035);
+}
+
+.site-header-shell {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: clamp(0.8rem, 2.4vw, 2.4rem);
+}
+
+.site-header-brand {
+    color: #164f4a;
+    letter-spacing: -0.02em;
+}
+
+.site-header-brand:hover {
+    color: #0b7068;
+}
+
+.site-header-logo {
+    width: 2.7rem;
+    height: 2.7rem;
+    filter: drop-shadow(0 5px 9px rgb(25 94 112 / 0.13));
+}
+
+.site-header nav {
+    margin-inline-start: auto;
+}
+
+.site-footer-logo {
+    background: rgb(255 255 255 / 0.08);
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow: none;
+}
+
+.site-footer-logo img {
+    filter: drop-shadow(0 4px 8px rgb(0 0 0 / 0.16));
+}
+
+/* Results history v3 — substantially shorter hero and cards. */
+.results-history {
+    max-width: 1500px;
+}
+
+.results-history-hero > .relative {
+    min-height: 0;
+}
+
+.results-history-title {
+    font-size: clamp(2rem, 3.5vw, 3.35rem);
+    line-height: 1.12;
+}
+
+.results-history-lead {
+    max-width: 54rem;
+    font-size: 0.98rem;
+    line-height: 1.72rem;
+}
+
+.results-history-count {
+    min-width: 8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+}
+
+.results-history-count strong {
+    font-size: 1.55rem;
+    line-height: 1.55rem;
+}
+
+.results-history-count span {
+    font-size: 0.74rem;
+}
+
+.results-history-toolbar {
+    margin-top: 0.85rem;
+}
+
+.results-history-section-title {
+    font-size: 1.2rem;
+    line-height: 1.55rem;
+}
+
+.results-history-grid {
+    margin-top: 0.7rem;
+}
+
+.results-history-card {
+    min-height: 14rem;
+    border-radius: 1rem;
+}
+
+.results-history-card-icon {
+    width: 2.35rem;
+    height: 2.35rem;
+}
+
+.results-history-card-title {
+    font-size: 0.98rem;
+    line-height: 1.35rem;
+}
+
+.results-history-card-index {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.55rem;
+    font-size: 0.67rem;
+}
+
+.results-history-card-date {
+    font-size: 0.82rem;
+}
+
+.results-history-card-meta > div {
+    padding: 0.48rem 0.55rem;
+}
+
+.results-history-card-meta span {
+    font-size: 0.62rem;
+}
+
+.results-history-card-meta strong {
+    font-size: 0.78rem;
+    line-height: 1.05rem;
+}
+
+.results-history-card-action {
+    font-size: 0.76rem;
+}
+
+.results-history-card-action > span:last-child {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.55rem;
+}
+
+.results-history-grid > li:nth-child(3n + 1) .results-history-card {
+    background:
+        radial-gradient(circle at 92% 5%, rgb(181 224 209 / 0.8), transparent 40%),
+        linear-gradient(145deg, #ffffff 0%, #edf8f4 100%);
+}
+
+.results-history-grid > li:nth-child(3n + 2) .results-history-card {
+    background:
+        radial-gradient(circle at 92% 5%, rgb(236 214 173 / 0.82), transparent 40%),
+        linear-gradient(145deg, #ffffff 0%, #faf4e8 100%);
+}
+
+.results-history-grid > li:nth-child(3n) .results-history-card {
+    background:
+        radial-gradient(circle at 92% 5%, rgb(195 221 232 / 0.84), transparent 40%),
+        linear-gradient(145deg, #ffffff 0%, #eef6f9 100%);
+}
+
+.results-history-cta {
+    padding-block: 1rem;
+}
+
+/* Profile v2 — compact, colored action cards. */
+.profile-experience {
+    max-width: 1180px;
+}
+
+.profile-hero > .relative {
+    min-height: 0;
+}
+
+.profile-avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.25rem;
+    font-size: 1.8rem;
+}
+
+.profile-name {
+    font-size: clamp(1.8rem, 3.3vw, 2.8rem);
+}
+
+.profile-hero-note {
+    min-width: 13rem;
+    padding: 0.75rem 0.9rem;
+}
+
+.profile-section-heading {
+    margin-top: 0.85rem;
+}
+
+.profile-action-grid {
+    margin-top: 0.75rem;
+    gap: 0.8rem;
+}
+
+.profile-action-card {
+    min-height: 15rem;
+}
+
+.profile-action-card-primary {
+    border-color: #c8e2da;
+    background:
+        radial-gradient(circle at 90% 8%, rgb(162 215 197 / 0.6), transparent 38%),
+        linear-gradient(145deg, #fbfefd 0%, #e8f6f1 100%);
+}
+
+.profile-action-card-results {
+    border-color: #e5d6b8;
+    background:
+        radial-gradient(circle at 90% 8%, rgb(232 203 150 / 0.58), transparent 38%),
+        linear-gradient(145deg, #fffdfa 0%, #f9f1e3 100%);
+}
+
+.profile-action-title {
+    font-size: 1.38rem;
+    line-height: 1.7rem;
+}
+
+.profile-action-copy {
+    max-width: 33rem;
+    font-size: 0.92rem;
+    line-height: 1.62rem;
+}
+
+.profile-action-label,
+.profile-results-label {
+    padding: 0.3rem 0.62rem;
+}
+
+.profile-guide {
+    background:
+        radial-gradient(circle at 94% 8%, rgb(205 230 222 / 0.62), transparent 34%),
+        linear-gradient(145deg, #ffffff 0%, #f2f8f5 100%);
+}
+
+.profile-guide-steps {
+    margin-top: 0.8rem;
+    gap: 0.55rem;
+}
+
+.profile-guide-step {
+    padding: 0.8rem;
+}
+
+.profile-guide-step:nth-child(1) {
+    background: #edf7f3;
+    border-color: #d2e7df;
+}
+
+.profile-guide-step:nth-child(2) {
+    background: #f8f2e8;
+    border-color: #eadfc9;
+}
+
+.profile-guide-step:nth-child(3) {
+    background: #eef5f8;
+    border-color: #d7e5eb;
+}
+
+@media (min-width: 1536px) {
+    .results-history-card {
+        min-height: 13.4rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .site-header-shell {
+        padding-inline: 0.85rem;
+    }
+
+    .site-header-logo {
+        width: 2.45rem;
+        height: 2.45rem;
+    }
+
+    .profile-action-card {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 639px) {
+    .site-header-shell {
+        padding-inline: 0.65rem;
+        gap: 0.55rem;
+    }
+
+    .site-header-brand {
+        gap: 0.35rem;
+        font-size: 1rem;
+    }
+
+    .site-header-logo {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+
+    .site-header nav details summary {
+        min-height: 2.6rem;
+        padding-inline: 0.65rem;
+        font-size: 0.78rem;
+    }
+
+    .results-history-hero > .relative {
+        padding: 0.78rem;
+    }
+
+    .results-history-title {
+        margin-top: 0.55rem;
+        font-size: 1.65rem;
+    }
+
+    .results-history-lead {
+        font-size: 0.82rem;
+        line-height: 1.4rem;
+    }
+
+    .results-history-count {
+        padding: 0.5rem 0.7rem;
+    }
+
+    .results-history-card {
+        min-height: 0;
+        padding: 0.68rem;
+    }
+
+    .results-history-card-title {
+        font-size: 0.86rem;
+        line-height: 1.18rem;
+    }
+
+    .results-history-card-date {
+        font-size: 0.74rem;
+    }
+
+    .results-history-card-meta > div {
+        padding: 0.42rem 0.45rem;
+    }
+
+    .results-history-card-action {
+        font-size: 0.7rem;
+    }
+
+    .profile-hero > .relative {
+        padding: 0.8rem;
+    }
+
+    .profile-avatar {
+        width: 3.15rem;
+        height: 3.15rem;
+        border-radius: 0.9rem;
+        font-size: 1.2rem;
+    }
+
+    .profile-name {
+        font-size: 1.4rem;
+    }
+
+    .profile-action-card {
+        padding: 0.78rem;
+    }
+
+    .profile-action-title {
+        font-size: 1.05rem;
+        line-height: 1.3rem;
+    }
+
+    .profile-action-copy {
+        font-size: 0.8rem;
+        line-height: 1.38rem;
+    }
+
+    .profile-guide {
+        padding: 0.8rem;
+    }
+}

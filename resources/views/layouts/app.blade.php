@@ -9,13 +9,14 @@
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}
     <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="/assets/brand/masarak-logo.svg">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans {{ request()->routeIs('assessment.*') ? 'assessment-page' : '' }} {{ request()->routeIs('home') ? 'home-page' : '' }} {{ request()->routeIs('specializations.index') ? 'specializations-index-page' : '' }} {{ request()->routeIs('specializations.show') ? 'specialization-detail-page' : '' }} {{ request()->routeIs('specializations.compare') ? 'specialization-compare-page' : '' }} {{ request()->routeIs('results.show') ? 'result-show-page' : '' }} {{ request()->routeIs('profile.results.index') ? 'results-history-page' : '' }} {{ request()->routeIs('profile.show') ? 'profile-page' : '' }}">
     <a href="#main" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
 
-    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md">
+    <header class="site-header sticky top-0 z-40 bg-white/88 backdrop-blur-md">
         @php
             // روابط التنقل — مصدر واحد يُعرض مضمّنًا على المكتب ومنسدلًا على الجوال.
             // النصوص والـaria-current مطابقة حرفيًا لما قبل التحويل.
@@ -34,10 +35,14 @@
                 $navLinks[] = ['href' => route('login'), 'label' => 'تسجيل الدخول', 'current' => request()->routeIs('login')];
             }
         @endphp
-        <div class="container-page flex items-center justify-between gap-x-4 py-2.5 lg:gap-x-6">
-            <a href="{{ url('/') }}" class="inline-flex min-h-11 items-center gap-2 text-xl font-bold text-brand-700 transition-colors hover:text-brand-800">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-extrabold text-white shadow-sm shadow-brand-600/30" aria-hidden="true">م</span>
-                مسارك
+        <div class="site-header-shell flex w-full items-center justify-between gap-x-4 py-2.5 lg:gap-x-6">
+            <a href="{{ url('/') }}" class="site-header-brand inline-flex min-h-11 items-center gap-2.5 text-xl font-extrabold transition-colors">
+                <img src="/assets/brand/masarak-logo.svg"
+                     alt=""
+                     class="site-header-logo h-10 w-10 shrink-0 object-contain"
+                     width="40"
+                     height="40">
+                <span>مسارك</span>
             </a>
 
             <nav aria-label="التنقل الرئيسي" class="relative shrink-0">
