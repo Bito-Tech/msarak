@@ -7827,3 +7827,78 @@
         margin-top: 0;
     }
 }
+
+
+/* Assessment question visual v6 — render the local image as a real element, not a CSS background. */
+.assessment-question-card {
+    position: relative;
+    background: #0b5e59 !important;
+}
+
+.assessment-question-photo {
+    position: absolute !important;
+    inset: 0;
+    z-index: 0 !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+    display: block;
+}
+
+.assessment-question-photo-overlay {
+    position: absolute !important;
+    inset: 0;
+    z-index: 1 !important;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgb(5 43 42 / 0.88) 0%,
+            rgb(6 58 56 / 0.74) 12%,
+            rgb(8 74 70 / 0.52) 24%,
+            rgb(9 88 81 / 0.22) 38%,
+            rgb(9 88 81 / 0.08) 50%,
+            transparent 66%
+        );
+}
+
+.assessment-question-card::after {
+    display: none;
+}
+
+.assessment-question-card #scenario-text {
+    position: relative;
+    z-index: 2;
+    align-self: stretch;
+    margin: 0;
+    max-width: 27rem;
+}
+
+@media (min-width: 1024px) {
+    .assessment-question-column .assessment-question-card {
+        justify-content: flex-start !important;
+        align-items: flex-start;
+        padding: 1.55rem 1.65rem;
+    }
+
+    .assessment-question-photo {
+        object-position: center 42%;
+    }
+
+    .assessment-question-card #scenario-text {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 1023px) {
+    .assessment-question-photo {
+        object-position: center 38%;
+    }
+}
+
+@media (max-width: 639px) {
+    .assessment-question-photo {
+        object-position: center 36%;
+    }
+}

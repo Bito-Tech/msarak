@@ -61,6 +61,14 @@
                 {{-- اليمين: كارد الموقف والصورة فقط، وخريطة المواقف منفصلة تحته على الكمبيوتر. --}}
                 <aside class="assessment-question-column min-w-0 lg:w-[470px] lg:shrink-0 xl:w-[520px]">
                     <div class="assessment-question-card rounded-xl border p-2.5 shadow-sm sm:rounded-2xl sm:p-4">
+                        <img src="/assets/assessment/question-card-student.jpg"
+                             alt=""
+                             class="assessment-question-photo"
+                             loading="eager"
+                             fetchpriority="high"
+                             aria-hidden="true">
+                        <div class="assessment-question-photo-overlay" aria-hidden="true"></div>
+
                         {{-- يبقى العنصر موجودًا لربط JavaScript، لكنه غير ظاهر بصريًا. --}}
                         <span id="scenario-badge" class="sr-only">
                             الموقف <span id="badge-num">1</span>
