@@ -9241,3 +9241,75 @@
         font-size: 0.84rem;
     }
 }
+
+
+/* Auth experience v5 — guaranteed visible image and original Arabic typeface. */
+.auth-page,
+.auth-canvas,
+.auth-split,
+.auth-form-panel-v3,
+.auth-form-inner,
+.auth-form-heading,
+.auth-form-v3,
+.auth-field-group,
+.auth-submit,
+.auth-bottom-links,
+.auth-visual-copy {
+    font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+}
+
+.auth-split {
+    background: #ffffff !important;
+}
+
+.auth-visual-panel {
+    position: relative;
+    isolation: isolate;
+    background: #dfeefa !important;
+}
+
+.auth-visual-panel::before,
+.auth-visual-panel::after,
+.auth-visual-shade {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+.auth-visual-image {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    object-position: 26% center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+.auth-visual-copy {
+    position: absolute !important;
+    z-index: 2 !important;
+}
+
+.auth-visual-copy h2,
+.auth-visual-copy p {
+    font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+}
+
+@media (max-width: 900px) {
+    .auth-visual-image {
+        object-position: 28% 45% !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .auth-visual-image {
+        object-position: 28% 44% !important;
+    }
+}

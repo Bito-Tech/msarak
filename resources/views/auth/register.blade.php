@@ -10,7 +10,6 @@
                  alt=""
                  class="auth-visual-image"
                  loading="eager">
-            <div class="auth-visual-shade"></div>
             <div class="auth-visual-copy">
                 <h2>اختر طريقك بثقة</h2>
                 <span class="auth-visual-mark"></span>
