@@ -7725,3 +7725,105 @@
         box-shadow: none;
     }
 }
+
+
+/* Assessment question visual v5 — local image, top-weighted color wash, question pinned to the top. */
+.assessment-stage {
+    /* Local image path for the question card. Replace this file manually when needed. */
+    --assessment-question-image: url('/assets/assessment/question-card-student.jpg');
+}
+
+.assessment-question-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start;
+    isolation: isolate;
+    overflow: hidden;
+    color: #ffffff;
+    border-color: rgb(207 225 219 / 0.84);
+    background-image:
+        linear-gradient(
+            180deg,
+            rgb(5 45 44 / 0.88) 0%,
+            rgb(7 63 60 / 0.74) 13%,
+            rgb(9 83 77 / 0.48) 26%,
+            rgb(10 95 87 / 0.2) 39%,
+            rgb(10 95 87 / 0.07) 51%,
+            rgb(255 255 255 / 0.01) 66%,
+            transparent 100%
+        ),
+        var(--assessment-question-image) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center 42% !important;
+    box-shadow: 0 14px 34px rgb(18 60 55 / 0.11);
+}
+
+.assessment-question-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            180deg,
+            rgb(4 38 37 / 0.16) 0%,
+            rgb(4 38 37 / 0.04) 31%,
+            transparent 56%
+        );
+}
+
+.assessment-question-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.assessment-question-card #scenario-text {
+    margin: 0;
+    max-width: 27rem;
+    color: #ffffff;
+    text-align: right;
+    text-shadow:
+        0 2px 10px rgb(0 0 0 / 0.24),
+        0 1px 2px rgb(0 0 0 / 0.18);
+}
+
+@media (min-width: 1024px) {
+    .assessment-question-column .assessment-question-card {
+        min-height: 31rem;
+        height: auto;
+        flex: 1 1 auto;
+        justify-content: flex-start !important;
+        align-items: flex-start;
+        padding: 1.55rem 1.65rem;
+        background-position: center 42% !important;
+    }
+
+    .assessment-question-card #scenario-text {
+        margin-top: 0;
+        font-size: 1.68rem;
+        line-height: 2.55rem;
+        font-weight: 800;
+    }
+}
+
+@media (max-width: 1023px) {
+    .assessment-question-column .assessment-question-card {
+        justify-content: flex-start !important;
+        align-items: flex-start;
+        background-position: center 38% !important;
+    }
+}
+
+@media (max-width: 639px) {
+    .assessment-question-card {
+        background-position: center 36% !important;
+    }
+
+    .assessment-question-card #scenario-text {
+        margin-top: 0;
+    }
+}
