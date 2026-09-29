@@ -12,7 +12,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans {{ request()->routeIs('assessment.*') ? 'assessment-page' : '' }} {{ request()->routeIs('home') ? 'home-page' : '' }} {{ request()->routeIs('specializations.index') ? 'specializations-index-page' : '' }} {{ request()->routeIs('specializations.show') ? 'specialization-detail-page' : '' }} {{ request()->routeIs('specializations.compare') ? 'specialization-compare-page' : '' }}">
+<body class="flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased font-sans {{ request()->routeIs('assessment.*') ? 'assessment-page' : '' }} {{ request()->routeIs('home') ? 'home-page' : '' }} {{ request()->routeIs('specializations.index') ? 'specializations-index-page' : '' }} {{ request()->routeIs('specializations.show') ? 'specialization-detail-page' : '' }} {{ request()->routeIs('specializations.compare') ? 'specialization-compare-page' : '' }} {{ request()->routeIs('results.show') ? 'result-show-page' : '' }}">
     <a href="#main" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
 
     <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md">
@@ -119,7 +119,7 @@
               ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
               : (request()->routeIs('assessment.intro')
                   ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
-                  : (request()->routeIs('home') || request()->routeIs('specializations.index') || request()->routeIs('specializations.show') || request()->routeIs('specializations.compare')
+                  : (request()->routeIs('home') || request()->routeIs('specializations.index') || request()->routeIs('specializations.show') || request()->routeIs('specializations.compare') || request()->routeIs('results.show')
                       ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-5'
                       : 'container-page flex-1 break-words py-8 lg:py-12')) }}">
         <x-ui.flash class="mb-6" />
