@@ -6,6 +6,11 @@
 <section class="auth-canvas" dir="rtl" aria-labelledby="forgot-title">
     <div class="auth-split">
         <aside class="auth-visual-panel" aria-hidden="true">
+            <img src="/assets/auth/masarak-auth-campus.webp"
+                 alt=""
+                 class="auth-visual-image"
+                 loading="eager">
+            <div class="auth-visual-shade"></div>
             <div class="auth-visual-copy">
                 <h2>اختر طريقك بثقة</h2>
                 <span class="auth-visual-mark"></span>
