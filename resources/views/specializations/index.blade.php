@@ -34,7 +34,7 @@
                     $imageUrl = is_array($visual) && !empty($visual['production_ready']) ? ($visual['image_url'] ?? null) : null;
                 @endphp
 
-                <article class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-3xl border sm:flex-row">
+                <article data-specialization="{{ $specId }}" class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-3xl border sm:flex-row">
                     <div class="specialization-card-accent absolute inset-x-0 top-0 z-10" aria-hidden="true"></div>
 
                     {{-- المحتوى في اليمين على الشاشات الواسعة. --}}

@@ -3100,3 +3100,131 @@
         line-height: 1rem;
     }
 }
+
+
+/* Specialization image-matched icon palettes. */
+.specialization-card {
+    --spec-color: #0f766e;
+    --spec-accent: #c59a58;
+    --spec-soft: #e9f4f0;
+    --spec-soft-2: #d7e9e3;
+}
+
+.specialization-card[data-specialization='computer_science'] {
+    --spec-color: #355f78;
+    --spec-accent: #7ba3b4;
+    --spec-soft: #edf4f7;
+    --spec-soft-2: #dce9ef;
+}
+
+.specialization-card[data-specialization='human_medicine'] {
+    --spec-color: #287b77;
+    --spec-accent: #7fb9b3;
+    --spec-soft: #e9f5f3;
+    --spec-soft-2: #d5ebe7;
+}
+
+.specialization-card[data-specialization='nursing'] {
+    --spec-color: #4f7888;
+    --spec-accent: #91b8c0;
+    --spec-soft: #edf4f6;
+    --spec-soft-2: #dce9ed;
+}
+
+.specialization-card[data-specialization='civil_engineering'] {
+    --spec-color: #647f8d;
+    --spec-accent: #ad875e;
+    --spec-soft: #f0f4f5;
+    --spec-soft-2: #e2e9ec;
+}
+
+.specialization-card[data-specialization='architecture'] {
+    --spec-color: #667a8c;
+    --spec-accent: #aebbc6;
+    --spec-soft: #f1f4f6;
+    --spec-soft-2: #e1e7ec;
+}
+
+.specialization-card[data-specialization='business_administration'] {
+    --spec-color: #75634e;
+    --spec-accent: #bf9a63;
+    --spec-soft: #f5f1ea;
+    --spec-soft-2: #e9e0d2;
+}
+
+.specialization-card[data-specialization='accounting'] {
+    --spec-color: #486b5b;
+    --spec-accent: #b29a62;
+    --spec-soft: #eef4f0;
+    --spec-soft-2: #dce8e1;
+}
+
+.specialization-card[data-specialization='law'] {
+    --spec-color: #704c40;
+    --spec-accent: #b28d61;
+    --spec-soft: #f5efec;
+    --spec-soft-2: #eaded8;
+}
+
+.specialization-card[data-specialization='graphic_design_multimedia'] {
+    --spec-color: #9a5e63;
+    --spec-accent: #d09a70;
+    --spec-soft: #f8efef;
+    --spec-soft-2: #efdddd;
+}
+
+.specialization-card[data-specialization='english_language_translation'] {
+    --spec-color: #596c8a;
+    --spec-accent: #9583ad;
+    --spec-soft: #f0f1f6;
+    --spec-soft-2: #e0e2ec;
+}
+
+.specialization-card .specialization-card-accent {
+    background: linear-gradient(90deg, var(--spec-accent), var(--spec-color));
+}
+
+.specialization-card .specialization-icon-shell {
+    background: var(--spec-soft);
+    border-color: var(--spec-soft-2);
+}
+
+.specialization-card .specialization-icon-shell > span {
+    background-image: linear-gradient(135deg, var(--spec-soft), var(--spec-soft-2));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--spec-color) 16%, transparent);
+}
+
+.specialization-card .specialization-icon-shell > span > span.absolute {
+    background-image: linear-gradient(135deg, var(--spec-accent), var(--spec-color));
+}
+
+.specialization-card .specialization-icon-shell .spec-draw {
+    color: var(--spec-color);
+}
+
+.specialization-card .specialization-number {
+    color: var(--spec-color);
+    background: var(--spec-soft);
+    border-color: var(--spec-soft-2);
+}
+
+.specialization-card .specialization-image-label {
+    background: color-mix(in srgb, var(--spec-color) 78%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .specialization-card:hover .specialization-icon-shell {
+        border-color: color-mix(in srgb, var(--spec-color) 42%, white);
+        box-shadow: 0 9px 20px color-mix(in srgb, var(--spec-color) 18%, transparent);
+    }
+
+    .specialization-card:hover .specialization-icon-shell .spec-draw {
+        color: #ffffff;
+    }
+
+    .specialization-card:hover .specialization-number {
+        color: #ffffff;
+        background: var(--spec-color);
+        border-color: var(--spec-color);
+    }
+}
