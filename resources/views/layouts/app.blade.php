@@ -135,54 +135,93 @@
         <div class="site-footer-shell">
             <div class="site-footer-accent" aria-hidden="true"></div>
 
-            <div class="container-page site-footer-inner flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-                <div class="site-footer-brand min-w-0">
-                    <div class="flex items-center gap-3">
-                        <span class="site-footer-logo inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold" aria-hidden="true">م</span>
-                        <div>
-                            <span class="site-footer-title block text-lg font-extrabold">مسارك</span>
-                            <span class="site-footer-subtitle block text-xs font-medium">اختر بوعي أكبر</span>
+            <div class="container-page site-footer-inner py-7 sm:py-8">
+                <div class="site-footer-grid grid gap-7 md:grid-cols-[1.25fr_0.8fr_0.95fr] md:items-start">
+                    <div class="site-footer-brand min-w-0">
+                        <div class="flex items-center gap-3">
+                            <span class="site-footer-logo inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl" aria-hidden="true">
+                                <img src="/assets/brand/masarak-logo.svg" alt="" class="h-9 w-9 object-contain">
+                            </span>
+                            <div>
+                                <span class="site-footer-title block text-lg font-extrabold">مسارك</span>
+                                <span class="site-footer-subtitle block text-xs font-bold">اختر بوعي أكبر</span>
+                            </div>
                         </div>
+
+                        <p class="site-footer-copy mt-3 max-w-md text-sm leading-relaxed">
+                            منصة للتوجيه الأكاديمي والمهني تساعد طلاب الثانوية في اليمن على استكشاف ميولهم وفهم خياراتهم بصورة أوضح.
+                        </p>
                     </div>
 
-                    <p class="site-footer-copy mt-2 max-w-md text-sm leading-relaxed">
-                        منصة للتوجيه الأكاديمي والمهني لطلاب الثانوية في اليمن
-                    </p>
+                    <section class="site-footer-about" aria-labelledby="footer-about-title">
+                        <p id="footer-about-title" class="site-footer-heading text-sm font-extrabold">من نحن</p>
+                        <p class="site-footer-team mt-2 text-base font-extrabold">فريق بيتو تك</p>
+
+                        <div class="site-footer-social mt-3 flex items-center gap-2.5">
+                            <a href="https://github.com/Bito-Tech"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="site-footer-social-link"
+                               aria-label="فريق بيتو تك على GitHub"
+                               title="GitHub">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="currentColor" d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.57.1.78-.25.78-.55v-2.17c-3.18.69-3.85-1.35-3.85-1.35-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.53-2.54-.29-5.21-1.27-5.21-5.65 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.12 1.17A10.85 10.85 0 0 1 12 5.93c.96 0 1.93.13 2.83.38 2.16-1.48 3.12-1.17 3.12-1.17.62 1.57.23 2.73.11 3.02.73.8 1.18 1.82 1.18 3.07 0 4.39-2.68 5.35-5.23 5.64.41.35.77 1.04.77 2.1v3.2c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z"/>
+                                </svg>
+                            </a>
+
+                            <a href="https://www.linkedin.com/company/bito-tech"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="site-footer-social-link"
+                               aria-label="فريق بيتو تك على LinkedIn"
+                               title="LinkedIn">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="currentColor" d="M5.37 7.97H1.75V19.5h3.62V7.97ZM3.56 2.5A2.1 2.1 0 1 0 3.56 6.7a2.1 2.1 0 0 0 0-4.2ZM22.25 12.89c0-3.47-1.85-5.08-4.32-5.08-1.99 0-2.88 1.09-3.38 1.86v-1.7h-3.62c.05 1.13 0 11.53 0 11.53h3.62v-6.44c0-.34.03-.69.13-.94.25-.69.82-1.4 1.77-1.4 1.25 0 1.75.95 1.75 2.35v6.43h3.62l.43-6.61Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </section>
+
+                    <nav aria-label="روابط التذييل" class="site-footer-nav">
+                        <p class="site-footer-heading text-sm font-extrabold">روابط سريعة</p>
+                        <ul class="site-footer-links mt-2.5 flex flex-wrap gap-1.5 text-sm font-semibold">
+                            <li>
+                                <a href="{{ url('/') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">الرئيسية</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">التخصصات</a>
+                            </li>
+                            @auth
+                                @if (auth()->user()->role === 'student')
+                                    <li>
+                                        <a href="{{ route('assessment.intro') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">استكشاف ميولك</a>
+                                    </li>
+                                @endif
+                                @if (auth()->user()->role === 'admin')
+                                    <li>
+                                        <a href="{{ route('admin.assessment-versions.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">إدارة التقييم</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.statistics.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">الإحصائيات</a>
+                                    </li>
+                                @endif
+                            @endauth
+                            @guest
+                                <li>
+                                    <a href="{{ route('login') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">تسجيل الدخول</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('register') }}" class="site-footer-link site-footer-link-cta inline-flex min-h-10 items-center rounded-xl px-3">إنشاء حساب</a>
+                                </li>
+                            @endguest
+                        </ul>
+                    </nav>
                 </div>
 
-                <nav aria-label="روابط التذييل" class="site-footer-nav">
-                    <ul class="flex flex-wrap items-center gap-1 text-sm font-semibold">
-                        <li>
-                            <a href="{{ url('/') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">الرئيسية</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">التخصصات</a>
-                        </li>
-                        @auth
-                            @if (auth()->user()->role === 'student')
-                                <li>
-                                    <a href="{{ route('assessment.intro') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">استكشاف ميولك</a>
-                                </li>
-                            @endif
-                            @if (auth()->user()->role === 'admin')
-                                <li>
-                                    <a href="{{ route('admin.assessment-versions.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">إدارة التقييم</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('admin.statistics.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">الإحصائيات</a>
-                                </li>
-                            @endif
-                        @endauth
-                        @guest
-                            <li>
-                                <a href="{{ route('login') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">تسجيل الدخول</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}" class="site-footer-link site-footer-link-cta inline-flex min-h-10 items-center rounded-lg px-3">إنشاء حساب</a>
-                            </li>
-                        @endguest
-                    </ul>
-                </nav>
+                <div class="site-footer-bottom mt-6 flex flex-col gap-2 border-t pt-4 text-xs sm:flex-row sm:items-center sm:justify-between">
+                    <span>مسارك — أحد أعمال فريق بيتو تك</span>
+                    <span>منصة توجيه أكاديمي ومهني لطلاب الثانوية في اليمن</span>
+                </div>
             </div>
         </div>
     </footer>
