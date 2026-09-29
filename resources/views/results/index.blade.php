@@ -55,7 +55,7 @@
             <span class="results-history-order text-sm font-bold">مرتبة من الأحدث إلى الأقدم</span>
         </div>
 
-        <ol class="results-history-grid mt-4 grid gap-4 lg:grid-cols-2">
+        <ol class="results-history-grid mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             @foreach ($results as $item)
                 @php
                     $dateLabel = $item->created_at
@@ -65,10 +65,10 @@
 
                 <li>
                     <a href="{{ route('results.show', $item) }}"
-                       class="results-history-card group flex h-full flex-col rounded-3xl border p-5 sm:p-6">
+                       class="results-history-card group flex h-full flex-col rounded-3xl border p-4 sm:p-5">
                         <div class="flex items-start justify-between gap-4">
                             <div class="flex min-w-0 items-start gap-3">
-                                <span class="results-history-card-icon inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl" aria-hidden="true">
+                                <span class="results-history-card-icon inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl" aria-hidden="true">
                                     <x-ui.icon name="check" class="h-6 w-6" />
                                 </span>
                                 <div class="min-w-0">
@@ -82,12 +82,12 @@
                             </span>
                         </div>
 
-                        <div class="results-history-card-date mt-5 flex items-center gap-2">
+                        <div class="results-history-card-date mt-4 flex items-center gap-2">
                             <x-ui.icon name="clock" class="h-5 w-5 shrink-0" />
                             <span class="font-bold">{{ $dateLabel }}</span>
                         </div>
 
-                        <div class="results-history-card-meta mt-4 grid grid-cols-2 gap-2">
+                        <div class="results-history-card-meta mt-3 grid grid-cols-2 gap-2">
                             <div class="rounded-2xl px-3 py-3">
                                 <span class="block text-xs font-bold">إصدار الأداة</span>
                                 <strong class="mt-1 block">{{ $item->scoring_version }}</strong>
@@ -98,7 +98,7 @@
                             </div>
                         </div>
 
-                        <div class="results-history-card-action mt-5 flex items-center justify-between gap-3 border-t pt-4">
+                        <div class="results-history-card-action mt-4 flex items-center justify-between gap-3 border-t pt-3">
                             <span class="font-extrabold">عرض النتيجة كاملة</span>
                             <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl">
                                 <x-ui.icon name="chevron-start" class="h-5 w-5 transition-transform group-hover:-translate-x-1" />
