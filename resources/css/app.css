@@ -2360,3 +2360,113 @@
         margin-top: 0.5rem;
     }
 }
+
+
+/* Home mobile refinement: compress the first card so both main actions surface sooner. */
+@media (max-width: 639px) {
+    .home-hero {
+        padding: 0.72rem 0.8rem;
+    }
+
+    .home-hero .home-pill {
+        padding: 0.22rem 0.5rem;
+        font-size: 0.58rem;
+        line-height: 0.85rem;
+    }
+
+    .home-hero .home-kicker {
+        margin-top: 0.45rem;
+        font-size: 0.68rem;
+        line-height: 1rem;
+    }
+
+    .home-hero .home-title {
+        margin-top: 0.18rem;
+        font-size: 1.55rem;
+        line-height: 1.2;
+    }
+
+    .home-hero .home-lead {
+        margin-top: 0.4rem;
+        font-size: 0.76rem;
+        line-height: 1.25rem;
+    }
+
+    .home-hero .home-insight,
+    .home-hero .home-hero-footer {
+        display: none;
+    }
+
+    .home-actions-card {
+        padding: 0.85rem;
+    }
+
+    .home-actions-card > header .home-kicker {
+        font-size: 0.66rem;
+        line-height: 0.95rem;
+    }
+
+    .home-actions-title {
+        margin-top: 0.15rem;
+        font-size: 1.25rem;
+        line-height: 1.55rem;
+    }
+
+    .home-actions-card > header > .home-actions-copy {
+        margin-top: 0.2rem;
+        font-size: 0.72rem;
+        line-height: 1.15rem;
+    }
+
+    .home-action-list {
+        margin-top: 0.55rem;
+        gap: 0.55rem;
+    }
+
+    .home-action-block {
+        padding: 0.72rem;
+    }
+
+    .home-action-icon {
+        width: 2.35rem;
+        height: 2.35rem;
+        border-radius: 0.75rem;
+    }
+
+    .home-action-title {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    .home-action-copy {
+        margin-top: 0.35rem;
+        font-size: 0.74rem;
+        line-height: 1.15rem;
+    }
+
+    .home-action-block .mt-3.grid {
+        margin-top: 0.4rem;
+    }
+
+    .home-emoji {
+        min-height: 2rem;
+    }
+
+    .home-emoji img {
+        width: 1.45rem;
+        height: 1.45rem;
+    }
+
+    .home-big-btn {
+        min-height: 3.35rem;
+        margin-top: 0.5rem;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .home-disclaimer {
+        margin-top: 0.45rem;
+        font-size: 0.58rem;
+        line-height: 0.85rem;
+    }
+}
