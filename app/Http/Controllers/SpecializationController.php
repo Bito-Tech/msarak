@@ -16,6 +16,7 @@ class SpecializationController extends Controller
     {
         return view('specializations.index', [
             'specializations' => $this->catalog->all(),
+            'specializationVisuals' => $this->visualsById(),
         ]);
     }
 
@@ -35,7 +36,14 @@ class SpecializationController extends Controller
 
         abort_if($first === null || $second === null, 404);
 
-        return view('specializations.compare', compact('first', 'second'));
+        $visuals = $this->visualsById();
+
+        return view('specializations.compare', [
+            'first' => $first,
+            'second' => $second,
+            'firstVisual' => $visuals[$firstId] ?? null,
+            'secondVisual' => $visuals[$secondId] ?? null,
+        ]);
     }
 
     public function show(string $specialization): View
@@ -44,6 +52,38 @@ class SpecializationController extends Controller
 
         abort_if($found === null, 404);
 
-        return view('specializations.show', ['specialization' => $found]);
+        $visuals = $this->visualsById();
+
+        return view('specializations.show', [
+            'specialization' => $found,
+            'specializationVisual' => $visuals[$specialization] ?? null,
+        ]);
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function visualsById(): array
+    {
+        $visualsPath = resource_path('data/specialization-visuals.json');
+        $visuals = [];
+
+        if (! is_file($visualsPath)) {
+            return $visuals;
+        }
+
+        $decoded = json_decode((string) file_get_contents($visualsPath), true);
+
+        if (! is_array($decoded)) {
+            return $visuals;
+        }
+
+        foreach ($decoded as $visual) {
+            if (is_array($visual) && isset($visual['id'])) {
+                $visuals[(string) $visual['id']] = $visual;
+            }
+        }
+
+        return $visuals;
     }
 }

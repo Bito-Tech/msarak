@@ -3,88 +3,140 @@
 @section('title', 'دليل التخصصات')
 
 @section('content')
-    <section aria-labelledby="specializations-title" class="mx-auto max-w-5xl">
-        {{-- رأس الصفحة — هيرو بنفس لغة الهوية (تدرّج + هالات blur) --}}
-        <div class="relative overflow-hidden rounded-card border border-brand-100/70 bg-gradient-to-br from-white via-brand-50/50 to-brand-100/40 p-6 shadow-card sm:p-8">
-            <div class="pointer-events-none absolute -end-16 -top-16 h-56 w-56 rounded-full bg-brand-400/15 blur-3xl" aria-hidden="true"></div>
-            <div class="pointer-events-none absolute -start-12 bottom-0 h-40 w-40 rounded-full bg-accent-500/10 blur-3xl" aria-hidden="true"></div>
+<div class="specializations-page mx-auto w-full" dir="rtl">
+    <section class="specializations-hero specializations-title-card rounded-2xl border shadow-card" aria-labelledby="specializations-title">
+        <div class="specializations-title-row flex items-center gap-3">
+            <span class="specializations-title-icon inline-flex shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
+                <x-ui.icon name="info" class="h-5 w-5" />
+            </span>
 
-            <div class="relative z-10 flex flex-wrap items-center justify-between gap-4">
-                <div class="max-w-xl">
-                    <h1 id="specializations-title" class="text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
+            <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h1 id="specializations-title" class="specializations-title font-extrabold">
                         دليل التخصصات
                     </h1>
-                    <p class="mt-4 text-lg leading-relaxed text-slate-700">
-                        تصفح التخصصات الأكاديمية المتاحة، واطّلع على تفاصيل كل تخصص، أو قارن بين تخصصين.
-                    </p>
+                    <p class="specializations-kicker font-bold">اختر ما تريد استكشافه</p>
                 </div>
-                {{-- أيقونة الدليل (شبكة) --}}
-                <span class="hidden shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 p-5 text-white shadow-lg shadow-brand-600/25 sm:inline-flex" aria-hidden="true">
-                    <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="4" y="4" width="7" height="7" rx="1.5" />
-                        <rect x="13" y="4" width="7" height="7" rx="1.5" />
-                        <rect x="4" y="13" width="7" height="7" rx="1.5" />
-                        <rect x="13" y="13" width="7" height="7" rx="1.5" />
-                    </svg>
-                </span>
+
+                <p class="specializations-lead mt-1">
+                    تصفح التخصصات، واقرأ وصفًا مختصرًا، ثم افتح التفاصيل لما يلفت اهتمامك.
+                </p>
+            </div>
+
+            <div class="specializations-count inline-flex shrink-0 items-center gap-2 rounded-xl border">
+                <span class="specializations-count-number font-extrabold">{{ count($specializations) }}</span>
+                <span class="specializations-count-label font-bold">تخصصات</span>
             </div>
         </div>
+    </section>
 
-        {{-- شبكة التخصصات: بطاقة معرض بأيقونة دلالية وشريط علوي موحد الهوية --}}
-        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+    @if (!empty($specializations) && count($specializations) > 0)
+        <section class="specializations-grid mt-5 grid gap-4 md:grid-cols-2" aria-label="قائمة التخصصات">
             @foreach ($specializations as $specialization)
                 @php
+                    $specId = $specialization['id'] ?? '';
                     $specName = $specialization['name'] ?? 'بدون اسم';
+                    $specDescription = $specialization['description'] ?? 'لا يوجد وصف متاح.';
+                    $visual = $specializationVisuals[$specId] ?? null;
+                    $imageUrl = is_array($visual) && !empty($visual['production_ready']) ? ($visual['image_url'] ?? null) : null;
                 @endphp
-                <article class="card-surface card-lift group flex flex-col overflow-hidden p-0">
-                    <div class="h-1.5 w-full bg-gradient-to-l from-brand-500 via-brand-600 to-accent-500/80 opacity-50 transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true"></div>
-                    <div class="flex flex-1 flex-col p-6">
-                        <div class="flex items-start justify-between gap-3">
-                            <x-ui.spec-icon :id="$specialization['id'] ?? null" :name="$specName" />
-                            <span class="text-xs font-bold text-slate-400" aria-hidden="true">{{ $loop->iteration }}</span>
+
+                <article data-specialization="{{ $specId }}" class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-3xl border sm:flex-row">
+                    <div class="specialization-card-accent absolute inset-x-0 top-0 z-10" aria-hidden="true"></div>
+
+                    {{-- المحتوى في اليمين على الشاشات الواسعة. --}}
+                    <div class="order-2 flex min-w-0 flex-1 flex-col p-5 sm:order-1 sm:w-[62%] sm:p-5 lg:p-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex min-w-0 items-center gap-3">
+                                <span class="specialization-icon-shell inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
+                                    <x-ui.spec-icon :id="$specId" :name="$specName" />
+                                </span>
+
+                                <div class="min-w-0">
+                                    <p class="specialization-index text-xs font-bold">التخصص {{ $loop->iteration }}</p>
+                                    <h2 class="specialization-card-title mt-1 font-extrabold text-slate-900">
+                                        {{ $specName }}
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <span class="specialization-number inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold" aria-hidden="true">
+                                {{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                            </span>
                         </div>
-                        <h2 class="mt-4 text-xl font-bold text-slate-900">{{ $specName }}</h2>
-                        <p class="mt-2 flex-1 leading-relaxed text-slate-600 line-clamp-3">
-                            {{ $specialization['description']??'لا يوجد تفاصيل' }}
+
+                        <p class="specialization-card-description mt-4 flex-1 text-slate-600">
+                            {{ $specDescription }}
                         </p>
-                        <div class="mt-4 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-4">
-                            <a href="{{ route('specializations.show', $specialization['id'] ?? '') }}"
-                               class="btn btn-primary btn-pill text-sm">
-                                التفاصيل
+
+                        <div class="specialization-card-actions mt-5 flex flex-col gap-2.5 border-t pt-4 xl:flex-row">
+                            <a href="{{ route('specializations.show', $specId) }}"
+                               class="specialization-details-btn inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-5 text-center font-extrabold">
+                                عرض التفاصيل
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
+                                </svg>
                             </a>
+
                             <button type="button"
-                                    class="compare-toggle btn btn-soft btn-pill text-sm"
-                                    data-id="{{ $specialization['id'] ?? '' }}"
-                                    data-name="{{ $specialization['name'] ?? '' }}">
+                                    class="compare-toggle specialization-compare-btn inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 font-bold"
+                                    data-id="{{ $specId }}"
+                                    data-name="{{ $specName }}">
                                 <x-ui.icon name="plus" class="h-4 w-4 pointer-events-none" />
                                 أضف للمقارنة
                             </button>
                         </div>
                     </div>
+
+                    {{-- الصورة في الجانب الأيسر على الكمبيوتر، وفي أعلى البطاقة على الهاتف. --}}
+                    <div class="specialization-card-media order-1 relative min-h-44 overflow-hidden sm:order-2 sm:min-h-full sm:w-[38%]">
+                        @if ($imageUrl)
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="صورة تعبيرية عن تخصص {{ $specName }}"
+                                class="specialization-card-image absolute inset-0 h-full w-full object-cover"
+                                loading="{{ $loop->iteration <= 2 ? 'eager' : 'lazy' }}"
+                                decoding="async">
+                        @else
+                            <div class="specialization-image-fallback absolute inset-0 flex items-center justify-center">
+                                <x-ui.spec-icon :id="$specId" :name="$specName" size="lg" />
+                            </div>
+                        @endif
+                        <div class="specialization-image-wash absolute inset-0" aria-hidden="true"></div>
+                        <span class="specialization-image-label absolute bottom-3 left-3 rounded-full px-3 py-1 text-[11px] font-bold">
+                            {{ $specName }}
+                        </span>
+                    </div>
                 </article>
             @endforeach
-        </div>
+        </section>
+    @else
+        <x-ui.empty-state
+            title="لا توجد تخصصات معروضة حاليًا"
+            description="سنضيف التخصصات قريبًا. تابعنا."
+            icon="info"
+            class="mt-8" />
+    @endif
+</div>
 
-        {{-- حالة الفراغ — تظهر فقط إن لم توجد تخصصات (نص موقت بانتظار اعتماد ملاطف) --}}
-        @if (empty($specializations) || count($specializations) === 0)
-            <x-ui.empty-state title="لا توجد تخصصات معروضة حاليًا" description="سنضيف التخصصات قريبًا. تابعنا." icon="info" class="mt-8" />
-        @endif
-    </section>
+{{-- عقد specializations.js محفوظ كما هو: ids + hidden/flex + data attributes --}}
+<div id="compare-bar"
+     class="specializations-compare-bar fixed inset-x-3 bottom-3 z-40 mx-auto flex hidden max-w-3xl flex-wrap items-center justify-between gap-3 rounded-2xl border p-3 text-sm shadow-pop sm:inset-x-6 sm:p-4">
+    <p class="min-w-0 flex-1" role="status" aria-live="polite">
+        تم اختيار:
+        <span id="compare-bar-names" class="font-extrabold"></span>
+    </p>
 
-    {{-- صينية المقارنة: لاصقة أسفل الشاشة تبقى ظاهرة أثناء التصفح (عقد specializations.js: ids + flex|hidden) --}}
-    <div id="compare-bar" class="fixed inset-x-4 bottom-4 z-40 mx-auto flex hidden max-w-2xl items-center justify-between gap-4 rounded-card bg-white p-4 text-sm shadow-pop ring-1 ring-brand-200">
-        <p class="text-slate-700">
-            تم اختيار: <span id="compare-bar-names" class="font-semibold text-brand-800"></span>
-        </p>
-        <div class="flex shrink-0 items-center gap-3">
-            <a id="compare-bar-link" href="#" class="btn btn-primary btn-pill text-sm">
-                قارن الآن
-            </a>
-            <button type="button" id="compare-bar-clear"
-                    class="btn btn-secondary btn-pill text-sm hover:border-danger-300 hover:bg-danger-50 hover:text-danger-700">
-                <x-ui.icon name="x-mark" class="h-4 w-4 pointer-events-none" />
-                إفراغ الاختيار
-            </button>
-        </div>
+    <div class="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+        <a id="compare-bar-link" class="specialization-details-btn inline-flex min-h-11 items-center justify-center rounded-xl px-5 font-extrabold">
+            قارن الآن
+        </a>
+        <button type="button"
+                id="compare-bar-clear"
+                class="specialization-compare-btn inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 font-bold">
+            <x-ui.icon name="x-mark" class="h-4 w-4 pointer-events-none" />
+            إفراغ الاختيار
+        </button>
     </div>
+</div>
 @endsection

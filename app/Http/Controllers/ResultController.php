@@ -122,6 +122,34 @@ class ResultController extends Controller
         return view('results.show', [
             'result' => $result,
             'catalogKeys' => array_column($this->catalog->all(), 'id'),
+            'specializationVisuals' => $this->specializationVisualsById(),
         ]);
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function specializationVisualsById(): array
+    {
+        $visualsPath = resource_path('data/specialization-visuals.json');
+        $visuals = [];
+
+        if (! is_file($visualsPath)) {
+            return $visuals;
+        }
+
+        $decoded = json_decode((string) file_get_contents($visualsPath), true);
+
+        if (! is_array($decoded)) {
+            return $visuals;
+        }
+
+        foreach ($decoded as $visual) {
+            if (is_array($visual) && isset($visual['id'])) {
+                $visuals[(string) $visual['id']] = $visual;
+            }
+        }
+
+        return $visuals;
     }
 }

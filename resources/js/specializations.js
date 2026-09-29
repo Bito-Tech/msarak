@@ -16,6 +16,15 @@ function setSelection(selection) {
 function renderBar() {
     const selection = getSelection();
     const bar = document.getElementById('compare-bar');
+
+    document.querySelectorAll('.compare-toggle').forEach((button) => {
+        const selected = selection.some((item) => item.id === button.dataset.id);
+        button.setAttribute('aria-pressed', String(selected));
+        button.classList.toggle('border-brand-600', selected);
+        button.classList.toggle('bg-brand-50', selected);
+        button.setAttribute('aria-label', `${selected ? 'إزالة' : 'إضافة'} ${button.dataset.name} ${selected ? 'من' : 'إلى'} المقارنة`);
+    });
+
     if (!bar) return;
 
     if (selection.length === 0) {
@@ -30,9 +39,14 @@ function renderBar() {
     const link = document.getElementById('compare-bar-link');
     if (selection.length === 2) {
         link.href = `/specializations/compare?first=${selection[0].id}&second=${selection[1].id}`;
-        link.classList.remove('pointer-events-none', 'opacity-50');
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+        link.classList.remove('opacity-50');
     } else {
-        link.classList.add('pointer-events-none', 'opacity-50');
+        link.removeAttribute('href');
+        link.setAttribute('aria-disabled', 'true');
+        link.setAttribute('tabindex', '-1');
+        link.classList.add('opacity-50');
     }
 }
 

@@ -6,44 +6,12 @@
  */
 
 const RATING_LEVELS = [
-    {
-        value: 2,
-        label: 'يشبهني جدًا',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 9.5c.5-.8 1.5-.8 2 0"/><path d="M14 9.5c.5-.8 1.5-.8 2 0"/><path d="M8 14c1 2.5 7 2.5 8 0"/></svg>`,
-        activeClass: 'bg-emerald-600 text-white border-emerald-600 shadow-xs',
-        idleClass: 'bg-emerald-50/60 text-emerald-800 border-emerald-200 hover:bg-emerald-100',
-    },
-    {
-        value: 1,
-        label: 'يشبهني',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 13.5c1 1.8 6 1.8 7 0"/></svg>`,
-        activeClass: 'bg-teal-600 text-white border-teal-600 shadow-xs',
-        idleClass: 'bg-teal-50/60 text-teal-800 border-teal-200 hover:bg-teal-100',
-    },
-    {
-        value: 0,
-        label: 'محايد / غير متأكد',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><line x1="8.5" y1="14" x2="15.5" y2="14" stroke-width="2"/></svg>`,
-        activeClass: 'bg-slate-700 text-white border-slate-700 shadow-xs',
-        idleClass: 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200',
-    },
-    {
-        value: -1,
-        label: 'لا يشبهني',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="3"/><line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="3"/><path d="M8.5 15.5c1-1.5 6-1.5 7 0"/></svg>`,
-        activeClass: 'bg-amber-600 text-white border-amber-600 shadow-xs',
-        idleClass: 'bg-amber-50/60 text-amber-800 border-amber-200 hover:bg-amber-100',
-    },
-    {
-        value: -2,
-        label: 'لا يشبهني إطلاقًا',
-        iconSvg: `<svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M13.5 10.5c.5-.5 1.5-.5 2 0"/><path d="M8 16c1.2-2.5 6.8-2.5 8 0"/></svg>`,
-        activeClass: 'bg-rose-600 text-white border-rose-600 shadow-xs',
-        idleClass: 'bg-rose-50/60 text-rose-800 border-rose-200 hover:bg-rose-100',
-    },
+    { value: -2, label: 'لا يشبهني إطلاقًا', displayLabel: 'لا يشبهني إطلاقًا', icon: 'emoji-strongly-dislike.png' },
+    { value: -1, label: 'لا يشبهني', displayLabel: 'لا يشبهني', icon: 'emoji-dislike.png' },
+    { value: 0, label: 'محايد / غير متأكد', displayLabel: 'محايد', icon: 'emoji-neutral.png' },
+    { value: 1, label: 'يشبهني', displayLabel: 'يشبهني', icon: 'emoji-like.png' },
+    { value: 2, label: 'يشبهني جدًا', displayLabel: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
 ];
-
-const ARABIC_OPTION_LETTERS = ['أ', 'ب', 'ج', 'د'];
 
 class AssessmentJourney {
     constructor(appElement) {
@@ -63,6 +31,7 @@ class AssessmentJourney {
         this.saveStatus = 'idle'; // idle | saving | saved | error
         this.debounceSaveTimer = null;
         this.pendingConflict = null;
+        this.lastRatingInteraction = null;
         this.abortController = null;
 
         this.cacheElements();
@@ -96,6 +65,8 @@ class AssessmentJourney {
 
         this.prevBtn = document.getElementById('prev-btn');
         this.nextBtn = document.getElementById('next-btn');
+        this.topPrevBtn = document.getElementById('top-prev-btn');
+        this.topNextBtn = document.getElementById('top-next-btn');
         this.completeBtn = document.getElementById('complete-btn');
         this.questionsNavGrid = document.getElementById('questions-nav-grid');
 
@@ -114,12 +85,20 @@ class AssessmentJourney {
     bindEvents() {
         this.prevBtn.addEventListener('click', () => this.goToPrevious());
         this.nextBtn.addEventListener('click', () => this.goToNext());
+        this.topPrevBtn.addEventListener('click', () => this.goToPrevious());
+        this.topNextBtn.addEventListener('click', () => this.goToNext());
         this.completeBtn.addEventListener('click', () => this.openCompletionModal());
 
         this.noneFitRadio.addEventListener('change', () => this.handleSpecialChoice('none_selected'));
         this.cannotJudgeRadio.addEventListener('change', () => this.handleSpecialChoice('unable_to_judge'));
 
-        this.retrySaveBtn.addEventListener('click', () => this.flushSave());
+        this.retrySaveBtn.addEventListener('click', () => {
+            if (this.questions.length === 0) {
+                this.fetchSessionData();
+            } else {
+                this.flushSave();
+            }
+        });
 
         // Conflict modal handlers
         this.conflictKeepBtn.addEventListener('click', () => this.resolveConflict(true));
@@ -157,8 +136,10 @@ class AssessmentJourney {
         if (initialScript && initialScript.textContent.trim()) {
             try {
                 const initialData = JSON.parse(initialScript.textContent);
-                this.loadPayload(initialData);
-                return;
+                if (Array.isArray(initialData?.questions)) {
+                    this.loadPayload(initialData);
+                    return;
+                }
             } catch (err) {
                 console.error('Failed to parse embedded initial assessment data', err);
             }
@@ -169,6 +150,7 @@ class AssessmentJourney {
 
     async fetchSessionData() {
         this.setSaveStatus('loading', 'جارٍ تحميل جلسة التقييم…');
+        this.hideError();
         try {
             const response = await fetch(this.app.dataset.sessionUrl, {
                 headers: {
@@ -182,9 +164,14 @@ class AssessmentJourney {
             }
 
             const json = await response.json();
+            if (!Array.isArray(json.data?.questions)) {
+                throw new Error('Invalid session payload');
+            }
             this.loadPayload(json.data);
+            this.setSaveStatus('idle', 'جاهز');
         } catch (err) {
-            this.showError('تعذر الاتصال. تأكد من اتصالك بالإنترنت ثم حاول مرة أخرى.');
+            this.setSaveStatus('error', 'تعذر تحميل التقييم.');
+            this.showError('تعذر تحميل التقييم. تحقق من اتصالك ثم حاول مرة أخرى.');
         }
     }
 
@@ -252,136 +239,128 @@ class AssessmentJourney {
         const question = this.getCurrentQuestion();
         if (!question) return;
 
+        const focused = document.activeElement;
+        const focusedOption = focused?.closest?.('.option-card')?.dataset.optionId;
+        const focusedRating = focused?.dataset.rating;
+        const focusedRadio = focused?.name === 'primary_option';
         const currentAnswer = this.getCurrentAnswer();
         this.hideError();
 
-        // Update header & badges
         this.badgeNum.textContent = question.position;
         this.currentPositionNum.textContent = question.position;
         this.totalQuestionsNum.textContent = this.questions.length;
         this.scenarioText.textContent = question.scenario;
 
-        // Reset radio states
         this.noneFitRadio.checked = currentAnswer.none_selected;
         this.cannotJudgeRadio.checked = currentAnswer.unable_to_judge;
         this.updateSpecialCardStyles();
 
-        // Render the 4 options
         this.optionsContainer.innerHTML = '';
-        const hasPrimary = currentAnswer.primary_option_id !== null;
 
         question.options.forEach((opt, idx) => {
             const isPrimary = currentAnswer.primary_option_id === opt.option_id;
             const currentRating = currentAnswer.ratings[opt.option_id];
-            const letter = ARABIC_OPTION_LETTERS[idx] || (idx + 1);
 
             const card = document.createElement('div');
-            card.className = `option-card group relative rounded-2xl border p-4 sm:p-5 transition-all cursor-pointer ${
-                isPrimary
-                    ? 'border-brand-600 bg-brand-50/40 ring-1 ring-brand-600 shadow-xs'
-                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60'
-            }`;
-            card.dataset.optionId = opt.option_id;
+            card.dir = 'rtl';
+            card.className = `option-card assessment-option-card flex min-w-0 flex-col gap-1.5 rounded-lg border px-2 py-2 transition sm:gap-2 sm:rounded-xl sm:px-4 sm:py-2 lg:flex-row lg:items-center lg:justify-center lg:gap-2.5 lg:px-5 lg:py-2 ${isPrimary ? 'is-primary shadow-sm' : ''}`;
+            card.dataset.optionId = String(opt.option_id);
 
-            // Option selection row
-            const topRow = document.createElement('div');
-            topRow.className = 'flex items-start gap-3.5';
+            const choiceWrap = document.createElement('div');
+            choiceWrap.className = 'flex min-w-0 flex-1 items-start gap-2 sm:gap-2.5 lg:flex-none lg:w-[44%] xl:w-[46%]';
 
-            // Letter Avatar Pill
-            const letterBadge = document.createElement('span');
-            letterBadge.className = `flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold transition-colors ${
-                isPrimary
-                    ? 'bg-brand-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 group-hover:bg-slate-200'
-            }`;
-            letterBadge.textContent = letter;
-
-            // Hidden Radio for form semantics
             const radio = document.createElement('input');
             radio.type = 'radio';
             radio.name = 'primary_option';
             radio.value = opt.option_id;
             radio.id = `opt-radio-${opt.option_id}`;
             radio.checked = isPrimary;
-            radio.className = 'sr-only';
+            radio.className = 'mt-0.5 h-4 w-4 shrink-0 cursor-pointer border-slate-300 text-brand-600 focus:ring-brand-600 sm:mt-1 sm:h-5 sm:w-5';
+            radio.setAttribute('aria-label', `اختيار التصرف ${idx + 1} بوصفه الأقرب لك`);
 
             const label = document.createElement('label');
             label.htmlFor = radio.id;
-            label.className = 'flex-1 text-sm sm:text-base font-semibold text-slate-900 cursor-pointer leading-relaxed';
+            label.className = 'min-w-0 flex-1 cursor-pointer text-right text-[10px] font-semibold leading-[1.15rem] text-slate-800 min-[380px]:text-[10.5px] sm:text-[0.9rem] sm:leading-6';
             label.textContent = opt.option_text;
 
-            topRow.appendChild(letterBadge);
-            topRow.appendChild(radio);
-            topRow.appendChild(label);
-            card.appendChild(topRow);
+            choiceWrap.append(radio, label);
+            card.appendChild(choiceWrap);
 
-            topRow.addEventListener('click', (e) => {
-                e.preventDefault();
+            radio.addEventListener('change', () => this.selectPrimaryOption(opt.option_id));
+            label.addEventListener('click', (event) => {
+                event.preventDefault();
                 this.selectPrimaryOption(opt.option_id);
             });
 
-            // Optional 5-point rating scale drawer
-            // Appears when a primary option has been selected
-            if (hasPrimary) {
-                const ratingDrawer = document.createElement('div');
-                ratingDrawer.className = 'mt-3.5 border-t border-slate-100 pt-3 ps-10 animate-in fade-in duration-200';
+            const ratingArea = document.createElement('div');
+            ratingArea.className = 'min-w-0 border-t border-slate-200/70 pt-1 sm:pt-1.5 lg:w-[315px] lg:shrink-0 lg:border-0 lg:pt-0 xl:w-[335px]';
 
-                const ratingTitle = document.createElement('div');
-                ratingTitle.className = 'mb-2 flex items-center justify-between text-xs text-slate-500';
-                ratingTitle.innerHTML = `
-                    <span class="font-medium text-slate-700">إلى أي مدى يشبهك هذا التصرف؟</span>
-                    <span class="text-[11px] text-slate-400">تقييم إضافي اختياري</span>
-                `;
-                ratingDrawer.appendChild(ratingTitle);
+            const scale = document.createElement('div');
+            scale.dir = 'ltr';
+            scale.className = 'grid w-full min-w-0 grid-cols-5 items-center gap-0 sm:gap-1.5';
 
-                const scaleGrid = document.createElement('div');
-                scaleGrid.className = 'flex flex-wrap gap-1.5 sm:gap-2';
+            RATING_LEVELS.forEach((level) => {
+                const isSelectedRating = currentRating === level.value;
+                const wasJustPressed = this.lastRatingInteraction
+                    && this.lastRatingInteraction.optionId === opt.option_id
+                    && this.lastRatingInteraction.ratingValue === level.value;
 
-                RATING_LEVELS.forEach((level) => {
-                    const isSelectedRating = currentRating === level.value;
-                    const ratingBtn = document.createElement('button');
-                    ratingBtn.type = 'button';
-                    ratingBtn.className = `rating-btn inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold transition-all shadow-2xs hover:shadow-xs active:scale-95 ${
-                        isSelectedRating ? level.activeClass : level.idleClass
-                    }`;
+                const ratingItem = document.createElement('div');
+                ratingItem.className = 'assessment-rating-item flex min-w-0 flex-col items-center gap-0.5';
 
-                    ratingBtn.innerHTML = `
-                        ${level.iconSvg}
-                        <span>${level.label}</span>
-                    `;
+                const ratingBtn = document.createElement('button');
+                ratingBtn.type = 'button';
+                ratingBtn.className = `rating-btn assessment-rating-btn mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg bg-transparent min-[380px]:h-7.5 min-[380px]:w-7.5 sm:h-9 sm:w-9 ${isSelectedRating ? 'is-selected' : ''} ${wasJustPressed ? 'rating-pop' : ''}`;
+                ratingBtn.dataset.rating = String(level.value);
+                ratingBtn.setAttribute('aria-label', `تقييم التصرف ${idx + 1}: ${level.label}`);
+                ratingBtn.setAttribute('aria-pressed', String(isSelectedRating));
+                ratingBtn.title = level.label;
 
-                    ratingBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.handleRatingClick(opt.option_id, level.value, isSelectedRating);
-                    });
+                const icon = document.createElement('img');
+                icon.src = `/assets/assessment/emoji/${level.icon}`;
+                icon.alt = '';
+                icon.width = 34;
+                icon.height = 34;
+                icon.className = 'assessment-emoji-image h-6 w-6 select-none object-contain min-[380px]:h-6.5 min-[380px]:w-6.5 sm:h-8 sm:w-8';
+                icon.draggable = false;
+                ratingBtn.appendChild(icon);
 
-                    scaleGrid.appendChild(ratingBtn);
+                const ratingLabel = document.createElement('span');
+                ratingLabel.className = 'assessment-rating-label w-full whitespace-nowrap text-center text-[6.5px] font-medium leading-[0.62rem] text-slate-500 sm:text-[8px] sm:leading-[0.7rem]';
+                ratingLabel.textContent = level.displayLabel;
+
+                ratingBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.handleRatingClick(opt.option_id, level.value, isSelectedRating);
                 });
-                ratingDrawer.appendChild(scaleGrid);
-                card.appendChild(ratingDrawer);
-            }
 
+                ratingItem.append(ratingBtn, ratingLabel);
+                scale.appendChild(ratingItem);
+            });
+
+            ratingArea.append(scale);
+            card.appendChild(ratingArea);
             this.optionsContainer.appendChild(card);
         });
 
+        if (focusedOption) {
+            const card = [...this.optionsContainer.children].find((element) => element.dataset.optionId === focusedOption);
+            const target = focusedRadio
+                ? card?.querySelector('input[name="primary_option"]')
+                : [...(card?.querySelectorAll('.rating-btn') || [])].find((button) => button.dataset.rating === focusedRating);
+            target?.focus({ preventScroll: true });
+        }
+
+        this.lastRatingInteraction = null;
         this.updateNavButtons();
         this.renderNavGrid();
     }
 
     updateSpecialCardStyles() {
         const currentAnswer = this.getCurrentAnswer();
-
-        this.noneFitCard.className = `relative flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
-            currentAnswer.none_selected
-                ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
-                : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
-        }`;
-
-        this.cannotJudgeCard.className = `relative flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
-            currentAnswer.unable_to_judge
-                ? 'border-brand-600 bg-brand-50/50 ring-1 ring-brand-600'
-                : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
-        }`;
+        const base = 'assessment-special-card relative flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:min-h-10 sm:gap-2 sm:rounded-xl sm:px-3 sm:py-2';
+        this.noneFitCard.className = `${base} ${currentAnswer.none_selected ? 'is-selected' : ''}`;
+        this.cannotJudgeCard.className = `${base} ${currentAnswer.unable_to_judge ? 'is-selected' : ''}`;
     }
 
     selectPrimaryOption(optionId) {
@@ -419,24 +398,45 @@ class AssessmentJourney {
     handleRatingClick(optionId, ratingValue, isAlreadySelected) {
         const answer = this.getCurrentAnswer();
 
-        // Clicking the active rating again unrates (clears rating)
+        // A rating belongs to the normal option-answer mode. If a special response
+        // was active, return to the normal mode without inventing a primary choice.
+        if (answer.none_selected || answer.unable_to_judge) {
+            answer.none_selected = false;
+            answer.unable_to_judge = false;
+            this.noneFitRadio.checked = false;
+            this.cannotJudgeRadio.checked = false;
+        }
+
+        // Clicking the active rating again unrates (clears rating).
         if (isAlreadySelected) {
+            this.lastRatingInteraction = { optionId, ratingValue };
             delete answer.ratings[optionId];
             this.renderCurrentQuestion();
-            this.scheduleSave();
+
+            if (answer.primary_option_id !== null) {
+                this.scheduleSave();
+            } else {
+                this.setSaveStatus('idle', 'اختر التصرف الأساسي للحفظ.');
+            }
             return;
         }
 
-        // Conflict check: if student chose this option as Primary AND gives strong negative rating (-1 or -2)
+        // Conflict check: if student chose this option as Primary AND gives strong negative rating (-1 or -2).
         if (answer.primary_option_id === optionId && (ratingValue === -1 || ratingValue === -2)) {
             this.pendingConflict = { optionId, ratingValue };
             this.openConflictModal();
             return;
         }
 
+        this.lastRatingInteraction = { optionId, ratingValue };
         answer.ratings[optionId] = ratingValue;
         this.renderCurrentQuestion();
-        this.scheduleSave();
+
+        if (answer.primary_option_id !== null) {
+            this.scheduleSave();
+        } else {
+            this.setSaveStatus('idle', 'اختر التصرف الأساسي للحفظ.');
+        }
     }
 
     openConflictModal() {
@@ -451,9 +451,15 @@ class AssessmentJourney {
     resolveConflict(keepRating) {
         if (keepRating && this.pendingConflict) {
             const answer = this.getCurrentAnswer();
+            this.lastRatingInteraction = {
+                optionId: this.pendingConflict.optionId,
+                ratingValue: this.pendingConflict.ratingValue,
+            };
             answer.ratings[this.pendingConflict.optionId] = this.pendingConflict.ratingValue;
             this.renderCurrentQuestion();
             this.scheduleSave();
+        } else {
+            this.lastRatingInteraction = null;
         }
         this.closeConflictModal();
     }
@@ -539,9 +545,9 @@ class AssessmentJourney {
         this.saveStatusText.textContent = message;
 
         if (status === 'saving') {
-            this.saveStatusText.className = 'text-brand-600 font-semibold';
+            this.saveStatusText.className = 'assessment-status-saving font-semibold';
             this.saveStatusIcon.innerHTML = `
-                <svg class="h-3.5 w-3.5 animate-spin text-brand-600" fill="none" viewBox="0 0 24 24">
+                <svg class="assessment-status-saving h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
@@ -603,12 +609,8 @@ class AssessmentJourney {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.setAttribute('aria-label', `الموقف رقم ${q.position}`);
-            btn.className = `flex h-9 w-full items-center justify-center rounded-xl text-xs font-bold transition-all ${
-                isCurrent
-                    ? 'bg-brand-600 text-white ring-2 ring-brand-600 ring-offset-2 shadow-xs'
-                    : isAnswered
-                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            btn.className = `assessment-question-dot flex h-9 w-full items-center justify-center rounded-xl text-xs font-bold transition-all ${
+                isCurrent ? 'is-current' : isAnswered ? 'is-answered' : 'is-idle'
             }`;
 
             btn.textContent = q.position;
@@ -622,10 +624,13 @@ class AssessmentJourney {
     }
 
     updateNavButtons() {
-        this.prevBtn.disabled = this.currentIndex <= 0;
-
-        const isLastQuestion = this.currentIndex >= this.questions.length - 1;
+        const isFirst = this.currentIndex <= 0;
+        const isLast = this.currentIndex >= this.questions.length - 1;
         const allProcessed = this.checkAllProcessed();
+
+        this.prevBtn.disabled = isFirst;
+        this.topPrevBtn.disabled = isFirst;
+        this.topNextBtn.disabled = isLast;
 
         if (allProcessed) {
             this.completeBtn.classList.remove('hidden');
@@ -633,7 +638,7 @@ class AssessmentJourney {
             this.completeBtn.classList.add('hidden');
         }
 
-        if (isLastQuestion) {
+        if (isLast) {
             this.nextBtn.classList.add('hidden');
         } else {
             this.nextBtn.classList.remove('hidden');
@@ -652,6 +657,8 @@ class AssessmentJourney {
         if (newIndex < 0 || newIndex >= this.questions.length) return;
         this.currentIndex = newIndex;
         this.renderCurrentQuestion();
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.app.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     }
 
     goToNext() {
@@ -716,7 +723,7 @@ class AssessmentJourney {
     disableInputsForCompletedSession() {
         const inputs = this.app.querySelectorAll('input, button');
         inputs.forEach((el) => {
-            if (el.id !== 'prev-btn' && el.id !== 'next-btn') {
+            if (!['prev-btn', 'next-btn', 'top-prev-btn', 'top-next-btn'].includes(el.id)) {
                 el.disabled = true;
             }
         });
