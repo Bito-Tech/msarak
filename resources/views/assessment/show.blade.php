@@ -58,41 +58,33 @@
 
         <div class="assessment-content p-2 sm:p-4 lg:p-4">
             <div class="assessment-workspace flex min-w-0 flex-col gap-2.5 sm:gap-3 lg:flex-row lg:items-stretch lg:gap-5">
-                {{-- اليمين: السؤال + خريطة المواقف. --}}
+                {{-- اليمين: كارد الموقف والصورة فقط، وخريطة المواقف منفصلة تحته على الكمبيوتر. --}}
                 <aside class="assessment-question-column min-w-0 lg:w-[470px] lg:shrink-0 xl:w-[520px]">
                     <div class="assessment-question-card rounded-xl border p-2.5 shadow-sm sm:rounded-2xl sm:p-4">
-                        <div class="mb-1.5 flex items-center justify-between gap-2 sm:mb-3 sm:gap-3">
-                            <span id="scenario-badge" class="assessment-question-badge hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold sm:inline-flex sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs">
-                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h7.5M8.25 12h7.5m-7.5 5.25h4.5M6.75 3.75h10.5A2.25 2.25 0 0 1 19.5 6v12a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 18V6a2.25 2.25 0 0 1 2.25-2.25Z" />
-                                </svg>
-                                الموقف <span id="badge-num" class="ms-0.5">1</span>
-                            </span>
-                            <span class="assessment-question-kicker hidden text-xs font-medium sm:inline">استكشاف ميولك</span>
-                        </div>
+                        {{-- يبقى العنصر موجودًا لربط JavaScript، لكنه غير ظاهر بصريًا. --}}
+                        <span id="scenario-badge" class="sr-only">
+                            الموقف <span id="badge-num">1</span>
+                        </span>
 
                         <h1 id="assessment-question-title" class="sr-only">استكشاف ميولك</h1>
                         <h2 id="scenario-text" class="assessment-question-text text-[0.8rem] font-extrabold leading-[1.45rem] sm:text-xl sm:leading-[1.9]">
                             جارٍ تحميل الموقف…
                         </h2>
-                        <p class="assessment-question-hint mt-0.5 hidden text-[9px] leading-4 sm:mt-2 sm:block sm:text-sm sm:leading-7">
-                            اختر التصرف الأقرب لك، ثم قيّم الخيارات اختياريًا.
-                        </p>
+                    </div>
 
-                        <div class="assessment-map mt-3 hidden rounded-xl border p-3 lg:block">
-                            <div class="mb-2 flex items-center justify-between gap-2 text-xs">
-                                <span class="font-bold">خريطة المواقف</span>
-                                <span id="processed-summary-text" class="assessment-map-muted">
-                                    تمت معالجة <span id="processed-count-num">0</span> من 18
-                                </span>
-                            </div>
-                            <div id="questions-nav-grid" class="grid grid-cols-6 gap-1.5 sm:grid-cols-9 lg:grid-cols-6"></div>
+                    <div class="assessment-map assessment-map-card mt-3 hidden rounded-2xl border p-3 lg:block">
+                        <div class="mb-2 flex items-center justify-between gap-2 text-xs">
+                            <span class="font-extrabold">خريطة المواقف</span>
+                            <span id="processed-summary-text" class="assessment-map-muted">
+                                تمت معالجة <span id="processed-count-num">0</span> من 18
+                            </span>
                         </div>
+                        <div id="questions-nav-grid" class="grid grid-cols-6 gap-1.5"></div>
                     </div>
                 </aside>
 
                 {{-- اليسار: الخيارات والتقييم والتنقل. --}}
-                <div class="min-w-0 flex-1">
+                <div class="assessment-answer-column assessment-options-card min-w-0 flex-1">
                     <div id="error-alert" class="mb-4 hidden rounded-xl border border-danger-300 bg-danger-50 p-3.5 text-danger-700" role="alert">
                         <div class="flex items-start justify-between gap-3">
                             <div class="flex min-w-0 items-start gap-2.5">

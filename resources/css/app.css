@@ -7576,3 +7576,152 @@
         padding: 0.8rem;
     }
 }
+
+
+/* Assessment question layout v4 — scenario/image only, detached desktop map, taller desktop answers. */
+.assessment-stage {
+    /* MANUAL QUESTION IMAGE: replace only this URL when changing the assessment scenario image. */
+    --assessment-question-image: url('https://images.unsplash.com/photo-1779358296802-715fc9fbc152?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=68&w=1400');
+}
+
+.assessment-question-card {
+    background-image:
+        linear-gradient(135deg, rgb(8 38 39 / 0.93) 2%, rgb(11 71 68 / 0.86) 48%, rgb(15 118 110 / 0.68) 100%),
+        var(--assessment-question-image);
+}
+
+.assessment-map-card {
+    color: #294f49;
+    background:
+        radial-gradient(circle at 92% 8%, rgb(215 236 229 / 0.72), transparent 38%),
+        #fbfdfc;
+    border-color: #d1e2dc;
+    box-shadow: 0 9px 24px rgb(28 62 58 / 0.055);
+}
+
+.assessment-map-card .assessment-map-muted {
+    color: #6b827d;
+}
+
+.assessment-map-card .assessment-question-dot {
+    color: #385b55;
+    background: #ffffff;
+    border-color: #d4e3de;
+}
+
+.assessment-map-card .assessment-question-dot.is-current {
+    color: #ffffff;
+    background: #0f766e;
+    border-color: #0f766e;
+    box-shadow: 0 5px 12px rgb(15 118 110 / 0.18);
+}
+
+@media (min-width: 1024px) {
+    .assessment-panel-screen {
+        min-height: 760px;
+    }
+
+    .assessment-panel-screen .assessment-workspace {
+        align-items: stretch;
+    }
+
+    .assessment-question-column {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 0;
+    }
+
+    .assessment-question-column .assessment-question-card {
+        height: auto;
+        min-height: 31rem;
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 2rem 1.75rem;
+    }
+
+    .assessment-question-card #scenario-text {
+        max-width: 26rem;
+        font-size: 1.72rem;
+        line-height: 2.65rem;
+    }
+
+    .assessment-question-column > .assessment-map-card {
+        flex: 0 0 auto;
+        margin-top: 0.9rem;
+        padding: 0.95rem;
+        border-radius: 1rem;
+    }
+
+    .assessment-question-column > .assessment-map-card > div:first-child {
+        margin-bottom: 0.7rem;
+        font-size: 0.82rem;
+    }
+
+    .assessment-question-column > .assessment-map-card #questions-nav-grid {
+        gap: 0.45rem;
+    }
+
+    .assessment-question-column > .assessment-map-card .assessment-question-dot {
+        min-height: 2.45rem;
+        font-size: 0.82rem;
+        border-radius: 0.7rem;
+    }
+
+    .assessment-answer-column.assessment-options-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 46rem;
+        padding: 1rem 1.05rem;
+        border: 1px solid #d4e1dd;
+        border-radius: 1.35rem;
+        background:
+            radial-gradient(circle at 92% 7%, rgb(220 239 232 / 0.55), transparent 30%),
+            #f6faf8;
+        box-shadow: 0 12px 30px rgb(28 62 58 / 0.055);
+    }
+
+    .assessment-answer-column.assessment-options-card #options-fieldset {
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .assessment-answer-column.assessment-options-card #options-container {
+        height: 100%;
+        display: grid;
+        grid-template-rows: repeat(4, minmax(7rem, 1fr));
+        gap: 0.9rem;
+    }
+
+    .assessment-answer-column.assessment-options-card .assessment-option-card {
+        min-height: 7rem;
+        height: 100%;
+        padding: 1.15rem 1.35rem;
+        border-radius: 1.05rem;
+    }
+
+    .assessment-answer-column.assessment-options-card .assessment-special-card {
+        min-height: 4rem;
+        padding-block: 0.95rem;
+    }
+
+    .assessment-answer-column.assessment-options-card .assessment-nav-dock {
+        margin-top: 0.85rem;
+        padding: 0.75rem;
+    }
+
+    .assessment-answer-column.assessment-options-card .assessment-nav-dock .btn {
+        min-height: 3.8rem;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .assessment-options-card {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+}
