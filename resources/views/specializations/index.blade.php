@@ -4,21 +4,28 @@
 
 @section('content')
 <div class="specializations-page mx-auto w-full" dir="rtl">
-    <section class="specializations-hero rounded-3xl border p-5 shadow-card sm:p-7 lg:p-8" aria-labelledby="specializations-title">
-        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div class="max-w-3xl">
-                <p class="specializations-kicker text-sm font-bold">اختر ما تريد استكشافه</p>
-                <h1 id="specializations-title" class="specializations-title mt-1 font-extrabold">
-                    دليل التخصصات
-                </h1>
-                <p class="specializations-lead mt-3">
-                    تصفح التخصصات الأكاديمية المتاحة، واقرأ وصفًا مختصرًا لكل تخصص، ثم افتح التفاصيل عندما تجد ما يلفت اهتمامك.
+    <section class="specializations-hero specializations-title-card rounded-2xl border shadow-card" aria-labelledby="specializations-title">
+        <div class="specializations-title-row flex items-center gap-3">
+            <span class="specializations-title-icon inline-flex shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
+                <x-ui.icon name="info" class="h-5 w-5" />
+            </span>
+
+            <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h1 id="specializations-title" class="specializations-title font-extrabold">
+                        دليل التخصصات
+                    </h1>
+                    <p class="specializations-kicker font-bold">اختر ما تريد استكشافه</p>
+                </div>
+
+                <p class="specializations-lead mt-1">
+                    تصفح التخصصات، واقرأ وصفًا مختصرًا، ثم افتح التفاصيل لما يلفت اهتمامك.
                 </p>
             </div>
 
-            <div class="specializations-count inline-flex w-fit items-center gap-2 rounded-2xl border px-4 py-3">
-                <span class="specializations-count-number text-2xl font-extrabold">{{ count($specializations) }}</span>
-                <span class="text-sm font-bold">تخصصات متاحة للاستكشاف</span>
+            <div class="specializations-count inline-flex shrink-0 items-center gap-2 rounded-xl border">
+                <span class="specializations-count-number font-extrabold">{{ count($specializations) }}</span>
+                <span class="specializations-count-label font-bold">تخصصات</span>
             </div>
         </div>
     </section>

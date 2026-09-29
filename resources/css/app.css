@@ -3228,3 +3228,117 @@
         border-color: var(--spec-color);
     }
 }
+
+
+/* Specializations title card — compact, calm and scan-friendly. */
+.specializations-title-card {
+    padding: 0.9rem 1rem;
+    border-color: #d3e1dc;
+    background:
+        linear-gradient(135deg, rgb(250 252 251 / 0.98), rgb(239 247 243 / 0.96));
+    box-shadow: 0 8px 24px rgb(28 62 58 / 0.055);
+}
+
+.specializations-title-row {
+    min-height: 4.4rem;
+}
+
+.specializations-title-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #147e75, #0a5751);
+    box-shadow: 0 7px 16px rgb(15 118 110 / 0.17);
+}
+
+.specializations-title-card .specializations-title {
+    font-size: 1.75rem;
+    line-height: 2.1rem;
+    letter-spacing: -0.02em;
+}
+
+.specializations-title-card .specializations-kicker {
+    color: #a9782f;
+    font-size: 0.72rem;
+    line-height: 1rem;
+}
+
+.specializations-title-card .specializations-lead {
+    max-width: 760px;
+    color: #58726e;
+    font-size: 0.84rem;
+    line-height: 1.35rem;
+}
+
+.specializations-title-card .specializations-count {
+    min-height: 2.75rem;
+    padding: 0.45rem 0.7rem;
+    color: #315a55;
+    border-color: #cbded8;
+    background: rgb(255 255 255 / 0.76);
+}
+
+.specializations-title-card .specializations-count-number {
+    color: #0f766e;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.specializations-title-card .specializations-count-label {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.specializations-title-card + .specializations-grid {
+    margin-top: 0.85rem;
+}
+
+@media (max-width: 639px) {
+    .specializations-title-card {
+        padding: 0.7rem 0.75rem;
+        border-radius: 0.9rem;
+    }
+
+    .specializations-title-row {
+        min-height: 0;
+        gap: 0.65rem;
+    }
+
+    .specializations-title-icon {
+        width: 2.35rem;
+        height: 2.35rem;
+        border-radius: 0.65rem;
+    }
+
+    .specializations-title-card .specializations-title {
+        font-size: 1.25rem;
+        line-height: 1.55rem;
+    }
+
+    .specializations-title-card .specializations-kicker {
+        display: none;
+    }
+
+    .specializations-title-card .specializations-lead {
+        margin-top: 0.1rem;
+        font-size: 0.7rem;
+        line-height: 1.08rem;
+    }
+
+    .specializations-title-card .specializations-count {
+        min-height: 2.2rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .specializations-title-card .specializations-count-number {
+        font-size: 1rem;
+    }
+
+    .specializations-title-card .specializations-count-label {
+        display: none;
+    }
+
+    .specializations-title-card + .specializations-grid {
+        margin-top: 0.65rem;
+    }
+}
