@@ -2802,3 +2802,301 @@
         font-size: 0.62rem;
     }
 }
+
+
+/* Home landing v2 — one calm continuous hero, no split-card composition. */
+.home-landing {
+    width: 100%;
+    max-width: 1560px;
+}
+
+.home-landing-hero {
+    min-height: 34rem;
+    border-color: #d1dfda;
+    background: #edf5f1;
+    box-shadow:
+        0 24px 60px rgb(28 62 58 / 0.09),
+        0 2px 10px rgb(28 62 58 / 0.04);
+}
+
+.home-landing-photo {
+    object-position: 25% center;
+    opacity: 0.34;
+    filter: saturate(0.55) contrast(0.82) brightness(1.08);
+    transform: scale(1.015);
+}
+
+.home-landing-veil {
+    background:
+        linear-gradient(90deg,
+            rgb(235 245 240 / 0.2) 0%,
+            rgb(237 246 242 / 0.58) 34%,
+            rgb(243 249 246 / 0.9) 62%,
+            rgb(248 251 250 / 0.98) 100%),
+        linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(227 239 233 / 0.28));
+}
+
+.home-landing-orb {
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+.home-landing-orb-one {
+    width: 19rem;
+    height: 19rem;
+    top: -7rem;
+    right: 12%;
+    background: radial-gradient(circle, rgb(197 154 88 / 0.15) 0%, rgb(197 154 88 / 0) 72%);
+}
+
+.home-landing-orb-two {
+    width: 24rem;
+    height: 24rem;
+    bottom: -10rem;
+    right: 42%;
+    background: radial-gradient(circle, rgb(15 118 110 / 0.11) 0%, rgb(15 118 110 / 0) 72%);
+}
+
+.home-landing-content {
+    max-width: 100%;
+}
+
+.home-landing-badge {
+    color: #235f59;
+    background: rgb(255 255 255 / 0.68);
+    border: 1px solid rgb(130 168 159 / 0.3);
+    box-shadow: 0 5px 16px rgb(33 74 69 / 0.045);
+    backdrop-filter: blur(10px);
+}
+
+.home-landing-dot {
+    background: #c59a58;
+    box-shadow: 0 0 0 4px rgb(197 154 88 / 0.12);
+}
+
+.home-landing-kicker {
+    color: #a47735;
+    font-size: 1.02rem;
+    line-height: 1.55rem;
+}
+
+.home-landing-title {
+    color: #083f3c;
+    max-width: 800px;
+    font-size: clamp(3rem, 5.4vw, 5.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.home-landing-lead {
+    max-width: 720px;
+    color: #315c58;
+    font-size: 1.18rem;
+    line-height: 2rem;
+}
+
+.home-landing-btn {
+    min-height: 4.7rem;
+    min-width: 18rem;
+    font-size: 1.15rem;
+    line-height: 1.5rem;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease,
+        background 0.18s ease;
+}
+
+.home-landing-btn-primary {
+    color: #082f2d;
+    background: linear-gradient(135deg, #ffe4aa 0%, #e8b65e 58%, #d4a049 100%);
+    border: 1px solid rgb(197 154 88 / 0.46);
+    box-shadow: 0 13px 28px rgb(112 80 27 / 0.16);
+}
+
+.home-landing-btn-secondary {
+    color: #ffffff;
+    background: linear-gradient(135deg, #117a72 0%, #0a5651 100%);
+    border: 1px solid rgb(9 92 85 / 0.25);
+    box-shadow: 0 13px 28px rgb(15 118 110 / 0.18);
+}
+
+.home-landing-meta {
+    color: #315b56;
+    font-size: 0.9rem;
+}
+
+.home-landing-meta-icon {
+    color: #0b625c;
+    background: rgb(255 255 255 / 0.68);
+    border: 1px solid #d2e1dc;
+    box-shadow: 0 4px 12px rgb(32 74 68 / 0.04);
+}
+
+.home-landing-note {
+    color: #66807c;
+    font-size: 0.77rem;
+    line-height: 1.35rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .home-landing-btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.025);
+    }
+
+    .home-landing-btn-primary:hover {
+        box-shadow: 0 17px 34px rgb(112 80 27 / 0.22);
+    }
+
+    .home-landing-btn-secondary:hover {
+        box-shadow: 0 17px 34px rgb(15 118 110 / 0.25);
+    }
+}
+
+@media (min-width: 1024px) {
+    .home-landing {
+        min-height: calc(100dvh - 10.55rem);
+    }
+
+    .home-landing-hero {
+        min-height: calc(100dvh - 10.55rem);
+    }
+
+    .home-landing-content {
+        padding-right: clamp(3.5rem, 6vw, 7rem);
+    }
+}
+
+@media (min-width: 1024px) and (max-height: 820px) {
+    .home-landing,
+    .home-landing-hero {
+        min-height: calc(100dvh - 10.1rem);
+    }
+
+    .home-landing-content {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .home-landing-copy {
+        margin-top: 1rem;
+    }
+
+    .home-landing-title {
+        font-size: clamp(2.75rem, 4.7vw, 4.25rem);
+    }
+
+    .home-landing-lead {
+        margin-top: 0.8rem;
+        font-size: 1rem;
+        line-height: 1.7rem;
+    }
+
+    .home-landing-actions {
+        margin-top: 1.25rem;
+    }
+
+    .home-landing-btn {
+        min-height: 4rem;
+        min-width: 16.5rem;
+        font-size: 1.05rem;
+    }
+
+    .home-landing-meta {
+        margin-top: 1.25rem;
+    }
+
+    .home-landing-note {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-landing-hero {
+        min-height: 0;
+        border-radius: 1rem;
+    }
+
+    .home-landing-photo {
+        object-position: 22% center;
+        opacity: 0.22;
+    }
+
+    .home-landing-veil {
+        background:
+            linear-gradient(180deg,
+                rgb(248 251 250 / 0.93) 0%,
+                rgb(240 248 244 / 0.93) 48%,
+                rgb(232 243 238 / 0.9) 100%);
+    }
+
+    .home-landing-content {
+        padding: 1rem;
+    }
+
+    .home-landing-badges {
+        gap: 0.35rem;
+    }
+
+    .home-landing-badge {
+        padding: 0.3rem 0.55rem;
+        font-size: 0.6rem;
+        line-height: 0.9rem;
+    }
+
+    .home-landing-copy {
+        margin-top: 1rem;
+    }
+
+    .home-landing-kicker {
+        font-size: 0.72rem;
+        line-height: 1.05rem;
+    }
+
+    .home-landing-title {
+        margin-top: 0.3rem;
+        max-width: 100%;
+        font-size: 2.25rem;
+        line-height: 1.16;
+    }
+
+    .home-landing-lead {
+        margin-top: 0.75rem;
+        font-size: 0.88rem;
+        line-height: 1.5rem;
+    }
+
+    .home-landing-actions {
+        margin-top: 1.1rem;
+        gap: 0.55rem;
+    }
+
+    .home-landing-btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 3.75rem;
+        padding-inline: 1rem;
+        border-radius: 0.9rem;
+        font-size: 0.98rem;
+    }
+
+    .home-landing-meta {
+        margin-top: 1rem;
+        gap: 0.45rem 0.8rem;
+        font-size: 0.68rem;
+    }
+
+    .home-landing-meta-icon {
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 0.55rem;
+        font-size: 0.72rem;
+    }
+
+    .home-landing-note {
+        margin-top: 0.75rem;
+        font-size: 0.62rem;
+        line-height: 1rem;
+    }
+}
