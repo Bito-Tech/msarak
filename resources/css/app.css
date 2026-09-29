@@ -9591,3 +9591,145 @@
         line-height: 1.1rem;
     }
 }
+
+
+/* Footer v3 — black surface with larger typography. */
+.site-footer .site-footer-shell,
+.home-page .site-footer-shell,
+.specializations-index-page .site-footer-shell,
+.assessment-page .site-footer-shell,
+.specialization-detail-page .site-footer-shell,
+.specialization-compare-page .site-footer-shell,
+.result-show-page .site-footer-shell,
+.results-history-page .site-footer-shell,
+.profile-page .site-footer-shell,
+.auth-page .site-footer-shell {
+    color: #f3f4f6 !important;
+    background: #0a0a0a !important;
+    border-top-color: #1f1f1f !important;
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.12);
+}
+
+.site-footer .site-footer-accent {
+    background: linear-gradient(90deg, transparent 0%, #8a8a8a 18%, #d0d0d0 50%, #8a8a8a 82%, transparent 100%);
+    opacity: 0.45;
+}
+
+.site-footer .site-footer-logo {
+    background: #141414;
+    border-color: #2c2c2c;
+    box-shadow: none;
+}
+
+.site-footer .site-footer-title {
+    color: #ffffff !important;
+    font-size: 1.3rem;
+}
+
+.site-footer .site-footer-subtitle {
+    color: #c8c8c8 !important;
+    font-size: 0.82rem;
+}
+
+.site-footer .site-footer-copy,
+.home-page .site-footer .site-footer-copy,
+.specializations-index-page .site-footer .site-footer-copy,
+.assessment-page .site-footer .site-footer-copy,
+.specialization-detail-page .site-footer .site-footer-copy,
+.specialization-compare-page .site-footer .site-footer-copy,
+.result-show-page .site-footer .site-footer-copy,
+.results-history-page .site-footer .site-footer-copy,
+.profile-page .site-footer .site-footer-copy,
+.auth-page .site-footer .site-footer-copy {
+    color: #cfcfcf !important;
+    font-size: 1rem;
+    line-height: 1.8rem;
+}
+
+.site-footer .site-footer-heading {
+    color: #ffffff !important;
+    font-size: 1rem;
+}
+
+.site-footer .site-footer-team {
+    color: #f2f2f2 !important;
+    font-size: 1.08rem;
+}
+
+.site-footer .site-footer-link,
+.home-page .site-footer .site-footer-link,
+.specializations-index-page .site-footer .site-footer-link,
+.assessment-page .site-footer .site-footer-link,
+.specialization-detail-page .site-footer .site-footer-link,
+.specialization-compare-page .site-footer .site-footer-link,
+.result-show-page .site-footer .site-footer-link,
+.results-history-page .site-footer .site-footer-link,
+.profile-page .site-footer .site-footer-link,
+.auth-page .site-footer .site-footer-link {
+    color: #d9d9d9 !important;
+    font-size: 0.98rem;
+}
+
+.site-footer .site-footer-link-cta {
+    color: #ffffff !important;
+    background: #181818;
+    border-color: #303030;
+}
+
+.site-footer .site-footer-social-link {
+    color: #ededed;
+    background: #151515;
+    border-color: #303030;
+}
+
+.site-footer .site-footer-bottom {
+    color: #bdbdbd;
+    border-color: #2a2a2a;
+    font-size: 0.86rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .site-footer .site-footer-link:hover {
+        color: #ffffff !important;
+        background: #171717;
+        border-color: #303030;
+    }
+
+    .site-footer .site-footer-social-link:hover {
+        color: #ffffff;
+        background: #1d1d1d;
+        border-color: #3a3a3a;
+    }
+}
+
+@media (max-width: 639px) {
+    .site-footer .site-footer-title {
+        font-size: 1.12rem;
+    }
+
+    .site-footer .site-footer-subtitle {
+        font-size: 0.74rem;
+    }
+
+    .site-footer .site-footer-copy {
+        font-size: 0.86rem;
+        line-height: 1.5rem;
+    }
+
+    .site-footer .site-footer-heading {
+        font-size: 0.9rem;
+    }
+
+    .site-footer .site-footer-team {
+        font-size: 0.96rem;
+    }
+
+    .site-footer .site-footer-link {
+        font-size: 0.82rem;
+    }
+
+    .site-footer .site-footer-bottom {
+        font-size: 0.74rem;
+        line-height: 1.25rem;
+    }
+}
