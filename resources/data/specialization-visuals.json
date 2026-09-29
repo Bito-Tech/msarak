@@ -3,10 +3,10 @@
     "id": "computer_science",
     "order": 1,
     "name": "علوم الحاسوب وتقنية المعلومات",
-    "image_url": "https://unsplash.com/photos/FhWWzP6LAkY/download?force=true&w=1200",
-    "source": "Unsplash",
-    "source_url": "https://unsplash.com/photos/laptop-displaying-code-on-a-wooden-table-by-window-FhWWzP6LAkY",
-    "license_status": "free_unsplash",
+    "image_url": "/assets/specializations/01_computer_science.webp",
+    "source": "Generated for Masarak",
+    "source_url": null,
+    "license_status": "project_generated",
     "production_ready": true
   },
   {
