@@ -14,8 +14,24 @@ class SpecializationController extends Controller
 
     public function index(): View
     {
+        $visualsPath = resource_path('data/specialization-visuals.json');
+        $visuals = [];
+
+        if (is_file($visualsPath)) {
+            $decoded = json_decode((string) file_get_contents($visualsPath), true);
+
+            if (is_array($decoded)) {
+                foreach ($decoded as $visual) {
+                    if (is_array($visual) && isset($visual['id'])) {
+                        $visuals[(string) $visual['id']] = $visual;
+                    }
+                }
+            }
+        }
+
         return view('specializations.index', [
             'specializations' => $this->catalog->all(),
+            'specializationVisuals' => $visuals,
         ]);
     }
 

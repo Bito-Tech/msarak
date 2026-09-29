@@ -3,120 +3,100 @@
     "id": "computer_science",
     "order": 1,
     "name": "علوم الحاسوب وتقنية المعلومات",
-    "image_file": "01_computer_science.jpg",
-    "image_path": "/assets/specializations/01_computer_science.jpg",
+    "image_url": "https://unsplash.com/photos/FhWWzP6LAkY/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/laptop-displaying-code-on-a-wooden-table-by-window-FhWWzP6LAkY",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "human_medicine",
     "order": 2,
     "name": "الطب البشري",
-    "image_file": "02_medicine.jpg",
-    "image_path": "/assets/specializations/02_medicine.jpg",
+    "image_url": "https://unsplash.com/photos/wDRga6fTnZA/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/a-surgeon-examines-a-medical-instrument-during-surgery-wDRga6fTnZA",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "nursing",
     "order": 3,
     "name": "التمريض",
-    "image_file": "03_nursing.jpg",
-    "image_path": "/assets/specializations/03_nursing.jpg",
-    "source": "iStock",
-    "source_url": "https://www.istockphoto.com/photo/healthcare-nurse-and-woman-in-bed-for-support-pillow-adjustment-or-friendly-service-gm2181530292-600546402",
-    "license_status": "paid_license_required",
-    "production_ready": false,
-    "fallback": "spec_icon"
+    "image_url": "https://unsplash.com/photos/Jusy7vxGPLM/download?force=true&w=1200",
+    "source": "Unsplash / CDC",
+    "source_url": "https://unsplash.com/photos/Jusy7vxGPLM",
+    "license_status": "free_unsplash",
+    "production_ready": true
   },
   {
     "id": "civil_engineering",
     "order": 4,
     "name": "الهندسة المدنية",
-    "image_file": "04_civil_engineering.jpg",
-    "image_path": "/assets/specializations/04_civil_engineering.jpg",
+    "image_url": "https://unsplash.com/photos/frxffKShowI/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/a-large-bridge-spanning-over-a-large-body-of-water-frxffKShowI",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "architecture",
     "order": 5,
     "name": "الهندسة المعمارية",
-    "image_file": "05_architecture.jpg",
-    "image_path": "/assets/specializations/05_architecture.jpg",
+    "image_url": "https://unsplash.com/photos/RFDP7_80v5A/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/white-modern-cement-building-under-blue-sky-RFDP7_80v5A",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "business_administration",
     "order": 6,
     "name": "إدارة الأعمال",
-    "image_file": "06_business_administration.jpg",
-    "image_path": "/assets/specializations/06_business_administration.jpg",
+    "image_url": "https://unsplash.com/photos/3tCLyPBSQ5k/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/business-meeting-with-people-around-a-conference-table-3tCLyPBSQ5k",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "accounting",
     "order": 7,
     "name": "المحاسبة",
-    "image_file": "07_accounting.jpg",
-    "image_path": "/assets/specializations/07_accounting.jpg",
-    "source": "Unsplash+",
-    "source_url": "https://unsplash.com/photos/a-person-sitting-at-a-desk-with-a-calculator-and-a-laptop-SG9s_FsZv3s",
-    "license_status": "unsplash_plus_license_required",
-    "production_ready": false,
-    "fallback": "spec_icon"
+    "image_url": "https://unsplash.com/photos/JhevWHCbVyw/download?force=true&w=1200",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/JhevWHCbVyw",
+    "license_status": "free_unsplash",
+    "production_ready": true
   },
   {
     "id": "law",
     "order": 8,
     "name": "الحقوق والقانون",
-    "image_file": "08_law.jpg",
-    "image_path": "/assets/specializations/08_law.jpg",
-    "source": "Unsplash+",
-    "source_url": "https://unsplash.com/photos/a-gaven-on-top-of-a-stack-of-books-mP7bW-eiaB0",
-    "license_status": "unsplash_plus_license_required",
-    "production_ready": false,
-    "fallback": "spec_icon"
+    "image_url": "https://unsplash.com/photos/jKU2NneZAbI/download?force=true&w=1200",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/jKU2NneZAbI",
+    "license_status": "free_unsplash",
+    "production_ready": true
   },
   {
     "id": "graphic_design_multimedia",
     "order": 9,
     "name": "التصميم الجرافيكي والوسائط المتعددة",
-    "image_file": "09_graphic_design.jpg",
-    "image_path": "/assets/specializations/09_graphic_design.jpg",
+    "image_url": "https://unsplash.com/photos/qC2n6RQU4Vw/download?force=true&w=1200",
     "source": "Unsplash",
     "source_url": "https://unsplash.com/photos/person-writing-on-white-paper-qC2n6RQU4Vw",
     "license_status": "free_unsplash",
-    "production_ready": true,
-    "fallback": "spec_icon"
+    "production_ready": true
   },
   {
     "id": "english_language_translation",
     "order": 10,
     "name": "اللغة الإنجليزية والترجمة",
-    "image_file": "10_english_translation.jpg",
-    "image_path": "/assets/specializations/10_english_translation.jpg",
-    "source": "iStock reference supplied by user",
-    "source_url": null,
-    "license_status": "reference_only_watermarked",
-    "production_ready": false,
-    "fallback": "spec_icon"
+    "image_url": "https://unsplash.com/photos/LUGuCtvlk1Q/download?force=true&w=1200",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/LUGuCtvlk1Q",
+    "license_status": "free_unsplash",
+    "production_ready": true
   }
 ]

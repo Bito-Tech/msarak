@@ -2730,3 +2730,75 @@
         border-radius: 1rem;
     }
 }
+
+
+/* Specialization cards — image left, content/actions right. */
+.specialization-card-media {
+    background:
+        linear-gradient(145deg, #dbeae5, #edf5f1);
+    border-color: #d7e4df;
+}
+
+.specialization-card-image {
+    object-position: center;
+    filter: saturate(0.82) contrast(0.94) brightness(0.94);
+    transform: scale(1.01);
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.specialization-image-wash {
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgb(6 47 44 / 0.03) 35%, rgb(6 47 44 / 0.25) 100%),
+        linear-gradient(90deg, rgb(15 118 110 / 0.08), transparent 45%);
+}
+
+.specialization-image-label {
+    color: #ffffff;
+    background: rgb(7 66 62 / 0.72);
+    border: 1px solid rgb(255 255 255 / 0.24);
+    box-shadow: 0 4px 14px rgb(8 46 43 / 0.16);
+    backdrop-filter: blur(8px);
+}
+
+.specialization-image-fallback {
+    color: #0f766e;
+    background:
+        radial-gradient(circle at 30% 25%, rgb(197 154 88 / 0.14), transparent 30%),
+        linear-gradient(135deg, #eff7f4, #dcebe6);
+}
+
+@media (min-width: 640px) {
+    .specialization-card {
+        min-height: 18.5rem;
+    }
+
+    .specialization-card-media {
+        border-right: 1px solid #dce7e3;
+    }
+
+    .specialization-card-description {
+        -webkit-line-clamp: 4;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .specialization-card:hover .specialization-card-image {
+        transform: scale(1.045);
+        filter: saturate(0.9) contrast(0.98) brightness(0.98);
+    }
+}
+
+@media (max-width: 639px) {
+    .specialization-card-media {
+        min-height: 10.5rem;
+        border-bottom: 1px solid #dce7e3;
+    }
+
+    .specialization-image-label {
+        bottom: 0.7rem;
+        left: 0.7rem;
+        padding: 0.28rem 0.65rem;
+        font-size: 0.62rem;
+    }
+}

@@ -27,18 +27,22 @@
         <section class="specializations-grid mt-5 grid gap-4 md:grid-cols-2" aria-label="قائمة التخصصات">
             @foreach ($specializations as $specialization)
                 @php
+                    $specId = $specialization['id'] ?? '';
                     $specName = $specialization['name'] ?? 'بدون اسم';
                     $specDescription = $specialization['description'] ?? 'لا يوجد وصف متاح.';
+                    $visual = $specializationVisuals[$specId] ?? null;
+                    $imageUrl = is_array($visual) && !empty($visual['production_ready']) ? ($visual['image_url'] ?? null) : null;
                 @endphp
 
-                <article class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-3xl border">
-                    <div class="specialization-card-accent" aria-hidden="true"></div>
+                <article class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-3xl border sm:flex-row">
+                    <div class="specialization-card-accent absolute inset-x-0 top-0 z-10" aria-hidden="true"></div>
 
-                    <div class="flex flex-1 flex-col p-5 sm:p-6">
+                    {{-- المحتوى في اليمين على الشاشات الواسعة. --}}
+                    <div class="order-2 flex min-w-0 flex-1 flex-col p-5 sm:order-1 sm:w-[62%] sm:p-5 lg:p-6">
                         <div class="flex items-start justify-between gap-4">
-                            <div class="flex min-w-0 items-center gap-3.5">
-                                <span class="specialization-icon-shell inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl">
-                                    <x-ui.spec-icon :id="$specialization['id'] ?? null" :name="$specName" />
+                            <div class="flex min-w-0 items-center gap-3">
+                                <span class="specialization-icon-shell inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
+                                    <x-ui.spec-icon :id="$specId" :name="$specName" />
                                 </span>
 
                                 <div class="min-w-0">
@@ -58,8 +62,8 @@
                             {{ $specDescription }}
                         </p>
 
-                        <div class="specialization-card-actions mt-5 flex flex-col gap-2.5 border-t pt-4 sm:flex-row">
-                            <a href="{{ route('specializations.show', $specialization['id'] ?? '') }}"
+                        <div class="specialization-card-actions mt-5 flex flex-col gap-2.5 border-t pt-4 xl:flex-row">
+                            <a href="{{ route('specializations.show', $specId) }}"
                                class="specialization-details-btn inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-5 text-center font-extrabold">
                                 عرض التفاصيل
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
@@ -69,12 +73,32 @@
 
                             <button type="button"
                                     class="compare-toggle specialization-compare-btn inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 font-bold"
-                                    data-id="{{ $specialization['id'] ?? '' }}"
-                                    data-name="{{ $specialization['name'] ?? '' }}">
+                                    data-id="{{ $specId }}"
+                                    data-name="{{ $specName }}">
                                 <x-ui.icon name="plus" class="h-4 w-4 pointer-events-none" />
                                 أضف للمقارنة
                             </button>
                         </div>
+                    </div>
+
+                    {{-- الصورة في الجانب الأيسر على الكمبيوتر، وفي أعلى البطاقة على الهاتف. --}}
+                    <div class="specialization-card-media order-1 relative min-h-44 overflow-hidden sm:order-2 sm:min-h-full sm:w-[38%]">
+                        @if ($imageUrl)
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="صورة تعبيرية عن تخصص {{ $specName }}"
+                                class="specialization-card-image absolute inset-0 h-full w-full object-cover"
+                                loading="{{ $loop->iteration <= 2 ? 'eager' : 'lazy' }}"
+                                decoding="async">
+                        @else
+                            <div class="specialization-image-fallback absolute inset-0 flex items-center justify-center">
+                                <x-ui.spec-icon :id="$specId" :name="$specName" size="lg" />
+                            </div>
+                        @endif
+                        <div class="specialization-image-wash absolute inset-0" aria-hidden="true"></div>
+                        <span class="specialization-image-label absolute bottom-3 left-3 rounded-full px-3 py-1 text-[11px] font-bold">
+                            {{ $specName }}
+                        </span>
                     </div>
                 </article>
             @endforeach
