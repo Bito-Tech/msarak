@@ -3,55 +3,78 @@
 @section('title', 'تسجيل الدخول')
 
 @section('content')
-<section class="auth-experience mx-auto w-full" dir="rtl" aria-labelledby="login-title">
-    <div class="auth-frame overflow-hidden rounded-[1.7rem] border">
-        <div class="grid lg:grid-cols-[0.92fr_1.08fr]">
-            <section class="auth-form-panel order-2 p-5 sm:p-8 lg:order-1 lg:p-10">
-                <div class="auth-brand-mobile mb-6 flex items-center gap-3 lg:hidden">
-                    <img src="/assets/brand/masarak-logo.svg" alt="" class="h-11 w-11 object-contain">
-                    <div>
-                        <strong class="block text-lg font-extrabold">مسارك</strong>
-                        <span class="block text-xs">ابدأ من فهم أفضل لنفسك</span>
-                    </div>
+<section class="auth-canvas" dir="rtl" aria-labelledby="login-title">
+    <div class="auth-split">
+        <aside class="auth-visual-panel" aria-hidden="true">
+            <div class="auth-visual-copy">
+                <h2>اختر طريقك بثقة</h2>
+                <span class="auth-visual-mark"></span>
+                <p>مسارك يساعدك على استكشاف ميولك<br>وبناء مستقبلك بخطوات واضحة.</p>
+            </div>
+        </aside>
+
+        <section class="auth-form-panel-v3">
+            <div class="auth-form-inner">
+                <a href="{{ route('home') }}" class="auth-logo-block" aria-label="العودة إلى مسارك">
+                    <img src="/assets/brand/masarak-logo.svg" alt="" class="auth-logo-image">
+                    <span>مسارك</span>
+                </a>
+
+                <div class="auth-form-heading">
+                    <h1 id="login-title">سجّل دخولك إلى مسارك</h1>
+                    <p>واصل استكشاف ميولك وراجع نتائجك بسهولة ووضوح.</p>
                 </div>
 
-                <div class="auth-copy">
-                    <p class="auth-eyebrow text-sm font-extrabold">مرحبًا بعودتك</p>
-                    <h1 id="login-title" class="auth-title mt-1 font-extrabold">تسجيل الدخول</h1>
-                    <p class="auth-lead mt-2">ادخل إلى حسابك لمتابعة تقييمك أو مراجعة نتائجك السابقة.</p>
-                </div>
-
-                <form method="POST" action="{{ route('login') }}" class="auth-form auth-form-v2 mt-7 space-y-5">
+                <form method="POST" action="{{ route('login') }}" class="auth-form-v3">
                     @csrf
 
-                    <div>
-                        <label for="email" class="field-label auth-field-label">البريد الإلكتروني</label>
-                        <input
-                            id="email" name="email" type="email"
-                            value="{{ old('email') }}"
-                            required autofocus autocomplete="email"
-                            class="field-input auth-field-input ltr-text"
-                            @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
-                        >
+                    <div class="auth-field-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <div class="auth-input-wrap">
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                value="{{ old('email') }}"
+                                required
+                                autofocus
+                                autocomplete="email"
+                                class="auth-input ltr-text"
+                                placeholder="أدخل بريدك الإلكتروني"
+                                @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
+                            >
+                            <span class="auth-input-icon" aria-hidden="true">
+                                <x-ui.icon name="envelope" class="h-5 w-5" />
+                            </span>
+                        </div>
                         @error('email')
-                            <p id="email-error" class="auth-field-error mt-1.5 text-sm">{{ $message }}</p>
+                            <p id="email-error" class="auth-error">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div>
-                        <div class="mb-1 flex items-center justify-between gap-3">
-                            <label for="password" class="field-label auth-field-label mb-0">كلمة المرور</label>
-                            <a href="{{ route('password.request') }}" class="auth-inline-link text-sm font-bold">نسيت كلمة المرور؟</a>
+                    <div class="auth-field-group">
+                        <div class="auth-label-row">
+                            <label for="password">كلمة المرور</label>
+                            <a href="{{ route('password.request') }}">نسيت كلمة المرور؟</a>
                         </div>
-                        <div class="field-wrap">
+
+                        <div class="auth-input-wrap">
                             <input
-                                id="password" name="password" type="password"
-                                required autocomplete="current-password"
-                                class="field-input field-input-with-toggle auth-field-input ltr-text"
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                autocomplete="current-password"
+                                class="auth-input auth-input-with-toggle ltr-text"
+                                placeholder="أدخل كلمة المرور"
                                 @error('password') aria-invalid="true" aria-describedby="password-error" @enderror
                             >
-                            <button type="button" class="field-toggle auth-field-toggle" data-password-toggle data-target="password"
-                                    aria-pressed="false" aria-label="إظهار كلمة المرور">
+                            <button type="button"
+                                    class="auth-password-toggle"
+                                    data-password-toggle
+                                    data-target="password"
+                                    aria-pressed="false"
+                                    aria-label="إظهار كلمة المرور">
                                 <svg data-icon-show class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -62,52 +85,23 @@
                             </button>
                         </div>
                         @error('password')
-                            <p id="password-error" class="auth-field-error mt-1.5 text-sm">{{ $message }}</p>
+                            <p id="password-error" class="auth-error">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <button type="submit" class="auth-primary-button inline-flex min-h-14 w-full items-center justify-center rounded-xl px-5 font-extrabold">
-                        دخول
+                    <button type="submit" class="auth-submit">
+                        <span>تسجيل الدخول</span>
+                        <x-ui.icon name="arrow-end" class="h-5 w-5" />
                     </button>
                 </form>
 
-                <div class="auth-switch mt-6 border-t pt-5 text-center">
-                    <p>ليس لديك حساب؟ <a href="{{ route('register') }}" class="auth-inline-link font-extrabold">إنشاء حساب</a></p>
+                <div class="auth-bottom-links">
+                    <a href="{{ route('password.request') }}">نسيت كلمة المرور؟</a>
+                    <span></span>
+                    <a href="{{ route('register') }}">إنشاء حساب</a>
                 </div>
-            </section>
-
-            <aside class="auth-story order-1 hidden lg:flex lg:flex-col lg:justify-between" aria-hidden="true">
-                <div>
-                    <div class="auth-story-brand flex items-center gap-3">
-                        <span class="auth-story-logo inline-flex h-14 w-14 items-center justify-center rounded-2xl">
-                            <img src="/assets/brand/masarak-logo.svg" alt="" class="h-11 w-11 object-contain">
-                        </span>
-                        <div>
-                            <strong class="block text-xl font-extrabold">مسارك</strong>
-                            <span class="block text-sm">اختر بوعي أكبر</span>
-                        </div>
-                    </div>
-
-                    <div class="auth-story-copy mt-12">
-                        <p class="auth-story-kicker text-sm font-extrabold">رحلتك محفوظة هنا</p>
-                        <h2 class="auth-story-title mt-2 font-extrabold">ارجع لما بدأت، وأكمل من حيث توقفت.</h2>
-                        <p class="auth-story-text mt-4">التقييم والنتائج ودليل التخصصات مترابطة داخل حساب واحد، بهدوء ومن دون خطوات زائدة.</p>
-                    </div>
-                </div>
-
-                <div class="auth-story-list grid gap-3">
-                    <div class="auth-story-item flex items-center gap-3 rounded-2xl px-4 py-3">
-                        <span>01</span><strong>تابع تقييمك</strong>
-                    </div>
-                    <div class="auth-story-item flex items-center gap-3 rounded-2xl px-4 py-3">
-                        <span>02</span><strong>راجع نتائجك</strong>
-                    </div>
-                    <div class="auth-story-item flex items-center gap-3 rounded-2xl px-4 py-3">
-                        <span>03</span><strong>قارن تخصصاتك</strong>
-                    </div>
-                </div>
-            </aside>
-        </div>
+            </div>
+        </section>
     </div>
 </section>
 @endsection
