@@ -1,13 +1,13 @@
 # Backend
-/app/ @Malek711
-/database/ @Malek711
-/routes/ @Malek711
-/config/ @Malek711
+/app/
+/database/ 
+/routes/ 
+/config/ 
 
 # Frontend
-/resources/views/ @ayman-albaidahi
-/resources/css/ @ayman-albaidahi
-/resources/js/ @ayman-albaidahi
+/resources/views/ 
+/resources/css/ 
+/resources/js/ 
 
 # Automated tests
 /tests/ @Abdullah-Al-basheri
