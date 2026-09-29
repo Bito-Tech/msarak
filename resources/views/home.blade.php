@@ -12,7 +12,7 @@
 
         <div class="home-landing-visual absolute inset-y-0 left-0 -z-20 hidden w-[48%] overflow-hidden lg:block" aria-hidden="true">
             <img
-                src="/assets/home/masarak-home-student-hero.webp"
+                src="/assets/home/masarak-home-student-hero.jpg"
                 alt=""
                 class="home-landing-visual-image h-full w-full object-cover"
                 loading="eager"
@@ -114,7 +114,7 @@
 
         <div class="home-landing-mobile-visual relative z-10 mx-4 mb-4 overflow-hidden rounded-[1.4rem] lg:hidden" aria-hidden="true">
             <img
-                src="/assets/home/masarak-home-student-hero.webp"
+                src="/assets/home/masarak-home-student-hero.jpg"
                 alt=""
                 class="h-full w-full object-cover"
                 loading="eager">
