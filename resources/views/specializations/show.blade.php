@@ -208,10 +208,11 @@
                         <a href="{{ $sourceUrl }}"
                            target="_blank"
                            rel="noopener noreferrer"
-                           class="specialization-detail-source-link flex items-center justify-between gap-4 rounded-2xl px-4 py-4">
-                            <span class="min-w-0">
+                           class="specialization-detail-source-link flex min-w-0 items-center justify-between gap-4 overflow-hidden rounded-2xl px-4 py-4">
+                            <span class="specialization-detail-source-content min-w-0 flex-1">
                                 <strong class="specialization-detail-source-title block">{{ $sourceLabel ?: 'فتح المصدر الأصلي' }}</strong>
-                                <span class="specialization-detail-source-url mt-1 block truncate" dir="ltr">{{ $sourceUrl }}</span>
+                                <span class="specialization-detail-source-url mt-1 block" dir="ltr">{{ $sourceUrl }}</span>
+                                <span class="specialization-detail-source-open mt-1 hidden font-bold">فتح المصدر الأصلي</span>
                             </span>
                             <span class="specialization-detail-source-arrow inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">↗</span>
                         </a>

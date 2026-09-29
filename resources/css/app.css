@@ -4561,3 +4561,127 @@
         font-size: 0.82rem;
     }
 }
+
+
+/* Specialization detail refinement v2 — larger supporting copy and safe mobile sources. */
+.specialization-detail-description {
+    font-size: 1.24rem;
+    line-height: 2.2rem;
+}
+
+.specialization-detail-body,
+.specialization-detail-study-body {
+    font-size: 1.14rem;
+    line-height: 2.12rem;
+}
+
+.specialization-detail-list-item {
+    font-size: 1.08rem;
+    line-height: 1.9rem;
+}
+
+.specialization-detail-career-item {
+    font-size: 1.06rem;
+    line-height: 1.75rem;
+}
+
+.specialization-detail-source-intro {
+    font-size: 0.98rem;
+    line-height: 1.65rem;
+}
+
+.specialization-detail-source-content {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.specialization-detail-source-title,
+.specialization-detail-source-url,
+.specialization-detail-source-static {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.specialization-detail-source-url {
+    white-space: normal;
+}
+
+@media (max-width: 639px) {
+    .specialization-detail-description {
+        font-size: 1rem;
+        line-height: 1.72rem;
+    }
+
+    .specialization-detail-body,
+    .specialization-detail-study-body {
+        font-size: 0.98rem;
+        line-height: 1.72rem;
+    }
+
+    .specialization-detail-list-item,
+    .specialization-detail-career-item {
+        font-size: 0.94rem;
+        line-height: 1.62rem;
+    }
+
+    .specialization-detail-source-intro {
+        font-size: 0.82rem;
+        line-height: 1.25rem;
+    }
+
+    .specialization-detail-sources {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .specialization-detail-source-list {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .specialization-detail-source-link,
+    .specialization-detail-source-static {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        border-radius: 0.9rem;
+    }
+
+    .specialization-detail-source-link {
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.85rem;
+    }
+
+    .specialization-detail-source-content {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .specialization-detail-source-title {
+        font-size: 0.88rem;
+        line-height: 1.4rem;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .specialization-detail-source-url {
+        display: none;
+    }
+
+    .specialization-detail-source-open {
+        display: block;
+        color: var(--spec-color);
+        font-size: 0.7rem;
+        line-height: 1rem;
+    }
+
+    .specialization-detail-source-arrow {
+        width: 2.4rem;
+        height: 2.4rem;
+        flex: 0 0 2.4rem;
+        border-radius: 0.75rem;
+    }
+}
