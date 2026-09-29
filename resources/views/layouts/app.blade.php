@@ -126,48 +126,54 @@
         @yield('content')
     </main>
 
-    <footer class="mt-auto">
-        <div class="bg-brand-900 text-white">
-            <div class="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-6 py-8">
-                <div class="max-w-md">
-                    <div class="flex items-center gap-2">
-                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-sm font-extrabold text-white ring-1 ring-inset ring-white/25" aria-hidden="true">م</span>
-                        <span class="text-xl font-bold">مسارك</span>
+    <footer class="site-footer mt-auto">
+        <div class="site-footer-shell">
+            <div class="site-footer-accent" aria-hidden="true"></div>
+
+            <div class="container-page site-footer-inner flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+                <div class="site-footer-brand min-w-0">
+                    <div class="flex items-center gap-3">
+                        <span class="site-footer-logo inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold" aria-hidden="true">م</span>
+                        <div>
+                            <span class="site-footer-title block text-lg font-extrabold">مسارك</span>
+                            <span class="site-footer-subtitle block text-xs font-medium">اختر بوعي أكبر</span>
+                        </div>
                     </div>
-                    <p class="mt-3 text-sm leading-relaxed text-brand-100/90">
+
+                    <p class="site-footer-copy mt-2 max-w-md text-sm leading-relaxed">
                         منصة للتوجيه الأكاديمي والمهني لطلاب الثانوية في اليمن
                     </p>
                 </div>
 
-                <nav aria-label="روابط التذييل">
-                    <ul class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium">
+                <nav aria-label="روابط التذييل" class="site-footer-nav">
+                    <ul class="flex flex-wrap items-center gap-1 text-sm font-semibold">
                         <li>
-                            <a href="{{ url('/') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">الرئيسية</a>
+                            <a href="{{ url('/') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">الرئيسية</a>
                         </li>
                         <li>
-                            <a href="{{ route('specializations.index') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">التخصصات</a>
+                            <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">التخصصات</a>
                         </li>
                         @auth
                             @if (auth()->user()->role === 'student')
                                 <li>
-                                    <a href="{{ route('assessment.intro') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">استكشاف ميولك</a>
+                                    <a href="{{ route('assessment.intro') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">استكشاف ميولك</a>
                                 </li>
                             @endif
                             @if (auth()->user()->role === 'admin')
                                 <li>
-                                    <a href="{{ route('admin.assessment-versions.index') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">إدارة التقييم</a>
+                                    <a href="{{ route('admin.assessment-versions.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">إدارة التقييم</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.statistics.index') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">الإحصائيات</a>
+                                    <a href="{{ route('admin.statistics.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">الإحصائيات</a>
                                 </li>
                             @endif
                         @endauth
                         @guest
                             <li>
-                                <a href="{{ route('login') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">تسجيل الدخول</a>
+                                <a href="{{ route('login') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-lg px-3">تسجيل الدخول</a>
                             </li>
                             <li>
-                                <a href="{{ route('register') }}" class="inline-flex min-h-11 items-center rounded-lg px-3 text-brand-100/90 transition-colors hover:bg-white/10 hover:text-white">إنشاء حساب</a>
+                                <a href="{{ route('register') }}" class="site-footer-link site-footer-link-cta inline-flex min-h-10 items-center rounded-lg px-3">إنشاء حساب</a>
                             </li>
                         @endguest
                     </ul>

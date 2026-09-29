@@ -3342,3 +3342,172 @@
         margin-top: 0.65rem;
     }
 }
+
+
+/* Unified site footer — deep night teal across every page. */
+.site-footer {
+    position: relative;
+    isolation: isolate;
+}
+
+.site-footer-shell {
+    position: relative;
+    overflow: hidden;
+    color: #eef8f5;
+    background:
+        radial-gradient(circle at 16% 20%, rgb(197 154 88 / 0.12), transparent 30%),
+        radial-gradient(circle at 86% 80%, rgb(34 116 108 / 0.18), transparent 36%),
+        linear-gradient(135deg, #0d2625 0%, #103936 48%, #0d2e2c 100%);
+    border-top: 1px solid rgb(255 255 255 / 0.06);
+    box-shadow: 0 -12px 34px rgb(12 39 37 / 0.08);
+}
+
+.site-footer-accent {
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #c59a58 20%, #6fa99e 52%, #c59a58 82%, transparent 100%);
+    opacity: 0.82;
+}
+
+.site-footer-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.site-footer-logo {
+    color: #0b3835;
+    background: linear-gradient(135deg, #f1d59b 0%, #c9a25c 52%, #79aaa0 100%);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    box-shadow:
+        0 7px 18px rgb(0 0 0 / 0.14),
+        inset 0 1px 0 rgb(255 255 255 / 0.3);
+}
+
+.site-footer-title {
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.site-footer-subtitle {
+    color: #d8b875;
+}
+
+.site-footer-copy {
+    color: rgb(222 239 234 / 0.76);
+}
+
+.site-footer-link {
+    color: rgb(229 242 238 / 0.78);
+    border: 1px solid transparent;
+    transition:
+        color 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.site-footer-link-cta {
+    color: #f5dfad;
+    border-color: rgb(197 154 88 / 0.22);
+    background: rgb(197 154 88 / 0.08);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .site-footer-link:hover {
+        color: #ffffff;
+        background: rgb(255 255 255 / 0.07);
+        border-color: rgb(255 255 255 / 0.08);
+        transform: translateY(-1px);
+    }
+
+    .site-footer-link-cta:hover {
+        color: #fff3d4;
+        background: rgb(197 154 88 / 0.14);
+        border-color: rgb(197 154 88 / 0.3);
+    }
+}
+
+/* Override page-specific footer coloring so the footer stays identical everywhere. */
+.home-page .site-footer-shell,
+.specializations-index-page .site-footer-shell,
+.assessment-page .site-footer-shell {
+    background:
+        radial-gradient(circle at 16% 20%, rgb(197 154 88 / 0.12), transparent 30%),
+        radial-gradient(circle at 86% 80%, rgb(34 116 108 / 0.18), transparent 36%),
+        linear-gradient(135deg, #0d2625 0%, #103936 48%, #0d2e2c 100%);
+}
+
+.home-page .site-footer .container-page,
+.specializations-index-page .site-footer .container-page,
+.assessment-page .site-footer .container-page {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.home-page .site-footer p,
+.home-page .site-footer a,
+.specializations-index-page .site-footer p,
+.specializations-index-page .site-footer a,
+.assessment-page .site-footer p,
+.assessment-page .site-footer a {
+    color: inherit;
+}
+
+.home-page .site-footer .site-footer-copy,
+.specializations-index-page .site-footer .site-footer-copy,
+.assessment-page .site-footer .site-footer-copy {
+    color: rgb(222 239 234 / 0.76);
+}
+
+.home-page .site-footer .site-footer-link,
+.specializations-index-page .site-footer .site-footer-link,
+.assessment-page .site-footer .site-footer-link {
+    color: rgb(229 242 238 / 0.78);
+}
+
+@media (max-width: 639px) {
+    .site-footer-inner {
+        padding-top: 1.05rem;
+        padding-bottom: 1.05rem;
+    }
+
+    .site-footer-brand {
+        width: 100%;
+    }
+
+    .site-footer-copy {
+        margin-top: 0.45rem;
+        font-size: 0.72rem;
+        line-height: 1.15rem;
+    }
+
+    .site-footer-logo {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.65rem;
+        font-size: 0.72rem;
+    }
+
+    .site-footer-title {
+        font-size: 0.95rem;
+        line-height: 1.2rem;
+    }
+
+    .site-footer-subtitle {
+        font-size: 0.62rem;
+        line-height: 0.9rem;
+    }
+
+    .site-footer-nav {
+        width: 100%;
+    }
+
+    .site-footer-nav ul {
+        gap: 0.25rem;
+    }
+
+    .site-footer-link {
+        min-height: 2.15rem;
+        padding-inline: 0.6rem;
+        font-size: 0.72rem;
+    }
+}
