@@ -2470,3 +2470,263 @@
         line-height: 0.85rem;
     }
 }
+
+
+/* Specializations index — clear ten-card catalog in the approved teal/gold identity. */
+.specializations-index-page {
+    background: #eaf1ef;
+}
+
+.specializations-index-page header {
+    background: rgb(253 254 254 / 0.94);
+}
+
+.specializations-index-page header .nav-link[aria-current='page'] {
+    background: #e7f3ef;
+    color: #0f6d68;
+}
+
+.specializations-index-page header .container-page > a {
+    color: #0f6d68;
+}
+
+.specializations-index-page header .container-page > a > span {
+    background-image: linear-gradient(135deg, #c59a58, #0f766e);
+    box-shadow: 0 5px 16px rgb(15 118 110 / 0.2);
+}
+
+.specializations-page {
+    --spec-teal: #0f766e;
+    --spec-teal-strong: #0a514d;
+    --spec-gold: #c59a58;
+    max-width: 1500px;
+}
+
+.specializations-hero {
+    border-color: #d2e0db;
+    background:
+        radial-gradient(circle at 12% 15%, rgb(197 154 88 / 0.1), transparent 28%),
+        linear-gradient(135deg, #f8fbfa 0%, #edf5f1 100%);
+}
+
+.specializations-kicker,
+.specialization-index {
+    color: #a9782f;
+}
+
+.specializations-title {
+    color: #0a4642;
+    font-size: clamp(2.3rem, 3.4vw, 3.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+}
+
+.specializations-lead {
+    color: #456b67;
+    font-size: 1.05rem;
+    line-height: 1.9rem;
+}
+
+.specializations-count {
+    color: #315a55;
+    border-color: #cdded8;
+    background: rgb(255 255 255 / 0.7);
+}
+
+.specializations-count-number {
+    color: var(--spec-teal);
+}
+
+.specialization-card {
+    position: relative;
+    border-color: #d5e2de;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgb(28 62 58 / 0.055);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.specialization-card-accent {
+    height: 0.28rem;
+    background: linear-gradient(90deg, var(--spec-gold), #67a99d 38%, var(--spec-teal));
+}
+
+.specialization-icon-shell {
+    background: #edf6f2;
+    border: 1px solid #d1e3dc;
+}
+
+.specialization-icon-shell > span {
+    box-shadow: none;
+}
+
+.specialization-card-title {
+    font-size: 1.35rem;
+    line-height: 1.85rem;
+}
+
+.specialization-number {
+    color: #0b5e59;
+    background: #e6f2ee;
+    border: 1px solid #cde0da;
+}
+
+.specialization-card-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-size: 0.98rem;
+    line-height: 1.75rem;
+}
+
+.specialization-card-actions {
+    border-color: #e1eae7;
+}
+
+.specialization-details-btn {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0f766e, #0a514d);
+    box-shadow: 0 8px 18px rgb(15 118 110 / 0.18);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.specialization-compare-btn {
+    color: #28514c;
+    background: #f7faf9;
+    border: 1px solid #cbded8;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.specialization-compare-btn[aria-pressed='true'] {
+    color: #0a514d;
+    background: #e4f1ed;
+    border-color: #77ada3;
+    box-shadow: inset 0 0 0 1px rgb(15 118 110 / 0.08);
+}
+
+.specializations-compare-bar {
+    color: #244d49;
+    border-color: #bdd5cd;
+    background: rgb(250 253 252 / 0.96);
+    backdrop-filter: blur(14px);
+}
+
+.specializations-compare-bar #compare-bar-names {
+    color: #0a514d;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .specialization-card:hover {
+        transform: translateY(-3px);
+        border-color: #abcac1;
+        box-shadow: 0 18px 40px rgb(28 62 58 / 0.09);
+    }
+
+    .specialization-details-btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.035);
+        box-shadow: 0 12px 24px rgb(15 118 110 / 0.24);
+    }
+
+    .specialization-compare-btn:hover {
+        color: #0a514d;
+        border-color: #91bcb1;
+        background: #edf6f2;
+    }
+}
+
+@media (min-width: 1280px) {
+    .specializations-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.15rem;
+    }
+
+    .specialization-card-title {
+        font-size: 1.45rem;
+    }
+
+    .specialization-card-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 639px) {
+    .specializations-hero {
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+    .specializations-title {
+        font-size: 1.9rem;
+        line-height: 1.2;
+    }
+
+    .specializations-lead {
+        margin-top: 0.45rem;
+        font-size: 0.85rem;
+        line-height: 1.45rem;
+    }
+
+    .specializations-count {
+        padding: 0.55rem 0.75rem;
+        border-radius: 0.8rem;
+    }
+
+    .specializations-count-number {
+        font-size: 1.35rem;
+    }
+
+    .specializations-grid {
+        margin-top: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .specialization-card {
+        border-radius: 1rem;
+    }
+
+    .specialization-card > div:last-child {
+        padding: 0.9rem;
+    }
+
+    .specialization-icon-shell {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.8rem;
+    }
+
+    .specialization-card-title {
+        font-size: 1.05rem;
+        line-height: 1.4rem;
+    }
+
+    .specialization-number {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.7rem;
+    }
+
+    .specialization-card-description {
+        margin-top: 0.65rem;
+        font-size: 0.82rem;
+        line-height: 1.4rem;
+        -webkit-line-clamp: 3;
+    }
+
+    .specialization-card-actions {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+    }
+
+    .specialization-details-btn,
+    .specialization-compare-btn {
+        width: 100%;
+        min-height: 3.25rem;
+        font-size: 0.9rem;
+    }
+
+    .specializations-compare-bar {
+        bottom: 0.5rem;
+        border-radius: 1rem;
+    }
+}
