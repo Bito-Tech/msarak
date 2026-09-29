@@ -4335,3 +4335,229 @@
         min-height: 3.5rem;
     }
 }
+
+
+/* Specialization detail readability refinement — clearer hierarchy, larger type, stronger rhythm. */
+.specialization-detail-page .specialization-detail {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.specialization-detail-title {
+    font-size: clamp(2.6rem, 4.2vw, 4.55rem);
+    line-height: 1.16;
+    font-weight: 800;
+}
+
+.specialization-detail-description {
+    max-width: 48rem;
+    color: #3f625d;
+    font-size: 1.18rem;
+    line-height: 2.15rem;
+    font-weight: 500;
+}
+
+.specialization-detail-quick-item {
+    background: rgb(255 255 255 / 0.78);
+    border: 1px solid color-mix(in srgb, var(--spec-color) 17%, #d7e3df);
+    box-shadow: 0 6px 16px rgb(32 73 67 / 0.04);
+}
+
+.specialization-detail-quick-number {
+    color: var(--spec-color);
+    font-size: 1.45rem;
+    line-height: 1.45rem;
+}
+
+.specialization-detail-quick-label {
+    margin-top: 0.25rem;
+    color: #4d6864;
+    font-size: 0.86rem;
+    line-height: 1.25rem;
+}
+
+.specialization-detail-section,
+.specialization-detail-sources,
+.specialization-detail-cta {
+    box-shadow: 0 12px 32px rgb(28 62 58 / 0.06);
+}
+
+.specialization-detail-section-title,
+.specialization-detail-cta-title {
+    font-size: 1.55rem;
+    line-height: 2rem;
+    font-weight: 800;
+}
+
+.specialization-detail-eyebrow {
+    font-size: 0.86rem;
+    line-height: 1.2rem;
+}
+
+.specialization-detail-body,
+.specialization-detail-study-body {
+    color: #425f5b;
+    font-size: 1.06rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
+.specialization-detail-study-body {
+    max-width: 76rem;
+}
+
+.specialization-detail-list-item {
+    min-height: 4rem;
+    color: #385753;
+    font-size: 1.02rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+}
+
+.specialization-detail-career-item {
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    color: #385753;
+    font-size: 1rem;
+    line-height: 1.65rem;
+    font-weight: 700;
+}
+
+.specialization-detail-source-intro {
+    color: #6a817d;
+    font-size: 0.92rem;
+    line-height: 1.55rem;
+}
+
+.specialization-detail-source-link,
+.specialization-detail-source-static {
+    color: #385753;
+    background: #f8fbfa;
+    border: 1px solid #dfe9e6;
+}
+
+.specialization-detail-source-link {
+    min-height: 5.25rem;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+.specialization-detail-source-title {
+    color: #284e49;
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+.specialization-detail-source-url {
+    max-width: 66rem;
+    color: #78908b;
+    font-size: 0.74rem;
+    line-height: 1.15rem;
+}
+
+.specialization-detail-source-arrow {
+    color: #ffffff;
+    background: var(--spec-color);
+    box-shadow: 0 7px 16px color-mix(in srgb, var(--spec-color) 18%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .specialization-detail-source-link:hover {
+        transform: translateY(-2px);
+        border-color: color-mix(in srgb, var(--spec-color) 32%, white);
+        background: color-mix(in srgb, var(--spec-soft) 48%, white);
+        box-shadow: 0 12px 28px rgb(28 62 58 / 0.075);
+    }
+}
+
+@media (min-width: 1280px) {
+    .specialization-detail-dual > section {
+        height: 100%;
+    }
+}
+
+@media (max-width: 639px) {
+    .specialization-detail-title {
+        font-size: 2rem;
+        line-height: 1.28;
+    }
+
+    .specialization-detail-description {
+        font-size: 0.94rem;
+        line-height: 1.65rem;
+    }
+
+    .specialization-detail-quick {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.4rem;
+    }
+
+    .specialization-detail-quick-item {
+        padding: 0.65rem 0.45rem;
+        text-align: center;
+    }
+
+    .specialization-detail-quick-number {
+        font-size: 1.1rem;
+        line-height: 1.1rem;
+    }
+
+    .specialization-detail-quick-label {
+        font-size: 0.62rem;
+        line-height: 0.95rem;
+    }
+
+    .specialization-detail-section-title,
+    .specialization-detail-cta-title {
+        font-size: 1.18rem;
+        line-height: 1.55rem;
+    }
+
+    .specialization-detail-eyebrow {
+        font-size: 0.68rem;
+    }
+
+    .specialization-detail-body,
+    .specialization-detail-study-body {
+        font-size: 0.88rem;
+        line-height: 1.58rem;
+    }
+
+    .specialization-detail-list-item,
+    .specialization-detail-career-item {
+        min-height: 0;
+        font-size: 0.84rem;
+        line-height: 1.48rem;
+    }
+
+    .specialization-detail-source-intro {
+        font-size: 0.72rem;
+        line-height: 1.15rem;
+    }
+
+    .specialization-detail-source-link,
+    .specialization-detail-source-static {
+        min-height: 0;
+        padding: 0.8rem;
+    }
+
+    .specialization-detail-source-title {
+        font-size: 0.82rem;
+        line-height: 1.35rem;
+    }
+
+    .specialization-detail-source-url {
+        font-size: 0.62rem;
+        line-height: 0.95rem;
+    }
+
+    .specialization-detail-source-arrow {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.7rem;
+        font-size: 0.82rem;
+    }
+}
