@@ -7902,3 +7902,47 @@
         object-position: center 36%;
     }
 }
+
+
+/* Assessment question visual v7 — darker top wash and larger scenario text. */
+.assessment-question-photo-overlay {
+    background:
+        linear-gradient(
+            180deg,
+            rgb(3 31 31 / 0.96) 0%,
+            rgb(4 43 42 / 0.9) 12%,
+            rgb(5 56 53 / 0.72) 24%,
+            rgb(7 70 65 / 0.42) 38%,
+            rgb(8 80 73 / 0.16) 52%,
+            transparent 70%
+        );
+}
+
+.assessment-question-card #scenario-text {
+    max-width: 29rem;
+    font-weight: 800;
+    text-shadow:
+        0 3px 14px rgb(0 0 0 / 0.34),
+        0 1px 3px rgb(0 0 0 / 0.28);
+}
+
+@media (min-width: 1024px) {
+    .assessment-question-card #scenario-text {
+        font-size: 1.92rem;
+        line-height: 2.9rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .assessment-question-card #scenario-text {
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .assessment-question-card #scenario-text {
+        font-size: 1.18rem;
+        line-height: 1.95rem;
+    }
+}
