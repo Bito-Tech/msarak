@@ -7,7 +7,7 @@
     <section class="assessment-onboarding-shell" aria-labelledby="assessment-onboarding-title">
         <div class="assessment-onboarding-hero">
             <div class="assessment-onboarding-copy">
-                <p class="assessment-onboarding-kicker">ابدأ من نفسك، لا من توقعات الآخرين</p>
+                <p class="assessment-onboarding-kicker">استكشاف ميولك — ابدأ من نفسك، لا من توقعات الآخرين</p>
 
                 <h1 id="assessment-onboarding-title" class="assessment-onboarding-title">
                     اكتشف المجالات الأقرب لك
@@ -35,7 +35,7 @@
                 <form method="POST" action="{{ route('assessment.sessions.store') }}" class="assessment-onboarding-actions">
                     @csrf
                     <button type="submit" class="assessment-onboarding-cta">
-                        {{ $activeSession ? 'متابعة التقييم' : 'ابدأ التقييم' }}
+                        {{ $activeSession ? 'متابعة التقييم' : 'بدء التقييم' }}
                         <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 19.5-7.5-7.5 7.5-7.5" />
                         </svg>
@@ -60,7 +60,7 @@
         <section class="assessment-onboarding-guide" aria-labelledby="assessment-guide-title">
             <header class="assessment-onboarding-guide-head">
                 <p>قبل أن تبدأ</p>
-                <h2 id="assessment-guide-title">كيف تجيب؟</h2>
+                <h2 id="assessment-guide-title">طريقة الإجابة</h2>
             </header>
 
             <div class="assessment-onboarding-steps">
