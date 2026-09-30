@@ -1,0 +1,57 @@
+name: InfinityFree FTP Probe
+
+on:
+  push:
+    branches:
+      - fix/infinityfree-incremental-deploy-v2
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Install lftp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lftp
+
+      - name: Probe InfinityFree upload modes
+        env:
+          FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "$FTP_USERNAME" || -z "$FTP_PASSWORD" ]]; then
+            echo "::error::Missing InfinityFree FTP secrets."
+            exit 1
+          fi
+
+          printf 'masarak ftp probe %s\n' "$GITHUB_SHA" > probe.txt
+
+          probe_mode() {
+            local protect_data="$1"
+            local remote_name="$2"
+
+            lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://ftpupload.net:21" <<LFTP
+          set cmd:fail-exit yes
+          set ftp:ssl-force yes
+          set ftp:ssl-auth TLS
+          set ftp:ssl-protect-data $protect_data
+          set ftp:passive-mode yes
+          set ssl:verify-certificate yes
+          set net:max-retries 3
+          set net:timeout 30
+          put probe.txt -o /htdocs/$remote_name
+          rm -f /htdocs/$remote_name
+          bye
+          LFTP
+          }
+
+          probe_mode yes ".masarak-ftps-probe"
+          probe_mode no ".masarak-ftps-control-probe"
