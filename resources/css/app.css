@@ -9927,3 +9927,469 @@
         height: 2.25rem;
     }
 }
+
+
+/* Auth viewport-fit pass — keep every auth page visible without page scrolling. */
+.auth-page {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+}
+
+.auth-page .site-header {
+    flex: 0 0 auto;
+}
+
+.auth-page .site-header-shell {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+}
+
+.auth-page .site-header-brand {
+    min-height: 2.65rem;
+    font-size: 1.05rem;
+}
+
+.auth-page .site-header-logo {
+    width: 2.15rem;
+    height: 2.15rem;
+}
+
+.auth-page .nav-link {
+    min-height: 2.65rem;
+    font-size: 0.9rem;
+}
+
+.auth-page #main {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0.45rem clamp(0.65rem, 1.7vw, 1.3rem) !important;
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+.auth-page .auth-canvas {
+    flex: 1 1 auto;
+    min-height: 0 !important;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.auth-page .auth-split {
+    flex: 1 1 auto;
+    min-height: 0 !important;
+    height: 100%;
+    max-height: 39rem;
+    align-self: center;
+    margin-block: auto;
+}
+
+.auth-page .auth-visual-panel,
+.auth-page .auth-form-panel-v3 {
+    min-height: 0 !important;
+    height: 100%;
+}
+
+.auth-page .auth-form-panel-v3 {
+    overflow: hidden;
+    padding: 1.1rem clamp(1rem, 2.4vw, 2.2rem);
+}
+
+.auth-page .auth-form-inner,
+.auth-page .auth-form-inner-register,
+.auth-page .auth-form-inner-compact {
+    width: min(100%, 29rem);
+}
+
+.auth-page .auth-logo-image {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.auth-page .auth-logo-block {
+    gap: 0.15rem;
+}
+
+.auth-page .auth-logo-block span {
+    font-size: 1.08rem;
+}
+
+.auth-page .auth-form-heading {
+    margin-top: 0.8rem;
+}
+
+.auth-page .auth-form-heading h1 {
+    font-size: clamp(1.5rem, 1.95vw, 2rem);
+    line-height: 1.2;
+}
+
+.auth-page .auth-form-heading p {
+    margin-top: 0.35rem;
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+.auth-page .auth-form-v3,
+.auth-page .auth-form-v3-register {
+    margin-top: 1rem;
+    gap: 0.68rem;
+}
+
+.auth-page .auth-field-group > label,
+.auth-page .auth-label-row label {
+    margin-bottom: 0.3rem;
+    font-size: 0.84rem;
+}
+
+.auth-page .auth-label-row a {
+    font-size: 0.78rem;
+}
+
+.auth-page .auth-input {
+    min-height: 2.95rem;
+    font-size: 0.9rem;
+    border-radius: 0.65rem;
+}
+
+.auth-page .auth-password-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.auth-page .auth-submit {
+    min-height: 3.15rem;
+    margin-top: 0.05rem;
+    font-size: 0.93rem;
+    border-radius: 0.68rem;
+}
+
+.auth-page .auth-bottom-links {
+    margin-top: 0.85rem;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+}
+
+.auth-page .auth-error {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1.25;
+}
+
+.auth-page .auth-visual-copy {
+    top: 16%;
+}
+
+.auth-page .auth-visual-copy h2 {
+    font-size: clamp(1.75rem, 2.45vw, 2.55rem);
+}
+
+.auth-page .auth-visual-copy p {
+    margin-top: 0.8rem;
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+/* Registration gets the tightest vertical rhythm because it has four fields. */
+.auth-canvas-register .auth-form-panel-v3,
+.auth-canvas-reset .auth-form-panel-v3 {
+    padding-block: 0.8rem;
+}
+
+.auth-canvas-register .auth-logo-block,
+.auth-canvas-reset .auth-logo-block {
+    flex-direction: row;
+    gap: 0.45rem;
+}
+
+.auth-canvas-register .auth-logo-image,
+.auth-canvas-reset .auth-logo-image {
+    width: 2.35rem;
+    height: 2.35rem;
+}
+
+.auth-canvas-register .auth-logo-block span,
+.auth-canvas-reset .auth-logo-block span {
+    font-size: 1rem;
+}
+
+.auth-canvas-register .auth-form-heading,
+.auth-canvas-reset .auth-form-heading {
+    margin-top: 0.55rem;
+}
+
+.auth-canvas-register .auth-form-v3,
+.auth-canvas-reset .auth-form-v3 {
+    margin-top: 0.75rem;
+    gap: 0.48rem;
+}
+
+.auth-canvas-register .auth-bottom-links,
+.auth-canvas-reset .auth-bottom-links {
+    margin-top: 0.6rem;
+}
+
+/* Keep the footer present on auth pages, but compact enough not to force a second viewport. */
+.auth-page .site-footer {
+    flex: 0 0 auto;
+}
+
+.auth-page .site-footer .site-footer-grid {
+    display: none;
+}
+
+.auth-page .site-footer .site-footer-inner {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.auth-page .site-footer .site-footer-bottom {
+    min-height: 2rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    font-size: 0.68rem;
+    line-height: 1;
+}
+
+.auth-page .site-footer .site-footer-bottom span:last-child {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .auth-page #main {
+        padding: 0.35rem 0.55rem !important;
+    }
+
+    .auth-page .auth-split {
+        width: min(100%, 35rem);
+        max-height: none;
+        height: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .auth-page .auth-visual-panel {
+        display: none;
+    }
+
+    .auth-page .auth-form-panel-v3 {
+        height: 100%;
+        min-height: 0 !important;
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .auth-page .auth-form-inner,
+    .auth-page .auth-form-inner-register,
+    .auth-page .auth-form-inner-compact {
+        width: min(100%, 31rem);
+    }
+
+    .auth-page .auth-logo-block {
+        flex-direction: row;
+        gap: 0.4rem;
+    }
+
+    .auth-page .auth-logo-image {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .auth-page .auth-logo-block span {
+        font-size: 0.95rem;
+    }
+
+    .auth-page .auth-form-heading {
+        margin-top: 0.5rem;
+    }
+
+    .auth-page .auth-form-heading h1 {
+        font-size: 1.4rem;
+    }
+
+    .auth-page .auth-form-heading p {
+        margin-top: 0.2rem;
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .auth-page .auth-form-v3,
+    .auth-page .auth-form-v3-register {
+        margin-top: 0.65rem;
+        gap: 0.42rem;
+    }
+
+    .auth-page .auth-input {
+        min-height: 2.7rem;
+        font-size: 0.84rem;
+    }
+
+    .auth-page .auth-submit {
+        min-height: 2.85rem;
+        font-size: 0.86rem;
+    }
+
+    .auth-page .auth-bottom-links {
+        margin-top: 0.5rem;
+        font-size: 0.74rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .auth-page .site-header-shell {
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+
+    .auth-page .site-header-brand {
+        min-height: 2.45rem;
+        font-size: 0.95rem;
+    }
+
+    .auth-page .site-header-logo {
+        width: 1.95rem;
+        height: 1.95rem;
+    }
+
+    .auth-page .nav-link {
+        min-height: 2.45rem;
+        font-size: 0.82rem;
+    }
+
+    .auth-page #main {
+        padding: 0.25rem 0.4rem !important;
+    }
+
+    .auth-page .auth-split {
+        border-radius: 0.9rem;
+    }
+
+    .auth-page .auth-form-panel-v3 {
+        min-height: 0 !important;
+        padding: 0.55rem 0.75rem;
+    }
+
+    .auth-page .auth-logo-image {
+        width: 1.9rem;
+        height: 1.9rem;
+    }
+
+    .auth-page .auth-logo-block span {
+        font-size: 0.86rem;
+    }
+
+    .auth-page .auth-form-heading {
+        margin-top: 0.35rem;
+    }
+
+    .auth-page .auth-form-heading h1 {
+        font-size: 1.23rem;
+    }
+
+    .auth-page .auth-form-heading p {
+        font-size: 0.72rem;
+        line-height: 1.25;
+    }
+
+    .auth-page .auth-field-group > label,
+    .auth-page .auth-label-row label {
+        margin-bottom: 0.18rem;
+        font-size: 0.76rem;
+    }
+
+    .auth-page .auth-label-row a {
+        font-size: 0.7rem;
+    }
+
+    .auth-page .auth-form-v3,
+    .auth-page .auth-form-v3-register {
+        margin-top: 0.48rem;
+        gap: 0.3rem;
+    }
+
+    .auth-page .auth-input {
+        min-height: 2.45rem;
+        padding-inline: 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    .auth-page .auth-input-with-toggle {
+        padding-left: 2.8rem;
+    }
+
+    .auth-page .auth-password-toggle {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .auth-page .auth-submit {
+        min-height: 2.6rem;
+        font-size: 0.8rem;
+    }
+
+    .auth-page .auth-bottom-links {
+        margin-top: 0.35rem;
+        font-size: 0.7rem;
+    }
+
+    .auth-page .site-footer .site-footer-inner {
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+
+    .auth-page .site-footer .site-footer-bottom {
+        min-height: 1.75rem;
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-height: 680px) and (min-width: 901px) {
+    .auth-page .auth-split {
+        max-height: 33rem;
+    }
+
+    .auth-page .auth-form-panel-v3 {
+        padding-block: 0.65rem;
+    }
+
+    .auth-page .auth-logo-image {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+
+    .auth-page .auth-form-heading {
+        margin-top: 0.45rem;
+    }
+
+    .auth-page .auth-form-heading h1 {
+        font-size: 1.4rem;
+    }
+
+    .auth-page .auth-form-heading p {
+        font-size: 0.76rem;
+    }
+
+    .auth-page .auth-form-v3,
+    .auth-page .auth-form-v3-register {
+        margin-top: 0.55rem;
+        gap: 0.34rem;
+    }
+
+    .auth-page .auth-input {
+        min-height: 2.45rem;
+    }
+
+    .auth-page .auth-submit {
+        min-height: 2.65rem;
+    }
+
+    .auth-page .auth-bottom-links {
+        margin-top: 0.35rem;
+    }
+}
