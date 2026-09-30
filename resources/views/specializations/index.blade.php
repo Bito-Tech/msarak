@@ -41,11 +41,11 @@
                     $imageUrl = is_array($visual) && !empty($visual['production_ready']) ? ($visual['image_url'] ?? null) : null;
                 @endphp
 
-                <article data-specialization="{{ $specId }}" class="specialization-card group flex min-h-0 flex-col overflow-hidden rounded-2xl border">
+                <article data-specialization="{{ $specId }}" class="specialization-card group flex min-h-0 overflow-hidden rounded-2xl border">
                     <div class="specialization-card-accent absolute inset-x-0 top-0 z-10" aria-hidden="true"></div>
 
                     {{-- المحتوى في اليمين على الشاشات الواسعة. --}}
-                    <div class="order-2 flex min-w-0 flex-1 flex-col p-4">
+                    <div class="specialization-card-content order-2 flex min-w-0 flex-1 flex-col">
                         <div class="flex items-start justify-between gap-4">
                             <div class="flex min-w-0 items-center gap-3">
                                 <span class="specialization-icon-shell inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
@@ -89,7 +89,7 @@
                     </div>
 
                     {{-- الصورة في الجانب الأيسر على الكمبيوتر، وفي أعلى البطاقة على الهاتف. --}}
-                    <div class="specialization-card-media order-1 relative h-40 overflow-hidden">
+                    <div class="specialization-card-media order-1 relative overflow-hidden">
                         @if ($imageUrl)
                             <img
                                 src="{{ $imageUrl }}"
