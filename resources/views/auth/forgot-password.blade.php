@@ -3,7 +3,7 @@
 @section('title', 'استعادة كلمة المرور')
 
 @section('content')
-<section class="auth-canvas" dir="rtl" aria-labelledby="forgot-title">
+<section class="auth-canvas auth-canvas-forgot" dir="rtl" aria-labelledby="forgot-title">
     <div class="auth-split">
         <aside class="auth-visual-panel" aria-hidden="true">
             <img src="/assets/auth/masarak-auth-campus.webp"

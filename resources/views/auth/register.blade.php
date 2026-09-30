@@ -3,7 +3,7 @@
 @section('title', 'إنشاء حساب')
 
 @section('content')
-<section class="auth-canvas" dir="rtl" aria-labelledby="register-title">
+<section class="auth-canvas auth-canvas-register" dir="rtl" aria-labelledby="register-title">
     <div class="auth-split">
         <aside class="auth-visual-panel" aria-hidden="true">
             <img src="/assets/auth/masarak-auth-campus.webp"
