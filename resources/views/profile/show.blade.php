@@ -4,117 +4,65 @@
 
 @section('content')
 @php
-    $nameInitial = \Illuminate\Support\Str::substr(trim((string) $user->name), 0, 1);
+    $nameInitial = IlluminateSupportStr::substr(trim((string) $user->name), 0, 1);
 @endphp
 
-<section class="profile-experience mx-auto w-full" dir="rtl" aria-labelledby="profile-title">
-    <header class="profile-hero relative overflow-hidden rounded-[2rem] border">
-        <div class="profile-hero-glow profile-hero-glow-one" aria-hidden="true"></div>
-        <div class="profile-hero-glow profile-hero-glow-two" aria-hidden="true"></div>
-
-        <div class="relative z-10 flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5 lg:p-6">
-            <div class="flex min-w-0 items-center gap-4 sm:gap-5">
-                <span class="profile-avatar inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.6rem] text-3xl font-extrabold sm:h-24 sm:w-24 sm:text-4xl" aria-hidden="true">
-                    {{ $nameInitial ?: 'م' }}
-                </span>
-
-                <div class="min-w-0">
-                    <span class="profile-account-badge inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-extrabold">
-                        <x-ui.icon name="check" class="h-4 w-4" />
-                        حساب طالب
-                    </span>
-                    <h1 id="profile-title" class="profile-name mt-3 break-words font-extrabold">{{ $user->name }}</h1>
-                    <p class="profile-email mt-2 break-all" dir="auto">{{ $user->email }}</p>
-                </div>
-            </div>
-
-            <div class="profile-hero-note rounded-2xl px-4 py-3">
-                <span class="block text-xs font-extrabold">مساحتك الشخصية</span>
-                <strong class="mt-1 block">نتائجك وخطواتك في مكان واحد</strong>
-            </div>
+<section class="profile-experience profile-experience-v2 mx-auto w-full" dir="rtl" aria-labelledby="profile-title">
+    <header class="profile-mobile-header">
+        <span class="profile-mobile-avatar" aria-hidden="true">{{ $nameInitial ?: 'م' }}</span>
+        <div class="min-w-0">
+            <p class="profile-mobile-eyebrow">حسابي</p>
+            <h1 id="profile-title">{{ $user->name }}</h1>
+            <p class="profile-mobile-email" dir="auto">{{ $user->email }}</p>
         </div>
     </header>
 
-    <div class="profile-section-heading mt-5">
-        <p class="profile-kicker text-sm font-extrabold">اختصارات الحساب</p>
-        <h2 class="profile-section-title mt-1 font-extrabold">ماذا تريد أن تفعل الآن؟</h2>
-    </div>
+    <section class="profile-mobile-section" aria-labelledby="profile-actions-title">
+        <h2 id="profile-actions-title">الخدمات</h2>
 
-    <div class="profile-action-grid mt-4 grid gap-4 lg:grid-cols-2">
-        <section aria-labelledby="assessment-title" class="profile-action-card profile-action-card-primary relative overflow-hidden rounded-2xl border p-4 sm:p-5">
-            <div class="profile-action-glow" aria-hidden="true"></div>
+        <div class="profile-mobile-list">
+            <a href="{{ route('assessment.intro') }}" class="profile-mobile-row">
+                <span class="profile-mobile-row-icon" aria-hidden="true">
+                    <x-ui.icon name="target" class="h-5 w-5" />
+                </span>
+                <span class="profile-mobile-row-copy">
+                    <strong>استكشاف ميولك</strong>
+                    <small>ابدأ تقييمًا جديدًا أو تابع تقييمك الحالي</small>
+                </span>
+                <x-ui.icon name="chevron-start" class="profile-mobile-chevron h-5 w-5" />
+            </a>
 
-            <div class="relative z-10">
-                <div class="flex items-start justify-between gap-4">
-                    <span class="profile-action-icon inline-flex h-12 w-12 items-center justify-center rounded-xl" aria-hidden="true">
-                        <x-ui.icon name="target" class="h-7 w-7" />
-                    </span>
-                    <span class="profile-action-label rounded-full px-3 py-1.5 text-xs font-extrabold">الخطوة الأساسية</span>
-                </div>
+            <a href="{{ route('profile.results.index') }}" class="profile-mobile-row">
+                <span class="profile-mobile-row-icon" aria-hidden="true">
+                    <x-ui.icon name="activity" class="h-5 w-5" />
+                </span>
+                <span class="profile-mobile-row-copy">
+                    <strong>سجل نتائجي</strong>
+                    <small>راجع النتائج السابقة وافتح أي نتيجة محفوظة</small>
+                </span>
+                <x-ui.icon name="chevron-start" class="profile-mobile-chevron h-5 w-5" />
+            </a>
 
-                <h2 id="assessment-title" class="profile-action-title mt-4 font-extrabold">استكشاف ميولك</h2>
-                <p class="profile-action-copy mt-3">
-                    انتقل إلى التقييم لاستكشاف ميولك. وإذا كان لديك تقييم غير مكتمل، يمكنك متابعته من الصفحة نفسها.
-                </p>
-
-                <a href="{{ route('assessment.intro') }}"
-                   class="profile-action-primary mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 font-extrabold sm:w-auto">
-                    الذهاب إلى التقييم
-                    <x-ui.icon name="arrow-end" class="h-5 w-5" />
-                </a>
-            </div>
-        </section>
-
-        <section aria-labelledby="results-title" class="profile-action-card profile-action-card-results relative overflow-hidden rounded-2xl border p-4 sm:p-5">
-            <div class="relative z-10">
-                <div class="flex items-start justify-between gap-4">
-                    <span class="profile-action-icon profile-results-icon inline-flex h-12 w-12 items-center justify-center rounded-xl" aria-hidden="true">
-                        <x-ui.icon name="activity" class="h-7 w-7" />
-                    </span>
-                    <span class="profile-results-label rounded-full px-3 py-1.5 text-xs font-extrabold">محفوظة لديك</span>
-                </div>
-
-                <h2 id="results-title" class="profile-action-title mt-4 font-extrabold">سجل نتائجي</h2>
-                <p class="profile-action-copy mt-3">
-                    راجع كل نتائج استكشاف الميول التي أتممتها سابقًا، وافتح أي نتيجة كما صدرت وقتها.
-                </p>
-
-                <a href="{{ route('profile.results.index') }}"
-                   class="profile-action-secondary mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-4 font-extrabold sm:w-auto">
-                    عرض سجل نتائجي
-                    <x-ui.icon name="arrow-end" class="h-5 w-5" />
-                </a>
-            </div>
-        </section>
-    </div>
-
-    <section class="profile-guide mt-4 rounded-2xl border p-4 sm:p-5">
-        <div class="flex items-start gap-3">
-            <span class="profile-guide-icon inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl" aria-hidden="true">
-                <x-ui.icon name="info" class="h-5 w-5" />
-            </span>
-            <div>
-                <p class="profile-kicker text-sm font-extrabold">كيف تستخدم حسابك؟</p>
-                <h2 class="profile-guide-title mt-1 font-extrabold">رحلة بسيطة من الاستكشاف إلى المقارنة</h2>
-            </div>
+            <a href="{{ route('specializations.index') }}" class="profile-mobile-row">
+                <span class="profile-mobile-row-icon" aria-hidden="true">
+                    <x-ui.icon name="book-open" class="h-5 w-5" />
+                </span>
+                <span class="profile-mobile-row-copy">
+                    <strong>دليل التخصصات</strong>
+                    <small>استكشف التخصصات وقارن بينها بهدوء</small>
+                </span>
+                <x-ui.icon name="chevron-start" class="profile-mobile-chevron h-5 w-5" />
+            </a>
         </div>
+    </section>
 
-        <div class="profile-guide-steps mt-5 grid gap-3 md:grid-cols-3">
-            <div class="profile-guide-step rounded-2xl p-4">
-                <span class="profile-guide-number inline-flex h-8 w-8 items-center justify-center rounded-xl font-extrabold">1</span>
-                <strong class="mt-3 block">أكمل التقييم</strong>
-                <p class="mt-1.5">أجب عن المواقف بهدوء كما تصفك أنت.</p>
-            </div>
-            <div class="profile-guide-step rounded-2xl p-4">
-                <span class="profile-guide-number inline-flex h-8 w-8 items-center justify-center rounded-xl font-extrabold">2</span>
-                <strong class="mt-3 block">راجع نتيجتك</strong>
-                <p class="mt-1.5">افهم المجالات الأعلى والتخصصات المقترحة للاستكشاف.</p>
-            </div>
-            <div class="profile-guide-step rounded-2xl p-4">
-                <span class="profile-guide-number inline-flex h-8 w-8 items-center justify-center rounded-xl font-extrabold">3</span>
-                <strong class="mt-3 block">قارن الخيارات</strong>
-                <p class="mt-1.5">استخدم دليل التخصصات والمقارنة قبل اتخاذ قرارك.</p>
-            </div>
+    <section class="profile-mobile-section profile-mobile-note" aria-labelledby="profile-guide-title">
+        <h2 id="profile-guide-title">كيف تستخدم مسارك؟</h2>
+
+        <div class="profile-steps-simple">
+            <div><span>1</span><p>أكمل التقييم</p></div>
+            <div><span>2</span><p>راجع نتيجتك</p></div>
+            <div><span>3</span><p>قارن التخصصات</p></div>
         </div>
     </section>
 </section>
