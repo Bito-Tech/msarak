@@ -8309,11 +8309,6 @@
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
 }
 
-.auth-page > .site-header,
-.auth-page > .site-footer {
-    display: none;
-}
-
 .auth-page #main {
     width: 100%;
     min-height: 100dvh;
@@ -10162,23 +10157,35 @@
 }
 
 @media (max-width: 900px) {
+    .auth-page {
+        height: auto;
+        min-height: 100svh;
+        overflow: auto;
+    }
+
     .auth-page #main {
         padding: 0.35rem 0.55rem !important;
+        overflow: visible !important;
+    }
+
+    .auth-page .auth-canvas {
+        height: auto;
     }
 
     .auth-page .auth-split {
         width: min(100%, 35rem);
         max-height: none;
-        height: 100%;
+        height: auto;
         grid-template-columns: 1fr;
     }
 
     .auth-page .auth-visual-panel {
-        display: none;
+        display: block;
+        height: auto;
     }
 
     .auth-page .auth-form-panel-v3 {
-        height: 100%;
+        height: auto;
         min-height: 0 !important;
         display: flex;
         align-items: center;
@@ -10417,6 +10424,33 @@
     }
 
     .assessment-question-page .site-footer {
+        display: block;
+        flex: 0 0 auto;
+    }
+
+    .assessment-question-page .site-footer .site-footer-grid {
+        display: none;
+    }
+
+    .assessment-question-page .site-footer .site-footer-inner {
+        padding-top: 0.22rem;
+        padding-bottom: max(0.22rem, env(safe-area-inset-bottom));
+    }
+
+    .assessment-question-page .site-footer .site-footer-bottom {
+        min-height: 1.7rem;
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.58rem;
+        line-height: 1;
+    }
+
+    .assessment-question-page .site-footer .site-footer-bottom span:last-child {
         display: none;
     }
 

@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $nameInitial = IlluminateSupportStr::substr(trim((string) $user->name), 0, 1);
+    $nameInitial = \Illuminate\Support\Str::substr(trim((string) $user->name), 0, 1);
 @endphp
 
 <section class="profile-experience profile-experience-v2 mx-auto w-full" dir="rtl" aria-labelledby="profile-title">
