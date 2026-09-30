@@ -3,7 +3,7 @@
 @section('title', 'تعيين كلمة مرور جديدة')
 
 @section('content')
-<section class="auth-canvas" dir="rtl" aria-labelledby="reset-title">
+<section class="auth-canvas auth-canvas-reset" dir="rtl" aria-labelledby="reset-title">
     <div class="auth-split">
         <aside class="auth-visual-panel" aria-hidden="true">
             <img src="/assets/auth/masarak-auth-campus.webp"
