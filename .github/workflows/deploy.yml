@@ -6,6 +6,8 @@ on:
       - CI
     types:
       - completed
+    branches:
+      - main
   workflow_dispatch:
 
 concurrency:
@@ -15,6 +17,11 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  FTP_HOST: ftpupload.net
+  DEPLOY_ROOT: /htdocs
+  INITIAL_PRODUCTION_BASELINE_SHA: f141d351bf67167fd44fb7d9f0ee11ead4e3518e
+
 jobs:
   deploy:
     name: Deploy production
@@ -22,35 +29,66 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (
         github.event.workflow_run.conclusion == 'success' &&
-        github.event.workflow_run.head_branch == 'main' &&
         github.event.workflow_run.event == 'push'
       )
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
-      - name: Check deployment credentials
-        id: credentials
+      - name: Validate deployment credentials
         env:
           FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
         shell: bash
         run: |
           if [[ -z "$FTP_USERNAME" || -z "$FTP_PASSWORD" ]]; then
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::InfinityFree deployment skipped: configure INFINITYFREE_FTP_USERNAME and INFINITYFREE_FTP_PASSWORD repository secrets."
-          else
-            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "::error::Missing INFINITYFREE_FTP_USERNAME or INFINITYFREE_FTP_PASSWORD repository secret."
+            exit 1
           fi
 
       - name: Checkout tested revision
-        if: steps.credentials.outputs.ready == 'true'
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
-          fetch-depth: 1
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || 'main' }}
+          fetch-depth: 0
+
+      - name: Install resilient FTP client
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lftp
+
+      - name: Resolve last deployed revision
+        id: baseline
+        env:
+          FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+        shell: bash
+        run: |
+          rm -f .remote-deploy-state
+
+          set +e
+          curl             --silent             --show-error             --fail             --retry 2             --retry-all-errors             --connect-timeout 15             --max-time 45             --ssl-reqd             --user "$FTP_USERNAME:$FTP_PASSWORD"             "ftp://$FTP_HOST$DEPLOY_ROOT/.masarak-deploy-state"             --output .remote-deploy-state
+          state_status=$?
+          set -e
+
+          baseline="$INITIAL_PRODUCTION_BASELINE_SHA"
+
+          if [[ $state_status -eq 0 && -s .remote-deploy-state ]]; then
+            candidate="$(tr -d '\r\n ' < .remote-deploy-state)"
+            if [[ "$candidate" =~ ^[0-9a-f]{40}$ ]]               && git cat-file -e "$candidate^{commit}" 2>/dev/null               && git merge-base --is-ancestor "$candidate" HEAD; then
+              baseline="$candidate"
+              echo "Using remote deployment state: $baseline"
+            else
+              echo "::warning::Remote deployment state is invalid or is not an ancestor of HEAD. Falling back to the known production baseline."
+            fi
+          else
+            echo "::notice::No readable deployment state found yet. Using the known production baseline."
+          fi
+
+          echo "sha=$baseline" >> "$GITHUB_OUTPUT"
 
       - name: Setup PHP
-        if: steps.credentials.outputs.ready == 'true'
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
@@ -58,85 +96,138 @@ jobs:
           coverage: none
 
       - name: Install production PHP dependencies
-        if: steps.credentials.outputs.ready == 'true'
         run: composer install --no-dev --no-interaction --prefer-dist --no-progress --optimize-autoloader
 
       - name: Setup Node.js
-        if: steps.credentials.outputs.ready == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
       - name: Build frontend
-        if: steps.credentials.outputs.ready == 'true'
         run: |
           npm ci
           npm run build
 
-      - name: Prepare InfinityFree web root
-        if: steps.credentials.outputs.ready == 'true'
+      - name: Prepare incremental deployment payload
+        env:
+          DEPLOY_BASELINE: ${{ steps.baseline.outputs.sha }}
+          DEPLOY_HEAD: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+        run: python3 .github/scripts/prepare_infinityfree_deploy.py
+
+      - name: Validate deployment payload
         shell: bash
         run: |
-          cat > .htaccess <<'HTACCESS'
-          RewriteEngine On
-          RewriteRule (.*) /public/$1 [L]
-          HTACCESS
-
-          test -f vendor/autoload.php
+          test -f .deploy/.htaccess
           test -f public/build/manifest.json
           test -f public/.htaccess
           test -f public/index.php
-          test ! -f .env
+          test ! -e .deploy/.env
 
-      - name: Enforce InfinityFree PHP file-size limit
-        if: steps.credentials.outputs.ready == 'true'
-        shell: bash
-        run: |
-          oversized="$(find . -path './node_modules' -prune -o -type f -name '*.php' -size +1024k -print)"
+          oversized="$(find .deploy -type f -name '*.php' -size +1024k -print)"
           if [[ -n "$oversized" ]]; then
-            echo "::error::PHP files larger than 1 MiB were found:"
+            echo "::error::PHP files larger than 1 MiB were found in the deployment payload:"
             echo "$oversized"
             exit 1
           fi
 
-      - name: Deploy changed files over FTPS
-        if: steps.credentials.outputs.ready == 'true'
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ftpupload.net
-          username: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
-          password: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: strict
-          timeout: 120000
-          local-dir: ./
-          server-dir: /htdocs/
-          state-name: .ftp-deploy-sync-state.json
-          log-level: minimal
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            node_modules/**
-            tests/**
-            docs/**
-            scripts/**
-            **/.env*
-            **/.phpunit*
-            **/*.bundle
-            README.md
-            AI_Log.md
-            package.json
-            package-lock.json
-            vite.config.js
-            resources/css/**
-            resources/js/**
-            database/**
-            storage/app/**
-            storage/logs/**
-            storage/framework/cache/**
-            storage/framework/sessions/**
-            storage/framework/views/**
-            public/hot
+          if grep -RIl --exclude='.htaccess' -E '^(APP_KEY|DB_PASSWORD)=' .deploy 2>/dev/null | grep -q .; then
+            echo "::error::A production secret-like environment entry was detected in the deployment payload."
+            exit 1
+          fi
+
+      - name: Upload incremental payload
+        env:
+          FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+        shell: bash
+        run: |
+          deploy_payload() {
+            local protect_data="$1"
+
+            lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_HOST:21" <<LFTP
+          set cmd:fail-exit yes
+          set ftp:ssl-force yes
+          set ftp:ssl-auth TLS
+          set ftp:ssl-protect-data $protect_data
+          set ftp:passive-mode yes
+          set ssl:verify-certificate yes
+          set net:max-retries 8
+          set net:timeout 30
+          set net:reconnect-interval-base 5
+          set net:reconnect-interval-max 30
+          set xfer:clobber yes
+          mirror --reverse --verbose=1 --parallel=1 .deploy/ $DEPLOY_ROOT/
+          bye
+          LFTP
+          }
+
+          transfer_mode=""
+
+          for attempt in 1 2; do
+            echo "Encrypted-data FTPS attempt $attempt/2"
+            if deploy_payload yes; then
+              transfer_mode="yes"
+              break
+            fi
+            sleep 10
+          done
+
+          if [[ -z "$transfer_mode" ]]; then
+            echo "::warning::InfinityFree closed the fully encrypted FTP data channel. Retrying with TLS kept on the control/login channel and clear transfer data. The payload contains public application code only; production secrets are excluded."
+            for attempt in 1 3; do
+              echo "TLS-control fallback attempt $attempt/3"
+              if deploy_payload no; then
+                transfer_mode="no"
+                break
+              fi
+              sleep 10
+            done
+          fi
+
+          if [[ -z "$transfer_mode" ]]; then
+            echo "::error::Unable to upload the incremental payload after all retry modes."
+            exit 1
+          fi
+
+          echo "$transfer_mode" > .ftp-transfer-mode
+
+      - name: Apply deletions and commit deployment state
+        env:
+          FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
+          DEPLOY_HEAD: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+        shell: bash
+        run: |
+          printf '%s\n' "$DEPLOY_HEAD" > .current-deploy-state
+          protect_data="$(cat .ftp-transfer-mode)"
+
+          finalize_deploy() {
+            lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_HOST:21" <<LFTP
+          set cmd:fail-exit yes
+          set ftp:ssl-force yes
+          set ftp:ssl-auth TLS
+          set ftp:ssl-protect-data $protect_data
+          set ftp:passive-mode yes
+          set ssl:verify-certificate yes
+          set net:max-retries 8
+          set net:timeout 30
+          set net:reconnect-interval-base 5
+          set net:reconnect-interval-max 30
+          source .deploy-deletions.lftp
+          put .current-deploy-state -o $DEPLOY_ROOT/.masarak-deploy-state
+          bye
+          LFTP
+          }
+
+          for attempt in 1 3; do
+            if finalize_deploy; then
+              echo "Deployment state committed at $DEPLOY_HEAD"
+              exit 0
+            fi
+            echo "Finalize attempt $attempt/3 failed; retrying."
+            sleep 10
+          done
+
+          echo "::error::Files were uploaded, but deployment state could not be committed."
+          exit 1
