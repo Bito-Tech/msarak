@@ -12096,3 +12096,675 @@
         font-size: 0.78rem;
     }
 }
+
+
+/* Specialization compare/detail v4 — dense desktop workspace, full-width composition. */
+@media (min-width: 1024px) {
+    /* Shared page shell */
+    .specialization-compare-page #main,
+    .specialization-detail-page #main {
+        padding-top: 0.55rem;
+        padding-bottom: 0.8rem;
+    }
+
+    .specialization-compare,
+    .specialization-detail {
+        max-width: 1420px;
+    }
+
+    /* Compare: compact toolbar + heading */
+    .specialization-compare-toolbar,
+    .specialization-detail-toolbar {
+        margin-bottom: 0.55rem !important;
+    }
+
+    .specialization-compare-back,
+    .specialization-detail-back,
+    .specialization-detail-compare {
+        min-height: 2.55rem !important;
+        padding: 0.45rem 0.75rem !important;
+        border-radius: 0.7rem !important;
+        font-size: 0.78rem !important;
+    }
+
+    .specialization-compare-back svg,
+    .specialization-detail-back svg,
+    .specialization-detail-compare svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .specialization-compare-note {
+        padding: 0.42rem 0.7rem !important;
+        border-radius: 0.7rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    .specialization-compare-heading {
+        padding: 0.75rem 0.95rem !important;
+        border-radius: 0.95rem !important;
+    }
+
+    .specialization-compare-kicker {
+        font-size: 0.68rem !important;
+    }
+
+    .specialization-compare-title {
+        font-size: 1.45rem !important;
+        line-height: 1.7rem !important;
+    }
+
+    .specialization-compare-lead {
+        max-width: 58rem !important;
+        margin-top: 0.2rem !important;
+        font-size: 0.74rem !important;
+        line-height: 1.2rem !important;
+    }
+
+    .specialization-compare-axis-count {
+        min-width: 5.2rem;
+        padding: 0.45rem 0.65rem !important;
+        border-radius: 0.7rem !important;
+    }
+
+    .specialization-compare-axis-count strong {
+        font-size: 1.2rem !important;
+        line-height: 1.2rem !important;
+    }
+
+    .specialization-compare-axis-count span {
+        font-size: 0.6rem !important;
+    }
+
+    /* Compare: two compact horizontal majors across the page */
+    .specialization-compare-pair {
+        margin-top: 0.6rem !important;
+        grid-template-columns: minmax(0, 1fr) 2.6rem minmax(0, 1fr) !important;
+        gap: 0.55rem !important;
+    }
+
+    .compare-major-card {
+        display: grid;
+        grid-template-columns: 34% minmax(0, 1fr);
+        min-height: 9.6rem !important;
+        height: 9.6rem;
+        border-radius: 0.9rem !important;
+    }
+
+    .compare-major-media {
+        min-height: 0 !important;
+        height: 100% !important;
+    }
+
+    .compare-major-position {
+        top: 0.55rem !important;
+        inset-inline-start: 0.55rem !important;
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.58rem !important;
+    }
+
+    .compare-major-body {
+        min-width: 0;
+        padding: 0.68rem 0.75rem !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .compare-major-body > .flex {
+        gap: 0.5rem !important;
+    }
+
+    .compare-major-icon {
+        width: 2.15rem !important;
+        height: 2.15rem !important;
+        border-radius: 0.65rem !important;
+    }
+
+    .compare-major-title {
+        font-size: 0.95rem !important;
+        line-height: 1.2rem !important;
+    }
+
+    .compare-major-description {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        margin-top: 0.38rem !important;
+        font-size: 0.68rem !important;
+        line-height: 1.05rem !important;
+    }
+
+    .compare-major-details {
+        width: fit-content;
+        min-height: 2rem !important;
+        margin-top: 0.45rem !important;
+        padding: 0.3rem 0.55rem !important;
+        border-radius: 0.55rem !important;
+        font-size: 0.62rem !important;
+    }
+
+    .compare-major-details svg {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+
+    .specialization-compare-vs span {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        font-size: 0.65rem !important;
+    }
+
+    /* Compare axes: 2x2 dense matrix */
+    .specialization-compare-sections {
+        margin-top: 0.6rem !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem !important;
+    }
+
+    .compare-axis-card {
+        border-radius: 0.9rem !important;
+    }
+
+    .compare-axis-head {
+        padding: 0.62rem 0.7rem !important;
+        gap: 0.65rem !important;
+    }
+
+    .compare-axis-head > div {
+        gap: 0.5rem !important;
+    }
+
+    .compare-axis-icon {
+        width: 2rem !important;
+        height: 2rem !important;
+        border-radius: 0.6rem !important;
+    }
+
+    .compare-axis-icon svg {
+        width: 0.95rem;
+        height: 0.95rem;
+    }
+
+    .compare-axis-eyebrow {
+        font-size: 0.56rem !important;
+    }
+
+    .compare-axis-title {
+        margin-top: 0 !important;
+        font-size: 0.86rem !important;
+        line-height: 1.1rem !important;
+    }
+
+    .compare-axis-hint {
+        max-width: 16rem !important;
+        font-size: 0.61rem !important;
+        line-height: 0.95rem !important;
+    }
+
+    .compare-axis-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .compare-axis-column {
+        min-width: 0;
+        padding: 0.65rem 0.7rem !important;
+    }
+
+    .compare-axis-column-label {
+        gap: 0.35rem !important;
+        font-size: 0.68rem !important;
+    }
+
+    .compare-axis-copy {
+        margin-top: 0.38rem !important;
+        font-size: 0.65rem !important;
+        line-height: 1.05rem !important;
+    }
+
+    .compare-axis-items {
+        margin-top: 0.4rem !important;
+        gap: 0.3rem !important;
+    }
+
+    .compare-axis-item {
+        gap: 0.4rem !important;
+        padding: 0.38rem 0.45rem !important;
+        border-radius: 0.55rem !important;
+        font-size: 0.62rem !important;
+        line-height: 0.95rem !important;
+    }
+
+    .compare-axis-bullet {
+        width: 1.3rem !important;
+        height: 1.3rem !important;
+        border-radius: 0.4rem !important;
+        font-size: 0.52rem !important;
+    }
+
+    .compare-axis-empty {
+        margin-top: 0.4rem !important;
+        font-size: 0.64rem !important;
+    }
+
+    .specialization-compare-footer {
+        margin-top: 0.6rem !important;
+        padding: 0.7rem 0.85rem !important;
+        gap: 0.8rem !important;
+        border-radius: 0.9rem !important;
+    }
+
+    .specialization-compare-footer-title {
+        margin-top: 0 !important;
+        font-size: 0.9rem !important;
+    }
+
+    .specialization-compare-footer-copy {
+        margin-top: 0.15rem !important;
+        font-size: 0.66rem !important;
+        line-height: 1rem !important;
+    }
+
+    .specialization-compare-footer-cta {
+        min-height: 2.4rem !important;
+        padding: 0.4rem 0.75rem !important;
+        border-radius: 0.65rem !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* Detail: compact hero using full width */
+    .specialization-detail-hero {
+        border-radius: 0.95rem !important;
+    }
+
+    .specialization-detail-hero > .grid {
+        grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.72fr) !important;
+        min-height: 15rem !important;
+        max-height: 16rem;
+    }
+
+    .specialization-detail-hero-copy {
+        padding: 1rem 1.15rem !important;
+    }
+
+    .specialization-detail-hero-copy > .flex {
+        gap: 0.55rem !important;
+    }
+
+    .specialization-detail-icon {
+        width: 2.7rem !important;
+        height: 2.7rem !important;
+        border-radius: 0.75rem !important;
+    }
+
+    .specialization-detail-label {
+        padding: 0.35rem 0.65rem !important;
+        font-size: 0.66rem !important;
+    }
+
+    .specialization-detail-title {
+        margin-top: 0.65rem !important;
+        font-size: 1.7rem !important;
+        line-height: 2rem !important;
+    }
+
+    .specialization-detail-description {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        margin-top: 0.45rem !important;
+        max-width: 58rem !important;
+        font-size: 0.76rem !important;
+        line-height: 1.25rem !important;
+    }
+
+    .specialization-detail-quick {
+        margin-top: 0.7rem !important;
+        gap: 0.45rem !important;
+        grid-template-columns: repeat(3, minmax(0, 9rem)) !important;
+    }
+
+    .specialization-detail-quick-item {
+        padding: 0.45rem 0.6rem !important;
+        border-radius: 0.65rem !important;
+    }
+
+    .specialization-detail-quick-number {
+        font-size: 1rem !important;
+        line-height: 1rem !important;
+    }
+
+    .specialization-detail-quick-label {
+        margin-top: 0.15rem;
+        font-size: 0.58rem !important;
+    }
+
+    .specialization-detail-media {
+        min-height: 0 !important;
+        height: 100%;
+    }
+
+    /* Detail content sections */
+    .specialization-detail-study,
+    .specialization-detail-dual,
+    .specialization-detail-careers,
+    .specialization-detail-sources,
+    .specialization-detail-cta {
+        margin-top: 0.6rem !important;
+    }
+
+    .specialization-detail-section,
+    .specialization-detail-sources,
+    .specialization-detail-cta {
+        padding: 0.75rem 0.85rem !important;
+        border-radius: 0.9rem !important;
+    }
+
+    .specialization-detail-dual {
+        gap: 0.6rem !important;
+    }
+
+    .specialization-detail-section > .flex,
+    .specialization-detail-sources > .flex {
+        gap: 0.55rem !important;
+    }
+
+    .specialization-detail-section-icon {
+        width: 2rem !important;
+        height: 2rem !important;
+        border-radius: 0.6rem !important;
+    }
+
+    .specialization-detail-section-icon svg {
+        width: 0.95rem;
+        height: 0.95rem;
+    }
+
+    .specialization-detail-eyebrow {
+        font-size: 0.58rem !important;
+    }
+
+    .specialization-detail-section-title,
+    .specialization-detail-cta-title {
+        margin-top: 0 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.15rem !important;
+    }
+
+    .specialization-detail-body,
+    .specialization-detail-study-body {
+        margin-top: 0.45rem !important;
+        font-size: 0.7rem !important;
+        line-height: 1.15rem !important;
+    }
+
+    .specialization-detail-list {
+        margin-top: 0.55rem !important;
+        gap: 0.35rem !important;
+    }
+
+    .specialization-detail-list-item {
+        gap: 0.45rem !important;
+        padding: 0.45rem 0.55rem !important;
+        border-radius: 0.6rem !important;
+        font-size: 0.66rem !important;
+        line-height: 1rem !important;
+    }
+
+    .specialization-detail-bullet {
+        width: 1.4rem !important;
+        height: 1.4rem !important;
+        border-radius: 0.4rem !important;
+        font-size: 0.54rem !important;
+    }
+
+    .specialization-detail-career-grid {
+        margin-top: 0.55rem !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 0.4rem !important;
+    }
+
+    .specialization-detail-career-item {
+        padding: 0.55rem 0.65rem !important;
+        border-radius: 0.6rem !important;
+        font-size: 0.66rem !important;
+        line-height: 1rem !important;
+    }
+
+    .specialization-detail-source-intro {
+        margin-top: 0.15rem !important;
+        font-size: 0.62rem !important;
+    }
+
+    .specialization-detail-source-list {
+        margin-top: 0.55rem !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.4rem !important;
+    }
+
+    .specialization-detail-source-link,
+    .specialization-detail-source-static {
+        padding: 0.5rem 0.6rem !important;
+        border-radius: 0.6rem !important;
+    }
+
+    .specialization-detail-source-title,
+    .specialization-detail-source-static {
+        font-size: 0.65rem !important;
+        line-height: 1rem !important;
+    }
+
+    .specialization-detail-source-url {
+        margin-top: 0.1rem !important;
+        font-size: 0.54rem !important;
+    }
+
+    .specialization-detail-source-arrow {
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+        border-radius: 0.5rem !important;
+        font-size: 0.7rem;
+    }
+
+    .specialization-detail-cta {
+        min-height: 0;
+    }
+
+    .specialization-detail-compare-large {
+        min-height: 2.55rem !important;
+        padding: 0.45rem 0.8rem !important;
+        border-radius: 0.65rem !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (min-width: 1280px) and (max-height: 800px) {
+    .specialization-detail-hero > .grid {
+        min-height: 13.8rem !important;
+        max-height: 14.5rem;
+    }
+
+    .specialization-compare-sections {
+        gap: 0.45rem !important;
+    }
+
+    .compare-axis-head,
+    .compare-axis-column {
+        padding-block: 0.52rem !important;
+    }
+}
+
+/* Tablet/mobile keep readable, but remove oversized vertical blocks. */
+@media (max-width: 1023px) {
+    .specialization-compare,
+    .specialization-detail {
+        max-width: 900px;
+    }
+
+    .specialization-compare-heading,
+    .specialization-detail-hero,
+    .compare-major-card,
+    .compare-axis-card,
+    .specialization-detail-section,
+    .specialization-detail-sources,
+    .specialization-detail-cta {
+        border-radius: 1rem !important;
+    }
+
+    .compare-major-media {
+        min-height: 10rem !important;
+    }
+
+    .specialization-detail-media {
+        min-height: 12rem !important;
+    }
+
+    .specialization-detail-hero-copy {
+        padding: 1rem !important;
+    }
+
+    .specialization-detail-title {
+        margin-top: 0.8rem !important;
+    }
+
+    .specialization-detail-description {
+        margin-top: 0.55rem !important;
+    }
+
+    .specialization-detail-quick {
+        margin-top: 0.8rem !important;
+        gap: 0.45rem !important;
+    }
+
+    .specialization-detail-section,
+    .specialization-detail-sources,
+    .specialization-detail-cta {
+        padding: 1rem !important;
+    }
+}
+
+@media (max-width: 639px) {
+    .specialization-compare-page #main,
+    .specialization-detail-page #main {
+        padding-inline: 0.8rem;
+        padding-top: 0.65rem;
+    }
+
+    .specialization-compare-toolbar,
+    .specialization-detail-toolbar {
+        margin-bottom: 0.6rem !important;
+    }
+
+    .specialization-compare-back,
+    .specialization-detail-back,
+    .specialization-detail-compare {
+        min-height: 2.55rem !important;
+        padding: 0.4rem 0.65rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    .specialization-compare-heading {
+        padding: 0.8rem !important;
+    }
+
+    .specialization-compare-title {
+        font-size: 1.35rem !important;
+    }
+
+    .specialization-compare-lead {
+        margin-top: 0.35rem !important;
+        font-size: 0.75rem !important;
+        line-height: 1.2rem !important;
+    }
+
+    .specialization-compare-axis-count {
+        display: none;
+    }
+
+    .specialization-compare-pair,
+    .specialization-compare-sections {
+        margin-top: 0.65rem !important;
+        gap: 0.55rem !important;
+    }
+
+    .compare-major-media {
+        min-height: 8.5rem !important;
+    }
+
+    .compare-major-body {
+        padding: 0.75rem !important;
+    }
+
+    .compare-axis-head,
+    .compare-axis-column {
+        padding: 0.75rem !important;
+    }
+
+    .compare-axis-item {
+        padding: 0.5rem 0.6rem !important;
+        border-radius: 0.6rem !important;
+    }
+
+    .specialization-detail-hero-copy {
+        padding: 0.85rem !important;
+    }
+
+    .specialization-detail-media {
+        min-height: 10.5rem !important;
+    }
+
+    .specialization-detail-icon {
+        width: 2.7rem !important;
+        height: 2.7rem !important;
+    }
+
+    .specialization-detail-title {
+        margin-top: 0.65rem !important;
+        font-size: 1.55rem !important;
+    }
+
+    .specialization-detail-description {
+        font-size: 0.78rem !important;
+        line-height: 1.3rem !important;
+    }
+
+    .specialization-detail-quick {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .specialization-detail-quick-item {
+        padding: 0.55rem !important;
+    }
+
+    .specialization-detail-section,
+    .specialization-detail-sources,
+    .specialization-detail-cta {
+        margin-top: 0.55rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .specialization-detail-dual {
+        margin-top: 0.55rem !important;
+        gap: 0.55rem !important;
+    }
+
+    .specialization-detail-list,
+    .specialization-detail-career-grid,
+    .specialization-detail-source-list {
+        margin-top: 0.6rem !important;
+        gap: 0.4rem !important;
+    }
+
+    .specialization-detail-career-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .specialization-detail-list-item,
+    .specialization-detail-career-item,
+    .specialization-detail-source-link,
+    .specialization-detail-source-static {
+        padding: 0.55rem 0.6rem !important;
+    }
+}
