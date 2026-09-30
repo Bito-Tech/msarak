@@ -3,7 +3,7 @@
 @section('title', 'تسجيل الدخول')
 
 @section('content')
-<section class="auth-canvas" dir="rtl" aria-labelledby="login-title">
+<section class="auth-canvas auth-canvas-login" dir="rtl" aria-labelledby="login-title">
     <div class="auth-split">
         <aside class="auth-visual-panel" aria-hidden="true">
             <img src="/assets/auth/masarak-auth-campus.webp"
@@ -99,9 +99,8 @@
                     </button>
                 </form>
 
-                <div class="auth-bottom-links">
-                    <a href="{{ route('password.request') }}">نسيت كلمة المرور؟</a>
-                    <span></span>
+                <div class="auth-bottom-links auth-bottom-links-single">
+                    <span>ليس لديك حساب؟</span>
                     <a href="{{ route('register') }}">إنشاء حساب</a>
                 </div>
             </div>
