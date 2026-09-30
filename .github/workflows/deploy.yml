@@ -9,6 +9,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  push:
+    branches:
+      - fix/infinityfree-no-perms-deploy
 
 concurrency:
   group: infinityfree-production
@@ -27,6 +30,7 @@ jobs:
     name: Deploy production
     if: >-
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'push' ||
       (
         github.event.workflow_run.conclusion == 'success' &&
         github.event.workflow_run.event == 'push'
@@ -112,8 +116,10 @@ jobs:
       - name: Prepare incremental deployment payload
         env:
           DEPLOY_BASELINE: ${{ steps.baseline.outputs.sha }}
-          DEPLOY_HEAD: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
-        run: python3 .github/scripts/prepare_infinityfree_deploy.py
+        shell: bash
+        run: |
+          export DEPLOY_HEAD="$(git rev-parse HEAD)"
+          python3 .github/scripts/prepare_infinityfree_deploy.py
 
       - name: Validate deployment payload
         shell: bash
@@ -157,7 +163,7 @@ jobs:
           set net:reconnect-interval-base 5
           set net:reconnect-interval-max 30
           set xfer:clobber yes
-          mirror --reverse --verbose=1 --parallel=1 .deploy/ $DEPLOY_ROOT/
+          mirror --reverse --verbose=1 --parallel=1 --no-perms .deploy/ $DEPLOY_ROOT/
           bye
           LFTP
           }
@@ -196,9 +202,9 @@ jobs:
         env:
           FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
-          DEPLOY_HEAD: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
         shell: bash
         run: |
+          DEPLOY_HEAD="$(git rev-parse HEAD)"
           printf '%s\n' "$DEPLOY_HEAD" > .current-deploy-state
           protect_data="$(cat .ftp-transfer-mode)"
 
