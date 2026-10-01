@@ -65,6 +65,13 @@ jobs:
       - name: Run Laravel tests
         run: php artisan test
 
+      - name: Verify assessment v1.3 upgrade seeder
+        run: |
+          php artisan migrate:fresh --force
+          php artisan db:seed --class='Database\Seeders\AssessmentQuestionBankSeeder' --force
+          php artisan db:seed --class='Database\Seeders\AssessmentQuestionBankV13Seeder' --force
+          php artisan db:seed --class='Database\Seeders\AssessmentQuestionBankV13Seeder' --force
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
