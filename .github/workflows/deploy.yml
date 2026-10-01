@@ -138,23 +138,20 @@ jobs:
           header('Content-Type: application/json; charset=utf-8');
 
           $expected = '__ASSESSMENT_V13_TOKEN__';
-          $provided = $_SERVER['HTTP_X_MASARAK_DEPLOY_TOKEN'] ?? '';
+          $provided = $_GET['token'] ?? '';
           if (! is_string($provided) || ! hash_equals($expected, $provided)) {
               http_response_code(404);
               echo json_encode(['ok' => false]);
               exit;
           }
 
-          require __DIR__.'/../vendor/autoload.php';
-          $app = require __DIR__.'/../bootstrap/app.php';
-          $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-          $kernel->bootstrap();
-
           try {
-              $exitCode = $kernel->call('db:seed', [
-                  '--class' => 'Database\\Seeders\\AssessmentQuestionBankV13Seeder',
-                  '--force' => true,
-              ]);
+              require __DIR__.'/../vendor/autoload.php';
+              $app = require __DIR__.'/../bootstrap/app.php';
+              $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+              $kernel->bootstrap();
+
+              (new Database\Seeders\AssessmentQuestionBankV13Seeder)->run();
 
               $active = App\Models\AssessmentVersion::query()
                   ->where('version_number', 13)
@@ -162,15 +159,18 @@ jobs:
                   ->whereNotNull('published_at')
                   ->exists();
 
-              if ($exitCode !== 0 || ! $active) {
+              if (! $active) {
                   throw new RuntimeException('Assessment v1.3 verification failed.');
               }
 
               echo json_encode(['ok' => true, 'version' => 13]);
           } catch (Throwable $e) {
-              report($e);
               http_response_code(500);
-              echo json_encode(['ok' => false]);
+              echo json_encode([
+                  'ok' => false,
+                  'error' => get_class($e),
+                  'message' => $e->getMessage(),
+              ]);
           }
           PHP
 
@@ -264,9 +264,8 @@ jobs:
           set -euo pipefail
 
           set +e
-          response="$(curl --silent --show-error --fail --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
-            -H "X-Masarak-Deploy-Token: $ASSESSMENT_V13_TOKEN" \
-            "https://masarak.42web.io/$ASSESSMENT_V13_RUNNER")"
+          response="$(curl --silent --show-error --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
+            "https://masarak.42web.io/$ASSESSMENT_V13_RUNNER?token=$ASSESSMENT_V13_TOKEN")"
           seed_status=$?
           set -e
 
