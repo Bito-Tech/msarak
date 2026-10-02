@@ -80,11 +80,11 @@
 
                         @php
                             $ratingPreview = [
-                                ['icon' => 'emoji-strongly-dislike.png', 'label' => 'لا يشبهني'],
-                                ['icon' => 'emoji-dislike.png', 'label' => 'قليلًا'],
-                                ['icon' => 'emoji-neutral.png', 'label' => 'محايد'],
-                                ['icon' => 'emoji-like.png', 'label' => 'يشبهني'],
-                                ['icon' => 'emoji-strongly-like.png', 'label' => 'جداً'],
+                                ['icon' => 'emoji-strongly-dislike.svg', 'label' => 'لا يشبهني'],
+                                ['icon' => 'emoji-dislike.svg', 'label' => 'قليلًا'],
+                                ['icon' => 'emoji-neutral.svg', 'label' => 'محايد'],
+                                ['icon' => 'emoji-like.svg', 'label' => 'يشبهني'],
+                                ['icon' => 'emoji-strongly-like.svg', 'label' => 'جداً'],
                             ];
                         @endphp
 
