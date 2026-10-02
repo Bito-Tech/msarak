@@ -6,11 +6,11 @@
  */
 
 const RATING_LEVELS = [
-    { value: -2, label: 'لا يشبهني إطلاقًا', displayLabel: 'لا يشبهني إطلاقًا', icon: 'emoji-strongly-dislike.png' },
-    { value: -1, label: 'لا يشبهني', displayLabel: 'لا يشبهني', icon: 'emoji-dislike.png' },
-    { value: 0, label: 'محايد / غير متأكد', displayLabel: 'محايد', icon: 'emoji-neutral.png' },
-    { value: 1, label: 'يشبهني', displayLabel: 'يشبهني', icon: 'emoji-like.png' },
-    { value: 2, label: 'يشبهني جدًا', displayLabel: 'يشبهني جدًا', icon: 'emoji-strongly-like.png' },
+    { value: -2, label: 'لا يشبهني إطلاقًا', displayLabel: 'لا يشبهني إطلاقًا', icon: 'emoji-strongly-dislike.svg' },
+    { value: -1, label: 'لا يشبهني', displayLabel: 'لا يشبهني', icon: 'emoji-dislike.svg' },
+    { value: 0, label: 'محايد / غير متأكد', displayLabel: 'محايد', icon: 'emoji-neutral.svg' },
+    { value: 1, label: 'يشبهني', displayLabel: 'يشبهني', icon: 'emoji-like.svg' },
+    { value: 2, label: 'يشبهني جدًا', displayLabel: 'يشبهني جدًا', icon: 'emoji-strongly-like.svg' },
 ];
 
 class AssessmentJourney {
