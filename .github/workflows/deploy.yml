@@ -117,65 +117,6 @@ jobs:
           export DEPLOY_HEAD="$(git rev-parse HEAD)"
           python3 .github/scripts/prepare_infinityfree_deploy.py
 
-      - name: Prepare one-time assessment v1.3 production runner
-        id: assessment_v13
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p .deploy/database/seeders .deploy/public
-          cp database/seeders/AssessmentQuestionBankV13Seeder.php .deploy/database/seeders/AssessmentQuestionBankV13Seeder.php
-
-          token="$(openssl rand -hex 32)"
-          runner="assessment-v13-$(openssl rand -hex 12).php"
-          echo "::add-mask::$token"
-          echo "token=$token" >> "$GITHUB_OUTPUT"
-          echo "runner=$runner" >> "$GITHUB_OUTPUT"
-
-          cat > ".deploy/public/$runner" <<'PHP'
-          <?php
-          declare(strict_types=1);
-
-          header('Content-Type: application/json; charset=utf-8');
-
-          $expected = '__ASSESSMENT_V13_TOKEN__';
-          $provided = $_GET['token'] ?? '';
-          if (! is_string($provided) || ! hash_equals($expected, $provided)) {
-              http_response_code(404);
-              echo json_encode(['ok' => false]);
-              exit;
-          }
-
-          try {
-              require __DIR__.'/../vendor/autoload.php';
-              $app = require __DIR__.'/../bootstrap/app.php';
-              $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-              $kernel->bootstrap();
-
-              (new Database\Seeders\AssessmentQuestionBankV13Seeder)->run();
-
-              $active = App\Models\AssessmentVersion::query()
-                  ->where('version_number', 13)
-                  ->where('status', 'active')
-                  ->whereNotNull('published_at')
-                  ->exists();
-
-              if (! $active) {
-                  throw new RuntimeException('Assessment v1.3 verification failed.');
-              }
-
-              echo json_encode(['ok' => true, 'version' => 13]);
-          } catch (Throwable $e) {
-              http_response_code(500);
-              echo json_encode([
-                  'ok' => false,
-                  'error' => get_class($e),
-                  'message' => $e->getMessage(),
-              ]);
-          }
-          PHP
-
-          sed -i "s/__ASSESSMENT_V13_TOKEN__/$token/" ".deploy/public/$runner"
-
       - name: Validate deployment payload
         shell: bash
         run: |
@@ -252,45 +193,6 @@ jobs:
           fi
 
           echo "$transfer_mode" > .ftp-transfer-mode
-
-      - name: Publish assessment v1.3 on production and remove runner
-        env:
-          FTP_USERNAME: ${{ secrets.INFINITYFREE_FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.INFINITYFREE_FTP_PASSWORD }}
-          ASSESSMENT_V13_TOKEN: ${{ steps.assessment_v13.outputs.token }}
-          ASSESSMENT_V13_RUNNER: ${{ steps.assessment_v13.outputs.runner }}
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          set +e
-          response="$(curl --silent --show-error --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 \
-            "https://masarak.42web.io/$ASSESSMENT_V13_RUNNER?token=$ASSESSMENT_V13_TOKEN")"
-          seed_status=$?
-          set -e
-
-          protect_data="$(cat .ftp-transfer-mode)"
-          cleanup_runner() {
-            lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_HOST:21" <<LFTP
-          set cmd:fail-exit yes
-          set ftp:ssl-force yes
-          set ftp:ssl-auth TLS
-          set ftp:ssl-protect-data $protect_data
-          set ftp:passive-mode yes
-          set ssl:verify-certificate yes
-          rm -f "$DEPLOY_ROOT/public/$ASSESSMENT_V13_RUNNER"
-          bye
-          LFTP
-          }
-
-          cleanup_runner
-
-          if [[ $seed_status -ne 0 ]] || [[ "$response" != *'"ok":true'* ]]; then
-            echo "::error::Assessment v1.3 production publication failed."
-            exit 1
-          fi
-
-          echo "Assessment v1.3 published successfully and one-time runner removed."
 
       - name: Apply deletions and commit deployment state
         env:
