@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('title', 'مقارنة التخصصات')
+@section('seo_robots', 'noindex,follow')
+@section('seo_canonical', route('specializations.compare', [
+    'first' => $first['id'] ?? '',
+    'second' => $second['id'] ?? '',
+]))
 
 @section('content')
 @php
