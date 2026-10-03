@@ -177,6 +177,20 @@ class SeoHeadTest extends TestCase
         $this->assertStringContainsString('second=computer_science', $canonical);
     }
 
+    public function test_default_social_image_asset_is_exactly_1200_by_630(): void
+    {
+        $path = public_path('assets/seo/masarak-og-1200x630.jpg');
+
+        $this->assertFileExists($path);
+
+        $size = getimagesize($path);
+
+        $this->assertIsArray($size);
+        $this->assertSame(1200, $size[0]);
+        $this->assertSame(630, $size[1]);
+        $this->assertSame(IMAGETYPE_JPEG, $size[2]);
+    }
+
     public function test_public_pages_emit_one_absolute_social_image_contract(): void
     {
         $urls = [
