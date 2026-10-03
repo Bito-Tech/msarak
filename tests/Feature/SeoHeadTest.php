@@ -77,6 +77,39 @@ class SeoHeadTest extends TestCase
         $this->assertNotFalse(filter_var($ogUrl, FILTER_VALIDATE_URL));
     }
 
+
+
+    public function test_comparison_page_is_noindex_and_keeps_a_valid_parameterized_canonical(): void
+    {
+        $url = route('specializations.compare', [
+            'first' => 'human_medicine',
+            'second' => 'computer_science',
+        ]);
+
+        $response = $this->get($url);
+
+        $response->assertOk();
+
+        $html = $response->getContent();
+
+        $this->assertIsString($html);
+        $this->assertStringContainsString(
+            '<meta name="robots" content="noindex,follow">',
+            $html
+        );
+
+        preg_match('/<link rel="canonical" href="([^"]+)">/', $html, $canonicalMatch);
+        preg_match('/<meta property="og:url" content="([^"]+)">/', $html, $ogUrlMatch);
+
+        $canonical = html_entity_decode($canonicalMatch[1] ?? '', ENT_QUOTES | ENT_HTML5);
+        $ogUrl = html_entity_decode($ogUrlMatch[1] ?? '', ENT_QUOTES | ENT_HTML5);
+
+        $this->assertSame($url, $canonical);
+        $this->assertSame($url, $ogUrl);
+        $this->assertStringContainsString('first=human_medicine', $canonical);
+        $this->assertStringContainsString('second=computer_science', $canonical);
+    }
+
     public function test_default_social_image_tags_are_not_emitted_before_the_og_image_stage(): void
     {
         $response = $this->get(route('home'));
