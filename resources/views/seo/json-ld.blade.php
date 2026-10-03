@@ -40,9 +40,14 @@
     ];
 
     if (request()->routeIs('specializations.index')) {
+        $seoBreadcrumbId = $seoCanonical.'#breadcrumb';
+        $seoGraph[2]['breadcrumb'] = [
+            '@id' => $seoBreadcrumbId,
+        ];
+
         $seoGraph[] = [
             '@type' => 'BreadcrumbList',
-            '@id' => $seoCanonical.'#breadcrumb',
+            '@id' => $seoBreadcrumbId,
             'itemListElement' => [
                 [
                     '@type' => 'ListItem',
@@ -63,10 +68,15 @@
     if (request()->routeIs('specializations.show')) {
         $seoSpecializationName = (string) ($specialization['name'] ?? 'تخصص جامعي');
         $seoCatalogUrl = route('specializations.index');
+        $seoBreadcrumbId = $seoCanonical.'#breadcrumb';
+
+        $seoGraph[2]['breadcrumb'] = [
+            '@id' => $seoBreadcrumbId,
+        ];
 
         $seoGraph[] = [
             '@type' => 'BreadcrumbList',
-            '@id' => $seoCanonical.'#breadcrumb',
+            '@id' => $seoBreadcrumbId,
             'itemListElement' => [
                 [
                     '@type' => 'ListItem',
