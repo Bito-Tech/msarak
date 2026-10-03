@@ -42,6 +42,7 @@ class SeoStructuredDataTest extends TestCase
         $breadcrumbs = $this->nodeOfType($graph, 'BreadcrumbList');
 
         $this->assertSame($url, $collection['url']);
+        $this->assertSame($url.'#breadcrumb', $collection['breadcrumb']['@id']);
         $this->assertSame(2, count($breadcrumbs['itemListElement']));
         $this->assertSame('الرئيسية', $breadcrumbs['itemListElement'][0]['name']);
         $this->assertSame(route('home'), $breadcrumbs['itemListElement'][0]['item']);
@@ -58,6 +59,7 @@ class SeoStructuredDataTest extends TestCase
         $breadcrumbs = $this->nodeOfType($graph, 'BreadcrumbList');
 
         $this->assertSame($url, $webpage['url']);
+        $this->assertSame($url.'#breadcrumb', $webpage['breadcrumb']['@id']);
         $this->assertSame(3, count($breadcrumbs['itemListElement']));
         $this->assertSame('الطب البشري', $breadcrumbs['itemListElement'][2]['name']);
         $this->assertSame($url, $breadcrumbs['itemListElement'][2]['item']);
