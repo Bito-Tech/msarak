@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    @php
+        $seoSiteName = (string) config('seo.site_name', 'مسارك');
+        $decodeSeoSection = static fn (string $value): string => trim(
+            html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8')
+        );
+
+        $seoPageTitle = $decodeSeoSection($__env->yieldContent('title'));
+        $seoTitle = $seoPageTitle !== '' ? $seoPageTitle.' | '.$seoSiteName : $seoSiteName;
+        $seoDescription = $decodeSeoSection($__env->yieldContent(
+            'seo_description',
+            (string) config('seo.default_description', '')
+        ));
+        $seoCanonical = $decodeSeoSection($__env->yieldContent('seo_canonical', url()->current()));
+        $seoType = $decodeSeoSection($__env->yieldContent(
+            'seo_type',
+            (string) config('seo.default_type', 'website')
+        ));
+        $seoImage = $decodeSeoSection($__env->yieldContent('seo_image'));
+
+        $defaultSeoRobots = request()->routeIs(
+            'login',
+            'register',
+            'password.*',
+            'assessment.*',
+            'results.*',
+            'profile.*',
+            'admin.*',
+        ) ? 'noindex,follow' : '';
+
+        $seoRobots = $decodeSeoSection(
+            $__env->yieldContent('seo_robots', $defaultSeoRobots)
+        );
+    @endphp
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="theme-color" content="{{ request()->routeIs('assessment.*') || request()->routeIs('home') || request()->routeIs('specializations.*') || request()->routeIs('login') || request()->routeIs('register') || request()->routeIs('password.*') ? '#0f766e' : '#4f46e5' }}">
-    <title>@hasSection('title')@yield('title') | @endifمسارك</title>
+
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDescription }}">
+    @if ($seoRobots !== '')
+        <meta name="robots" content="{{ $seoRobots }}">
+    @endif
+    <link rel="canonical" href="{{ $seoCanonical }}">
+
+    <meta property="og:site_name" content="{{ $seoSiteName }}">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:url" content="{{ $seoCanonical }}">
+    <meta property="og:type" content="{{ $seoType }}">
+    <meta property="og:locale" content="{{ config('seo.locale', 'ar_YE') }}">
+    @if ($seoImage !== '')
+        <meta property="og:image" content="{{ $seoImage }}">
+    @endif
+
+    <meta name="twitter:card" content="{{ $seoImage !== '' ? 'summary_large_image' : 'summary' }}">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    @if ($seoImage !== '')
+        <meta name="twitter:image" content="{{ $seoImage }}">
+    @endif
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}
     <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2" crossorigin>
