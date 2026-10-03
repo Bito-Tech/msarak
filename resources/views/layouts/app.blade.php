@@ -19,7 +19,20 @@
             (string) config('seo.default_type', 'website')
         ));
         $seoImage = $decodeSeoSection($__env->yieldContent('seo_image'));
-        $seoRobots = $decodeSeoSection($__env->yieldContent('seo_robots'));
+
+        $defaultSeoRobots = request()->routeIs(
+            'login',
+            'register',
+            'password.*',
+            'assessment.*',
+            'results.*',
+            'profile.*',
+            'admin.*',
+        ) ? 'noindex,follow' : '';
+
+        $seoRobots = $decodeSeoSection(
+            $__env->yieldContent('seo_robots', $defaultSeoRobots)
+        );
     @endphp
 
     <meta charset="utf-8">
