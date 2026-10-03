@@ -18,7 +18,41 @@
             'seo_type',
             (string) config('seo.default_type', 'website')
         ));
-        $seoImage = $decodeSeoSection($__env->yieldContent('seo_image'));
+
+        $seoIsIndexablePublicPage = request()->routeIs(
+            'home',
+            'specializations.index',
+            'specializations.show',
+        );
+
+        $defaultSeoImage = $seoIsIndexablePublicPage
+            ? url((string) config('seo.default_image', '/assets/home/masarak-home-student-hero.jpg'))
+            : '';
+
+        $seoImage = $decodeSeoSection(
+            $__env->yieldContent('seo_image', $defaultSeoImage)
+        );
+
+        $seoImageAlt = $decodeSeoSection(
+            $__env->yieldContent('seo_image_alt', $seoSiteName.' — التوجيه الأكاديمي والمهني')
+        );
+
+        $seoImageUsesDefaultAsset = $seoImage !== '' && $seoImage === $defaultSeoImage;
+
+        $seoImageWidth = $decodeSeoSection($__env->yieldContent(
+            'seo_image_width',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_width', '') : ''
+        ));
+
+        $seoImageHeight = $decodeSeoSection($__env->yieldContent(
+            'seo_image_height',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_height', '') : ''
+        ));
+
+        $seoImageType = $decodeSeoSection($__env->yieldContent(
+            'seo_image_type',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_type', '') : ''
+        ));
 
         $defaultSeoRobots = request()->routeIs(
             'login',
@@ -55,6 +89,16 @@
     <meta property="og:locale" content="{{ config('seo.locale', 'ar_YE') }}">
     @if ($seoImage !== '')
         <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image:alt" content="{{ $seoImageAlt }}">
+        @if ($seoImageWidth !== '')
+            <meta property="og:image:width" content="{{ $seoImageWidth }}">
+        @endif
+        @if ($seoImageHeight !== '')
+            <meta property="og:image:height" content="{{ $seoImageHeight }}">
+        @endif
+        @if ($seoImageType !== '')
+            <meta property="og:image:type" content="{{ $seoImageType }}">
+        @endif
     @endif
 
     <meta name="twitter:card" content="{{ $seoImage !== '' ? 'summary_large_image' : 'summary' }}">
@@ -62,6 +106,11 @@
     <meta name="twitter:description" content="{{ $seoDescription }}">
     @if ($seoImage !== '')
         <meta name="twitter:image" content="{{ $seoImage }}">
+        <meta name="twitter:image:alt" content="{{ $seoImageAlt }}">
+    @endif
+
+    @if ($seoIsIndexablePublicPage)
+        @include('seo.json-ld')
     @endif
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}

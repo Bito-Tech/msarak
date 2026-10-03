@@ -52,7 +52,31 @@ class SeoHeadTest extends TestCase
             false
         );
         $response->assertSee(
-            '<meta name="twitter:card" content="summary">',
+            '<meta name="twitter:card" content="summary_large_image">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image" content="'.url(config('seo.default_image')).'">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:alt" content="مسارك — التوجيه الأكاديمي والمهني">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:width" content="1122">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:height" content="1402">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:type" content="image/jpeg">',
+            false
+        );
+        $response->assertSee(
+            '<meta name="twitter:image" content="'.url(config('seo.default_image')).'">',
             false
         );
     }
@@ -97,8 +121,7 @@ class SeoHeadTest extends TestCase
             ->assertSee(
                 '<meta name="description" content="تصفح دليل التخصصات الجامعية في مسارك، وتعرّف إلى طبيعة الدراسة والمهارات والأنشطة والمسارات المهنية لكل تخصص قبل اتخاذ قرارك.">',
                 false
-            )
-            ->assertDontSee(config('seo.default_description'), false);
+            );
     }
 
     public function test_every_specialization_page_has_specific_title_and_bounded_description(): void
@@ -166,13 +189,58 @@ class SeoHeadTest extends TestCase
         $this->assertStringContainsString('second=computer_science', $canonical);
     }
 
-    public function test_default_social_image_tags_are_not_emitted_before_the_og_image_stage(): void
+    public function test_default_social_image_reuses_the_existing_site_hero_asset(): void
     {
-        $response = $this->get(route('home'));
+        $this->assertSame(
+            '/assets/home/masarak-home-student-hero.jpg',
+            config('seo.default_image')
+        );
 
-        $response
-            ->assertOk()
-            ->assertDontSee('<meta property="og:image"', false)
-            ->assertDontSee('<meta name="twitter:image"', false);
+        $path = public_path('assets/home/masarak-home-student-hero.jpg');
+
+        $this->assertFileExists($path);
+
+        $size = getimagesize($path);
+
+        $this->assertIsArray($size);
+        $this->assertSame(1122, $size[0]);
+        $this->assertSame(1402, $size[1]);
+        $this->assertSame(IMAGETYPE_JPEG, $size[2]);
+    }
+
+    public function test_public_pages_emit_one_absolute_social_image_contract(): void
+    {
+        $urls = [
+            route('home'),
+            route('specializations.index'),
+            route('specializations.show', 'human_medicine'),
+        ];
+
+        $expectedImage = url(config('seo.default_image'));
+
+        foreach ($urls as $url) {
+            $response = $this->get($url);
+
+            $response->assertOk();
+
+            $html = $response->getContent();
+
+            $this->assertIsString($html);
+            $this->assertSame(1, substr_count($html, '<meta property="og:image"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:alt"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:width"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:height"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:type"'));
+            $this->assertSame(1, substr_count($html, '<meta name="twitter:image"'));
+            $this->assertSame(1, substr_count($html, '<meta name="twitter:image:alt"'));
+            $this->assertStringContainsString(
+                '<meta property="og:image" content="'.$expectedImage.'">',
+                $html
+            );
+            $this->assertStringContainsString('<meta property="og:image:width" content="1122">', $html);
+            $this->assertStringContainsString('<meta property="og:image:height" content="1402">', $html);
+            $this->assertStringContainsString('<meta property="og:image:type" content="image/jpeg">', $html);
+            $this->assertNotFalse(filter_var($expectedImage, FILTER_VALIDATE_URL));
+        }
     }
 }
