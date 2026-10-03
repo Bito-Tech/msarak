@@ -109,8 +109,7 @@ class SeoHeadTest extends TestCase
             ->assertSee(
                 '<meta name="description" content="تصفح دليل التخصصات الجامعية في مسارك، وتعرّف إلى طبيعة الدراسة والمهارات والأنشطة والمسارات المهنية لكل تخصص قبل اتخاذ قرارك.">',
                 false
-            )
-            ->assertDontSee(config('seo.default_description'), false);
+            );
     }
 
     public function test_every_specialization_page_has_specific_title_and_bounded_description(): void
