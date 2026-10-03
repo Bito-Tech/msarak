@@ -11,13 +11,14 @@ class SeoStructuredDataTest extends TestCase
         $graph = $this->jsonLdGraphFor(route('home'));
 
         $this->assertSame(
-            ['Organization', 'WebSite', 'WebPage'],
+            ['Organization', 'WebSite', 'WebPage', 'ImageObject'],
             array_column($graph, '@type')
         );
 
         $organization = $this->nodeOfType($graph, 'Organization');
         $website = $this->nodeOfType($graph, 'WebSite');
         $webpage = $this->nodeOfType($graph, 'WebPage');
+        $image = $this->nodeOfType($graph, 'ImageObject');
 
         $this->assertSame('فريق بيتو تك', $organization['name']);
         $this->assertSame(route('home'), $organization['url']);
@@ -31,6 +32,15 @@ class SeoStructuredDataTest extends TestCase
         $this->assertSame(route('home'), $webpage['url']);
         $this->assertSame('ar', $webpage['inLanguage']);
         $this->assertSame(route('home').'#website', $webpage['isPartOf']['@id']);
+        $this->assertSame(route('home').'#primaryimage', $webpage['primaryImageOfPage']['@id']);
+
+        $this->assertSame(route('home').'#primaryimage', $image['@id']);
+        $this->assertSame(url(config('seo.default_image')), $image['url']);
+        $this->assertSame(url(config('seo.default_image')), $image['contentUrl']);
+        $this->assertSame(1122, $image['width']);
+        $this->assertSame(1402, $image['height']);
+        $this->assertSame('image/jpeg', $image['encodingFormat']);
+        $this->assertSame('مسارك — التوجيه الأكاديمي والمهني', $image['caption']);
     }
 
     public function test_specialization_catalog_emits_collection_page_and_two_level_breadcrumbs(): void
@@ -39,9 +49,12 @@ class SeoStructuredDataTest extends TestCase
         $graph = $this->jsonLdGraphFor($url);
 
         $collection = $this->nodeOfType($graph, 'CollectionPage');
+        $image = $this->nodeOfType($graph, 'ImageObject');
         $breadcrumbs = $this->nodeOfType($graph, 'BreadcrumbList');
 
         $this->assertSame($url, $collection['url']);
+        $this->assertSame($url.'#primaryimage', $collection['primaryImageOfPage']['@id']);
+        $this->assertSame($url.'#primaryimage', $image['@id']);
         $this->assertSame($url.'#breadcrumb', $collection['breadcrumb']['@id']);
         $this->assertSame(2, count($breadcrumbs['itemListElement']));
         $this->assertSame('الرئيسية', $breadcrumbs['itemListElement'][0]['name']);
@@ -56,9 +69,12 @@ class SeoStructuredDataTest extends TestCase
         $graph = $this->jsonLdGraphFor($url);
 
         $webpage = $this->nodeOfType($graph, 'WebPage');
+        $image = $this->nodeOfType($graph, 'ImageObject');
         $breadcrumbs = $this->nodeOfType($graph, 'BreadcrumbList');
 
         $this->assertSame($url, $webpage['url']);
+        $this->assertSame($url.'#primaryimage', $webpage['primaryImageOfPage']['@id']);
+        $this->assertSame($url.'#primaryimage', $image['@id']);
         $this->assertSame($url.'#breadcrumb', $webpage['breadcrumb']['@id']);
         $this->assertSame(3, count($breadcrumbs['itemListElement']));
         $this->assertSame('الطب البشري', $breadcrumbs['itemListElement'][2]['name']);
