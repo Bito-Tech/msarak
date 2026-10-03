@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'دليل التخصصات')
+@section('title', 'دليل التخصصات الجامعية')
+@section('seo_description', 'تصفح دليل التخصصات الجامعية في مسارك، وتعرّف إلى طبيعة الدراسة والمهارات والأنشطة والمسارات المهنية لكل تخصص قبل اتخاذ قرارك.')
 
 @section('content')
 <div class="specializations-page mx-auto w-full" dir="rtl">
