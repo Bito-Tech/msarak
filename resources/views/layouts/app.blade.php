@@ -3,19 +3,23 @@
 <head>
     @php
         $seoSiteName = (string) config('seo.site_name', 'مسارك');
-        $seoPageTitle = trim($__env->yieldContent('title'));
+        $decodeSeoSection = static fn (string $value): string => trim(
+            html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8')
+        );
+
+        $seoPageTitle = $decodeSeoSection($__env->yieldContent('title'));
         $seoTitle = $seoPageTitle !== '' ? $seoPageTitle.' | '.$seoSiteName : $seoSiteName;
-        $seoDescription = trim($__env->yieldContent(
+        $seoDescription = $decodeSeoSection($__env->yieldContent(
             'seo_description',
             (string) config('seo.default_description', '')
         ));
-        $seoCanonical = trim($__env->yieldContent('seo_canonical', url()->current()));
-        $seoType = trim($__env->yieldContent(
+        $seoCanonical = $decodeSeoSection($__env->yieldContent('seo_canonical', url()->current()));
+        $seoType = $decodeSeoSection($__env->yieldContent(
             'seo_type',
             (string) config('seo.default_type', 'website')
         ));
-        $seoImage = trim($__env->yieldContent('seo_image'));
-        $seoRobots = trim($__env->yieldContent('seo_robots'));
+        $seoImage = $decodeSeoSection($__env->yieldContent('seo_image'));
+        $seoRobots = $decodeSeoSection($__env->yieldContent('seo_robots'));
     @endphp
 
     <meta charset="utf-8">
