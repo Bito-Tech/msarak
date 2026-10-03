@@ -3,6 +3,7 @@
     $seoOrganizationId = $seoHomeUrl.'#organization';
     $seoWebsiteId = $seoHomeUrl.'#website';
     $seoWebPageId = $seoCanonical.'#webpage';
+    $seoImageObjectId = $seoCanonical.'#primaryimage';
 
     $seoGraph = [
         [
@@ -36,6 +37,19 @@
             'publisher' => [
                 '@id' => $seoOrganizationId,
             ],
+            'primaryImageOfPage' => [
+                '@id' => $seoImageObjectId,
+            ],
+        ],
+        [
+            '@type' => 'ImageObject',
+            '@id' => $seoImageObjectId,
+            'url' => $seoImage,
+            'contentUrl' => $seoImage,
+            'width' => (int) $seoImageWidth,
+            'height' => (int) $seoImageHeight,
+            'encodingFormat' => $seoImageType,
+            'caption' => $seoImageAlt,
         ],
     ];
 
