@@ -15,6 +15,7 @@
             (string) config('seo.default_type', 'website')
         ));
         $seoImage = trim($__env->yieldContent('seo_image'));
+        $seoRobots = trim($__env->yieldContent('seo_robots'));
     @endphp
 
     <meta charset="utf-8">
@@ -24,6 +25,9 @@
 
     <title>{{ $seoTitle }}</title>
     <meta name="description" content="{{ $seoDescription }}">
+    @if ($seoRobots !== '')
+        <meta name="robots" content="{{ $seoRobots }}">
+    @endif
     <link rel="canonical" href="{{ $seoCanonical }}">
 
     <meta property="og:site_name" content="{{ $seoSiteName }}">
