@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-@section('title', $specialization['name'] ?? 'تخصص')
+@section('title', 'تخصص '.($specialization['name'] ?? 'جامعي').' | الدراسة والمهارات والمسارات المهنية')
+@section('seo_description', \Illuminate\Support\Str::limit(
+    'تعرّف إلى تخصص '.($specialization['name'] ?? 'جامعي').': '.($specialization['description'] ?? 'طبيعة الدراسة والمهارات والأنشطة والمسارات المهنية.'),
+    155,
+    '…'
+))
 
 @section('content')
 @php
