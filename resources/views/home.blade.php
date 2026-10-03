@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'الرئيسية')
+@section('title', 'اكتشف ميولك واختر تخصصك الجامعي بوعي')
+@section('seo_description', 'اكتشف ميولك المهنية مع مسارك، واستكشف التخصصات الجامعية وطبيعة الدراسة والمهارات والمسارات المهنية لتبدأ قرارك بعد الثانوية بوعي أكبر.')
 
 @section('content')
 <div class="home-landing mx-auto w-full" dir="rtl">
