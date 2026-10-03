@@ -64,6 +64,18 @@ class SeoHeadTest extends TestCase
             false
         );
         $response->assertSee(
+            '<meta property="og:image:width" content="1122">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:height" content="1402">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:type" content="image/jpeg">',
+            false
+        );
+        $response->assertSee(
             '<meta name="twitter:image" content="'.url(config('seo.default_image')).'">',
             false
         );
@@ -216,12 +228,18 @@ class SeoHeadTest extends TestCase
             $this->assertIsString($html);
             $this->assertSame(1, substr_count($html, '<meta property="og:image"'));
             $this->assertSame(1, substr_count($html, '<meta property="og:image:alt"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:width"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:height"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:type"'));
             $this->assertSame(1, substr_count($html, '<meta name="twitter:image"'));
             $this->assertSame(1, substr_count($html, '<meta name="twitter:image:alt"'));
             $this->assertStringContainsString(
                 '<meta property="og:image" content="'.$expectedImage.'">',
                 $html
             );
+            $this->assertStringContainsString('<meta property="og:image:width" content="1122">', $html);
+            $this->assertStringContainsString('<meta property="og:image:height" content="1402">', $html);
+            $this->assertStringContainsString('<meta property="og:image:type" content="image/jpeg">', $html);
             $this->assertNotFalse(filter_var($expectedImage, FILTER_VALIDATE_URL));
         }
     }
