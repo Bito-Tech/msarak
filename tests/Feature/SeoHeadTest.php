@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Services\SpecializationCatalogService;
 use Tests\TestCase;
 
 class SeoHeadTest extends TestCase
@@ -26,9 +27,12 @@ class SeoHeadTest extends TestCase
         $this->assertSame(1, substr_count($html, '<meta name="twitter:title"'));
         $this->assertSame(1, substr_count($html, '<meta name="twitter:description"'));
 
-        $response->assertSee('<title>الرئيسية | مسارك</title>', false);
         $response->assertSee(
-            '<meta name="description" content="'.config('seo.default_description').'">',
+            '<title>اكتشف ميولك واختر تخصصك الجامعي بوعي | مسارك</title>',
+            false
+        );
+        $response->assertSee(
+            '<meta name="description" content="اكتشف ميولك المهنية مع مسارك، واستكشف التخصصات الجامعية وطبيعة الدراسة والمهارات والمسارات المهنية لتبدأ قرارك بعد الثانوية بوعي أكبر.">',
             false
         );
         $response->assertSee(
@@ -63,7 +67,10 @@ class SeoHeadTest extends TestCase
         $html = $response->getContent();
 
         $this->assertIsString($html);
-        $this->assertStringContainsString('<title>الطب البشري | مسارك</title>', $html);
+        $this->assertStringContainsString(
+            '<title>تخصص الطب البشري | الدراسة والمهارات والمسارات المهنية | مسارك</title>',
+            $html
+        );
 
         preg_match('/<link rel="canonical" href="([^"]+)">/', $html, $canonicalMatch);
         preg_match('/<meta property="og:url" content="([^"]+)">/', $html, $ogUrlMatch);
@@ -78,6 +85,54 @@ class SeoHeadTest extends TestCase
     }
 
 
+
+
+    public function test_specialization_catalog_has_search_focused_unique_metadata(): void
+    {
+        $response = $this->get(route('specializations.index'));
+
+        $response
+            ->assertOk()
+            ->assertSee('<title>دليل التخصصات الجامعية | مسارك</title>', false)
+            ->assertSee(
+                '<meta name="description" content="تصفح دليل التخصصات الجامعية في مسارك، وتعرّف إلى طبيعة الدراسة والمهارات والأنشطة والمسارات المهنية لكل تخصص قبل اتخاذ قرارك.">',
+                false
+            )
+            ->assertDontSee(config('seo.default_description'), false);
+    }
+
+    public function test_every_specialization_page_has_specific_title_and_bounded_description(): void
+    {
+        $catalog = app(SpecializationCatalogService::class);
+
+        foreach ($catalog->all() as $specialization) {
+            $url = route('specializations.show', $specialization['id']);
+            $response = $this->get($url);
+
+            $response->assertOk();
+
+            $html = $response->getContent();
+
+            $this->assertIsString($html);
+            $this->assertStringContainsString(
+                '<title>تخصص '.$specialization['name'].' | الدراسة والمهارات والمسارات المهنية | مسارك</title>',
+                $html
+            );
+
+            preg_match('/<meta name="description" content="([^"]*)">/', $html, $descriptionMatch);
+            $description = html_entity_decode($descriptionMatch[1] ?? '', ENT_QUOTES | ENT_HTML5);
+
+            $this->assertNotSame('', $description);
+            $this->assertNotSame(config('seo.default_description'), $description);
+            $this->assertStringStartsWith('تعرّف إلى تخصص '.$specialization['name'].':', $description);
+            $this->assertLessThanOrEqual(155, mb_strlen($description));
+
+            preg_match('/<link rel="canonical" href="([^"]+)">/', $html, $canonicalMatch);
+            $canonical = html_entity_decode($canonicalMatch[1] ?? '', ENT_QUOTES | ENT_HTML5);
+
+            $this->assertSame($url, $canonical);
+        }
+    }
 
     public function test_comparison_page_is_noindex_and_keeps_a_valid_parameterized_canonical(): void
     {
