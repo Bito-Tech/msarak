@@ -9,6 +9,12 @@ return [
 
     'default_image' => '/assets/home/masarak-home-student-hero.jpg',
 
+    'default_image_width' => 1122,
+
+    'default_image_height' => 1402,
+
+    'default_image_type' => 'image/jpeg',
+
     'locale' => 'ar_YE',
 
     'language' => 'ar',
