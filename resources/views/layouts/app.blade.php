@@ -18,7 +18,24 @@
             'seo_type',
             (string) config('seo.default_type', 'website')
         ));
-        $seoImage = $decodeSeoSection($__env->yieldContent('seo_image'));
+
+        $seoIsIndexablePublicPage = request()->routeIs(
+            'home',
+            'specializations.index',
+            'specializations.show',
+        );
+
+        $defaultSeoImage = $seoIsIndexablePublicPage
+            ? url((string) config('seo.default_image', '/assets/home/masarak-home-student-hero.jpg'))
+            : '';
+
+        $seoImage = $decodeSeoSection(
+            $__env->yieldContent('seo_image', $defaultSeoImage)
+        );
+
+        $seoImageAlt = $decodeSeoSection(
+            $__env->yieldContent('seo_image_alt', $seoSiteName.' — التوجيه الأكاديمي والمهني')
+        );
 
         $defaultSeoRobots = request()->routeIs(
             'login',
@@ -55,6 +72,7 @@
     <meta property="og:locale" content="{{ config('seo.locale', 'ar_YE') }}">
     @if ($seoImage !== '')
         <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image:alt" content="{{ $seoImageAlt }}">
     @endif
 
     <meta name="twitter:card" content="{{ $seoImage !== '' ? 'summary_large_image' : 'summary' }}">
@@ -62,6 +80,11 @@
     <meta name="twitter:description" content="{{ $seoDescription }}">
     @if ($seoImage !== '')
         <meta name="twitter:image" content="{{ $seoImage }}">
+        <meta name="twitter:image:alt" content="{{ $seoImageAlt }}">
+    @endif
+
+    @if ($seoIsIndexablePublicPage)
+        @include('seo.json-ld')
     @endif
 
     {{-- الخط العربي المعتمد: IBM Plex Sans Arabic ذو الرصانة التقنية والوضوح العالي في الواجهات البرمجية --}}
