@@ -106,6 +106,7 @@ class SeoHeadTest extends TestCase
 
         $this->assertSame($url, $canonical);
         $this->assertSame($url, $ogUrl);
+        $this->assertStringNotContainsString('&amp;amp;', $html);
         $this->assertStringContainsString('first=human_medicine', $canonical);
         $this->assertStringContainsString('second=computer_science', $canonical);
     }
