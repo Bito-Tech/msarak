@@ -7,7 +7,7 @@ return [
 
     'default_type' => 'website',
 
-    'default_image' => '/assets/seo/masarak-og-1200x630.jpg',
+    'default_image' => '/assets/home/masarak-home-student-hero.jpg',
 
     'locale' => 'ar_YE',
 
