@@ -37,6 +37,23 @@
             $__env->yieldContent('seo_image_alt', $seoSiteName.' — التوجيه الأكاديمي والمهني')
         );
 
+        $seoImageUsesDefaultAsset = $seoImage !== '' && $seoImage === $defaultSeoImage;
+
+        $seoImageWidth = $decodeSeoSection($__env->yieldContent(
+            'seo_image_width',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_width', '') : ''
+        ));
+
+        $seoImageHeight = $decodeSeoSection($__env->yieldContent(
+            'seo_image_height',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_height', '') : ''
+        ));
+
+        $seoImageType = $decodeSeoSection($__env->yieldContent(
+            'seo_image_type',
+            $seoImageUsesDefaultAsset ? (string) config('seo.default_image_type', '') : ''
+        ));
+
         $defaultSeoRobots = request()->routeIs(
             'login',
             'register',
@@ -73,6 +90,15 @@
     @if ($seoImage !== '')
         <meta property="og:image" content="{{ $seoImage }}">
         <meta property="og:image:alt" content="{{ $seoImageAlt }}">
+        @if ($seoImageWidth !== '')
+            <meta property="og:image:width" content="{{ $seoImageWidth }}">
+        @endif
+        @if ($seoImageHeight !== '')
+            <meta property="og:image:height" content="{{ $seoImageHeight }}">
+        @endif
+        @if ($seoImageType !== '')
+            <meta property="og:image:type" content="{{ $seoImageType }}">
+        @endif
     @endif
 
     <meta name="twitter:card" content="{{ $seoImage !== '' ? 'summary_large_image' : 'summary' }}">
