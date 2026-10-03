@@ -7,5 +7,16 @@ return [
 
     'default_type' => 'website',
 
+    'default_image' => '/assets/home/masarak-home-student-hero.jpg',
+
     'locale' => 'ar_YE',
+
+    'language' => 'ar',
+
+    'organization_name' => 'فريق بيتو تك',
+
+    'organization_same_as' => [
+        'https://github.com/Bito-Tech',
+        'https://www.linkedin.com/company/bito-tech',
+    ],
 ];
