@@ -121,6 +121,7 @@ class SeoNoIndexTest extends TestCase
     {
         $urls = [
             route('home'),
+            route('career-interests.index'),
             route('specializations.index'),
             route('specializations.show', 'human_medicine'),
         ];
