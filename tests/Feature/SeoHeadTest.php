@@ -52,7 +52,19 @@ class SeoHeadTest extends TestCase
             false
         );
         $response->assertSee(
-            '<meta name="twitter:card" content="summary">',
+            '<meta name="twitter:card" content="summary_large_image">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image" content="'.url(config('seo.default_image')).'">',
+            false
+        );
+        $response->assertSee(
+            '<meta property="og:image:alt" content="مسارك — التوجيه الأكاديمي والمهني">',
+            false
+        );
+        $response->assertSee(
+            '<meta name="twitter:image" content="'.url(config('seo.default_image')).'">',
             false
         );
     }
@@ -166,13 +178,33 @@ class SeoHeadTest extends TestCase
         $this->assertStringContainsString('second=computer_science', $canonical);
     }
 
-    public function test_default_social_image_tags_are_not_emitted_before_the_og_image_stage(): void
+    public function test_public_pages_emit_one_absolute_social_image_contract(): void
     {
-        $response = $this->get(route('home'));
+        $urls = [
+            route('home'),
+            route('specializations.index'),
+            route('specializations.show', 'human_medicine'),
+        ];
 
-        $response
-            ->assertOk()
-            ->assertDontSee('<meta property="og:image"', false)
-            ->assertDontSee('<meta name="twitter:image"', false);
+        $expectedImage = url(config('seo.default_image'));
+
+        foreach ($urls as $url) {
+            $response = $this->get($url);
+
+            $response->assertOk();
+
+            $html = $response->getContent();
+
+            $this->assertIsString($html);
+            $this->assertSame(1, substr_count($html, '<meta property="og:image"'));
+            $this->assertSame(1, substr_count($html, '<meta property="og:image:alt"'));
+            $this->assertSame(1, substr_count($html, '<meta name="twitter:image"'));
+            $this->assertSame(1, substr_count($html, '<meta name="twitter:image:alt"'));
+            $this->assertStringContainsString(
+                '<meta property="og:image" content="'.$expectedImage.'">',
+                $html
+            );
+            $this->assertNotFalse(filter_var($expectedImage, FILTER_VALIDATE_URL));
+        }
     }
 }
