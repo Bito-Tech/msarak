@@ -177,17 +177,22 @@ class SeoHeadTest extends TestCase
         $this->assertStringContainsString('second=computer_science', $canonical);
     }
 
-    public function test_default_social_image_asset_is_exactly_1200_by_630(): void
+    public function test_default_social_image_reuses_the_existing_site_hero_asset(): void
     {
-        $path = public_path('assets/seo/masarak-og-1200x630.jpg');
+        $this->assertSame(
+            '/assets/home/masarak-home-student-hero.jpg',
+            config('seo.default_image')
+        );
+
+        $path = public_path('assets/home/masarak-home-student-hero.jpg');
 
         $this->assertFileExists($path);
 
         $size = getimagesize($path);
 
         $this->assertIsArray($size);
-        $this->assertSame(1200, $size[0]);
-        $this->assertSame(630, $size[1]);
+        $this->assertSame(1122, $size[0]);
+        $this->assertSame(1402, $size[1]);
         $this->assertSame(IMAGETYPE_JPEG, $size[2]);
     }
 
