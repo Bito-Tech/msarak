@@ -48,7 +48,9 @@ class SeoScientificFoundationTest extends TestCase
             ->assertSee('تنظيمي/إجرائي')
             ->assertSee('href="'.route('career-interests.index').'"', false)
             ->assertSee('href="'.route('major-choice.index').'"', false)
-            ->assertSee('https://www.onetcenter.org/reports/IP_Manual.html', false);
+            ->assertSee('https://www.onetcenter.org/reports/IP_Manual.html', false)
+            ->assertSee('https://doi.org/10.1006/jvbe.1994.1027', false)
+            ->assertDontSee('https://doi.org/10.1016/0001-8791(94)90026-4', false);
     }
 
     public function test_existing_public_guides_link_to_scientific_foundation(): void
