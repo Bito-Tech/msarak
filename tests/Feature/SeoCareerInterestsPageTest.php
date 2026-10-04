@@ -13,10 +13,20 @@ class SeoCareerInterestsPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee(
-                '<title>اختبار الميول المهنية بالعربي | اكتشف ميولك قبل اختيار تخصصك | مسارك</title>',
+                '<title>اختبار الميول المهنية بالعربي | اكتشف ميولك | مسارك</title>',
                 false
             )
             ->assertSee('اختبار الميول المهنية: ابدأ بفهم ما يجذبك')
+            ->assertSee('نموذج هولاند RIASEC')
+            ->assertSee('عملي/تطبيقي')
+            ->assertSee('بحثي/تحليلي')
+            ->assertSee('فني/إبداعي')
+            ->assertSee('اجتماعي/مساند')
+            ->assertSee('مبادر/تأثيري')
+            ->assertSee('تنظيمي/إجرائي')
+            ->assertSee('ليس لاختبار الشخصية أو القدرات')
+            ->assertDontSee('المغامر')
+            ->assertDontSee('التقليدي')
             ->assertDontSee('<meta name="robots" content="noindex,follow">', false)
             ->assertSee(
                 '<link rel="canonical" href="'.route('career-interests.index').'">',
