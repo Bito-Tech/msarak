@@ -42,6 +42,19 @@ class SeoScientificFoundationPageTest extends TestCase
             ->assertSee('https://doi.org/10.1016/0001-8791(94)90026-4', false);
     }
 
+    public function test_existing_public_guides_link_to_scientific_foundation(): void
+    {
+        $url = route('scientific-foundation.index');
+
+        $this->get(route('career-interests.index'))
+            ->assertOk()
+            ->assertSee('href="'.$url.'"', false);
+
+        $this->get(route('major-choice.index'))
+            ->assertOk()
+            ->assertSee('href="'.$url.'"', false);
+    }
+
     public function test_scientific_foundation_page_emits_webpage_image_and_two_level_breadcrumb_json_ld(): void
     {
         $response = $this->get(route('scientific-foundation.index'));
