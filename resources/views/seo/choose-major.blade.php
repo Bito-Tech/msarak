@@ -133,6 +133,9 @@
             <a href="{{ route('career-interests.index') }}" class="btn btn-secondary btn-pill min-h-12 px-6 text-base font-bold">
                 استكشف ميولك أولًا
             </a>
+            <a href="{{ route('scientific-foundation.index') }}" class="inline-flex min-h-12 items-center px-3 text-base font-bold text-slate-700 hover:text-brand-800">
+                اقرأ الأساس العلمي لمسارك
+            </a>
         </div>
     </section>
 </article>
