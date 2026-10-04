@@ -13,6 +13,7 @@ class SitemapController extends Controller
             route('home'),
             route('career-interests.index'),
             route('major-choice.index'),
+            route('scientific-foundation.index'),
             route('specializations.index'),
         ];
 
