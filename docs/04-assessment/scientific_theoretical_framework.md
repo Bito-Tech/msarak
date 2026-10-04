@@ -108,7 +108,7 @@
 
 ## 5. الأساس الثاني: النظرية المعرفية الاجتماعية للمسار المهني SCCT
 
-طوّر Lent وBrown وHackett النظرية لتفسير نشوء الاهتمامات والاختيارات والأداء من خلال تفاعل فعالية الذات، وتوقعات النتائج، والأهداف، وخبرات التعلم، والدعم والعوائق السياقية. المرجع المؤسس هو [Lent, Brown, & Hackett, 1994](https://doi.org/10.1016/0001-8791(94)90026-4).
+طوّر Lent وBrown وHackett النظرية لتفسير نشوء الاهتمامات والاختيارات والأداء من خلال تفاعل فعالية الذات، وتوقعات النتائج، والأهداف، وخبرات التعلم، والدعم والعوائق السياقية. المرجع المؤسس هو [Lent, Brown, & Hackett, 1994](https://doi.org/10.1006/jvbe.1994.1027).
 
 ### 5.1 ما الذي نأخذه منها؟
 
@@ -450,7 +450,7 @@ SCCT **إطار مساند أساسي** لبنود قليلة ومنفصلة ب�
 ## 17. مراجع البحث الأساسية
 
 1. Holland, J. L. (1997). *Making Vocational Choices* (3rd ed.). Psychological Assessment Resources. الأساس النظري لنموذج RIASEC.
-2. Lent, R. W., Brown, S. D., & Hackett, G. (1994). [Toward a Unifying Social Cognitive Theory of Career and Academic Interest, Choice, and Performance](https://doi.org/10.1016/0001-8791(94)90026-4). *Journal of Vocational Behavior, 45*, 79–122.
+2. Lent, R. W., Brown, S. D., & Hackett, G. (1994). [Toward a Unifying Social Cognitive Theory of Career and Academic Interest, Choice, and Performance](https://doi.org/10.1006/jvbe.1994.1027). *Journal of Vocational Behavior, 45*, 79–122.
 3. Eccles, J. S., & Wigfield, A. (2020). [From Expectancy–Value Theory to Situated Expectancy–Value Theory](https://doi.org/10.1016/j.cedpsych.2020.101859). *Contemporary Educational Psychology, 61*.
 4. Nye, C. D., Su, R., Rounds, J., & Drasgow, F. (2012). [Vocational Interests and Performance](https://doi.org/10.1177/1745691612449021). *Perspectives on Psychological Science, 7*(4), 384–403.
 5. Nye, C. D., Su, R., Rounds, J., & Drasgow, F. (2017). [Interest Congruence and Performance](https://doi.org/10.1016/j.jvb.2016.11.002). *Journal of Vocational Behavior, 98*, 138–151.
