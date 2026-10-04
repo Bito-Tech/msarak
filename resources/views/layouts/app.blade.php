@@ -22,6 +22,7 @@
         $seoIsIndexablePublicPage = request()->routeIs(
             'home',
             'career-interests.index',
+            'major-choice.index',
             'specializations.index',
             'specializations.show',
         );
@@ -297,6 +298,9 @@
                             </li>
                             <li>
                                 <a href="{{ route('career-interests.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">اختبار الميول المهنية</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('major-choice.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">كيف أختار تخصصي؟</a>
                             </li>
                             <li>
                                 <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">التخصصات</a>
