@@ -19,6 +19,9 @@ Route::view('/career-interests-test', 'seo.career-interests')
 Route::view('/how-to-choose-university-major', 'seo.choose-major')
     ->name('major-choice.index');
 
+Route::view('/scientific-foundation', 'seo.scientific-foundation')
+    ->name('scientific-foundation.index');
+
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/specializations', [SpecializationController::class, 'index'])
