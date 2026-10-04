@@ -122,5 +122,12 @@
             <div class="absolute inset-0 bg-gradient-to-t from-[#edf7f3]/60 via-transparent to-transparent"></div>
         </div>
     </section>
+
+    <nav aria-label="مسارات إرشادية مرتبطة" class="seo-context-links mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-bold text-slate-600">
+        <span class="text-slate-900">قبل أن تبدأ:</span>
+        <a href="{{ route('career-interests.index') }}" class="hover:text-brand-800">ما هو اختبار الميول المهنية؟</a>
+        <a href="{{ route('major-choice.index') }}" class="hover:text-brand-800">كيف أختار تخصصي الجامعي؟</a>
+        <a href="{{ route('scientific-foundation.index') }}" class="hover:text-brand-800">الأساس العلمي لمسارك</a>
+    </nav>
 </div>
 @endsection
