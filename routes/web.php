@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 
+Route::view('/career-interests-test', 'seo.career-interests')
+    ->name('career-interests.index');
+
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/specializations', [SpecializationController::class, 'index'])
