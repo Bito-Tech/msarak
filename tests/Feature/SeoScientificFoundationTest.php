@@ -22,6 +22,7 @@ class SeoScientificFoundationTest extends TestCase
             ->assertSee('SEVT')
             ->assertSee('لا يقيس الذكاء')
             ->assertSee('لا يشخّص الصحة النفسية أو الشخصية الشاملة')
+            ->assertSee('لا تُقدَّم الدرجات بوصفها مقارنة بمعيار وطني يمني غير متاح للمشروع')
             ->assertDontSee('<meta name="robots" content="noindex,follow">', false)
             ->assertSee(
                 '<link rel="canonical" href="'.route('scientific-foundation.index').'">',
@@ -48,6 +49,19 @@ class SeoScientificFoundationTest extends TestCase
             ->assertSee('href="'.route('career-interests.index').'"', false)
             ->assertSee('href="'.route('major-choice.index').'"', false)
             ->assertSee('https://www.onetcenter.org/reports/IP_Manual.html', false);
+    }
+
+    public function test_existing_public_guides_link_to_scientific_foundation(): void
+    {
+        $url = route('scientific-foundation.index');
+
+        $this->get(route('career-interests.index'))
+            ->assertOk()
+            ->assertSee('href="'.$url.'"', false);
+
+        $this->get(route('major-choice.index'))
+            ->assertOk()
+            ->assertSee('href="'.$url.'"', false);
     }
 
     public function test_scientific_foundation_emits_webpage_image_and_two_level_breadcrumb_json_ld(): void
