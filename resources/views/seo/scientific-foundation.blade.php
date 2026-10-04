@@ -128,6 +128,7 @@
             <p class="rounded-2xl bg-slate-50 p-4 leading-7 text-slate-600">لا يضمن النجاح الدراسي أو الوظيفة أو الدخل.</p>
             <p class="rounded-2xl bg-slate-50 p-4 leading-7 text-slate-600">لا يقرر أن هناك «تخصصًا صحيحًا وحيدًا» للطالب.</p>
             <p class="rounded-2xl bg-slate-50 p-4 leading-7 text-slate-600">ولا يحوّل النتيجة إلى حكم نهائي غير قابل للمراجعة.</p>
+            <p class="rounded-2xl bg-slate-50 p-4 leading-7 text-slate-600 sm:col-span-2 lg:col-span-3">تُفسَّر درجات الميول داخل ملف الطالب نفسه، ولا تُقدَّم بوصفها مقارنة بمعيار وطني يمني غير متاح للمشروع.</p>
         </div>
     </section>
 
