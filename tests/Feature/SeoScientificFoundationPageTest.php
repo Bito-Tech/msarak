@@ -13,7 +13,7 @@ class SeoScientificFoundationPageTest extends TestCase
         $response
             ->assertOk()
             ->assertSee(
-                '<title>الأساس العلمي لاختبار الميول المهنية | مسارك | مسارك</title>',
+                '<title>الأساس العلمي لاختبار الميول المهنية | مسارك</title>',
                 false
             )
             ->assertSee('الأساس العلمي لاختبار الميول المهنية في مسارك')
