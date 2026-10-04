@@ -150,7 +150,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://doi.org/10.1016/0001-8791(94)90026-4" target="_blank" rel="noopener noreferrer" class="font-bold text-brand-800 hover:text-brand-900">
+                <a href="https://doi.org/10.1006/jvbe.1994.1027" target="_blank" rel="noopener noreferrer" class="font-bold text-brand-800 hover:text-brand-900">
                     Lent, Brown & Hackett — Social Cognitive Career Theory
                 </a>
             </li>
