@@ -41,12 +41,13 @@ class SeoIndexingFoundationTest extends TestCase
         preg_match_all('/<loc>(.*?)<\/loc>/', $xml, $matches);
         $locations = $matches[1] ?? [];
 
-        $this->assertCount(14, $locations);
-        $this->assertCount(14, array_unique($locations));
+        $this->assertCount(15, $locations);
+        $this->assertCount(15, array_unique($locations));
 
         $this->assertContains(route('home'), $locations);
         $this->assertContains(route('career-interests.index'), $locations);
         $this->assertContains(route('major-choice.index'), $locations);
+        $this->assertContains(route('scientific-foundation.index'), $locations);
         $this->assertContains(route('specializations.index'), $locations);
         $this->assertContains(route('specializations.show', 'computer_science'), $locations);
         $this->assertContains(route('specializations.show', 'human_medicine'), $locations);
