@@ -22,6 +22,8 @@
         $seoIsIndexablePublicPage = request()->routeIs(
             'home',
             'career-interests.index',
+            'major-choice.index',
+            'scientific-foundation.index',
             'specializations.index',
             'specializations.show',
         );
@@ -231,7 +233,7 @@
               ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
               : (request()->routeIs('assessment.intro')
                   ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-3'
-                  : (request()->routeIs('home') || request()->routeIs('specializations.index') || request()->routeIs('specializations.show') || request()->routeIs('specializations.compare') || request()->routeIs('results.show') || request()->routeIs('profile.results.index') || request()->routeIs('profile.show') || request()->routeIs('login') || request()->routeIs('register') || request()->routeIs('password.*')
+                  : (request()->routeIs('home') || request()->routeIs('major-choice.index') || request()->routeIs('scientific-foundation.index') || request()->routeIs('specializations.index') || request()->routeIs('specializations.show') || request()->routeIs('specializations.compare') || request()->routeIs('results.show') || request()->routeIs('profile.results.index') || request()->routeIs('profile.show') || request()->routeIs('login') || request()->routeIs('register') || request()->routeIs('password.*')
                       ? 'w-full flex-1 break-words px-2 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-5'
                       : 'container-page flex-1 break-words py-8 lg:py-12')) }}">
         <x-ui.flash class="mb-6" />
@@ -297,6 +299,12 @@
                             </li>
                             <li>
                                 <a href="{{ route('career-interests.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">اختبار الميول المهنية</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('major-choice.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">كيف أختار تخصصي؟</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('scientific-foundation.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">الأساس العلمي</a>
                             </li>
                             <li>
                                 <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">التخصصات</a>

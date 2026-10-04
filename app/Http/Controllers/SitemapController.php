@@ -12,6 +12,8 @@ class SitemapController extends Controller
         $urls = [
             route('home'),
             route('career-interests.index'),
+            route('major-choice.index'),
+            route('scientific-foundation.index'),
             route('specializations.index'),
         ];
 

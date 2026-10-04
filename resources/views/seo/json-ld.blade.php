@@ -79,6 +79,58 @@
         ];
     }
 
+    if (request()->routeIs('major-choice.index')) {
+        $seoBreadcrumbId = $seoCanonical.'#breadcrumb';
+        $seoGraph[2]['breadcrumb'] = [
+            '@id' => $seoBreadcrumbId,
+        ];
+
+        $seoGraph[] = [
+            '@type' => 'BreadcrumbList',
+            '@id' => $seoBreadcrumbId,
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'الرئيسية',
+                    'item' => $seoHomeUrl,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'كيف أختار تخصصي الجامعي؟',
+                    'item' => $seoCanonical,
+                ],
+            ],
+        ];
+    }
+
+    if (request()->routeIs('scientific-foundation.index')) {
+        $seoBreadcrumbId = $seoCanonical.'#breadcrumb';
+        $seoGraph[2]['breadcrumb'] = [
+            '@id' => $seoBreadcrumbId,
+        ];
+
+        $seoGraph[] = [
+            '@type' => 'BreadcrumbList',
+            '@id' => $seoBreadcrumbId,
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'الرئيسية',
+                    'item' => $seoHomeUrl,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'الأساس العلمي لمسارك',
+                    'item' => $seoCanonical,
+                ],
+            ],
+        ];
+    }
+
     if (request()->routeIs('specializations.index')) {
         $seoBreadcrumbId = $seoCanonical.'#breadcrumb';
         $seoGraph[2]['breadcrumb'] = [

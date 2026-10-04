@@ -17,6 +17,14 @@
 @endphp
 
 <article class="specialization-detail mx-auto w-full" data-specialization="{{ $specId }}" dir="rtl">
+    <nav aria-label="مسار الصفحة" class="mb-4 text-sm font-semibold text-slate-500">
+        <a href="{{ route('home') }}" class="transition-colors hover:text-brand-700">الرئيسية</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <a href="{{ route('specializations.index') }}" class="transition-colors hover:text-brand-700">دليل التخصصات الجامعية</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span aria-current="page" class="text-slate-700">{{ $specName }}</span>
+    </nav>
+
     <div class="specialization-detail-toolbar mb-4 flex flex-wrap items-center justify-between gap-3">
         <a href="{{ route('specializations.index') }}"
            class="specialization-detail-back inline-flex min-h-12 items-center gap-2 rounded-xl px-4 text-base font-bold">
@@ -230,6 +238,12 @@
             </div>
         </section>
     @endif
+
+    <nav aria-label="مسارات إرشادية مرتبطة" class="seo-context-links mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-bold text-slate-600">
+        <span class="text-slate-900">قبل اتخاذ قرارك:</span>
+        <a href="{{ route('major-choice.index') }}" class="hover:text-brand-800">كيف أختار تخصصي الجامعي؟</a>
+        <a href="{{ route('career-interests.index') }}" class="hover:text-brand-800">استكشف ميولك المهنية</a>
+    </nav>
 
     @if (!empty($specId))
         <section class="specialization-detail-cta mt-5 flex flex-col gap-4 rounded-3xl border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">

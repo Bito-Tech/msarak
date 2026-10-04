@@ -117,6 +117,9 @@
             <a href="{{ route('specializations.index') }}" class="mt-5 inline-flex min-h-11 items-center font-extrabold text-brand-800 hover:text-brand-900">
                 تصفح دليل التخصصات الجامعية
             </a>
+            <a href="{{ route('scientific-foundation.index') }}" class="mt-2 inline-flex min-h-11 items-center font-bold text-slate-700 hover:text-brand-800">
+                تعرّف إلى الأساس العلمي للتقييم
+            </a>
         </div>
     </section>
 </article>
