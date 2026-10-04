@@ -307,9 +307,6 @@
                                 <a href="{{ route('scientific-foundation.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">الأساس العلمي</a>
                             </li>
                             <li>
-                                <a href="{{ route('scientific-foundation.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">الأساس العلمي</a>
-                            </li>
-                            <li>
                                 <a href="{{ route('specializations.index') }}" class="site-footer-link inline-flex min-h-10 items-center rounded-xl px-3">التخصصات</a>
                             </li>
                             @auth
