@@ -23,6 +23,7 @@ class SeoScientificFoundationPageTest extends TestCase
             ->assertSee('لا يقيس الذكاء أو القدرة العقلية العامة')
             ->assertSee('لا يضمن النجاح الدراسي أو الوظيفة أو الدخل')
             ->assertSee('لا يقرر أن هناك «تخصصًا صحيحًا وحيدًا» للطالب')
+            ->assertSee('لا تُقدَّم بوصفها مقارنة بمعيار وطني يمني غير متاح للمشروع')
             ->assertDontSee('<meta name="robots" content="noindex,follow">', false)
             ->assertSee(
                 '<link rel="canonical" href="'.route('scientific-foundation.index').'">',
