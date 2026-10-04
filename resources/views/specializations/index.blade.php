@@ -5,6 +5,12 @@
 
 @section('content')
 <div class="specializations-page mx-auto w-full" dir="rtl">
+    <nav aria-label="مسار الصفحة" class="mb-4 text-sm font-semibold text-slate-500">
+        <a href="{{ route('home') }}" class="transition-colors hover:text-brand-700">الرئيسية</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span aria-current="page" class="text-slate-700">دليل التخصصات الجامعية</span>
+    </nav>
+
     <section class="specializations-hero specializations-title-card rounded-2xl border shadow-card" aria-labelledby="specializations-title">
         <div class="specializations-title-row flex items-center gap-3">
             <span class="specializations-title-icon inline-flex shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
@@ -30,6 +36,13 @@
             </div>
         </div>
     </section>
+
+    <nav aria-label="مسارات إرشادية مرتبطة" class="seo-context-links mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-bold text-slate-600">
+        <span class="text-slate-900">قبل المقارنة بين التخصصات:</span>
+        <a href="{{ route('major-choice.index') }}" class="hover:text-brand-800">اقرأ كيف تختار تخصصك الجامعي</a>
+        <a href="{{ route('career-interests.index') }}" class="hover:text-brand-800">استكشف ميولك المهنية</a>
+        <a href="{{ route('scientific-foundation.index') }}" class="hover:text-brand-800">تعرّف إلى الأساس العلمي</a>
+    </nav>
 
     @if (!empty($specializations) && count($specializations) > 0)
         <section class="specializations-grid mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" aria-label="قائمة التخصصات">
